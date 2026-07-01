@@ -1,94 +1,148 @@
-# SCR Returned Output Schema and Usage Notes
+# SCR Returned Output Schema and Interpretation
 
-Status: draft schema interpretation from the two returned SCR examples,
+Status: deep profile from the two local SCR returned-output examples,
 2026-07-01.
 
-Example files:
+Local example files:
 
 ```text
 asset_1232_physical_risks.xlsx
 asset_1232_transition_risks.xlsx
 ```
 
-This document describes what the returned SCR workbooks contain, how to join
-them back to InfraSure data, and where the result can be useful in the product
-and database workflow.
+The `.xlsx` examples are intentionally ignored by git because this repository
+is public. This markdown file records the useful structure learned from them:
+how to join the results back, what each workbook contains, how complete the
+example data is, and where the fields can fit into InfraSure.
 
-## Core Decision
+## Read This First
 
-The returned workbooks preserve the uploaded `assetName` exactly. That makes
-`assetName` the bridge back to InfraSure:
+The returned SCR workbooks are not one-row summaries. They are long-format
+model outputs.
+
+The repeated asset fields are context. The analytical data lives across
+scenario, horizon, indicator, hazard, and subrisk rows.
+
+Most important rule:
 
 ```text
-SCR Output.assetName
-  -> scr_manifest.csv.scr_asset_name
-  -> scr_manifest.csv.plant_uuid
-  -> plants.id
+Use Output.assetName as the row-level join key.
+Do not use SCR assetId as the InfraSure key.
 ```
 
-`assetId` is SCR's identifier, for example `USA_00490`. Store it, but do not
-use it as the InfraSure database key.
+Join-back path:
 
-The matching `scr_manifest.csv` from the upload run is required for a clean
-import because it carries context SCR does not return:
+```text
+SCR returned workbook
+  Output.assetName
+      |
+      v
+scr_manifest.csv.scr_asset_name
+      |
+      v
+scr_manifest.csv.plant_uuid
+      |
+      v
+plants.id
+```
 
-- `plant_uuid`
-- `portfolio_asset_id`
-- workspace and portfolio identifiers
-- source type: reference vs tenant / greenfield
-- upload validation warnings
-- asset value and revenue source
-- run ID and generated timestamp
+`assetId` is useful vendor metadata. In the examples it is `USA_00490`. Store
+it, but do not use it as the canonical database identity.
 
-If the manifest is missing, `plant_uuid` can be reconstructed from names like
-`is_p_f0d551408183414598a0bd83bf10ee72`, but that loses portfolio and run
-context.
+## At a Glance
 
-## Workbook Shape
+The two example workbooks cover one uploaded asset:
 
-Both output examples contain:
+```text
+assetName = is_p_f0d551408183414598a0bd83bf10ee72
+assetId   = USA_00490
+type      = Gas-Fired Power Generation / IC101020
+country   = USA
+zone      = Temperate
+coords    = (47.079722,-122.365)
+```
 
-| Sheet | Purpose | Ingestion stance |
-|---|---|---|
-| `ReadMe` | Asset metadata and field groups. | Useful for quick human review. Do not use as the row-level source of truth. |
-| `Output` | Long-format risk rows. | Authoritative sheet for import. |
+Observed shapes:
+
+| Output | Rows | Columns | Main analytical axes |
+|---|---:|---:|---|
+| Physical risk | 952 | 36 | scenario, time horizon, indicator, hazard |
+| Transition risk | 240 | 20 | scenario, time horizon, indicator, subrisk |
+
+ASCII shape sketch:
+
+```text
+Physical
+1 asset
+  x 2 scenarios
+  x 17 horizons
+  x 28 physical indicators
+  = 952 long rows
+
+Transition
+1 asset
+  x 6 scenarios
+  x 8 horizons
+  x 5 transition indicators
+  = 240 long rows
+```
 
 Both returned files contain static values only; no worksheet formulas were
 found in the workbook XML.
 
-The ingestion script should always read actual `Output` headers. The
-transition `ReadMe` mentions `adjustedIndicatorValue`, but that column is not
-present in the current transition `Output` sheet.
+## Workbook Anatomy
 
-## Common Fields
+Both returned workbooks contain the same sheet pattern:
+
+| Sheet | Role | Import stance |
+|---|---|---|
+| `ReadMe` | Single-asset metadata and SCR field group notes. | Human review only. |
+| `Output` | Row-level long-format model output. | Authoritative import source. |
+
+Use the actual `Output` headers. The transition `ReadMe` mentions
+`adjustedIndicatorValue`, but that field is not present in the actual
+transition `Output` sheet.
+
+## Identity Fields
+
+These fields are repeated on every row and should be used for linkage, audit,
+or QA rather than treated as analytical measures.
+
+| Field | Type | Interpretation | Recommended use |
+|---|---|---|---|
+| `assetName` | text | The generated upload name preserved by SCR. | Primary join to `scr_manifest.csv`. |
+| `assetId` | text | SCR's returned asset identifier. | Store as vendor metadata. |
+| `reportDate` | date | SCR report/output date. | Versioning and freshness checks. |
+| `geolocationCoordinates` | text | SCR-returned coordinate string. | QA against upload; not canonical geospatial identity. |
+| `countryCode` | text | ISO3 country code. | QA and filtering. |
+| `climateZone` | text | SCR climate-zone label. | Portfolio segmentation. |
+| `ticcsSubClass` | text | TICCS subclass code. | Sector/technology grouping and QA. |
+| `ticcsSubClassName` | text | Human-readable TICCS subclass. | Display and reporting. |
+
+Import recommendation:
+
+```text
+Store repeated asset context once per imported SCR asset.
+Store analytical rows separately in long result tables.
+```
+
+## Common Analytical Fields
 
 These fields appear in both physical and transition outputs.
 
-| Field | Type | Meaning | Useful for |
+| Field | Type | Interpretation | Useful for |
 |---|---|---|---|
-| `assetId` | text | SCR's returned asset identifier. | Vendor audit, support tickets, cross-checking repeated SCR exports. |
-| `assetName` | text | The InfraSure-generated upload name that SCR preserved. | Primary join key back to `scr_manifest.csv`. |
-| `reportDate` | date | Date SCR produced or labeled the result. | Versioning, freshness, comparing reruns. |
-| `geolocationCoordinates` | text | SCR-returned coordinate string, such as `(47.079722,-122.365)`. | Audit only; prefer InfraSure DB coordinates for canonical geospatial joins. |
-| `countryCode` | text | ISO3 country code, usually `USA`. | QA and filtering. |
-| `climateZone` | text | SCR climate-zone classification. | Portfolio segmentation, climate-zone rollups. |
-| `ticcsSubClass` | text | SCR/TICCS subclass code from the upload mapping. | Technology/sector grouping and QA. |
-| `ticcsSubClassName` | text | Human-readable TICCS subclass name. | Display and reporting. |
-| `scenario` | text | Scenario name. Physical and transition use different scenario families. | Scenario analysis, stress comparisons. |
-| `timeHorizon` | text | Historical/future horizon. Keep as text because physical includes `Historical`. | Time-series comparison and horizon filters. |
-| `indicator` | text | Climate or transition indicator name. | Explaining which driver produced a risk result. |
+| `scenario` | text | Scenario family. Physical and transition use different families. | Stress testing and scenario comparisons. |
+| `timeHorizon` | text | Historical or future horizon. | Time filters and trend views. |
+| `indicator` | text | Driver being measured. | Explaining why a risk score exists. |
 | `indicatorUnit` | text | Unit for `indicatorValue`. | Display and QA. |
-| `indicatorValue` | numeric | Raw indicator value returned by SCR. | Driver-level analysis, charts, explanations. |
+| `indicatorValue` | numeric | Raw driver value from SCR. | Driver charts and model explainability. |
 
-Recommended import behavior:
+Keep `timeHorizon` as text in raw import. Physical includes `Historical`;
+transition is numeric-looking in this example but should not be assumed to
+stay numeric forever.
 
-- Keep the original field names in the first normalized CSVs.
-- Convert to internal `snake_case` only when designing database tables.
-- Preserve `timeHorizon` as text initially.
-- Preserve `assetId` and `assetName` even after joining to `plant_uuid`.
-- Do not join by coordinates, display names, country, or TICCS fields.
-
-## Physical Risk Output
+## Physical Output Profile
 
 File:
 
@@ -96,81 +150,265 @@ File:
 asset_1232_physical_risks.xlsx
 ```
 
-Observed shape:
-
-- `Output`: 36 columns
-- data rows: 952
-- row grain:
+Observed grain:
 
 ```text
 assetName + scenario + timeHorizon + indicator + hazard
 ```
 
-Example scenario values:
+The physical output has two climate scenarios:
 
 ```text
 ssp2-4.5
 ssp5-8.5
 ```
 
-Example hazards:
+Horizons:
+
+```text
+Historical
+2025, 2030, 2035, ..., 2100
+```
+
+Each scenario/horizon combination has 28 rows:
+
+```text
+              ssp2-4.5  ssp5-8.5
+Historical        28        28
+2025              28        28
+2030              28        28
+...               28        28
+2100              28        28
+```
+
+Hazard row mix:
+
+```text
+Flood          204 | #####-------------------
+Heat           204 | #####-------------------
+Wind           204 | #####-------------------
+Drought        102 | ###---------------------
+Wildfire       102 | ###---------------------
+Precipitation   68 | ##----------------------
+Landslide       34 | #-----------------------
+Subsidence      34 | #-----------------------
+```
+
+Interpretation:
+
+- Flood, heat, and wind each have 6 indicators.
+- Drought and wildfire each have 3 indicators.
+- Precipitation has 2 indicators.
+- Landslide and subsidence each have 1 indicator.
+
+Indicator families:
 
 ```text
 Drought
+  - Water stress
+  - Drought duration
+  - Drought magnitude
+
 Flood
+  - Fluvial & Pluvial Flood depth - 10 years RP
+  - Fluvial & Pluvial Flood depth - 100 years RP
+  - Fluvial & Pluvial Flood depth - 500 years RP
+  - Coastal flood depth - 10 years RP
+  - Coastal flood depth - 100 years RP
+  - Coastal flood depth - 500 years RP
+
 Heat
-Landslide
-Subsidence
+  - Days above 35C
+  - Days above 38C
+  - Days above 99th percentile
+  - WBGT days
+  - Heatwave average length
+  - Heatwave days
+
+Wind
+  - TC wind speed - 10 years RP
+  - TC wind speed - 100 years RP
+  - TC wind speed - 500 years RP
+  - ETS wind speed - 10 years RP
+  - ETS wind speed - 100 years RP
+  - ETS wind speed - 500 years RP
 ```
+
+Other physical indicators:
+
+```text
+Landslide:     Landslide susceptibility
+Precipitation: Max precipitation 1 day, Max precipitation 5 days
+Subsidence:    Subsidence rate
+Wildfire:      Burn probability, Tree cover, Fire Weather Index (FWI)
+```
+
+## Physical Metric Families
+
+Physical output contains three practical metric layers.
+
+```text
+indicator layer
+  indicatorValue
+  indicatorRating
+
+hazard layer
+  hazardDamage
+  hazardDisruption
+  hazardDisruptionDamageEquivalent
+  hazardValueImpact
+  hazardExposureRating
+
+asset total layer
+  totalDamage
+  totalDisruption
+  totalDisruptionDamageEquivalent
+  totalValueImpact
+  physicalExposureRating
+```
+
+Adjusted versions exist for most physical metrics. Store both adjusted and
+unadjusted values. The first product view will likely prefer adjusted values,
+but the raw import should not discard either family.
 
 Physical-specific fields:
 
-| Field | Type | Meaning | Useful for |
+| Field | Type | Interpretation | Useful for |
 |---|---|---|---|
-| `indicatorRating` | text | SCR rating for the indicator. | Driver-level color/rating displays. |
-| `hazard` | text | Physical hazard group. | Grouping results into drought/flood/heat/etc. |
-| `HazardRating` | text | SCR hazard-level rating. Header currently uses capital `H`. | Hazard summary tables. |
-| `hazardDamage` | numeric | Hazard-level asset value / capex impact. | Estimating value-at-risk style signals by hazard. |
-| `adjustedHazardDamage` | numeric | Adjusted hazard damage output. | Main adjusted hazard damage metric, if we decide adjusted is preferred. |
-| `hazardDisruption` | numeric | Hazard-level revenue / opex disruption impact. | Operating disruption screening. |
-| `adjustedHazardDisruption` | numeric | Adjusted disruption output. | Main adjusted disruption metric, if adjusted is preferred. |
-| `hazardDisruptionDamageEquivalent` | numeric | Disruption translated to damage-equivalent terms. | Combining disruption and damage into a comparable impact view. |
-| `adjustedHazardDisruptionDamageEquivalent` | numeric | Adjusted damage-equivalent disruption. | Adjusted combined risk analysis. |
-| `hazardValueImpact` | numeric | Hazard-level total value-impact signal. | Ranking hazards within an asset. |
-| `adjustedHazardValueImpact` | numeric | Adjusted hazard value-impact signal. | Preferred hazard ranking candidate after validation. |
-| `hazardExposureRating` | text | SCR hazard exposure rating. | Hazard-level rating display. |
-| `adjustedHazardExposureRating` | text | Adjusted hazard exposure rating. | Adjusted hazard-level rating display. |
-| `totalDamage` | numeric | Asset-level total damage across physical hazards for the row context. | Asset-level physical loss rollup. |
-| `adjustedTotalDamage` | numeric | Adjusted total damage. | Preferred total damage candidate after validation. |
-| `totalDisruption` | numeric | Asset-level total disruption. | Portfolio disruption screening. |
-| `adjustedTotalDisruption` | numeric | Adjusted total disruption. | Preferred total disruption candidate after validation. |
-| `totalDisruptionDamageEquivalent` | numeric | Total disruption converted to damage-equivalent terms. | Combined physical impact reporting. |
-| `adjustedTotalDisruptionDamageEquivalent` | numeric | Adjusted total disruption damage equivalent. | Adjusted combined physical impact reporting. |
-| `totalValueImpact` | numeric | Total value-impact signal. | Asset ranking and portfolio rollups. |
-| `adjustedTotalValueImpact` | numeric | Adjusted total value-impact signal. | Preferred ranking candidate after validation. |
-| `physicalExposureRating` | text | Overall physical exposure rating. | Simple physical risk badge. |
-| `adjustedPhysicalExposureRating` | text | Adjusted overall physical exposure rating. | Preferred physical risk badge after validation. |
+| `indicatorRating` | text | Rating for the individual indicator. | Driver-level badges. |
+| `hazard` | text | Physical hazard group. | Grouping and hazard-level rollups. |
+| `HazardRating` | text | Hazard-level rating. Header uses capital `H`. | Raw import and hazard summary. |
+| `hazardDamage` | numeric | Hazard impact on asset value / capex. | Hazard-specific damage screen. |
+| `adjustedHazardDamage` | numeric | Adjusted hazard damage. | Preferred damage candidate after validation. |
+| `hazardDisruption` | numeric | Hazard impact on revenue / opex disruption. | Operating-disruption screen. |
+| `adjustedHazardDisruption` | numeric | Adjusted disruption. | Preferred disruption candidate after validation. |
+| `hazardDisruptionDamageEquivalent` | numeric | Disruption converted to damage-equivalent terms. | Combined impact analysis. |
+| `adjustedHazardDisruptionDamageEquivalent` | numeric | Adjusted damage-equivalent disruption. | Combined adjusted impact analysis. |
+| `hazardValueImpact` | numeric | Hazard-level value-impact signal. | Ranking hazards within one asset. |
+| `adjustedHazardValueImpact` | numeric | Adjusted hazard value-impact signal. | Preferred hazard ranking candidate. |
+| `hazardExposureRating` | text | Hazard exposure rating. | Hazard-level display. |
+| `adjustedHazardExposureRating` | text | Adjusted hazard exposure rating. | Preferred hazard rating candidate. |
+| `totalDamage` | numeric | Asset total damage for the scenario/horizon context. | Asset-level physical rollup. |
+| `adjustedTotalDamage` | numeric | Adjusted total damage. | Preferred damage rollup candidate. |
+| `totalDisruption` | numeric | Asset total disruption. | Portfolio disruption screening. |
+| `adjustedTotalDisruption` | numeric | Adjusted total disruption. | Preferred disruption rollup. |
+| `totalDisruptionDamageEquivalent` | numeric | Total disruption converted to damage-equivalent terms. | Combined impact reporting. |
+| `adjustedTotalDisruptionDamageEquivalent` | numeric | Adjusted total disruption equivalent. | Preferred combined impact reporting. |
+| `totalValueImpact` | numeric | Total asset value-impact signal. | Asset ranking and portfolio rollups. |
+| `adjustedTotalValueImpact` | numeric | Adjusted total value-impact signal. | Preferred physical value-impact candidate. |
+| `physicalExposureRating` | text | Overall physical exposure rating. | Simple physical badge. |
+| `adjustedPhysicalExposureRating` | text | Adjusted overall physical exposure rating. | Preferred physical badge candidate. |
 
-Potential product uses:
+## Physical Completeness and Reliability
 
-- Plant detail: show top physical hazards by `adjustedHazardValueImpact`.
-- Portfolio view: rank assets by worst `adjustedPhysicalExposureRating`.
-- Scenario view: compare `ssp2-4.5` vs `ssp5-8.5` across horizons.
-- Diligence workflow: flag assets with high flood, heat, drought, or
-  wildfire-related exposure.
-- Data QA: compare SCR `ticcsSubClassName`, coordinates, and country against
-  what we uploaded.
+Missing values are not automatically errors. Some metrics appear only where
+SCR considers the hazard/indicator applicable.
 
-Implementation cautions:
+Example coverage:
 
-- The numeric impact fields look like fractional values. Do not multiply or
-  relabel them as percentages until we confirm SCR's display convention.
-- Store both adjusted and unadjusted values. Decide which to show at the
-  product layer.
-- Preserve `HazardRating` exactly in raw files, but normalize to
-  `hazard_rating` in database tables.
+```text
+Asset total metrics:        about 94% populated
+Hazard ratings:             about 79% populated
+Hazard disruption metrics:  about 50% populated
+Hazard damage/value metrics: about 30% populated
+Indicator fields:           about 87% populated
+```
 
-## Transition Risk Output
+Practical rule:
+
+```text
+If identity fields are present and row axes are present, keep the row.
+Treat metric blanks as null model outputs unless a required column is absent.
+```
+
+The physical historical rows exist in the matrix, but asset total impact
+metrics are blank for those historical rows in this example. For trend charts,
+start with future horizons unless SCR confirms a historical impact convention.
+
+Physical rating distribution in the example:
+
+```text
+indicatorRating
+A   357 | #########---------------
+B   156 | ####--------------------
+C    61 | ##----------------------
+D    50 | #-----------------------
+E    38 | #-----------------------
+F   239 | ######------------------
+NA   51 | #-----------------------
+
+adjustedHazardExposureRating
+A   192 | #####-------------------
+C   102 | ###---------------------
+D   252 | ######------------------
+E   102 | ###---------------------
+F    24 | #-----------------------
+NA  280 | #######-----------------
+
+adjustedPhysicalExposureRating
+A   896 | #######################-
+NA   56 | #-----------------------
+```
+
+The example asset's overall adjusted physical exposure is low (`A`) wherever
+the total rating is present, but individual indicators can still have worse
+ratings. This is why product UI should show both overall rating and top
+drivers.
+
+## Physical ASCII Trend
+
+This trend uses `adjustedTotalValueImpact`, taking one value per
+scenario/horizon. The plot is relative within each scenario line.
+
+Horizons shown:
+
+```text
+2025 2030 2035 2040 2045 2050 2055 2060 2065 2070 2075 2080 2085 2090 2095 2100
+```
+
+ASCII scale:
+
+```text
+. low  _  -  ~  =  +  *  # high
+```
+
+Example:
+
+```text
+ssp2-4.5  .______--~=++**#   min 0.000955   max 0.001023
+ssp5-8.5  .....___--~~=+*#   min 0.000953   max 0.001239
+```
+
+Interpretation:
+
+- Both scenarios show increasing physical value impact over time.
+- `ssp5-8.5` diverges more sharply after mid-century.
+- The absolute values are small in this sample, but display scaling still
+  needs SCR confirmation before we label them as percentages.
+
+## Physical Usefulness in InfraSure
+
+High-value uses:
+
+- Asset detail: show overall physical rating plus top hazards and indicators.
+- Portfolio dashboard: rank assets by worst adjusted physical rating.
+- Climate scenario comparison: compare `ssp2-4.5` and `ssp5-8.5`.
+- Hazard lens: group exposure by flood, heat, wind, drought, wildfire, etc.
+- Diligence workflow: explain which hazard/indicator drives an asset's result.
+- QA: compare returned TICCS, coordinates, and country against the upload
+  manifest.
+
+Best first product summary:
+
+```text
+For each asset + scenario + horizon:
+  show adjustedPhysicalExposureRating
+  show adjustedTotalValueImpact
+  show top N hazards by adjustedHazardValueImpact
+  show top N indicators by indicatorRating severity
+```
+
+## Transition Output Profile
 
 File:
 
@@ -178,96 +416,225 @@ File:
 asset_1232_transition_risks.xlsx
 ```
 
-Observed shape:
-
-- `Output`: 20 columns
-- data rows: 240
-- row grain:
+Observed grain:
 
 ```text
 assetName + scenario + timeHorizon + indicator + subrisk
 ```
 
-Example scenario values:
+Transition scenarios:
 
 ```text
-Below 2°C
+Below 2C
 Current Policies
-NDCs
 Delayed Transition
+Low Demand
+NDCs
 Net Zero 2050
 ```
 
-Example subrisk values:
+Horizons:
+
+```text
+2025, 2030, 2035, 2040, 2045, 2050, 2055, 2060
+```
+
+Each scenario/horizon combination has 5 rows:
+
+```text
+                     rows per horizon
+Below 2C                    5
+Current Policies            5
+Delayed Transition          5
+Low Demand                  5
+NDCs                        5
+Net Zero 2050               5
+```
+
+Subrisk row mix:
+
+```text
+Market_demand_shifts   144 | ##############----------
+Direct_carbon_cost      96 | ##########--------------
+```
+
+Indicator mapping:
 
 ```text
 Direct_carbon_cost
+  - Carbon price
+  - scope12_intensity
+
 Market_demand_shifts
+  - Revenue growth
+  - Inflation
+  - scope3_intensity
 ```
+
+## Transition Metric Families
+
+Transition output has three practical layers.
+
+```text
+indicator layer
+  indicatorValue
+
+subrisk layer
+  subriskRevenueImpact
+  subriskExposureRating
+
+asset total layer
+  transitionExposureRating
+```
+
+Adjusted versions exist for subrisk and asset exposure ratings. Store both.
 
 Transition-specific fields:
 
-| Field | Type | Meaning | Useful for |
+| Field | Type | Interpretation | Useful for |
 |---|---|---|---|
-| `subrisk` | text | Transition subrisk driver. | Splitting direct carbon cost vs market-demand impacts. |
-| `subriskRevenueImpact` | numeric | Revenue impact for the subrisk. | Ranking transition-risk revenue sensitivity. |
-| `adjustedSubriskRevenueImpact` | numeric | Adjusted revenue impact for the subrisk. | Preferred subrisk ranking candidate after validation. |
-| `subriskExposureRating` | text | SCR rating for the subrisk. | Subrisk-level badge/display. |
-| `adjustedSubriskExposureRating` | text | Adjusted subrisk exposure rating. | Preferred adjusted subrisk display. |
-| `transitionExposureRating` | text | Overall transition exposure rating. | Simple transition risk badge. |
-| `adjustedTransitionExposureRating` | text | Adjusted overall transition exposure rating. | Preferred transition risk badge after validation. |
+| `subrisk` | text | Transition risk driver. | Splitting direct carbon cost and demand-shift effects. |
+| `subriskRevenueImpact` | numeric | Revenue impact for the subrisk. | Ranking transition revenue sensitivity. |
+| `adjustedSubriskRevenueImpact` | numeric | Adjusted revenue impact for the subrisk. | Preferred subrisk ranking candidate. |
+| `subriskExposureRating` | text | Subrisk exposure rating. | Subrisk-level badge/display. |
+| `adjustedSubriskExposureRating` | text | Adjusted subrisk exposure rating. | Preferred subrisk rating candidate. |
+| `transitionExposureRating` | text | Overall transition exposure rating. | Simple transition badge. |
+| `adjustedTransitionExposureRating` | text | Adjusted overall transition exposure rating. | Preferred transition badge candidate. |
 
-Potential product uses:
+## Transition Completeness and Reliability
 
-- Plant detail: show transition exposure under each climate/economic scenario.
-- Portfolio view: rank assets by `adjustedTransitionExposureRating`.
-- Scenario comparison: compare Current Policies vs Net Zero 2050 / Below 2C.
-- Financial-risk view: connect `subriskRevenueImpact` to revenue assumptions
-  from the SCR upload sidecar.
-- Asset-type diagnostics: compare transition risk across TICCS subclasses.
+Example coverage:
 
-Implementation cautions:
+```text
+Rating fields:       100% populated
+Indicator values:     92.5% populated
+Subrisk impacts:      87.5% populated
+```
 
-- Do not assume transition `timeHorizon` is always numeric in future files;
-  store it as text first.
-- Store `subriskRevenueImpact` as a raw numeric value and decide display
-  scaling later.
-- Trust the actual `Output` headers over the `ReadMe` field list.
+The missing subrisk impact rows align with the 2025 baseline rows in this
+example. Treat them as null model outputs, not parser failures.
 
-## Fit in InfraSure Workflow
+Transition rating distribution in the example:
 
-The SCR result data fits as a vendor model-output layer. It should not replace
-the canonical asset table; it should attach to assets through `plant_uuid` and
-portfolio context from the manifest.
+```text
+adjustedSubriskExposureRating
+B     3 | ------------------------
+C    15 | ##----------------------
+D    24 | ##----------------------
+E    27 | ###---------------------
+F    90 | #########---------------
+G    81 | ########----------------
+
+adjustedTransitionExposureRating
+B     5 | ------------------------
+C    25 | ##----------------------
+D    40 | ####--------------------
+E    30 | ###---------------------
+F    85 | ########----------------
+G    55 | ######------------------
+```
+
+Unlike the physical example, the transition example has materially worse
+ratings. This makes transition output highly useful for ranking assets and
+explaining scenario sensitivity.
+
+## Transition ASCII Scenario Stress
+
+This plot uses max `adjustedSubriskRevenueImpact` by scenario and horizon.
+The plot is relative within each scenario line.
+
+Horizons shown:
+
+```text
+2030 2035 2040 2045 2050 2055 2060
+```
+
+ASCII scale:
+
+```text
+. low  _  -  ~  =  +  *  # high
+```
+
+Example:
+
+```text
+Below 2C             +#*=...   min 0.158   max  4.075
+Current Policies     ~*#*~..   min 0.241   max  7.423
+NDCs                 ~*#*~..   min 0.200   max  6.234
+Delayed Transition   .+###*+   min 2.476   max 21.426
+Low Demand           =#*=-_.   min 8.407   max 14.720
+Net Zero 2050        =#*=-_.   min 13.85   max 22.868
+```
+
+Max `adjustedSubriskRevenueImpact` by scenario and subrisk:
+
+| Scenario | Direct carbon cost | Market demand shifts |
+|---|---:|---:|
+| Below 2C | 0.245 | 4.075 |
+| Current Policies | 0.267 | 7.423 |
+| Delayed Transition | 21.426 | 2.476 |
+| Low Demand | 14.720 | 0.914 |
+| NDCs | 0.252 | 6.234 |
+| Net Zero 2050 | 22.868 | 0.027 |
+
+Interpretation:
+
+- `Net Zero 2050` and `Delayed Transition` are dominated by direct carbon
+  cost for this gas-fired asset.
+- `Current Policies`, `NDCs`, and `Below 2C` show larger market-demand-shift
+  values than direct-carbon-cost values in this example.
+- `Low Demand` shows large direct-carbon-cost values even though its market
+  demand shift is low in the example output.
+
+## Transition Usefulness in InfraSure
+
+High-value uses:
+
+- Asset detail: show transition rating by scenario/horizon.
+- Portfolio dashboard: rank assets by worst adjusted transition exposure.
+- Scenario comparison: expose Current Policies vs Net Zero 2050 vs Delayed
+  Transition.
+- Financial-risk view: connect `adjustedSubriskRevenueImpact` to revenue
+  assumptions from the upload sidecar.
+- Technology diagnostics: compare transition sensitivity by TICCS subclass.
+
+Best first product summary:
+
+```text
+For each asset + scenario + horizon:
+  show adjustedTransitionExposureRating
+  show max adjustedSubriskRevenueImpact
+  show top subrisk
+  show the indicator family behind that subrisk
+```
+
+## Raw Import Design
+
+Do not write SCR outputs directly into `plants`. Treat SCR as a separate
+vendor model-output layer.
 
 Recommended flow:
 
 ```text
-DB assets
+InfraSure DB assets
   -> SCR upload exporter
-  -> scr_upload.xlsx
+  -> SCR upload workbook
   -> SCR processing
-  -> SCR returned workbooks
-  -> SCR output ingestion
+  -> returned physical/transition workbooks
+  -> output ingestion script
   -> normalized local CSVs
   -> reviewed database tables
   -> product/API views
 ```
 
-Useful downstream surfaces:
+Recommended local outputs before database writes:
 
-| Surface | Useful fields |
-|---|---|
-| Asset detail page | Overall physical/transition ratings, top hazards, top subrisks, scenario/horizon trend. |
-| Portfolio dashboard | Worst assets by adjusted ratings, count of high-risk assets, hazard concentration by geography. |
-| Client export | Joined asset identity, SCR ratings, scenario/horizon metrics, source run metadata. |
-| Data quality review | SCR-returned `assetId`, coordinates, TICCS class, country, and manifest validation warnings. |
-| Ontology work | `hazard`, `subrisk`, `indicator`, `scenario`, and `timeHorizon` become candidate controlled vocabularies. |
-
-## Proposed Local Normalized Outputs
-
-Before writing to the database, create local normalized files beside the
-returned workbooks.
+```text
+scr_output_import_manifest.csv
+scr_physical_risk_long.csv
+scr_transition_risk_long.csv
+scr_output_import_warnings.csv
+```
 
 `scr_output_import_manifest.csv`:
 
@@ -281,6 +648,7 @@ row_count
 asset_count
 matched_asset_count
 unmatched_asset_count
+warning_count
 ```
 
 `scr_physical_risk_long.csv` key columns:
@@ -315,25 +683,22 @@ indicator
 subrisk
 ```
 
-Keep all SCR metric columns in those files, even if the first UI only uses a
-few ratings. The raw long-format data is valuable for later scenario and
-portfolio analytics.
+Keep all raw SCR metric columns in the normalized files. Even if the first UI
+uses only ratings and top drivers, the full long-format data is valuable for
+portfolio analytics and future ontology work.
 
-## Future Database Shape
-
-Do not write directly into existing `plants` records. Treat SCR as a separate
-vendor result dimension.
-
-Candidate future tables:
+## Candidate Future Database Tables
 
 | Table | Purpose |
 |---|---|
 | `scr_import_runs` | One row per imported SCR return package. |
-| `scr_import_assets` | One row per SCR asset per import, including `assetId`, `assetName`, `plant_uuid`, and portfolio context. |
+| `scr_import_assets` | One row per SCR asset per import, linked to `plant_uuid` and portfolio context. |
 | `scr_physical_risk_results` | Long physical rows keyed by import, plant, scenario, horizon, indicator, and hazard. |
 | `scr_transition_risk_results` | Long transition rows keyed by import, plant, scenario, horizon, indicator, and subrisk. |
+| `scr_result_warnings` | Import warnings, unmapped vocabularies, and coordinate mismatches. |
 
-This keeps repeat runs auditable and avoids overwriting older SCR results.
+This table shape keeps repeat SCR runs auditable and prevents overwriting
+older model results.
 
 ## Validation Rules for the Ingestion Script
 
@@ -341,27 +706,70 @@ Hard failures:
 
 - Missing `Output` sheet.
 - Missing `assetName`.
-- `assetName` not found in `scr_manifest.csv`.
+- `assetName` not found in the matching `scr_manifest.csv`.
 - UUID suffix in `assetName` disagrees with manifest `plant_uuid`.
-- Physical file missing `hazard`.
-- Transition file missing `subrisk`.
+- Physical file has no `hazard` column.
+- Transition file has no `subrisk` column.
+- Output type cannot be determined from headers.
 
 Warnings:
 
-- Unknown `assetId` for an otherwise matched `assetName`.
-- SCR-returned coordinates differ from upload manifest coordinates.
 - `ReadMe.assetName` differs from one or more `Output.assetName` values.
-- Expected metric column missing, but enough columns exist to identify the
-  result type.
-- New scenario, hazard, subrisk, or indicator value not yet in our ontology.
+- SCR-returned coordinates differ from upload manifest coordinates.
+- `assetId` changes for the same `assetName` across reruns.
+- New scenario, hazard, subrisk, or indicator value is not yet in our
+  ontology.
+- Metric fields are blank but identity and row-axis fields are present.
+- Expected metric column is missing, but enough columns exist to identify and
+  import the result type.
+
+## Product Interpretation Rules
+
+Use these defaults until SCR confirms stronger guidance:
+
+```text
+1. Use adjusted ratings/metrics for default UI.
+2. Keep unadjusted values available in details or raw export.
+3. Do not convert numeric impacts to percentages in storage.
+4. Do not rank by indicatorValue alone; it has mixed units.
+5. Rank physical hazard drivers by adjustedHazardValueImpact when populated.
+6. Rank transition drivers by adjustedSubriskRevenueImpact when populated.
+7. Use ratings as categorical values, not numeric scores, until rating order
+   and severity direction are confirmed.
+```
+
+## Ontology Candidates
+
+The returned outputs provide useful controlled vocabulary seeds:
+
+```text
+scenario
+timeHorizon
+hazard
+subrisk
+indicator
+indicatorUnit
+rating values
+ticcsSubClass
+climateZone
+```
+
+Do not immediately rename vendor vocabularies in raw import. Instead:
+
+```text
+raw SCR value -> ontology mapping table -> product display label
+```
+
+This protects auditability and gives us room to normalize names later.
 
 ## Open Questions
 
-- Should adjusted metrics be the default product view, with unadjusted values
-  available in detail?
-- What display scaling should we use for numeric impact fields?
-- Should SCR scenario/hazard/subrisk names be kept verbatim or mapped to an
-  internal ontology immediately?
-- What retention policy should we use for repeated SCR reruns of the same
-  portfolio?
-- Which outputs can be shown to clients under SCR's distribution terms?
+- Which adjusted metric should become the default physical ranking metric?
+- What display scaling should SCR numeric impact fields use?
+- What is the confirmed severity order of rating letters?
+- Should we expose SCR outputs to clients directly, or only derived
+  InfraSure summaries?
+- Should reruns replace the active view while preserving history, or should
+  users choose a run explicitly?
+- Should physical and transition imports be accepted separately, or only as a
+  paired return package from the same upload run?
