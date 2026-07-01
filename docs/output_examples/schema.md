@@ -10,10 +10,10 @@ asset_1232_physical_risks.xlsx
 asset_1232_transition_risks.xlsx
 ```
 
-The `.xlsx` examples are intentionally ignored by git because this repository
-is public. This markdown file records the useful structure learned from them:
-how to join the results back, what each workbook contains, how complete the
-example data is, and where the fields can fit into InfraSure.
+The `.xlsx` examples are checked in as example artifacts for reproducibility.
+This markdown file records the useful structure learned from them: how to join
+the results back, what each workbook contains, how complete the example data
+is, and where the fields can fit into InfraSure.
 
 ## Read This First
 

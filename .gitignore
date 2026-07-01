@@ -6,10 +6,3 @@ __pycache__/
 .env.*
 !.env.example
 .venv/
-
-runs/*
-!runs/.gitkeep
-
-# Vendor-provided templates and returned outputs are kept local-only.
-docs/Climate_Metrics_Import_tempate.xlsx
-docs/output_examples/*.xlsx

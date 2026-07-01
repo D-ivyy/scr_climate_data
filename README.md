@@ -10,19 +10,16 @@ This repo contains:
 
 - `scripts/export_scr_upload.py`: dev/prod DB to SCR upload exporter
 - `docs/`: upload, manifest, output-schema, and ingestion notes
-- `runs/.gitkeep`: placeholder for generated local outputs
+- `docs/Climate_Metrics_Import_tempate.xlsx`: SCR upload template used by
+  the exporter
+- `docs/output_examples/`: returned SCR physical/transition examples and
+  interpretation notes
+- `runs/`: checked-in example run artifacts
 
-This public repo intentionally does not commit vendor-provided workbooks,
-returned SCR output workbooks, generated uploads, manifests, or database
-credentials.
-
-Local-only files expected by the current workflow:
+Database credentials remain local-only:
 
 ```text
 .env
-docs/Climate_Metrics_Import_tempate.xlsx
-docs/output_examples/*.xlsx
-runs/<run_id>/*
 ```
 
 ## Setup
@@ -60,7 +57,9 @@ python scripts/export_scr_upload.py \
   --template /path/to/Climate_Metrics_Import_tempate.xlsx
 ```
 
-Generated files are written under `runs/<run_id>/` and are ignored by git.
+Generated files are written under `runs/<run_id>/`. Review them before
+committing because manifests and generated uploads can contain client or asset
+context.
 
 ## Docs
 

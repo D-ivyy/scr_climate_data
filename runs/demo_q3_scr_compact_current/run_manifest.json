@@ -1,0 +1,31 @@
+{
+  "scr_run_id": "demo_q3_scr_compact_current",
+  "generated_at": "2026-07-01T00:37:53.483819+00:00",
+  "target": "dev",
+  "db_host": "ep-odd-sun-ajr41r12-pooler.c-3.us-east-2.aws.neon.tech",
+  "workspace_id": "8d087262-d0d7-429c-b85b-7288b859c61f",
+  "workspace_slug": "demo",
+  "portfolio_id": "c3a799ac-4f66-48e7-855e-ee68d8a4b9a9",
+  "portfolio_name": "Q3 Outlook",
+  "all_reference": false,
+  "plant_uuid": null,
+  "asset_value_source": "capex_proxy",
+  "include_operating_entity": false,
+  "strict": false,
+  "template": "/Users/divy/code/personal/renewablesinfo/scr_climate_data/docs/Climate_Metrics_Import_tempate.xlsx",
+  "selected_rows": 25,
+  "accepted_rows": 20,
+  "rejected_rows": 5,
+  "rows_with_warnings": 25,
+  "warning_counts": {
+    "asset_value_uses_capex_proxy_not_true_valuation": 20,
+    "missing_asset_value_capex_proxy_unavailable": 5,
+    "missing_detention_rate": 25,
+    "missing_revenues_template_marks_mandatory": 25
+  },
+  "error_counts": {
+    "missing_asset_value": 5,
+    "missing_latitude": 2,
+    "missing_longitude": 2
+  }
+}

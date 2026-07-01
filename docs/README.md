@@ -223,8 +223,9 @@ Supported selection modes:
 .../export_scr_upload.py --all-reference --limit 100
 ```
 
-Default target is the dev DB (`DATABASE_URL_DEV` from the platform repo's
-`web/.env.local`). Production requires `--target prod` explicitly.
+Default target is the dev DB (`DATABASE_URL_DEV` from `.env`, unless
+`--env-file` or `--database-url` is provided). Production requires
+`--target prod` explicitly.
 
 ## Sidecar Inputs
 

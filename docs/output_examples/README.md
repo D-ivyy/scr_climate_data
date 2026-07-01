@@ -1,15 +1,14 @@
 # SCR Output Examples
 
-Local returned examples from SCR define the current inbound result shape:
+Returned examples from SCR define the current inbound result shape:
 
 ```text
 asset_1232_physical_risks.xlsx
 asset_1232_transition_risks.xlsx
 ```
 
-The `.xlsx` files themselves are intentionally local-only and ignored by git
-because this repository is public. Keep returned SCR workbooks outside version
-control and use this folder for local analysis.
+The `.xlsx` files are checked in as example artifacts for reproducibility.
+Review any future SCR return files before committing them.
 
 Both workbooks contain:
 

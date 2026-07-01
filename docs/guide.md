@@ -237,20 +237,19 @@ The `runs/` folder is generated output. It is safe to delete stale run
 directories after keeping any returned SCR output and the matching
 `scr_manifest.csv` needed for join-back.
 
-## Public Repo Note
+## Repository Artifact Note
 
-The SCR template workbook, returned SCR output workbooks, generated uploads,
-manifests, and `.env` files are local-only artifacts and are ignored by git in
-this public repository.
+The repository now includes the SCR template workbook, returned SCR output
+examples, and the current example run artifacts for reproducibility.
 
-Expected local paths when working with the current defaults:
+Database credentials remain local-only and are ignored by git:
 
 ```text
 .env
-docs/Climate_Metrics_Import_tempate.xlsx
-docs/output_examples/*.xlsx
-runs/<run_id>/*
 ```
+
+Review any new `runs/<run_id>/` folder before committing because manifests and
+generated uploads can contain client or asset context.
 
 ## Manifest Schema
 
