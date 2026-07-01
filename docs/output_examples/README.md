@@ -53,3 +53,6 @@ The full join-back and ingestion notes are in
 
 The detailed returned-output schema and product/database usage notes are in
 [`schema.md`](schema.md).
+
+The ClimateMetrics metadata source map is in
+[`../metadata/README.md`](../metadata/README.md).

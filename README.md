@@ -14,6 +14,8 @@ This repo contains:
   the exporter
 - `docs/output_examples/`: returned SCR physical/transition examples and
   interpretation notes
+- `docs/metadata/`: ClimateMetrics metadata workbook, FAQ, methodology, and
+  source interpretation notes
 - `runs/`: checked-in example run artifacts
 
 Database credentials remain local-only:
@@ -67,3 +69,5 @@ context.
 - [`docs/guide.md`](docs/guide.md): operator guide
 - [`docs/output_examples/schema.md`](docs/output_examples/schema.md):
   returned SCR output schema and usage notes
+- [`docs/metadata/README.md`](docs/metadata/README.md): ClimateMetrics
+  metadata source map and implementation notes

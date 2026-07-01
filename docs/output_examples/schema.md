@@ -1,7 +1,7 @@
 # SCR Returned Output Schema and Interpretation
 
-Status: deep profile from the two local SCR returned-output examples,
-2026-07-01.
+Status: deep profile from the returned SCR examples plus ClimateMetrics
+metadata documents, 2026-07-01.
 
 Local example files:
 
@@ -10,7 +10,15 @@ asset_1232_physical_risks.xlsx
 asset_1232_transition_risks.xlsx
 ```
 
-The `.xlsx` examples are checked in as example artifacts for reproducibility.
+Metadata source files:
+
+```text
+docs/metadata/climatemetrics_metadata.xlsx
+docs/metadata/climatemetrics_faq.pdf
+docs/metadata/climatemetrics_methodology.pdf
+```
+
+The example workbooks and metadata files are checked in for reproducibility.
 This markdown file records the useful structure learned from them: how to join
 the results back, what each workbook contains, how complete the example data
 is, and where the fields can fit into InfraSure.
@@ -22,6 +30,11 @@ model outputs.
 
 The repeated asset fields are context. The analytical data lives across
 scenario, horizon, indicator, hazard, and subrisk rows.
+
+ClimateMetrics should be treated as an exposure model-output layer. The
+methodology describes physical and transition outputs as exposure metrics and
+ratings, not as a direct replacement for InfraSure asset data or a complete
+cash-flow forecast.
 
 Most important rule:
 
@@ -76,12 +89,12 @@ Physical
 1 asset
   x 2 scenarios
   x 17 horizons
-  x 28 physical indicators
+  x 28 returned physical indicator rows
   = 952 long rows
 
 Transition
 1 asset
-  x 6 scenarios
+  x 6 returned scenarios
   x 8 horizons
   x 5 transition indicators
   = 240 long rows
@@ -89,6 +102,46 @@ Transition
 
 Both returned files contain static values only; no worksheet formulas were
 found in the workbook XML.
+
+## Metadata-Derived Interpretation Rules
+
+The metadata files change how we should interpret the returned rows:
+
+```text
+Asset grain
+  One SCR request is one asset analysis.
+  Distinct asset types or geographically separated sub-assets should be
+  assessed separately, then aggregated at portfolio level.
+
+Geography
+  Minimum input is asset centroid coordinates in WGS84.
+  Address geocoding is supported, but direct coordinates are preferred.
+  Lines and polygons are supported by SCR, but the current exporter sends
+  point assets.
+
+Financial inputs
+  Asset value supports physical damage quantification.
+  Revenue supports transition risk and revenue disruption quantification.
+  Scope 1 and Scope 2 are optional; SCR can estimate defaults, but reported
+  data improves precision.
+
+Time horizons
+  Physical indicators run in 5-year steps from 2025 to 2100.
+  Transition indicators run in 5-year steps from 2025 to 2060.
+  Indicator values represent a 10-year average centered on the horizon.
+  Financial impacts represent the average annual impact from 2025 through the
+  selected horizon.
+
+Ratings
+  A is best / lowest exposure.
+  G is worst / highest exposure.
+  Ratings are derived from percentile scores against SCR's reference
+  infrastructure universe, anchored to the Expected scenario and 2035 horizon.
+```
+
+Implication for InfraSure: keep raw numeric values and SCR letter ratings.
+Do not infer cash-flow impacts or insurance outcomes without a product-layer
+interpretation step.
 
 ## Workbook Anatomy
 
@@ -170,6 +223,16 @@ Historical
 2025, 2030, 2035, ..., 2100
 ```
 
+Metadata interpretation:
+
+- `ssp2-4.5` is the moderate/intermediate emissions physical scenario.
+- `ssp5-8.5` is the high-emissions, fossil-fuel-intensive physical scenario.
+- The methodology maps several transition scenarios back to these two
+  physical scenarios when combined climate exposure ratings are produced.
+- Physical output is modelled to 2100.
+- Indicator values are centered 10-year averages; financial impacts are
+  average annual impacts from 2025 to the selected horizon.
+
 Each scenario/horizon combination has 28 rows:
 
 ```text
@@ -200,6 +263,10 @@ Interpretation:
 - Drought and wildfire each have 3 indicators.
 - Precipitation has 2 indicators.
 - Landslide and subsidence each have 1 indicator.
+- The metadata workbook's current `Indicators` sheet lists 27 physical
+  indicators and does not list `Subsidence rate`, but the returned workbook
+  does include subsidence. The importer should keep returned indicators even
+  when metadata mapping is missing, and emit a vocabulary warning.
 
 Indicator families:
 
@@ -239,7 +306,7 @@ Other physical indicators:
 ```text
 Landslide:     Landslide susceptibility
 Precipitation: Max precipitation 1 day, Max precipitation 5 days
-Subsidence:    Subsidence rate
+Subsidence:    Subsidence rate (returned output; not in current metadata sheet)
 Wildfire:      Burn probability, Tree cover, Fire Weather Index (FWI)
 ```
 
@@ -271,6 +338,20 @@ Adjusted versions exist for most physical metrics. Store both adjusted and
 unadjusted values. The first product view will likely prefer adjusted values,
 but the raw import should not discard either family.
 
+Methodology interpretation:
+
+- `hazardDamage` and `totalDamage` are tied to asset value / replacement
+  value. They represent annual expected loss style asset-value impacts.
+- `hazardDisruption` and `totalDisruption` are tied to revenue and business
+  continuity.
+- `hazardDisruptionDamageEquivalent` converts disruption into a
+  damage-equivalent form so damage and disruption can be compared or combined.
+- Financial impact metrics are available mainly for flood, wind, heat, and
+  wildfire. Blank damage/value fields for other hazards can be structurally
+  expected.
+- Physical exposure ratings are benchmarked A-G ratings, not raw hazard
+  intensities.
+
 Physical-specific fields:
 
 | Field | Type | Interpretation | Useful for |
@@ -278,9 +359,9 @@ Physical-specific fields:
 | `indicatorRating` | text | Rating for the individual indicator. | Driver-level badges. |
 | `hazard` | text | Physical hazard group. | Grouping and hazard-level rollups. |
 | `HazardRating` | text | Hazard-level rating. Header uses capital `H`. | Raw import and hazard summary. |
-| `hazardDamage` | numeric | Hazard impact on asset value / capex. | Hazard-specific damage screen. |
+| `hazardDamage` | numeric | Hazard impact relative to asset value / replacement value. | Hazard-specific damage screen. |
 | `adjustedHazardDamage` | numeric | Adjusted hazard damage. | Preferred damage candidate after validation. |
-| `hazardDisruption` | numeric | Hazard impact on revenue / opex disruption. | Operating-disruption screen. |
+| `hazardDisruption` | numeric | Hazard impact relative to revenue / business continuity. | Operating-disruption screen. |
 | `adjustedHazardDisruption` | numeric | Adjusted disruption. | Preferred disruption candidate after validation. |
 | `hazardDisruptionDamageEquivalent` | numeric | Disruption converted to damage-equivalent terms. | Combined impact analysis. |
 | `adjustedHazardDisruptionDamageEquivalent` | numeric | Adjusted damage-equivalent disruption. | Combined adjusted impact analysis. |
@@ -422,7 +503,7 @@ Observed grain:
 assetName + scenario + timeHorizon + indicator + subrisk
 ```
 
-Transition scenarios:
+Transition scenarios present in the example return:
 
 ```text
 Below 2C
@@ -432,6 +513,32 @@ Low Demand
 NDCs
 Net Zero 2050
 ```
+
+Metadata scenario universe:
+
+```text
+Orderly
+  - Net Zero 2050
+  - Below 2C
+
+Disorderly
+  - Delayed Transition
+
+Too Little, Too Late
+  - Fragmented World
+
+Hot House World
+  - Nationally Determined Contributions (NDCs)
+  - Current Policies
+
+ECI stress extensions
+  - Climate Destabilisation
+  - Climate Breakdown
+```
+
+The importer should accept all eight metadata scenarios. The current returned
+example contains six and does not include `Fragmented World`,
+`Climate Destabilisation`, or `Climate Breakdown`.
 
 Horizons:
 
@@ -489,12 +596,24 @@ asset total layer
 
 Adjusted versions exist for subrisk and asset exposure ratings. Store both.
 
+Methodology interpretation:
+
+- Direct carbon cost measures exposure to Scope 1+2 emissions intensity under
+  a carbon-price path. Conceptually it is emissions intensity multiplied by
+  carbon price, giving an annual carbon-cost burden relative to revenue.
+- Market demand shifts compare an asset/sector revenue path under a climate
+  scenario against an inflation-only reference path.
+- Scope 3 is estimated by SCR from sector/country inputs, not directly
+  uploaded by users in this workflow.
+- The Transition Exposure Rating aggregates direct carbon cost and market
+  demand shifts into an A-G rating.
+
 Transition-specific fields:
 
 | Field | Type | Interpretation | Useful for |
 |---|---|---|---|
 | `subrisk` | text | Transition risk driver. | Splitting direct carbon cost and demand-shift effects. |
-| `subriskRevenueImpact` | numeric | Revenue impact for the subrisk. | Ranking transition revenue sensitivity. |
+| `subriskRevenueImpact` | numeric | Revenue-relative impact for the subrisk. | Ranking transition revenue sensitivity. |
 | `adjustedSubriskRevenueImpact` | numeric | Adjusted revenue impact for the subrisk. | Preferred subrisk ranking candidate. |
 | `subriskExposureRating` | text | Subrisk exposure rating. | Subrisk-level badge/display. |
 | `adjustedSubriskExposureRating` | text | Adjusted subrisk exposure rating. | Preferred subrisk rating candidate. |
@@ -608,6 +727,40 @@ For each asset + scenario + horizon:
   show the indicator family behind that subrisk
 ```
 
+## Rating Semantics
+
+SCR uses A-G ratings across indicator, hazard, physical exposure, transition
+exposure, and combined climate exposure concepts.
+
+Confirmed interpretation from the metadata:
+
+```text
+A = best / lowest exposure
+B
+C
+D
+E
+F
+G = worst / highest exposure
+```
+
+Ratings are derived from continuous 1-100 exposure scores benchmarked against
+SCR's reference infrastructure universe. The reference scale is anchored to
+the Expected scenario at the 2035 horizon, which is intended to make ratings
+comparable over assets, time, sectors, and geographies.
+
+Portfolio-level SCR ratings are computed by mapping letters to numbers,
+averaging valid asset ratings, rounding, and mapping back:
+
+```text
+A=1, B=2, C=3, D=4, E=5, F=6, G=7
+portfolio_rating = letter(round(mean(asset_rating_number)))
+```
+
+InfraSure should store the raw letters as strings. If we reproduce SCR-style
+portfolio summaries, keep the numeric mapping explicit and preserve the
+underlying distribution because a simple average hides dispersion.
+
 ## Raw Import Design
 
 Do not write SCR outputs directly into `plants`. Treat SCR as a separate
@@ -719,6 +872,9 @@ Warnings:
 - `assetId` changes for the same `assetName` across reruns.
 - New scenario, hazard, subrisk, or indicator value is not yet in our
   ontology.
+- Returned indicator is not present in the current metadata workbook.
+- Metadata contains a scenario or indicator that is not present in a returned
+  workbook. This is not an error; the return may be a subset.
 - Metric fields are blank but identity and row-axis fields are present.
 - Expected metric column is missing, but enough columns exist to identify and
   import the result type.
@@ -734,8 +890,9 @@ Use these defaults until SCR confirms stronger guidance:
 4. Do not rank by indicatorValue alone; it has mixed units.
 5. Rank physical hazard drivers by adjustedHazardValueImpact when populated.
 6. Rank transition drivers by adjustedSubriskRevenueImpact when populated.
-7. Use ratings as categorical values, not numeric scores, until rating order
-   and severity direction are confirmed.
+7. Treat A as lowest exposure and G as highest exposure.
+8. Store rating letters as categorical strings; only map to numbers in an
+   explicit portfolio-scoring routine.
 ```
 
 ## Ontology Candidates
@@ -766,7 +923,6 @@ This protects auditability and gives us room to normalize names later.
 
 - Which adjusted metric should become the default physical ranking metric?
 - What display scaling should SCR numeric impact fields use?
-- What is the confirmed severity order of rating letters?
 - Should we expose SCR outputs to clients directly, or only derived
   InfraSure summaries?
 - Should reruns replace the active view while preserving history, or should

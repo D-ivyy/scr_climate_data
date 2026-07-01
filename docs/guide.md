@@ -444,6 +444,9 @@ docs/output_examples/asset_1232_transition_risks.xlsx
 Detailed returned-output schema and usage notes:
 [`output_examples/schema.md`](output_examples/schema.md).
 
+ClimateMetrics metadata source map and methodology-derived interpretation
+notes: [`metadata/README.md`](metadata/README.md).
+
 Both examples have the same workbook shape:
 
 - `ReadMe`: asset metadata and field definitions
