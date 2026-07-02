@@ -16,11 +16,27 @@
       <div class="header-controls">
         <label class="select-label" for="assetSelect">Asset</label>
         <select id="assetSelect"></select>
-        <span class="status-pill" id="dataStatus">Loading data</span>
+        <div class="header-actions">
+          <button class="help-button" id="helpToggle" type="button">Metric Guide</button>
+          <span class="status-pill" id="dataStatus">Loading data</span>
+        </div>
       </div>
     </header>
 
     <main>
+      <section class="help-panel is-hidden" id="helpPanel">
+        <div>
+          <p class="eyebrow">Metric Guide</p>
+          <h2>How To Read These Outputs</h2>
+        </div>
+        <div class="help-grid">
+          <p><strong>Raw values are preserved.</strong> SCR returns small physical impact values such as <code>0.001238918</code>. The dashboard defaults to a percent-style display, <code>0.1239%</code>, but keeps the raw value in labels and hover text.</p>
+          <p><strong>Percent-style display is not a confirmed vendor unit.</strong> It is a readability conversion of raw value times 100. Until SCR confirms the exact product-facing label, treat it as a display view, not a final financial percentage.</p>
+          <p><strong>Hazards have two signals.</strong> Quantified value impact is one signal. Indicator severity ratings are another. If a hazard says "not quantified," SCR did not return a numeric hazard value impact for that hazard in the selected scenario/horizon.</p>
+          <p><strong>Missing magnitude is not missing meaning.</strong> Some indicator rows have a rating but no numeric value or unit. Those rows are still useful for severity screening, but the dashboard marks the magnitude as "rating only."</p>
+        </div>
+      </section>
+
       <section class="summary-grid" id="assetSummary" aria-label="Asset summary"></section>
 
       <section class="workspace">
@@ -39,6 +55,12 @@
             <select id="physicalScenarioSelect"></select>
             <label for="physicalHorizonSelect">Horizon</label>
             <select id="physicalHorizonSelect"></select>
+            <label for="physicalDisplaySelect">Impact display</label>
+            <select id="physicalDisplaySelect">
+              <option value="percent">Percent-style</option>
+              <option value="basis_points">Basis points</option>
+              <option value="raw">Raw SCR value</option>
+            </select>
           </div>
 
           <div class="control-group" id="transitionControls">

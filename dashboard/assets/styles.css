@@ -101,8 +101,6 @@ select {
 }
 
 .status-pill {
-  grid-column: 2;
-  justify-self: start;
   border: 1px solid #cbd5e1;
   border-radius: 999px;
   color: var(--muted);
@@ -111,8 +109,73 @@ select {
   padding: 4px 10px;
 }
 
+.header-actions {
+  grid-column: 2;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.help-button {
+  min-height: 30px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: #ffffff;
+  color: var(--ink);
+  cursor: pointer;
+  font-size: 0.78rem;
+  font-weight: 800;
+  padding: 4px 12px;
+}
+
+.help-button.is-active {
+  background: var(--ink);
+  color: #ffffff;
+}
+
 main {
   padding: 24px 32px 40px;
+}
+
+.help-panel {
+  display: grid;
+  grid-template-columns: minmax(180px, 0.35fr) minmax(0, 1fr);
+  gap: 18px;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--blue);
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: var(--shadow);
+  margin-bottom: 18px;
+  padding: 16px;
+}
+
+.help-panel h2 {
+  font-size: 1.12rem;
+}
+
+.help-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px 18px;
+}
+
+.help-grid p {
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.help-grid strong {
+  color: var(--ink);
+}
+
+.help-grid code {
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: #f8fafc;
+  padding: 1px 4px;
 }
 
 .summary-grid {
@@ -361,6 +424,10 @@ main {
   background: var(--blue);
 }
 
+.bar-fill.is-empty {
+  min-width: 0;
+}
+
 .bar-value {
   color: var(--muted);
   font-variant-numeric: tabular-nums;
@@ -393,6 +460,40 @@ main {
   gap: 4px;
   color: var(--muted);
   font-size: 0.78rem;
+}
+
+.severity-meter {
+  display: inline-grid;
+  grid-template-columns: repeat(7, 10px);
+  gap: 2px;
+  vertical-align: middle;
+}
+
+.severity-cell {
+  width: 10px;
+  height: 6px;
+  border-radius: 999px;
+  background: #d8dee8;
+}
+
+.severity-cell.is-on.low {
+  background: var(--green);
+}
+
+.severity-cell.is-on.mid {
+  background: var(--amber);
+}
+
+.severity-cell.is-on.high {
+  background: var(--red);
+}
+
+.cell-note {
+  display: block;
+  color: var(--muted);
+  font-size: 0.74rem;
+  line-height: 1.25;
+  margin-top: 3px;
 }
 
 .table-wrap {
@@ -509,8 +610,13 @@ th {
     grid-template-columns: 1fr;
   }
 
-  .status-pill {
+  .header-actions {
     grid-column: auto;
+  }
+
+  .help-panel,
+  .help-grid {
+    grid-template-columns: 1fr;
   }
 
   .bar-row,

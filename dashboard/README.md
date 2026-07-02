@@ -60,8 +60,16 @@ The builder writes:
 
 - The dashboard uses SCR `assetName` as the join key, matching the manifest
   guidance in the output schema docs.
+- Physical impact fields are stored as raw SCR values, but the dashboard
+  defaults to a percent-style readability view. Use the `Impact display`
+  control to switch between percent-style, basis points, and raw values.
+- Percent-style and basis-point displays are simple transformations of the raw
+  value. They are not confirmed SCR product-facing unit labels.
 - Physical values are best read as exposure-model outputs, not final insurance
   or cash-flow impacts.
+- Hazard rows distinguish quantified impact from severity. `not quantified`
+  means SCR did not return a numeric hazard value impact for that hazard in the
+  selected scenario/horizon.
 - Transition values are useful for ranking scenarios and separating direct
   carbon cost from market-demand shifts.
 - Numeric impact fields remain raw SCR model-output values until SCR confirms

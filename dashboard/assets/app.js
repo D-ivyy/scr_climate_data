@@ -9,6 +9,7 @@ const state = {
   activeView: "physical",
   physicalScenario: null,
   physicalHorizon: null,
+  physicalDisplay: "percent",
   transitionScenario: null,
 };
 
@@ -43,6 +44,26 @@ function ratingBadge(value) {
   return `<span class="rating ${klass}">${escapeHtml(rating)}</span>`;
 }
 
+function ratingMeaning(value) {
+  const score = ratingScore(value);
+  if (!score) return "No SCR rating";
+  if (score <= 2) return "Lower exposure";
+  if (score <= 4) return "Moderate exposure";
+  return "Higher exposure";
+}
+
+function severityMeter(value) {
+  const score = ratingScore(value);
+  const tone = score >= 5 ? "high" : score >= 3 ? "mid" : "low";
+  return `
+    <span class="severity-meter" aria-label="${escapeHtml(ratingMeaning(value))}">
+      ${[1, 2, 3, 4, 5, 6, 7]
+        .map((index) => `<span class="severity-cell ${index <= score ? `is-on ${tone}` : ""}"></span>`)
+        .join("")}
+    </span>
+  `;
+}
+
 function formatNumber(value, digits = 3) {
   if (value === null || value === undefined || Number.isNaN(Number(value))) {
     return "n/a";
@@ -66,6 +87,46 @@ function formatCompact(value) {
     return number.toExponential(2);
   }
   return number.toLocaleString(undefined, { maximumFractionDigits: 3 });
+}
+
+function physicalDisplayValue(value) {
+  if (value === null || value === undefined || Number.isNaN(Number(value))) {
+    return null;
+  }
+  const number = Number(value);
+  if (state.physicalDisplay === "percent") {
+    return number * 100;
+  }
+  if (state.physicalDisplay === "basis_points") {
+    return number * 10000;
+  }
+  return number;
+}
+
+function physicalDisplayLabel() {
+  if (state.physicalDisplay === "percent") {
+    return "percent-style display";
+  }
+  if (state.physicalDisplay === "basis_points") {
+    return "basis-point display";
+  }
+  return "raw SCR value";
+}
+
+function formatPhysicalImpact(value, options = {}) {
+  if (value === null || value === undefined || Number.isNaN(Number(value))) {
+    return "not quantified";
+  }
+  const number = Number(value);
+  if (state.physicalDisplay === "percent") {
+    const shown = `${(number * 100).toFixed(4)}%`;
+    return options.includeRaw ? `${shown} (raw ${number.toFixed(9)})` : shown;
+  }
+  if (state.physicalDisplay === "basis_points") {
+    const shown = `${(number * 10000).toFixed(2)} bps`;
+    return options.includeRaw ? `${shown} (raw ${number.toFixed(9)})` : shown;
+  }
+  return `${number.toFixed(9)} raw`;
 }
 
 function formatValueWithUnit(value, unit) {
@@ -166,6 +227,10 @@ function bindControls() {
     state.physicalHorizon = Number(event.target.value);
     render();
   });
+  el("physicalDisplaySelect").addEventListener("change", (event) => {
+    state.physicalDisplay = event.target.value;
+    render();
+  });
   el("transitionScenarioSelect").addEventListener("change", (event) => {
     state.transitionScenario = event.target.value;
     render();
@@ -177,6 +242,11 @@ function bindControls() {
   el("transitionTab").addEventListener("click", () => {
     state.activeView = "transition";
     render();
+  });
+  el("helpToggle").addEventListener("click", () => {
+    const panel = el("helpPanel");
+    const isHidden = panel.classList.toggle("is-hidden");
+    el("helpToggle").classList.toggle("is-active", !isHidden);
   });
 }
 
@@ -222,7 +292,7 @@ function renderSummary(asset, physical, transition) {
     metric("Physical Rating", ratingBadge(trend?.adjusted_physical_exposure_rating), `${state.physicalScenario} @ ${state.physicalHorizon}`),
     metric(
       "Physical Impact",
-      escapeHtml(formatNumber(trend?.adjusted_total_value_impact)),
+      escapeHtml(formatPhysicalImpact(trend?.adjusted_total_value_impact)),
       topHazard ? `Top hazard: ${topHazard.hazard}` : "No hazard ranking",
     ),
     metric(
@@ -248,15 +318,19 @@ function renderPhysical(asset, physical) {
       .sort((a, b) => Number(a.horizon) - Number(b.horizon))
       .map((row) => ({
         x: Number(row.horizon),
-        y: row.adjusted_total_value_impact,
+        y: physicalDisplayValue(row.adjusted_total_value_impact),
+        raw: row.adjusted_total_value_impact,
         rating: row.adjusted_physical_exposure_rating,
       })),
   }));
 
-  el("physicalTrendKicker").textContent = `${asset.scr_asset_id || asset.asset_name} | ${state.physicalScenario}`;
+  el("physicalTrendKicker").textContent = `${asset.scr_asset_id || asset.asset_name} | ${state.physicalScenario} | ${physicalDisplayLabel()}`;
   renderLineChart("physicalTrendChart", trendsByScenario, {
-    yLabel: "adjustedTotalValueImpact",
+    yLabel: `adjustedTotalValueImpact (${physicalDisplayLabel()})`,
     baselineZero: false,
+    valueFormatter: formatCompact,
+    tooltipFormatter: (point) =>
+      `${formatPhysicalImpact(point.raw, { includeRaw: true })} | rating ${point.rating || "-"}`,
   });
 
   renderHazardRanking(physical);
@@ -272,19 +346,26 @@ function renderHazardRanking(physical) {
   const maxValue = Math.max(...hazards.map((row) => Number(row.adjusted_hazard_value_impact || 0)), 0);
   el("hazardRanking").innerHTML = hazards
     .map((row) => {
-      const width = maxValue > 0 ? (Number(row.adjusted_hazard_value_impact || 0) / maxValue) * 100 : 0;
+      const rawImpact = row.adjusted_hazard_value_impact;
+      const numericImpact = Number(rawImpact || 0);
+      const hasImpact = rawImpact !== null && rawImpact !== undefined;
+      const width = maxValue > 0 ? (numericImpact / maxValue) * 100 : 0;
       const worst = (row.worst_indicators || [])
         .slice(0, 2)
-        .map((item) => `${item.rating || "-"} ${item.indicator || ""} ${formatValueWithUnit(item.value, item.unit)}`)
+        .map((item) => {
+          const magnitude = item.value === null ? "rating only" : formatValueWithUnit(item.value, item.unit);
+          return `${item.rating || "-"} ${item.indicator || ""} ${magnitude}`;
+        })
         .join(" | ");
       return `
         <div class="bar-row">
           <div class="bar-label">
             <span class="bar-title">${escapeHtml(row.hazard)}</span>
-            <span class="bar-subtitle">Rating ${escapeHtml(row.hazard_rating || "-")} | ${escapeHtml(worst)}</span>
+            <span class="bar-subtitle">${ratingBadge(row.hazard_rating)} ${severityMeter(row.hazard_rating)} ${escapeHtml(ratingMeaning(row.hazard_rating))}</span>
+            <span class="bar-subtitle">${escapeHtml(worst)}</span>
           </div>
-          <div class="bar-track"><div class="bar-fill" style="width:${width}%; background:${COLORS[0]}"></div></div>
-          <div class="bar-value">${formatNumber(row.adjusted_hazard_value_impact)}</div>
+          <div class="bar-track"><div class="bar-fill ${hasImpact ? "" : "is-empty"}" style="width:${width}%; background:${COLORS[0]}"></div></div>
+          <div class="bar-value">${escapeHtml(formatPhysicalImpact(rawImpact))}</div>
         </div>
       `;
     })
@@ -316,9 +397,10 @@ function renderIndicatorTable(physical) {
       <thead>
         <tr>
           <th>Rating</th>
+          <th>Severity</th>
           <th>Hazard</th>
           <th>Indicator</th>
-          <th>Value</th>
+          <th>Magnitude</th>
         </tr>
       </thead>
       <tbody>
@@ -327,9 +409,13 @@ function renderIndicatorTable(physical) {
             (row) => `
               <tr>
                 <td>${ratingBadge(row.rating)}</td>
+                <td>${severityMeter(row.rating)}<span class="cell-note">${escapeHtml(ratingMeaning(row.rating))}</span></td>
                 <td>${escapeHtml(row.hazard || "-")}</td>
                 <td>${escapeHtml(row.indicator || "-")}</td>
-                <td>${escapeHtml(formatValueWithUnit(row.value, row.unit))}</td>
+                <td>
+                  ${escapeHtml(row.value === null ? "rating only" : formatValueWithUnit(row.value, row.unit))}
+                  ${row.value === null ? '<span class="cell-note">SCR did not return numeric magnitude for this row.</span>' : ""}
+                </td>
               </tr>
             `,
           )
@@ -450,7 +536,9 @@ function renderSubriskTable(transition) {
 function renderLineChart(containerId, series, options) {
   const container = el(containerId);
   const xValues = sortNumeric(unique(series.flatMap((item) => item.points.map((point) => point.x))));
-  const yValues = series.flatMap((item) => item.points.map((point) => point.y)).filter((value) => value !== null);
+  const yValues = series
+    .flatMap((item) => item.points.map((point) => point.y))
+    .filter((value) => value !== null && value !== undefined && !Number.isNaN(Number(value)));
 
   if (!xValues.length || !yValues.length) {
     container.innerHTML = `<div class="empty-state">No trend data available.</div>`;
@@ -481,7 +569,7 @@ function renderLineChart(containerId, series, options) {
       const y = yFor(tick);
       return `
         <line class="grid-line" x1="${margin.left}" x2="${width - margin.right}" y1="${y}" y2="${y}"></line>
-        <text class="tick-label" x="${margin.left - 10}" y="${y + 4}" text-anchor="end">${escapeHtml(formatCompact(tick))}</text>
+        <text class="tick-label" x="${margin.left - 10}" y="${y + 4}" text-anchor="end">${escapeHtml((options.valueFormatter || formatCompact)(tick))}</text>
       `;
     })
     .join("");
@@ -496,12 +584,14 @@ function renderLineChart(containerId, series, options) {
 
   const lines = series
     .map((item) => {
-      const points = item.points.filter((point) => point.y !== null);
+      const points = item.points.filter(
+        (point) => point.y !== null && point.y !== undefined && !Number.isNaN(Number(point.y)),
+      );
       const path = points.map((point, index) => `${index === 0 ? "M" : "L"} ${xFor(point.x)} ${yFor(point.y)}`).join(" ");
       const circles = points
         .map(
           (point) =>
-            `<circle cx="${xFor(point.x)}" cy="${yFor(point.y)}" r="${item.selected ? 3.5 : 2.5}" fill="${item.color}"><title>${escapeHtml(item.name)} ${point.x}: ${formatNumber(point.y)} rating ${point.rating || "-"}</title></circle>`,
+            `<circle cx="${xFor(point.x)}" cy="${yFor(point.y)}" r="${item.selected ? 3.5 : 2.5}" fill="${item.color}"><title>${escapeHtml(item.name)} ${point.x}: ${options.tooltipFormatter ? options.tooltipFormatter(point) : `${formatNumber(point.y)} rating ${point.rating || "-"}`}</title></circle>`,
         )
         .join("");
       return `
@@ -546,9 +636,9 @@ function renderInterpretation(asset, physical, transition) {
 
   el("interpretationBody").innerHTML = `
     <p><strong>Asset context:</strong> ${escapeHtml(asset.scr_asset_id || asset.asset_name)} is modeled as ${escapeHtml(asset.ticcs_sub_class_name || "an infrastructure asset")} at ${escapeHtml(asset.coordinates || "unknown coordinates")}.</p>
-    <p><strong>Physical:</strong> ${escapeHtml(state.physicalScenario)} at ${escapeHtml(state.physicalHorizon)} returns overall rating ${escapeHtml(trend?.adjusted_physical_exposure_rating || "-")} and adjusted total value impact ${escapeHtml(formatNumber(trend?.adjusted_total_value_impact))}${change ? `, a ${escapeHtml(change)}% move from the first returned horizon` : ""}. ${topHazard ? `The top quantified hazard is ${escapeHtml(topHazard.hazard)}.` : ""}</p>
+    <p><strong>Physical:</strong> ${escapeHtml(state.physicalScenario)} at ${escapeHtml(state.physicalHorizon)} returns overall rating ${escapeHtml(trend?.adjusted_physical_exposure_rating || "-")} and adjusted total value impact ${escapeHtml(formatPhysicalImpact(trend?.adjusted_total_value_impact, { includeRaw: true }))}${change ? `, a ${escapeHtml(change)}% move from the first returned horizon` : ""}. ${topHazard ? `The top quantified hazard is ${escapeHtml(topHazard.hazard)}.` : ""}</p>
     <p><strong>Transition:</strong> the highest peak scenario is ${escapeHtml(topTransition?.scenario || "-")} with ${escapeHtml(formatNumber(topTransition?.peak_impact))}. The selected scenario, ${escapeHtml(selectedTransition?.scenario || "-")}, is led by ${escapeHtml(selectedTransition?.peak_subrisk || "-")} at ${escapeHtml(selectedTransition?.peak_year || "-")}.</p>
-    <p><strong>Caveat:</strong> impact fields are shown as raw SCR model-output values until SCR confirms product-facing units and labels.</p>
+    <p><strong>Caveat:</strong> physical impact can be toggled between raw, percent-style, and basis-point display. Percent-style and basis-point displays are readability conversions from the raw SCR value, not confirmed vendor unit labels.</p>
   `;
 }
 
