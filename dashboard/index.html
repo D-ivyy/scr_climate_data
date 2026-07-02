@@ -34,6 +34,7 @@
           <p><strong>Percent-style display is not a confirmed vendor unit.</strong> It is a readability conversion of raw value times 100. Until SCR confirms the exact product-facing label, treat it as a display view, not a final financial percentage.</p>
           <p><strong>Hazards have two signals.</strong> Quantified value impact is one signal. Indicator severity ratings are another. If a hazard says "not quantified," SCR did not return a numeric hazard value impact for that hazard in the selected scenario/horizon.</p>
           <p><strong>Missing magnitude is not missing meaning.</strong> Some indicator rows have a rating but no numeric value or unit. Those rows are still useful for severity screening, but the dashboard marks the magnitude as "rating only."</p>
+          <p><strong>Ratings are relative benchmarks.</strong> A-G ratings compare exposure against SCR's reference infrastructure universe. They are not a percentile within only this dashboard file or only InfraSure assets.</p>
         </div>
       </section>
 
@@ -88,6 +89,14 @@
               <button class="eye-button compact" data-help="join_key" type="button">View</button>
             </div>
             <span>SCR assetName maps back through the private manifest.</span>
+          </div>
+
+          <div class="control-note">
+            <div class="control-note-header">
+              <strong>Rating benchmark</strong>
+              <button class="eye-button compact" data-help="rating_benchmark" type="button">View</button>
+            </div>
+            <span>A-G is relative to SCR's reference infrastructure universe.</span>
           </div>
         </aside>
 

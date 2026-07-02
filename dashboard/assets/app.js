@@ -32,7 +32,8 @@ const HELP_CONTENT = {
     eyebrow: "Physical",
     title: "Physical Rating",
     body: [
-      "SCR ratings run from A to G. A means lowest exposure in SCR's benchmark universe, and G means highest exposure.",
+      "SCR ratings run from A to G. A means lowest exposure in SCR's reference infrastructure universe, and G means highest exposure.",
+      "The benchmark is not only this dashboard file, not only our database, and not only this asset's portfolio. The metadata describes a reference infrastructure universe anchored to the Expected scenario and 2035 horizon.",
       "The overall physical rating can remain A while individual hazard indicators are worse. Use this card with Hazard Ranking and Indicator Detail before making a judgment.",
     ],
   },
@@ -75,7 +76,8 @@ const HELP_CONTENT = {
     body: [
       "This section ranks physical hazards by adjustedHazardValueImpact for the selected scenario and horizon, then falls back to hazard rating when impacts tie.",
       "A hazard marked not quantified does not mean no exposure. It means SCR did not return a numeric hazard value impact for that hazard in this view.",
-      "The worst visible indicators are included because severe indicator ratings can matter even when hazard-level value impact is blank or zero.",
+      "Click a hazard row to open the worst returned indicators. Severe indicator ratings can matter even when hazard-level value impact is blank or zero.",
+      "If a hazard value does not change when filters change, first check the returned data. In the current example, Flood has the same adjustedHazardValueImpact in the raw SCR workbook across both scenarios and all future horizons.",
     ],
   },
   indicator_detail: {
@@ -128,6 +130,15 @@ const HELP_CONTENT = {
     body: [
       "The SCR output repeats assetName on every row. That is the field we join back to our private scr_manifest.csv.",
       "The manifest then maps scr_asset_name to plant_uuid, portfolio context, and any tenant-specific asset identity. SCR assetId should be stored as vendor metadata, not used as the canonical database key.",
+    ],
+  },
+  rating_benchmark: {
+    eyebrow: "Methodology",
+    title: "Rating Benchmark",
+    body: [
+      "Based on the SCR metadata/methodology notes, A-G ratings are benchmarked against SCR's reference infrastructure universe. A is best or lowest exposure; G is worst or highest exposure.",
+      "The metadata describes ratings as percentile-style exposure scores anchored to the Expected scenario at the 2035 horizon. That means the comparison is broader than this uploaded file, this portfolio, or InfraSure's current database.",
+      "We should still keep the raw SCR letter and avoid converting it into a local percentile unless SCR gives the exact benchmark population and scoring thresholds for the product UI.",
     ],
   },
 };
@@ -442,6 +453,38 @@ function selectedHazards(physical) {
     });
 }
 
+function hasStaticHazardImpact(physical, hazard) {
+  const values = physical.hazards
+    .filter((row) => row.hazard === hazard && validImpact(row.adjusted_hazard_value_impact))
+    .map((row) => Number(row.adjusted_hazard_value_impact).toPrecision(12));
+  return values.length > 1 && unique(values).length === 1;
+}
+
+function renderWorstIndicatorChips(indicators) {
+  if (!indicators?.length) {
+    return `<div class="empty-state compact-empty">No indicator details returned for this hazard.</div>`;
+  }
+  return `
+    <div class="indicator-chip-grid">
+      ${indicators
+        .map((item) => {
+          const magnitude =
+            item.value === null || item.value === undefined ? "rating only" : formatValueWithUnit(item.value, item.unit);
+          return `
+            <div class="indicator-chip">
+              <div class="indicator-chip-rating">${ratingBadge(item.rating)} ${severityMeter(item.rating)}</div>
+              <div class="indicator-chip-body">
+                <span class="indicator-chip-title">${escapeHtml(item.indicator || "-")}</span>
+                <span class="indicator-chip-value">${escapeHtml(magnitude)}</span>
+              </div>
+            </div>
+          `;
+        })
+        .join("")}
+    </div>
+  `;
+}
+
 function filteredTransitionSubrisks(transition) {
   return transition.subrisks.filter(
     (row) => state.transitionDriver === "all" || row.subrisk === state.transitionDriver,
@@ -580,28 +623,35 @@ function renderHazardRanking(physical) {
   }
   const maxValue = Math.max(...hazards.map((row) => Number(row.adjusted_hazard_value_impact || 0)), 0);
   el("hazardRanking").innerHTML = hazards
-    .map((row) => {
+    .map((row, index) => {
       const rawImpact = row.adjusted_hazard_value_impact;
       const numericImpact = Number(rawImpact || 0);
-      const hasImpact = rawImpact !== null && rawImpact !== undefined;
+      const hasImpact = validImpact(rawImpact);
       const width = maxValue > 0 ? (numericImpact / maxValue) * 100 : 0;
-      const worst = (row.worst_indicators || [])
-        .slice(0, 2)
-        .map((item) => {
-          const magnitude = item.value === null || item.value === undefined ? "rating only" : formatValueWithUnit(item.value, item.unit);
-          return `${item.rating || "-"} ${item.indicator || ""} ${magnitude}`;
-        })
-        .join(" | ");
+      const indicatorCount = row.worst_indicators?.length || 0;
+      const staticImpact = hasStaticHazardImpact(physical, row.hazard);
       return `
-        <div class="bar-row">
-          <div class="bar-label">
-            <span class="bar-title">${escapeHtml(row.hazard)}</span>
-            <span class="bar-subtitle">${ratingBadge(row.hazard_rating)} ${severityMeter(row.hazard_rating)} ${escapeHtml(ratingMeaning(row.hazard_rating))}</span>
-            <span class="bar-subtitle">${escapeHtml(worst)}</span>
+        <details class="hazard-card" ${index === 0 ? "open" : ""}>
+          <summary class="hazard-summary">
+            <div class="bar-label">
+              <span class="bar-title">${escapeHtml(row.hazard)}</span>
+              <span class="bar-subtitle">${ratingBadge(row.hazard_rating)} ${severityMeter(row.hazard_rating)} ${escapeHtml(ratingMeaning(row.hazard_rating))}</span>
+            </div>
+            <div class="bar-track"><div class="bar-fill ${hasImpact ? "" : "is-empty"}" style="width:${width}%; background:${COLORS[0]}"></div></div>
+            <div class="bar-value">
+              <span>${escapeHtml(formatPhysicalImpact(rawImpact))}</span>
+              ${staticImpact ? '<span class="impact-note">static in SCR return</span>' : ""}
+            </div>
+            <span class="details-pill" aria-hidden="true"></span>
+          </summary>
+          <div class="hazard-detail">
+            <div class="hazard-detail-header">
+              <span>Worst returned indicators</span>
+              <span>${escapeHtml(indicatorCount)} shown</span>
+            </div>
+            ${renderWorstIndicatorChips(row.worst_indicators || [])}
           </div>
-          <div class="bar-track"><div class="bar-fill ${hasImpact ? "" : "is-empty"}" style="width:${width}%; background:${COLORS[0]}"></div></div>
-          <div class="bar-value">${escapeHtml(formatPhysicalImpact(rawImpact))}</div>
-        </div>
+        </details>
       `;
     })
     .join("");

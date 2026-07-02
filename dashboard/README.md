@@ -62,6 +62,9 @@ The builder writes:
   guidance in the output schema docs.
 - `View` buttons on KPI cards and major sections open field-level notes derived
   from `docs/metadata/README.md` and `docs/output_examples/schema.md`.
+- A-G ratings are relative SCR benchmark ratings. The metadata describes them
+  as percentile-style scores against SCR's reference infrastructure universe,
+  not rankings within only the current file, portfolio, or InfraSure database.
 - Physical impact fields are stored as raw SCR values, but the dashboard
   defaults to a percent-style readability view. Use the `Impact display`
   control to switch between percent-style, basis points, and raw values.
@@ -72,6 +75,13 @@ The builder writes:
 - Hazard rows distinguish quantified impact from severity. `not quantified`
   means SCR did not return a numeric hazard value impact for that hazard in the
   selected scenario/horizon.
+- Hazard rows are expandable. The collapsed row shows hazard, rating, impact,
+  and ranking bar; the opened detail shows worst returned indicators without
+  forcing long indicator names into the main view.
+- If a hazard impact does not change when scenario or horizon changes, check
+  the returned data before assuming a dashboard bug. In the current example
+  workbook, Flood has one unique `adjustedHazardValueImpact` value across both
+  physical scenarios and all future horizons.
 - The transition `Driver` control filters returned subrisk rows. `All drivers`
   ranks the worst returned subrisk per scenario; `Direct carbon cost` and
   `Market demand shifts` recompute the ranking and trend from only that subrisk
