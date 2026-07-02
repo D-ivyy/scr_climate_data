@@ -60,6 +60,8 @@ The builder writes:
 
 - The dashboard uses SCR `assetName` as the join key, matching the manifest
   guidance in the output schema docs.
+- `View` buttons on KPI cards and major sections open field-level notes derived
+  from `docs/metadata/README.md` and `docs/output_examples/schema.md`.
 - Physical impact fields are stored as raw SCR values, but the dashboard
   defaults to a percent-style readability view. Use the `Impact display`
   control to switch between percent-style, basis points, and raw values.
@@ -70,7 +72,15 @@ The builder writes:
 - Hazard rows distinguish quantified impact from severity. `not quantified`
   means SCR did not return a numeric hazard value impact for that hazard in the
   selected scenario/horizon.
+- The transition `Driver` control filters returned subrisk rows. `All drivers`
+  ranks the worst returned subrisk per scenario; `Direct carbon cost` and
+  `Market demand shifts` recompute the ranking and trend from only that subrisk
+  family.
+- Direct carbon cost is a returned SCR transition subrisk, not a default upload
+  parameter selected in the CSV request. The current returned example also
+  includes market-demand-shift rows.
 - Transition values are useful for ranking scenarios and separating direct
-  carbon cost from market-demand shifts.
+  carbon cost from market-demand shifts, but the subrisk table should be used to
+  inspect the underlying indicators and units.
 - Numeric impact fields remain raw SCR model-output values until SCR confirms
   product-facing units.

@@ -37,6 +37,17 @@
         </div>
       </section>
 
+      <section class="context-panel is-hidden" id="contextPanel" aria-live="polite">
+        <div class="context-panel-header">
+          <div>
+            <p class="eyebrow" id="contextEyebrow">Metric Notes</p>
+            <h2 id="contextTitle">Metric notes</h2>
+          </div>
+          <button class="context-close" id="contextClose" type="button">Close</button>
+        </div>
+        <div id="contextBody" class="context-body"></div>
+      </section>
+
       <section class="summary-grid" id="assetSummary" aria-label="Asset summary"></section>
 
       <section class="workspace">
@@ -67,10 +78,15 @@
             <p class="control-title">Transition</p>
             <label for="transitionScenarioSelect">Scenario</label>
             <select id="transitionScenarioSelect"></select>
+            <label for="transitionDriverSelect">Driver</label>
+            <select id="transitionDriverSelect"></select>
           </div>
 
           <div class="control-note">
-            <strong>Join key</strong>
+            <div class="control-note-header">
+              <strong>Join key</strong>
+              <button class="eye-button compact" data-help="join_key" type="button">View</button>
+            </div>
             <span>SCR assetName maps back through the private manifest.</span>
           </div>
         </aside>
@@ -83,7 +99,10 @@
                   <p class="eyebrow">Physical Exposure</p>
                   <h2>Value Impact Trend</h2>
                 </div>
-                <p class="panel-kicker" id="physicalTrendKicker"></p>
+                <div class="panel-heading-actions">
+                  <p class="panel-kicker" id="physicalTrendKicker"></p>
+                  <button class="eye-button" data-help="physical_trend" type="button">View</button>
+                </div>
               </div>
               <div id="physicalTrendChart" class="chart"></div>
             </div>
@@ -95,6 +114,7 @@
                     <p class="eyebrow">Selected Horizon</p>
                     <h2>Hazard Ranking</h2>
                   </div>
+                  <button class="eye-button" data-help="hazard_ranking" type="button">View</button>
                 </div>
                 <div id="hazardRanking" class="bar-list"></div>
               </div>
@@ -105,6 +125,7 @@
                     <p class="eyebrow">Indicator Detail</p>
                     <h2>Worst Ratings</h2>
                   </div>
+                  <button class="eye-button" data-help="indicator_detail" type="button">View</button>
                 </div>
                 <div id="indicatorTable" class="table-wrap"></div>
               </div>
@@ -118,7 +139,10 @@
                   <p class="eyebrow">Transition Exposure</p>
                   <h2>Scenario Ranking</h2>
                 </div>
-                <p class="panel-kicker" id="transitionRankKicker"></p>
+                <div class="panel-heading-actions">
+                  <p class="panel-kicker" id="transitionRankKicker"></p>
+                  <button class="eye-button" data-help="transition_ranking" type="button">View</button>
+                </div>
               </div>
               <div id="transitionRanking" class="bar-list scenario-list"></div>
             </div>
@@ -130,6 +154,7 @@
                     <p class="eyebrow">Transition Trend</p>
                     <h2>Max Subrisk Impact</h2>
                   </div>
+                  <button class="eye-button" data-help="transition_trend" type="button">View</button>
                 </div>
                 <div id="transitionTrendChart" class="chart compact-chart"></div>
               </div>
@@ -140,6 +165,7 @@
                     <p class="eyebrow">Selected Scenario</p>
                     <h2>Subrisk Drivers</h2>
                   </div>
+                  <button class="eye-button" data-help="subrisk_drivers" type="button">View</button>
                 </div>
                 <div id="subriskTable" class="table-wrap"></div>
               </div>
@@ -152,6 +178,7 @@
                 <p class="eyebrow">Interpretation</p>
                 <h2>What This View Says</h2>
               </div>
+              <button class="eye-button" data-help="interpretation" type="button">View</button>
             </div>
             <div id="interpretationBody" class="interpretation-body"></div>
           </section>

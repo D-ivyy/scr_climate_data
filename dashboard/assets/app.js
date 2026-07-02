@@ -2,6 +2,11 @@ const DATA_URL = "data/example_asset_1232.json";
 
 const COLORS = ["#2f6f9f", "#218a61", "#b7791f", "#6f5ab8", "#c2410c", "#0f8b8d"];
 const RATING_SCORE = { A: 1, B: 2, C: 3, D: 4, E: 5, F: 6, G: 7 };
+const DRIVER_LABELS = {
+  all: "All drivers",
+  Direct_carbon_cost: "Direct carbon cost",
+  Market_demand_shifts: "Market demand shifts",
+};
 
 const state = {
   data: null,
@@ -11,6 +16,120 @@ const state = {
   physicalHorizon: null,
   physicalDisplay: "percent",
   transitionScenario: null,
+  transitionDriver: "all",
+};
+
+const HELP_CONTENT = {
+  kpi_asset: {
+    eyebrow: "Identity",
+    title: "Asset Identity",
+    body: [
+      "This card shows SCR vendor identity and TICCS context. SCR assetId is useful metadata, but it is not the InfraSure database key.",
+      "The durable join-back path is Output.assetName to scr_manifest.csv.scr_asset_name to plant_uuid. That private manifest is the bridge back to InfraSure.",
+    ],
+  },
+  kpi_physical_rating: {
+    eyebrow: "Physical",
+    title: "Physical Rating",
+    body: [
+      "SCR ratings run from A to G. A means lowest exposure in SCR's benchmark universe, and G means highest exposure.",
+      "The overall physical rating can remain A while individual hazard indicators are worse. Use this card with Hazard Ranking and Indicator Detail before making a judgment.",
+    ],
+  },
+  kpi_physical_impact: {
+    eyebrow: "Physical",
+    title: "Physical Impact",
+    body: [
+      "This uses adjustedTotalValueImpact from the physical output for the selected scenario and horizon.",
+      "The percent-style and basis-point displays are readability transforms of SCR's raw value. They are not confirmed vendor unit labels yet.",
+    ],
+  },
+  kpi_transition_peak: {
+    eyebrow: "Transition",
+    title: "Transition Peak",
+    body: [
+      "This card ranks scenarios by peak adjustedSubriskRevenueImpact after applying the current transition driver filter.",
+      "When the driver filter is All drivers, direct carbon cost and market demand shifts compete. When a specific driver is selected, the card only ranks that driver family.",
+    ],
+  },
+  kpi_selected_driver: {
+    eyebrow: "Transition",
+    title: "Selected Driver",
+    body: [
+      "This is the subrisk family leading the selected transition scenario after the current driver filter is applied.",
+      "Direct carbon cost is driven by Scope 1+2 emissions intensity and carbon price. Market demand shifts use revenue growth, inflation, and SCR-estimated Scope 3 intensity.",
+    ],
+  },
+  physical_trend: {
+    eyebrow: "Chart",
+    title: "Physical Value Impact Trend",
+    body: [
+      "This trend uses adjustedTotalValueImpact, one point per physical scenario and future horizon.",
+      "Physical horizons run from 2025 to 2100 in 5-year steps. SCR methodology describes indicator values as 10-year averages centered on the horizon, while financial impacts are average annual impacts from 2025 through the selected horizon.",
+      "Use the Impact display control to inspect raw SCR values, percent-style values, or basis points. The underlying JSON keeps the raw SCR number.",
+    ],
+  },
+  hazard_ranking: {
+    eyebrow: "Physical",
+    title: "Hazard Ranking",
+    body: [
+      "This section ranks physical hazards by adjustedHazardValueImpact for the selected scenario and horizon, then falls back to hazard rating when impacts tie.",
+      "A hazard marked not quantified does not mean no exposure. It means SCR did not return a numeric hazard value impact for that hazard in this view.",
+      "The worst visible indicators are included because severe indicator ratings can matter even when hazard-level value impact is blank or zero.",
+    ],
+  },
+  indicator_detail: {
+    eyebrow: "Physical",
+    title: "Indicator Detail",
+    body: [
+      "This table shows the worst physical indicator ratings for the selected scenario and horizon.",
+      "Indicator values have mixed units across hazards, such as meters, days, percent, or rating-only rows. Do not rank mixed indicators by raw magnitude alone.",
+      "Rating-only rows are still meaningful severity evidence when SCR returns a rating without a numeric indicator magnitude.",
+    ],
+  },
+  transition_ranking: {
+    eyebrow: "Transition",
+    title: "Scenario Ranking",
+    body: [
+      "This ranking uses adjustedSubriskRevenueImpact from the transition output. It is recomputed when you change the Driver selector.",
+      "Direct carbon cost is not a parameter we selected in the upload CSV. It is one of the returned SCR transition subrisk families.",
+      "Use All drivers to see the worst returned transition driver per scenario, or isolate Direct carbon cost and Market demand shifts to understand what is driving the peak.",
+    ],
+  },
+  transition_trend: {
+    eyebrow: "Transition",
+    title: "Transition Trend",
+    body: [
+      "This chart follows the maximum adjusted subrisk revenue impact by scenario and horizon. With a driver selected, it follows only that subrisk family.",
+      "Transition horizons run from 2025 to 2060 in 5-year steps. Missing baseline impacts can be valid model output, not parser failure.",
+      "Treat the numeric impact values as raw SCR model-output values until SCR confirms the product-facing unit label.",
+    ],
+  },
+  subrisk_drivers: {
+    eyebrow: "Transition",
+    title: "Subrisk Drivers",
+    body: [
+      "This table is row-level evidence behind the transition ranking for the selected scenario and driver filter.",
+      "Direct carbon cost rows include Carbon price and scope12_intensity. Market demand shifts rows include Revenue growth, Inflation, and scope3_intensity.",
+      "Scope 3 intensity is estimated by SCR from sector and country inputs in this workflow, so it should be displayed as model-derived context rather than uploaded company data.",
+    ],
+  },
+  interpretation: {
+    eyebrow: "Notes",
+    title: "Interpretation Panel",
+    body: [
+      "This panel turns the selected chart state into a short reading. It is not a separate model result.",
+      "The safest product pattern is to show overall rating, top quantified driver, top severity indicators, scenario, horizon, and the raw-value caveat together.",
+    ],
+  },
+  join_key: {
+    eyebrow: "Join Back",
+    title: "Join Key",
+    body: [
+      "The SCR output repeats assetName on every row. That is the field we join back to our private scr_manifest.csv.",
+      "The manifest then maps scr_asset_name to plant_uuid, portfolio context, and any tenant-specific asset identity. SCR assetId should be stored as vendor metadata, not used as the canonical database key.",
+    ],
+  },
 };
 
 function el(id) {
@@ -19,6 +138,10 @@ function el(id) {
 
 function unique(values) {
   return [...new Set(values.filter((value) => value !== null && value !== undefined && value !== ""))];
+}
+
+function driverLabel(value) {
+  return DRIVER_LABELS[value] || value || "n/a";
 }
 
 function sortNumeric(values) {
@@ -137,9 +260,9 @@ function formatValueWithUnit(value, unit) {
   return `${formatted}${unit ? ` ${unit}` : ""}`;
 }
 
-function setOptions(select, options, selected) {
+function setOptions(select, options, selected, labelFn = (value) => value) {
   select.innerHTML = options
-    .map((option) => `<option value="${escapeHtml(option)}">${escapeHtml(option)}</option>`)
+    .map((option) => `<option value="${escapeHtml(option)}">${escapeHtml(labelFn(option))}</option>`)
     .join("");
   if (selected !== null && selected !== undefined) {
     select.value = String(selected);
@@ -166,6 +289,10 @@ function transitionRows(name) {
   };
 }
 
+function transitionDriverOptions(transition) {
+  return ["all", ...unique(transition.subrisks.map((row) => row.subrisk))];
+}
+
 function preferredValue(values, preferred, fallbackIndex = 0) {
   if (values.includes(preferred)) {
     return preferred;
@@ -185,7 +312,9 @@ function initialiseState() {
 
   const transition = transitionRows(state.assetName);
   const transitionScenarios = unique(transition.rankings.map((row) => row.scenario));
+  const transitionDrivers = transitionDriverOptions(transition);
   state.transitionScenario = preferredValue(transitionScenarios, "Net Zero 2050");
+  state.transitionDriver = preferredValue(transitionDrivers, "all");
 
   setOptions(el("assetSelect"), state.data.assets.map((item) => item.asset_name), state.assetName);
   refreshControls();
@@ -197,6 +326,7 @@ function refreshControls() {
   const physicalScenarios = unique(physical.trends.map((row) => row.scenario));
   const physicalHorizons = sortNumeric(unique(physical.trends.map((row) => row.horizon)));
   const transitionScenarios = unique(transition.rankings.map((row) => row.scenario));
+  const transitionDrivers = transitionDriverOptions(transition);
 
   if (!physicalScenarios.includes(state.physicalScenario)) {
     state.physicalScenario = preferredValue(physicalScenarios, "ssp5-8.5");
@@ -207,10 +337,14 @@ function refreshControls() {
   if (!transitionScenarios.includes(state.transitionScenario)) {
     state.transitionScenario = preferredValue(transitionScenarios, "Net Zero 2050");
   }
+  if (!transitionDrivers.includes(state.transitionDriver)) {
+    state.transitionDriver = "all";
+  }
 
   setOptions(el("physicalScenarioSelect"), physicalScenarios, state.physicalScenario);
   setOptions(el("physicalHorizonSelect"), physicalHorizons, state.physicalHorizon);
   setOptions(el("transitionScenarioSelect"), transitionScenarios, state.transitionScenario);
+  setOptions(el("transitionDriverSelect"), transitionDrivers, state.transitionDriver, driverLabel);
 }
 
 function bindControls() {
@@ -235,6 +369,10 @@ function bindControls() {
     state.transitionScenario = event.target.value;
     render();
   });
+  el("transitionDriverSelect").addEventListener("change", (event) => {
+    state.transitionDriver = event.target.value;
+    render();
+  });
   el("physicalTab").addEventListener("click", () => {
     state.activeView = "physical";
     render();
@@ -248,12 +386,40 @@ function bindControls() {
     const isHidden = panel.classList.toggle("is-hidden");
     el("helpToggle").classList.toggle("is-active", !isHidden);
   });
+  el("contextClose").addEventListener("click", closeContextHelp);
+  document.querySelector("main").addEventListener("click", (event) => {
+    const button = event.target.closest("[data-help]");
+    if (!button) return;
+    openContextHelp(button.dataset.help);
+  });
 }
 
-function metric(label, value, detail) {
+function openContextHelp(key) {
+  const content = HELP_CONTENT[key] || {
+    eyebrow: "Metric Notes",
+    title: "Metric notes",
+    body: ["No detailed notes are available for this dashboard element yet."],
+  };
+  el("contextEyebrow").textContent = content.eyebrow || "Metric Notes";
+  el("contextTitle").textContent = content.title || "Metric notes";
+  el("contextBody").innerHTML = (content.body || [])
+    .map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`)
+    .join("");
+  el("contextPanel").classList.remove("is-hidden");
+  el("contextPanel").scrollIntoView({ behavior: "smooth", block: "nearest" });
+}
+
+function closeContextHelp() {
+  el("contextPanel").classList.add("is-hidden");
+}
+
+function metric(label, value, detail, helpKey) {
   return `
     <article class="metric">
-      <span class="metric-label">${escapeHtml(label)}</span>
+      <div class="metric-header">
+        <span class="metric-label">${escapeHtml(label)}</span>
+        ${helpKey ? `<button class="eye-button metric-eye" data-help="${escapeHtml(helpKey)}" type="button">View</button>` : ""}
+      </div>
       <span class="metric-value">${value}</span>
       <span class="metric-detail">${escapeHtml(detail || "")}</span>
     </article>
@@ -276,34 +442,103 @@ function selectedHazards(physical) {
     });
 }
 
+function filteredTransitionSubrisks(transition) {
+  return transition.subrisks.filter(
+    (row) => state.transitionDriver === "all" || row.subrisk === state.transitionDriver,
+  );
+}
+
+function validImpact(value) {
+  return value !== null && value !== undefined && !Number.isNaN(Number(value));
+}
+
+function bestImpactRow(rows) {
+  return rows
+    .filter((row) => validImpact(row.adjusted_revenue_impact))
+    .sort((a, b) => Number(b.adjusted_revenue_impact) - Number(a.adjusted_revenue_impact))[0];
+}
+
+function transitionRankingsForDriver(transition) {
+  const baseRankings = [...transition.rankings].sort(
+    (a, b) => Number(b.peak_impact || 0) - Number(a.peak_impact || 0),
+  );
+  if (state.transitionDriver === "all") {
+    return baseRankings;
+  }
+
+  const baseByScenario = new Map(baseRankings.map((row) => [row.scenario, row]));
+  return unique(transition.subrisks.map((row) => row.scenario))
+    .map((scenario) => {
+      const best = bestImpactRow(
+        transition.subrisks.filter((row) => row.scenario === scenario && row.subrisk === state.transitionDriver),
+      );
+      if (!best) return null;
+      const base = baseByScenario.get(scenario) || {};
+      return {
+        ...base,
+        asset_name: best.asset_name,
+        scenario,
+        peak_impact: best.adjusted_revenue_impact,
+        peak_subrisk: best.subrisk,
+        peak_year: best.horizon,
+        selected_driver_peak: {
+          asset_name: best.asset_name,
+          rating: best.rating,
+          subrisk: best.subrisk,
+          value: best.adjusted_revenue_impact,
+          year: best.horizon,
+        },
+      };
+    })
+    .filter(Boolean)
+    .sort((a, b) => Number(b.peak_impact || 0) - Number(a.peak_impact || 0));
+}
+
 function selectedTransitionRanking(transition) {
-  return transition.rankings.find((row) => row.scenario === state.transitionScenario) || transition.rankings[0];
+  const rankings = transitionRankingsForDriver(transition);
+  return rankings.find((row) => row.scenario === state.transitionScenario) || rankings[0];
 }
 
 function renderSummary(asset, physical, transition) {
   const trend = selectedPhysicalTrend(physical);
   const hazards = selectedHazards(physical);
   const topHazard = hazards[0];
-  const topTransition = transition.rankings[0];
+  const transitionRankings = transitionRankingsForDriver(transition);
+  const topTransition = transitionRankings[0];
   const selectedTransition = selectedTransitionRanking(transition);
 
   el("assetSummary").innerHTML = [
-    metric("Asset", escapeHtml(asset.scr_asset_id || asset.asset_name), asset.ticcs_sub_class_name || asset.ticcs_sub_class || ""),
-    metric("Physical Rating", ratingBadge(trend?.adjusted_physical_exposure_rating), `${state.physicalScenario} @ ${state.physicalHorizon}`),
+    metric(
+      "Asset",
+      escapeHtml(asset.scr_asset_id || asset.asset_name),
+      asset.ticcs_sub_class_name || asset.ticcs_sub_class || "",
+      "kpi_asset",
+    ),
+    metric(
+      "Physical Rating",
+      ratingBadge(trend?.adjusted_physical_exposure_rating),
+      `${state.physicalScenario} @ ${state.physicalHorizon}`,
+      "kpi_physical_rating",
+    ),
     metric(
       "Physical Impact",
       escapeHtml(formatPhysicalImpact(trend?.adjusted_total_value_impact)),
       topHazard ? `Top hazard: ${topHazard.hazard}` : "No hazard ranking",
+      "kpi_physical_impact",
     ),
     metric(
       "Transition Peak",
       escapeHtml(formatNumber(topTransition?.peak_impact)),
       topTransition ? `${topTransition.scenario} @ ${topTransition.peak_year}` : "No transition ranking",
+      "kpi_transition_peak",
     ),
     metric(
       "Selected Driver",
-      escapeHtml(selectedTransition?.peak_subrisk || "n/a"),
-      selectedTransition ? `${selectedTransition.scenario} peak ${formatNumber(selectedTransition.peak_impact)}` : "",
+      escapeHtml(driverLabel(selectedTransition?.peak_subrisk)),
+      selectedTransition
+        ? `${selectedTransition.scenario} peak ${formatNumber(selectedTransition.peak_impact)} | ${driverLabel(state.transitionDriver)}`
+        : "",
+      "kpi_selected_driver",
     ),
   ].join("");
 }
@@ -353,7 +588,7 @@ function renderHazardRanking(physical) {
       const worst = (row.worst_indicators || [])
         .slice(0, 2)
         .map((item) => {
-          const magnitude = item.value === null ? "rating only" : formatValueWithUnit(item.value, item.unit);
+          const magnitude = item.value === null || item.value === undefined ? "rating only" : formatValueWithUnit(item.value, item.unit);
           return `${item.rating || "-"} ${item.indicator || ""} ${magnitude}`;
         })
         .join(" | ");
@@ -413,8 +648,8 @@ function renderIndicatorTable(physical) {
                 <td>${escapeHtml(row.hazard || "-")}</td>
                 <td>${escapeHtml(row.indicator || "-")}</td>
                 <td>
-                  ${escapeHtml(row.value === null ? "rating only" : formatValueWithUnit(row.value, row.unit))}
-                  ${row.value === null ? '<span class="cell-note">SCR did not return numeric magnitude for this row.</span>' : ""}
+                  ${escapeHtml(row.value === null || row.value === undefined ? "rating only" : formatValueWithUnit(row.value, row.unit))}
+                  ${row.value === null || row.value === undefined ? '<span class="cell-note">SCR did not return numeric magnitude for this row.</span>' : ""}
                 </td>
               </tr>
             `,
@@ -425,26 +660,59 @@ function renderIndicatorTable(physical) {
   `;
 }
 
+function transitionTrendSeries(transition) {
+  if (state.transitionDriver === "all") {
+    return unique(transition.trends.map((row) => row.scenario)).map((scenario, index) => ({
+      name: scenario,
+      color: COLORS[index % COLORS.length],
+      selected: scenario === state.transitionScenario,
+      points: transition.trends
+        .filter((row) => row.scenario === scenario)
+        .sort((a, b) => Number(a.horizon) - Number(b.horizon))
+        .map((row) => ({
+          x: Number(row.horizon),
+          y: row.max_adjusted_subrisk_revenue_impact,
+          rating: row.transition_rating,
+          driver: row.top_subrisk,
+        })),
+    }));
+  }
+
+  const rows = filteredTransitionSubrisks(transition);
+  return unique(rows.map((row) => row.scenario)).map((scenario, index) => {
+    const scenarioRows = rows.filter((row) => row.scenario === scenario);
+    const horizons = sortNumeric(unique(scenarioRows.map((row) => row.horizon)));
+    return {
+      name: scenario,
+      color: COLORS[index % COLORS.length],
+      selected: scenario === state.transitionScenario,
+      points: horizons.map((horizon) => {
+        const best = bestImpactRow(scenarioRows.filter((row) => Number(row.horizon) === Number(horizon)));
+        return {
+          x: Number(horizon),
+          y: best?.adjusted_revenue_impact ?? null,
+          rating: best?.rating,
+          driver: best?.subrisk,
+          indicator: best?.indicator,
+        };
+      }),
+    };
+  });
+}
+
 function renderTransition(asset, transition) {
-  el("transitionRankKicker").textContent = `${asset.scr_asset_id || asset.asset_name} | raw model-output values`;
+  el("transitionRankKicker").textContent = `${asset.scr_asset_id || asset.asset_name} | ${driverLabel(state.transitionDriver)} | raw model-output values`;
   renderTransitionRanking(transition);
 
-  const series = unique(transition.trends.map((row) => row.scenario)).map((scenario, index) => ({
-    name: scenario,
-    color: COLORS[index % COLORS.length],
-    selected: scenario === state.transitionScenario,
-    points: transition.trends
-      .filter((row) => row.scenario === scenario)
-      .sort((a, b) => Number(a.horizon) - Number(b.horizon))
-      .map((row) => ({
-        x: Number(row.horizon),
-        y: row.max_adjusted_subrisk_revenue_impact,
-        rating: row.transition_rating,
-      })),
-  }));
+  const series = transitionTrendSeries(transition);
   renderLineChart("transitionTrendChart", series, {
-    yLabel: "max adjustedSubriskRevenueImpact",
+    yLabel:
+      state.transitionDriver === "all"
+        ? "max adjustedSubriskRevenueImpact"
+        : `${driverLabel(state.transitionDriver)} adjustedSubriskRevenueImpact`,
     baselineZero: true,
+    tooltipFormatter: (point) =>
+      `${formatNumber(point.y)} | ${driverLabel(point.driver)} | rating ${point.rating || "-"}${point.indicator ? ` | ${point.indicator}` : ""}`,
   });
   renderSubriskTable(transition);
 }
@@ -457,12 +725,13 @@ function peakText(peak) {
 }
 
 function renderTransitionRanking(transition) {
-  if (!transition.rankings.length) {
+  const rankings = transitionRankingsForDriver(transition);
+  if (!rankings.length) {
     el("transitionRanking").innerHTML = `<div class="empty-state">No transition rankings available.</div>`;
     return;
   }
-  const maxPeak = Math.max(...transition.rankings.map((row) => Number(row.peak_impact || 0)), 0);
-  el("transitionRanking").innerHTML = transition.rankings
+  const maxPeak = Math.max(...rankings.map((row) => Number(row.peak_impact || 0)), 0);
+  el("transitionRanking").innerHTML = rankings
     .map((row, index) => {
       const width = maxPeak > 0 ? (Number(row.peak_impact || 0) / maxPeak) * 100 : 0;
       const selected = row.scenario === state.transitionScenario ? " is-selected" : "";
@@ -470,7 +739,7 @@ function renderTransitionRanking(transition) {
         <button class="bar-row scenario-row${selected}" type="button" data-scenario="${escapeHtml(row.scenario)}">
           <div class="bar-label">
             <span class="bar-title">${index + 1}. ${escapeHtml(row.scenario)}</span>
-            <span class="bar-subtitle">${escapeHtml(row.peak_subrisk)} peak @ ${escapeHtml(row.peak_year)}</span>
+            <span class="bar-subtitle">${escapeHtml(driverLabel(row.peak_subrisk))} peak @ ${escapeHtml(row.peak_year)}</span>
           </div>
           <div class="bar-track"><div class="bar-fill" style="width:${width}%; background:${COLORS[index % COLORS.length]}"></div></div>
           <div class="driver-split">
@@ -494,12 +763,17 @@ function renderTransitionRanking(transition) {
 
 function renderSubriskTable(transition) {
   const rows = transition.subrisks
-    .filter((row) => row.scenario === state.transitionScenario && row.adjusted_revenue_impact !== null)
+    .filter(
+      (row) =>
+        row.scenario === state.transitionScenario &&
+        validImpact(row.adjusted_revenue_impact) &&
+        (state.transitionDriver === "all" || row.subrisk === state.transitionDriver),
+    )
     .sort((a, b) => Number(b.adjusted_revenue_impact || 0) - Number(a.adjusted_revenue_impact || 0))
     .slice(0, 18);
 
   if (!rows.length) {
-    el("subriskTable").innerHTML = `<div class="empty-state">No subrisk rows for this scenario.</div>`;
+    el("subriskTable").innerHTML = `<div class="empty-state">No subrisk rows for this scenario and driver.</div>`;
     return;
   }
 
@@ -511,6 +785,7 @@ function renderSubriskTable(transition) {
           <th>Horizon</th>
           <th>Subrisk</th>
           <th>Indicator</th>
+          <th>Indicator value</th>
           <th>Impact</th>
         </tr>
       </thead>
@@ -521,8 +796,9 @@ function renderSubriskTable(transition) {
               <tr>
                 <td>${ratingBadge(row.rating)}</td>
                 <td>${escapeHtml(row.horizon)}</td>
-                <td>${escapeHtml(row.subrisk || "-")}</td>
+                <td>${escapeHtml(driverLabel(row.subrisk))}</td>
                 <td>${escapeHtml(row.indicator || "-")}</td>
+                <td>${escapeHtml(formatValueWithUnit(row.indicator_value, row.indicator_unit))}</td>
                 <td>${escapeHtml(formatNumber(row.adjusted_revenue_impact))}</td>
               </tr>
             `,
@@ -631,13 +907,14 @@ function renderInterpretation(asset, physical, transition) {
     firstYearTrend && trend?.adjusted_total_value_impact
       ? ((trend.adjusted_total_value_impact / firstYearTrend.adjusted_total_value_impact - 1) * 100).toFixed(1)
       : null;
+  const transitionRankings = transitionRankingsForDriver(transition);
   const selectedTransition = selectedTransitionRanking(transition);
-  const topTransition = transition.rankings[0];
+  const topTransition = transitionRankings[0];
 
   el("interpretationBody").innerHTML = `
     <p><strong>Asset context:</strong> ${escapeHtml(asset.scr_asset_id || asset.asset_name)} is modeled as ${escapeHtml(asset.ticcs_sub_class_name || "an infrastructure asset")} at ${escapeHtml(asset.coordinates || "unknown coordinates")}.</p>
     <p><strong>Physical:</strong> ${escapeHtml(state.physicalScenario)} at ${escapeHtml(state.physicalHorizon)} returns overall rating ${escapeHtml(trend?.adjusted_physical_exposure_rating || "-")} and adjusted total value impact ${escapeHtml(formatPhysicalImpact(trend?.adjusted_total_value_impact, { includeRaw: true }))}${change ? `, a ${escapeHtml(change)}% move from the first returned horizon` : ""}. ${topHazard ? `The top quantified hazard is ${escapeHtml(topHazard.hazard)}.` : ""}</p>
-    <p><strong>Transition:</strong> the highest peak scenario is ${escapeHtml(topTransition?.scenario || "-")} with ${escapeHtml(formatNumber(topTransition?.peak_impact))}. The selected scenario, ${escapeHtml(selectedTransition?.scenario || "-")}, is led by ${escapeHtml(selectedTransition?.peak_subrisk || "-")} at ${escapeHtml(selectedTransition?.peak_year || "-")}.</p>
+    <p><strong>Transition:</strong> with the ${escapeHtml(driverLabel(state.transitionDriver))} filter, the highest peak scenario is ${escapeHtml(topTransition?.scenario || "-")} with ${escapeHtml(formatNumber(topTransition?.peak_impact))}. The selected scenario, ${escapeHtml(selectedTransition?.scenario || "-")}, is led by ${escapeHtml(driverLabel(selectedTransition?.peak_subrisk))} at ${escapeHtml(selectedTransition?.peak_year || "-")}.</p>
     <p><strong>Caveat:</strong> physical impact can be toggled between raw, percent-style, and basis-point display. Percent-style and basis-point displays are readability conversions from the raw SCR value, not confirmed vendor unit labels.</p>
   `;
 }
