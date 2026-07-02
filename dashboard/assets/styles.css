@@ -651,6 +651,12 @@ main {
   gap: 10px;
 }
 
+.magnitude-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
 .hazard-curve-card {
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -658,14 +664,24 @@ main {
   padding: 10px;
 }
 
+.magnitude-card {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #ffffff;
+  padding: 10px;
+}
+
 .hazard-curve-head,
-.hazard-curve-meta {
+.hazard-curve-meta,
+.magnitude-head,
+.magnitude-meta {
   display: flex;
   justify-content: space-between;
   gap: 8px;
 }
 
-.hazard-curve-head {
+.hazard-curve-head,
+.magnitude-head {
   align-items: baseline;
   color: var(--ink);
   font-size: 0.82rem;
@@ -673,13 +689,39 @@ main {
 }
 
 .hazard-curve-head span:last-child,
-.hazard-curve-meta {
+.hazard-curve-meta,
+.magnitude-head span:last-child,
+.magnitude-meta {
   color: var(--muted);
   font-size: 0.74rem;
   font-weight: 700;
 }
 
+.magnitude-head {
+  align-items: flex-start;
+}
+
+.magnitude-head span {
+  min-width: 0;
+}
+
+.magnitude-head span:first-child {
+  line-height: 1.25;
+}
+
+.magnitude-head span:last-child {
+  flex: 0 0 auto;
+  text-align: right;
+}
+
 .hazard-sparkline {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 6px 0 2px;
+}
+
+.magnitude-plot {
   display: block;
   width: 100%;
   height: auto;
@@ -877,7 +919,8 @@ th {
     grid-template-columns: 1fr;
   }
 
-  .hazard-curve-grid {
+  .hazard-curve-grid,
+  .magnitude-grid {
     grid-template-columns: 1fr;
   }
 

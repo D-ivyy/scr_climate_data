@@ -87,6 +87,11 @@ The builder writes:
   `adjustedHazardDamage`, `adjustedHazardDisruption`,
   `adjustedHazardDisruptionDamageEquivalent`, and
   `adjustedHazardValueImpact`.
+- Opened hazard rows include magnitude-response plots when the returned
+  indicator magnitude varies across horizons. These are derived views that join
+  `indicatorValue` to returned hazard damage/disruption/value metrics; they
+  should not be treated as official SCR vulnerability functions unless SCR
+  confirms that interpretation.
 - If a hazard impact does not change when scenario or horizon changes, check
   the returned data before assuming a dashboard bug. In the current example
   workbook, Flood has one unique `adjustedHazardValueImpact` value across both

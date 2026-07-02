@@ -49,6 +49,26 @@ const HAZARD_CURVE_METRICS = [
     color: COLORS[4],
   },
 ];
+const HAZARD_RESPONSE_FALLBACKS = [
+  {
+    field: "adjusted_hazard_damage",
+    label: "Damage",
+    source: "adjustedHazardDamage",
+    color: COLORS[0],
+  },
+  {
+    field: "adjusted_hazard_disruption",
+    label: "Disruption",
+    source: "adjustedHazardDisruption",
+    color: COLORS[1],
+  },
+  {
+    field: "adjusted_hazard_value_impact",
+    label: "Value impact",
+    source: "adjustedHazardValueImpact",
+    color: COLORS[4],
+  },
+];
 
 const state = {
   data: null,
@@ -121,7 +141,8 @@ const HELP_CONTENT = {
     body: [
       "This section ranks physical hazards by adjustedHazardValueImpact for the selected scenario and horizon, then falls back to hazard rating when impacts tie.",
       "A hazard marked not quantified does not mean no exposure. It means SCR did not return a numeric hazard value impact for that hazard in this view.",
-      "Click a hazard row to open the worst returned indicators and any returned hazard-level damage, disruption, disruption-equivalent, and value-impact curves.",
+      "Click a hazard row to open the worst returned indicators, returned horizon curves, and magnitude-response plots where the indicator magnitude varies.",
+      "Magnitude-response plots are derived views: x is the returned indicator magnitude and y is the returned hazard damage, disruption, or value-impact metric across horizons. They are not a vendor-provided vulnerability function.",
       "If a hazard value does not change when filters change, first check the returned data. In the current example, Flood has the same adjustedHazardValueImpact in the raw SCR workbook across both scenarios and all future horizons.",
     ],
   },
@@ -548,6 +569,25 @@ function hazardRowsForScenario(physical, hazard) {
     .sort((a, b) => Number(a.horizon) - Number(b.horizon));
 }
 
+function isEffectivelyFlat(values) {
+  const numeric = values.filter((value) => validImpact(value)).map(Number);
+  if (numeric.length < 2) return true;
+  const min = Math.min(...numeric);
+  const max = Math.max(...numeric);
+  return Math.abs(max - min) <= 1e-9;
+}
+
+function paddedDomain(values, flatPadRatio = 0.1) {
+  const minRaw = Math.min(...values);
+  const maxRaw = Math.max(...values);
+  if (isEffectivelyFlat(values)) {
+    const center = values.reduce((total, value) => total + value, 0) / values.length;
+    const pad = Math.max(Math.abs(center) * flatPadRatio, 1e-6);
+    return { min: center - pad, max: center + pad, flat: true, center };
+  }
+  return { min: minRaw, max: maxRaw, flat: false, center: null };
+}
+
 function renderMiniHazardCurve(rows, metric) {
   const points = rows
     .filter((row) => validImpact(row[metric.field]))
@@ -569,11 +609,10 @@ function renderMiniHazardCurve(rows, metric) {
   const innerHeight = height - margin.top - margin.bottom;
   const xValues = points.map((point) => point.horizon);
   const yValues = points.map((point) => point.shown).filter((value) => validImpact(value));
-  const yMinRaw = Math.min(...yValues);
-  const yMaxRaw = Math.max(...yValues);
-  const flat = yMinRaw === yMaxRaw;
-  const yMin = flat ? yMinRaw - Math.abs(yMinRaw || 1) * 0.1 : yMinRaw;
-  const yMax = flat ? yMaxRaw + Math.abs(yMaxRaw || 1) * 0.1 : yMaxRaw;
+  const yDomain = paddedDomain(yValues);
+  const yMin = yDomain.min;
+  const yMax = yDomain.max;
+  const flat = yDomain.flat;
   const yRange = yMax - yMin || 1;
 
   const xFor = (value) => {
@@ -582,7 +621,8 @@ function renderMiniHazardCurve(rows, metric) {
     return margin.left + (index / (xValues.length - 1)) * innerWidth;
   };
   const yFor = (value) => margin.top + innerHeight - ((Number(value) - yMin) / yRange) * innerHeight;
-  const path = points.map((point, index) => `${index === 0 ? "M" : "L"} ${xFor(point.horizon)} ${yFor(point.shown)}`).join(" ");
+  const yPlot = (point) => (flat ? yDomain.center : point.shown);
+  const path = points.map((point, index) => `${index === 0 ? "M" : "L"} ${xFor(point.horizon)} ${yFor(yPlot(point))}`).join(" ");
   const selected = points.find((point) => point.selected) || points[points.length - 1];
   const first = points[0];
   const last = points[points.length - 1];
@@ -590,7 +630,7 @@ function renderMiniHazardCurve(rows, metric) {
   const circles = points
     .map(
       (point) =>
-        `<circle cx="${xFor(point.horizon)}" cy="${yFor(point.shown)}" r="${point.selected ? 3.5 : 2}" fill="${metric.color}"><title>${escapeHtml(metric.label)} ${point.horizon}: ${formatPhysicalImpact(point.raw, { includeRaw: true })}</title></circle>`,
+        `<circle cx="${xFor(point.horizon)}" cy="${yFor(yPlot(point))}" r="${point.selected ? 3.5 : 2}" fill="${metric.color}"><title>${escapeHtml(metric.label)} ${point.horizon}: ${formatPhysicalImpact(point.raw, { includeRaw: true })}</title></circle>`,
     )
     .join("");
 
@@ -614,6 +654,125 @@ function renderMiniHazardCurve(rows, metric) {
       </div>
       <span class="cell-note">${escapeHtml(metric.source)} | ${flat ? "flat in returned data" : physicalDisplayLabel()}</span>
     </article>
+  `;
+}
+
+function selectHazardResponseMetric(rows) {
+  return HAZARD_RESPONSE_FALLBACKS.find((metric) => rows.some((row) => validImpact(row[metric.field])));
+}
+
+function responseIndicatorSeries(physical, hazard, responseMetric) {
+  const rows = hazardRowsForScenario(physical, hazard);
+  const responseByHorizon = new Map(
+    rows.filter((row) => validImpact(row[responseMetric.field])).map((row) => [Number(row.horizon), Number(row[responseMetric.field])]),
+  );
+  const grouped = new Map();
+
+  physical.indicators
+    .filter(
+      (row) =>
+        row.scenario === state.physicalScenario &&
+        row.hazard === hazard &&
+        validImpact(row.value) &&
+        responseByHorizon.has(Number(row.horizon)),
+    )
+    .forEach((row) => {
+      const key = `${row.indicator || "-"}|${row.unit || ""}`;
+      if (!grouped.has(key)) {
+        grouped.set(key, {
+          indicator: row.indicator || "-",
+          unit: row.unit || "",
+          points: [],
+        });
+      }
+      grouped.get(key).points.push({
+        horizon: Number(row.horizon),
+        x: Number(row.value),
+        y: responseByHorizon.get(Number(row.horizon)),
+        rating: row.rating,
+        selected: Number(row.horizon) === Number(state.physicalHorizon),
+      });
+    });
+
+  return [...grouped.values()]
+    .map((series) => ({
+      ...series,
+      points: series.points.sort((a, b) => a.x - b.x || a.horizon - b.horizon),
+      uniqueXCount: unique(series.points.map((point) => point.x.toPrecision(12))).length,
+      uniqueYCount: unique(series.points.map((point) => point.y.toPrecision(12))).length,
+    }))
+    .filter((series) => series.points.length >= 3 && series.uniqueXCount > 1)
+    .sort((a, b) => b.uniqueYCount - a.uniqueYCount || b.uniqueXCount - a.uniqueXCount || a.indicator.localeCompare(b.indicator))
+    .slice(0, 4);
+}
+
+function renderMagnitudeResponseCard(series, responseMetric, index) {
+  const width = 260;
+  const height = 112;
+  const margin = { top: 12, right: 12, bottom: 26, left: 36 };
+  const innerWidth = width - margin.left - margin.right;
+  const innerHeight = height - margin.top - margin.bottom;
+  const xValues = series.points.map((point) => point.x);
+  const yValues = series.points.map((point) => physicalDisplayValue(point.y)).filter((value) => validImpact(value));
+  const xDomain = paddedDomain(xValues, 0.08);
+  const yDomain = paddedDomain(yValues, 0.12);
+  const xRange = xDomain.max - xDomain.min || 1;
+  const yRange = yDomain.max - yDomain.min || 1;
+  const color = COLORS[(index + 2) % COLORS.length];
+
+  const xFor = (value) => margin.left + ((Number(value) - xDomain.min) / xRange) * innerWidth;
+  const yFor = (value) => margin.top + innerHeight - ((Number(value) - yDomain.min) / yRange) * innerHeight;
+  const yPlot = (point) => (yDomain.flat ? yDomain.center : physicalDisplayValue(point.y));
+  const path = series.points.map((point, pointIndex) => `${pointIndex === 0 ? "M" : "L"} ${xFor(point.x)} ${yFor(yPlot(point))}`).join(" ");
+  const selected = series.points.find((point) => point.selected);
+
+  const circles = series.points
+    .map(
+      (point) =>
+        `<circle cx="${xFor(point.x)}" cy="${yFor(yPlot(point))}" r="${point.selected ? 3.8 : 2.2}" fill="${color}"><title>${escapeHtml(point.horizon)} | ${escapeHtml(series.indicator)} ${formatValueWithUnit(point.x, series.unit)} -> ${formatPhysicalImpact(point.y, { includeRaw: true })}</title></circle>`,
+    )
+    .join("");
+
+  return `
+    <article class="magnitude-card">
+      <div class="magnitude-head">
+        <span>${escapeHtml(series.indicator)}</span>
+        ${selected ? `<span>${escapeHtml(formatValueWithUnit(selected.x, series.unit))} -> ${escapeHtml(formatPhysicalImpact(selected.y))}</span>` : ""}
+      </div>
+      <svg class="magnitude-plot" viewBox="0 0 ${width} ${height}" role="img" aria-label="${escapeHtml(series.indicator)} magnitude response">
+        <line class="spark-axis" x1="${margin.left}" x2="${width - margin.right}" y1="${height - margin.bottom}" y2="${height - margin.bottom}"></line>
+        <line class="spark-axis" x1="${margin.left}" x2="${margin.left}" y1="${margin.top}" y2="${height - margin.bottom}"></line>
+        <path d="${path}" fill="none" stroke="${color}" stroke-width="2.2"></path>
+        ${circles}
+        <text class="spark-label" x="${margin.left}" y="${height - 7}" text-anchor="start">${escapeHtml(formatCompact(xDomain.min))}</text>
+        <text class="spark-label" x="${width - margin.right}" y="${height - 7}" text-anchor="end">${escapeHtml(formatCompact(xDomain.max))}</text>
+        <text class="spark-label" x="${margin.left - 5}" y="${yFor(yDomain.max) + 4}" text-anchor="end">${escapeHtml(formatCompact(yDomain.max))}</text>
+        <text class="spark-label" x="${margin.left - 5}" y="${yFor(yDomain.min) + 4}" text-anchor="end">${escapeHtml(formatCompact(yDomain.min))}</text>
+      </svg>
+      <div class="magnitude-meta">
+        <span>x: ${escapeHtml(series.unit || "indicator magnitude")}</span>
+        <span>y: ${escapeHtml(responseMetric.label)}</span>
+      </div>
+      <span class="cell-note">${escapeHtml(responseMetric.source)} | derived from returned scenario/horizon rows${yDomain.flat ? " | flat response" : ""}</span>
+    </article>
+  `;
+}
+
+function renderMagnitudeResponseCurves(physical, hazard) {
+  const rows = hazardRowsForScenario(physical, hazard);
+  const responseMetric = selectHazardResponseMetric(rows);
+  if (!responseMetric) {
+    return `<div class="empty-state compact-empty">No returned hazard damage, disruption, or value-impact metric is available for a magnitude-response plot.</div>`;
+  }
+  const series = responseIndicatorSeries(physical, hazard, responseMetric);
+  if (!series.length) {
+    return `<div class="empty-state compact-empty">No varying indicator magnitude is available for this hazard/scenario, so a magnitude-vs-${escapeHtml(responseMetric.label.toLowerCase())} curve would be misleading.</div>`;
+  }
+  return `
+    <div class="magnitude-grid">
+      ${series.map((item, index) => renderMagnitudeResponseCard(item, responseMetric, index)).join("")}
+    </div>
+    <p class="cell-note">These are derived response views, not confirmed SCR vulnerability functions. They join returned indicator magnitude to the returned hazard ${escapeHtml(responseMetric.label.toLowerCase())} metric across horizons.</p>
   `;
 }
 
@@ -803,6 +962,11 @@ function renderHazardRanking(physical) {
               <span>${escapeHtml(state.physicalScenario)} | current ${escapeHtml(state.physicalHorizon)}</span>
             </div>
             ${renderHazardMetricCurves(physical, row.hazard)}
+            <div class="hazard-detail-header hazard-curve-title">
+              <span>Magnitude response</span>
+              <span>x: indicator magnitude | y: returned metric</span>
+            </div>
+            ${renderMagnitudeResponseCurves(physical, row.hazard)}
           </div>
         </details>
       `;
