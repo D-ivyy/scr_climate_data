@@ -23,6 +23,32 @@ const PHYSICAL_METRICS = {
     description: "adjustedTotalDisruption, SCR's physical disruption metric tied to revenue and business-continuity exposure.",
   },
 };
+const HAZARD_CURVE_METRICS = [
+  {
+    field: "adjusted_hazard_damage",
+    label: "Damage",
+    source: "adjustedHazardDamage",
+    color: COLORS[0],
+  },
+  {
+    field: "adjusted_hazard_disruption",
+    label: "Disruption",
+    source: "adjustedHazardDisruption",
+    color: COLORS[1],
+  },
+  {
+    field: "adjusted_hazard_disruption_damage_equivalent",
+    label: "Disruption equivalent",
+    source: "adjustedHazardDisruptionDamageEquivalent",
+    color: COLORS[2],
+  },
+  {
+    field: "adjusted_hazard_value_impact",
+    label: "Value impact",
+    source: "adjustedHazardValueImpact",
+    color: COLORS[4],
+  },
+];
 
 const state = {
   data: null,
@@ -95,7 +121,7 @@ const HELP_CONTENT = {
     body: [
       "This section ranks physical hazards by adjustedHazardValueImpact for the selected scenario and horizon, then falls back to hazard rating when impacts tie.",
       "A hazard marked not quantified does not mean no exposure. It means SCR did not return a numeric hazard value impact for that hazard in this view.",
-      "Click a hazard row to open the worst returned indicators. Severe indicator ratings can matter even when hazard-level value impact is blank or zero.",
+      "Click a hazard row to open the worst returned indicators and any returned hazard-level damage, disruption, disruption-equivalent, and value-impact curves.",
       "If a hazard value does not change when filters change, first check the returned data. In the current example, Flood has the same adjustedHazardValueImpact in the raw SCR workbook across both scenarios and all future horizons.",
     ],
   },
@@ -516,6 +542,94 @@ function renderWorstIndicatorChips(indicators) {
   `;
 }
 
+function hazardRowsForScenario(physical, hazard) {
+  return physical.hazards
+    .filter((row) => row.scenario === state.physicalScenario && row.hazard === hazard)
+    .sort((a, b) => Number(a.horizon) - Number(b.horizon));
+}
+
+function renderMiniHazardCurve(rows, metric) {
+  const points = rows
+    .filter((row) => validImpact(row[metric.field]))
+    .map((row) => ({
+      horizon: Number(row.horizon),
+      raw: Number(row[metric.field]),
+      shown: physicalDisplayValue(row[metric.field]),
+      selected: Number(row.horizon) === Number(state.physicalHorizon),
+    }));
+
+  if (!points.length) {
+    return "";
+  }
+
+  const width = 260;
+  const height = 76;
+  const margin = { top: 10, right: 10, bottom: 18, left: 10 };
+  const innerWidth = width - margin.left - margin.right;
+  const innerHeight = height - margin.top - margin.bottom;
+  const xValues = points.map((point) => point.horizon);
+  const yValues = points.map((point) => point.shown).filter((value) => validImpact(value));
+  const yMinRaw = Math.min(...yValues);
+  const yMaxRaw = Math.max(...yValues);
+  const flat = yMinRaw === yMaxRaw;
+  const yMin = flat ? yMinRaw - Math.abs(yMinRaw || 1) * 0.1 : yMinRaw;
+  const yMax = flat ? yMaxRaw + Math.abs(yMaxRaw || 1) * 0.1 : yMaxRaw;
+  const yRange = yMax - yMin || 1;
+
+  const xFor = (value) => {
+    const index = xValues.indexOf(value);
+    if (xValues.length === 1) return margin.left + innerWidth / 2;
+    return margin.left + (index / (xValues.length - 1)) * innerWidth;
+  };
+  const yFor = (value) => margin.top + innerHeight - ((Number(value) - yMin) / yRange) * innerHeight;
+  const path = points.map((point, index) => `${index === 0 ? "M" : "L"} ${xFor(point.horizon)} ${yFor(point.shown)}`).join(" ");
+  const selected = points.find((point) => point.selected) || points[points.length - 1];
+  const first = points[0];
+  const last = points[points.length - 1];
+
+  const circles = points
+    .map(
+      (point) =>
+        `<circle cx="${xFor(point.horizon)}" cy="${yFor(point.shown)}" r="${point.selected ? 3.5 : 2}" fill="${metric.color}"><title>${escapeHtml(metric.label)} ${point.horizon}: ${formatPhysicalImpact(point.raw, { includeRaw: true })}</title></circle>`,
+    )
+    .join("");
+
+  return `
+    <article class="hazard-curve-card">
+      <div class="hazard-curve-head">
+        <span>${escapeHtml(metric.label)}</span>
+        <span>${escapeHtml(formatPhysicalImpact(selected.raw))}</span>
+      </div>
+      <svg class="hazard-sparkline" viewBox="0 0 ${width} ${height}" role="img" aria-label="${escapeHtml(metric.label)} curve">
+        <line class="spark-axis" x1="${margin.left}" x2="${width - margin.right}" y1="${height - margin.bottom}" y2="${height - margin.bottom}"></line>
+        <path d="${path}" fill="none" stroke="${metric.color}" stroke-width="2.5"></path>
+        <line class="spark-selected" x1="${xFor(selected.horizon)}" x2="${xFor(selected.horizon)}" y1="${margin.top}" y2="${height - margin.bottom}"></line>
+        ${circles}
+        <text class="spark-label" x="${margin.left}" y="${height - 4}" text-anchor="start">${escapeHtml(first.horizon)}</text>
+        <text class="spark-label" x="${width - margin.right}" y="${height - 4}" text-anchor="end">${escapeHtml(last.horizon)}</text>
+      </svg>
+      <div class="hazard-curve-meta">
+        <span>Start ${escapeHtml(formatPhysicalImpact(first.raw))}</span>
+        <span>End ${escapeHtml(formatPhysicalImpact(last.raw))}</span>
+      </div>
+      <span class="cell-note">${escapeHtml(metric.source)} | ${flat ? "flat in returned data" : physicalDisplayLabel()}</span>
+    </article>
+  `;
+}
+
+function renderHazardMetricCurves(physical, hazard) {
+  const rows = hazardRowsForScenario(physical, hazard);
+  const cards = HAZARD_CURVE_METRICS.map((metric) => renderMiniHazardCurve(rows, metric)).filter(Boolean);
+  if (!cards.length) {
+    return `<div class="empty-state compact-empty">SCR did not return quantified hazard-level damage or disruption curves for this hazard/scenario.</div>`;
+  }
+  return `
+    <div class="hazard-curve-grid">
+      ${cards.join("")}
+    </div>
+  `;
+}
+
 function filteredTransitionSubrisks(transition) {
   return transition.subrisks.filter(
     (row) => state.transitionDriver === "all" || row.subrisk === state.transitionDriver,
@@ -684,6 +798,11 @@ function renderHazardRanking(physical) {
               <span>${escapeHtml(indicatorCount)} shown</span>
             </div>
             ${renderWorstIndicatorChips(row.worst_indicators || [])}
+            <div class="hazard-detail-header hazard-curve-title">
+              <span>Returned hazard curves</span>
+              <span>${escapeHtml(state.physicalScenario)} | current ${escapeHtml(state.physicalHorizon)}</span>
+            </div>
+            ${renderHazardMetricCurves(physical, row.hazard)}
           </div>
         </details>
       `;

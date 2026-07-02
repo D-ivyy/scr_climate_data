@@ -83,6 +83,10 @@ The builder writes:
 - Hazard rows are expandable. The collapsed row shows hazard, rating, impact,
   and ranking bar; the opened detail shows worst returned indicators without
   forcing long indicator names into the main view.
+- Opened hazard rows also show returned hazard-level curves when available:
+  `adjustedHazardDamage`, `adjustedHazardDisruption`,
+  `adjustedHazardDisruptionDamageEquivalent`, and
+  `adjustedHazardValueImpact`.
 - If a hazard impact does not change when scenario or horizon changes, check
   the returned data before assuming a dashboard bug. In the current example
   workbook, Flood has one unique `adjustedHazardValueImpact` value across both

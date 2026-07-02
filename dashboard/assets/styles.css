@@ -599,6 +599,12 @@ main {
   text-transform: uppercase;
 }
 
+.hazard-curve-title {
+  border-top: 1px solid var(--line);
+  margin: 12px 0 8px;
+  padding-top: 10px;
+}
+
 .indicator-chip-grid {
   display: grid;
   gap: 8px;
@@ -637,6 +643,63 @@ main {
 .indicator-chip-value {
   color: var(--muted);
   font-size: 0.78rem;
+}
+
+.hazard-curve-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.hazard-curve-card {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #ffffff;
+  padding: 10px;
+}
+
+.hazard-curve-head,
+.hazard-curve-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.hazard-curve-head {
+  align-items: baseline;
+  color: var(--ink);
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.hazard-curve-head span:last-child,
+.hazard-curve-meta {
+  color: var(--muted);
+  font-size: 0.74rem;
+  font-weight: 700;
+}
+
+.hazard-sparkline {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 6px 0 2px;
+}
+
+.spark-axis {
+  stroke: #dfe5ee;
+  stroke-width: 1;
+}
+
+.spark-selected {
+  stroke: var(--line-strong);
+  stroke-dasharray: 3 3;
+  stroke-width: 1;
+}
+
+.spark-label {
+  fill: var(--muted);
+  font-size: 10px;
 }
 
 .scenario-list .bar-row {
@@ -811,6 +874,10 @@ th {
   }
 
   .summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hazard-curve-grid {
     grid-template-columns: 1fr;
   }
 
