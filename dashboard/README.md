@@ -68,6 +68,11 @@ The builder writes:
 - Physical impact fields are stored as raw SCR values, but the dashboard
   defaults to a percent-style readability view. Use the `Impact display`
   control to switch between percent-style, basis points, and raw values.
+- The physical trend can switch between `adjustedTotalValueImpact` and
+  `adjustedTotalDisruption`. Value impact is the physical value-impact signal;
+  disruption is the physical revenue/business-continuity signal.
+- Physical disruption is not the same field as transition revenue impact.
+  Transition uses `adjustedSubriskRevenueImpact` in the transition workbook.
 - Percent-style and basis-point displays are simple transformations of the raw
   value. They are not confirmed SCR product-facing unit labels.
 - Physical values are best read as exposure-model outputs, not final insurance

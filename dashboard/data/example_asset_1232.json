@@ -11,7 +11,7 @@
     }
   ],
   "meta": {
-    "generated_at": "2026-07-02T02:05:11.120722+00:00",
+    "generated_at": "2026-07-02T03:14:08.499027+00:00",
     "manifest_source": null,
     "missing_fields": {
       "physical": [],
@@ -25,6 +25,9 @@
   "physical": {
     "hazards": [
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Drought",
@@ -62,6 +65,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": 0.0007529177105248538,
+        "adjusted_hazard_disruption": 0.0007426037692847874,
+        "adjusted_hazard_disruption_damage_equivalent": 0.0001441949066572403,
         "adjusted_hazard_value_impact": 0.0008971126171820941,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Flood",
@@ -99,6 +105,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": 1.732203660032017e-05,
+        "adjusted_hazard_disruption_damage_equivalent": 3.363502252489353e-06,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Heat",
@@ -136,6 +145,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Landslide",
@@ -161,6 +173,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Precipitation",
@@ -192,6 +207,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Subsidence",
@@ -217,6 +235,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": 4.58225143920947e-05,
+        "adjusted_hazard_disruption": 4.519480871549068e-05,
+        "adjusted_hazard_disruption_damage_equivalent": 8.775691012716636e-06,
         "adjusted_hazard_value_impact": 5.459820540481134e-05,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Wildfire",
@@ -254,6 +275,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Wind",
@@ -291,6 +315,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Drought",
@@ -328,6 +355,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": 0.0007529177105248538,
+        "adjusted_hazard_disruption": 0.0007426037692847874,
+        "adjusted_hazard_disruption_damage_equivalent": 0.0001441949066572403,
         "adjusted_hazard_value_impact": 0.0008971126171820941,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Flood",
@@ -365,6 +395,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": 5.027093094449783e-05,
+        "adjusted_hazard_disruption_damage_equivalent": 9.761345814465597e-06,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Heat",
@@ -402,6 +435,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Landslide",
@@ -427,6 +463,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Precipitation",
@@ -458,6 +497,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Subsidence",
@@ -483,6 +525,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": 4.58225143920947e-05,
+        "adjusted_hazard_disruption": 4.519480871549068e-05,
+        "adjusted_hazard_disruption_damage_equivalent": 8.775691012716636e-06,
         "adjusted_hazard_value_impact": 5.459820540481134e-05,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Wildfire",
@@ -520,6 +565,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Wind",
@@ -557,6 +605,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Drought",
@@ -594,6 +645,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": 0.0007529177105248538,
+        "adjusted_hazard_disruption": 0.0007426037692847876,
+        "adjusted_hazard_disruption_damage_equivalent": 0.0001441949066572403,
         "adjusted_hazard_value_impact": 0.0008971126171820941,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Flood",
@@ -631,6 +685,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": 5.642894457360346e-05,
+        "adjusted_hazard_disruption_damage_equivalent": 1.095707661623368e-05,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Heat",
@@ -668,6 +725,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Landslide",
@@ -693,6 +753,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Precipitation",
@@ -724,6 +787,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Subsidence",
@@ -749,6 +815,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": 4.58225143920947e-05,
+        "adjusted_hazard_disruption": 4.519480871549068e-05,
+        "adjusted_hazard_disruption_damage_equivalent": 8.775691012716636e-06,
         "adjusted_hazard_value_impact": 5.459820540481134e-05,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Wildfire",
@@ -786,6 +855,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Wind",
@@ -823,6 +895,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Drought",
@@ -860,6 +935,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": 0.0007529177105248538,
+        "adjusted_hazard_disruption": 0.0007426037692847874,
+        "adjusted_hazard_disruption_damage_equivalent": 0.0001441949066572403,
         "adjusted_hazard_value_impact": 0.0008971126171820941,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Flood",
@@ -897,6 +975,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": 5.629470709022158e-05,
+        "adjusted_hazard_disruption_damage_equivalent": 1.093101108547992e-05,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Heat",
@@ -934,6 +1015,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Landslide",
@@ -959,6 +1043,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Precipitation",
@@ -990,6 +1077,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Subsidence",
@@ -1015,6 +1105,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": 4.58225143920947e-05,
+        "adjusted_hazard_disruption": 4.519480871549068e-05,
+        "adjusted_hazard_disruption_damage_equivalent": 8.775691012716636e-06,
         "adjusted_hazard_value_impact": 5.459820540481134e-05,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Wildfire",
@@ -1052,6 +1145,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Wind",
@@ -1089,6 +1185,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Drought",
@@ -1126,6 +1225,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": 0.0007529177105248539,
+        "adjusted_hazard_disruption": 0.0007426037692847874,
+        "adjusted_hazard_disruption_damage_equivalent": 0.0001441949066572403,
         "adjusted_hazard_value_impact": 0.0008971126171820941,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Flood",
@@ -1163,6 +1265,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": 6.391767744062804e-05,
+        "adjusted_hazard_disruption_damage_equivalent": 1.241119950303457e-05,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Heat",
@@ -1200,6 +1305,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Landslide",
@@ -1225,6 +1333,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Precipitation",
@@ -1256,6 +1367,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Subsidence",
@@ -1281,6 +1395,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": 4.58225143920947e-05,
+        "adjusted_hazard_disruption": 4.519480871549068e-05,
+        "adjusted_hazard_disruption_damage_equivalent": 8.775691012716636e-06,
         "adjusted_hazard_value_impact": 5.459820540481134e-05,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Wildfire",
@@ -1318,6 +1435,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Wind",
@@ -1355,6 +1475,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Drought",
@@ -1392,6 +1515,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": 0.0007529177105248538,
+        "adjusted_hazard_disruption": 0.0007426037692847873,
+        "adjusted_hazard_disruption_damage_equivalent": 0.0001441949066572402,
         "adjusted_hazard_value_impact": 0.000897112617182094,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Flood",
@@ -1429,6 +1555,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": 6.98800412320186e-05,
+        "adjusted_hazard_disruption_damage_equivalent": 1.356894004505216e-05,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Heat",
@@ -1466,6 +1595,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Landslide",
@@ -1491,6 +1623,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Precipitation",
@@ -1522,6 +1657,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Subsidence",
@@ -1547,6 +1685,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": 4.582251439209471e-05,
+        "adjusted_hazard_disruption": 4.519480871549068e-05,
+        "adjusted_hazard_disruption_damage_equivalent": 8.775691012716636e-06,
         "adjusted_hazard_value_impact": 5.459820540481135e-05,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Wildfire",
@@ -1584,6 +1725,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Wind",
@@ -1621,6 +1765,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Drought",
@@ -1658,6 +1805,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": 0.0007529177105248538,
+        "adjusted_hazard_disruption": 0.0007426037692847874,
+        "adjusted_hazard_disruption_damage_equivalent": 0.0001441949066572403,
         "adjusted_hazard_value_impact": 0.0008971126171820941,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Flood",
@@ -1695,6 +1845,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": 7.674088116609875e-05,
+        "adjusted_hazard_disruption_damage_equivalent": 1.490114197399976e-05,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Heat",
@@ -1732,6 +1885,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Landslide",
@@ -1757,6 +1913,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Precipitation",
@@ -1788,6 +1947,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Subsidence",
@@ -1813,6 +1975,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": 4.58225143920947e-05,
+        "adjusted_hazard_disruption": 4.519480871549068e-05,
+        "adjusted_hazard_disruption_damage_equivalent": 8.775691012716636e-06,
         "adjusted_hazard_value_impact": 5.459820540481134e-05,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Wildfire",
@@ -1850,6 +2015,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Wind",
@@ -1887,6 +2055,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Drought",
@@ -1924,6 +2095,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": 0.0007529177105248538,
+        "adjusted_hazard_disruption": 0.0007426037692847874,
+        "adjusted_hazard_disruption_damage_equivalent": 0.0001441949066572403,
         "adjusted_hazard_value_impact": 0.0008971126171820941,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Flood",
@@ -1961,6 +2135,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": 9.370934779888429e-05,
+        "adjusted_hazard_disruption_damage_equivalent": 1.819598986386103e-05,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Heat",
@@ -1998,6 +2175,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Landslide",
@@ -2023,6 +2203,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Precipitation",
@@ -2054,6 +2237,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Subsidence",
@@ -2079,6 +2265,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": 4.58225143920947e-05,
+        "adjusted_hazard_disruption": 4.519480871549068e-05,
+        "adjusted_hazard_disruption_damage_equivalent": 8.775691012716636e-06,
         "adjusted_hazard_value_impact": 5.459820540481134e-05,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Wildfire",
@@ -2116,6 +2305,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Wind",
@@ -2153,6 +2345,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Drought",
@@ -2190,6 +2385,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": 0.0007529177105248538,
+        "adjusted_hazard_disruption": 0.0007426037692847874,
+        "adjusted_hazard_disruption_damage_equivalent": 0.0001441949066572403,
         "adjusted_hazard_value_impact": 0.0008971126171820941,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Flood",
@@ -2227,6 +2425,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": 0.0001255882410752482,
+        "adjusted_hazard_disruption_damage_equivalent": 2.438606622820352e-05,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Heat",
@@ -2264,6 +2465,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Landslide",
@@ -2289,6 +2493,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Precipitation",
@@ -2320,6 +2527,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Subsidence",
@@ -2345,6 +2555,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": 4.58225143920947e-05,
+        "adjusted_hazard_disruption": 4.519480871549068e-05,
+        "adjusted_hazard_disruption_damage_equivalent": 8.775691012716636e-06,
         "adjusted_hazard_value_impact": 5.459820540481134e-05,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Wildfire",
@@ -2382,6 +2595,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Wind",
@@ -2419,6 +2635,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Drought",
@@ -2456,6 +2675,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": 0.0007529177105248538,
+        "adjusted_hazard_disruption": 0.0007426037692847874,
+        "adjusted_hazard_disruption_damage_equivalent": 0.0001441949066572403,
         "adjusted_hazard_value_impact": 0.0008971126171820941,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Flood",
@@ -2493,6 +2715,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": 0.0001683621024206919,
+        "adjusted_hazard_disruption_damage_equivalent": 3.269167037294988e-05,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Heat",
@@ -2530,6 +2755,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Landslide",
@@ -2555,6 +2783,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Precipitation",
@@ -2586,6 +2817,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Subsidence",
@@ -2611,6 +2845,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": 4.58225143920947e-05,
+        "adjusted_hazard_disruption": 4.519480871549067e-05,
+        "adjusted_hazard_disruption_damage_equivalent": 8.775691012716634e-06,
         "adjusted_hazard_value_impact": 5.459820540481134e-05,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Wildfire",
@@ -2648,6 +2885,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Wind",
@@ -2685,6 +2925,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Drought",
@@ -2722,6 +2965,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": 0.0007529177105248539,
+        "adjusted_hazard_disruption": 0.0007426037692847874,
+        "adjusted_hazard_disruption_damage_equivalent": 0.0001441949066572403,
         "adjusted_hazard_value_impact": 0.0008971126171820941,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Flood",
@@ -2759,6 +3005,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": 0.0002156812198488333,
+        "adjusted_hazard_disruption_damage_equivalent": 4.187984851433656e-05,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Heat",
@@ -2796,6 +3045,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Landslide",
@@ -2821,6 +3073,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Precipitation",
@@ -2852,6 +3107,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Subsidence",
@@ -2877,6 +3135,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": 4.58225143920947e-05,
+        "adjusted_hazard_disruption": 4.519480871549068e-05,
+        "adjusted_hazard_disruption_damage_equivalent": 8.775691012716636e-06,
         "adjusted_hazard_value_impact": 5.459820540481134e-05,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Wildfire",
@@ -2914,6 +3175,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Wind",
@@ -2951,6 +3215,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Drought",
@@ -2988,6 +3255,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": 0.0007529177105248538,
+        "adjusted_hazard_disruption": 0.0007426037692847874,
+        "adjusted_hazard_disruption_damage_equivalent": 0.0001441949066572403,
         "adjusted_hazard_value_impact": 0.0008971126171820941,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Flood",
@@ -3025,6 +3295,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": 0.0002593585640959269,
+        "adjusted_hazard_disruption_damage_equivalent": 5.036088623221881e-05,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Heat",
@@ -3062,6 +3335,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Landslide",
@@ -3087,6 +3363,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Precipitation",
@@ -3118,6 +3397,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Subsidence",
@@ -3143,6 +3425,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": 4.58225143920947e-05,
+        "adjusted_hazard_disruption": 4.519480871549069e-05,
+        "adjusted_hazard_disruption_damage_equivalent": 8.775691012716638e-06,
         "adjusted_hazard_value_impact": 5.459820540481135e-05,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Wildfire",
@@ -3180,6 +3465,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Wind",
@@ -3217,6 +3505,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Drought",
@@ -3254,6 +3545,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": 0.0007529177105248538,
+        "adjusted_hazard_disruption": 0.0007426037692847874,
+        "adjusted_hazard_disruption_damage_equivalent": 0.0001441949066572403,
         "adjusted_hazard_value_impact": 0.0008971126171820941,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Flood",
@@ -3291,6 +3585,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": 0.0002908260186762936,
+        "adjusted_hazard_disruption_damage_equivalent": 5.647107158762983e-05,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Heat",
@@ -3328,6 +3625,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Landslide",
@@ -3353,6 +3653,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Precipitation",
@@ -3384,6 +3687,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Subsidence",
@@ -3409,6 +3715,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": 4.58225143920947e-05,
+        "adjusted_hazard_disruption": 4.519480871549068e-05,
+        "adjusted_hazard_disruption_damage_equivalent": 8.775691012716636e-06,
         "adjusted_hazard_value_impact": 5.459820540481134e-05,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Wildfire",
@@ -3446,6 +3755,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Wind",
@@ -3483,6 +3795,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Drought",
@@ -3520,6 +3835,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": 0.0007529177105248538,
+        "adjusted_hazard_disruption": 0.0007426037692847874,
+        "adjusted_hazard_disruption_damage_equivalent": 0.0001441949066572403,
         "adjusted_hazard_value_impact": 0.0008971126171820941,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Flood",
@@ -3557,6 +3875,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": 0.0003158065701167225,
+        "adjusted_hazard_disruption_damage_equivalent": 6.132166410033445e-05,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Heat",
@@ -3594,6 +3915,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Landslide",
@@ -3619,6 +3943,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Precipitation",
@@ -3650,6 +3977,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Subsidence",
@@ -3675,6 +4005,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": 4.58225143920947e-05,
+        "adjusted_hazard_disruption": 4.519480871549068e-05,
+        "adjusted_hazard_disruption_damage_equivalent": 8.775691012716636e-06,
         "adjusted_hazard_value_impact": 5.459820540481134e-05,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Wildfire",
@@ -3712,6 +4045,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Wind",
@@ -3749,6 +4085,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Drought",
@@ -3786,6 +4125,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": 0.0007529177105248538,
+        "adjusted_hazard_disruption": 0.0007426037692847874,
+        "adjusted_hazard_disruption_damage_equivalent": 0.0001441949066572403,
         "adjusted_hazard_value_impact": 0.0008971126171820941,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Flood",
@@ -3823,6 +4165,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": 0.0003431657564762374,
+        "adjusted_hazard_disruption_damage_equivalent": 6.663412747111405e-05,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Heat",
@@ -3860,6 +4205,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Landslide",
@@ -3885,6 +4233,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Precipitation",
@@ -3916,6 +4267,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Subsidence",
@@ -3941,6 +4295,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": 4.58225143920947e-05,
+        "adjusted_hazard_disruption": 4.519480871549068e-05,
+        "adjusted_hazard_disruption_damage_equivalent": 8.775691012716636e-06,
         "adjusted_hazard_value_impact": 5.459820540481134e-05,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Wildfire",
@@ -3978,6 +4335,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Wind",
@@ -4015,6 +4375,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Drought",
@@ -4052,6 +4415,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": 0.0007529177105248538,
+        "adjusted_hazard_disruption": 0.0007426037692847874,
+        "adjusted_hazard_disruption_damage_equivalent": 0.0001441949066572403,
         "adjusted_hazard_value_impact": 0.0008971126171820941,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Flood",
@@ -4089,6 +4455,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": 0.0003690228917425346,
+        "adjusted_hazard_disruption_damage_equivalent": 7.16549304354436e-05,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Heat",
@@ -4126,6 +4495,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Landslide",
@@ -4151,6 +4523,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Precipitation",
@@ -4182,6 +4557,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Subsidence",
@@ -4207,6 +4585,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": 4.58225143920947e-05,
+        "adjusted_hazard_disruption": 4.519480871549068e-05,
+        "adjusted_hazard_disruption_damage_equivalent": 8.775691012716636e-06,
         "adjusted_hazard_value_impact": 5.459820540481134e-05,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Wildfire",
@@ -4244,6 +4625,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Wind",
@@ -4281,6 +4665,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Drought",
@@ -4318,6 +4705,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": 0.0007529177105248538,
+        "adjusted_hazard_disruption": 0.0007426037692847874,
+        "adjusted_hazard_disruption_damage_equivalent": 0.0001441949066572403,
         "adjusted_hazard_value_impact": 0.0008971126171820941,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Flood",
@@ -4355,6 +4745,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": 7.255714905229915e-06,
+        "adjusted_hazard_disruption_damage_equivalent": 1.408876680627168e-06,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Heat",
@@ -4392,6 +4785,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Landslide",
@@ -4417,6 +4813,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Precipitation",
@@ -4448,6 +4847,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Subsidence",
@@ -4473,6 +4875,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": 4.58225143920947e-05,
+        "adjusted_hazard_disruption": 4.519480871549068e-05,
+        "adjusted_hazard_disruption_damage_equivalent": 8.775691012716636e-06,
         "adjusted_hazard_value_impact": 5.459820540481134e-05,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Wildfire",
@@ -4510,6 +4915,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Wind",
@@ -4547,6 +4955,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Drought",
@@ -4584,6 +4995,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": 0.0007529177105248538,
+        "adjusted_hazard_disruption": 0.0007426037692847874,
+        "adjusted_hazard_disruption_damage_equivalent": 0.0001441949066572403,
         "adjusted_hazard_value_impact": 0.0008971126171820941,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Flood",
@@ -4621,6 +5035,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": 2.216418964257061e-05,
+        "adjusted_hazard_disruption_damage_equivalent": 4.303726144188467e-06,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Heat",
@@ -4658,6 +5075,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Landslide",
@@ -4683,6 +5103,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Precipitation",
@@ -4714,6 +5137,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Subsidence",
@@ -4739,6 +5165,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": 4.58225143920947e-05,
+        "adjusted_hazard_disruption": 4.519480871549068e-05,
+        "adjusted_hazard_disruption_damage_equivalent": 8.775691012716636e-06,
         "adjusted_hazard_value_impact": 5.459820540481134e-05,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Wildfire",
@@ -4776,6 +5205,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Wind",
@@ -4813,6 +5245,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Drought",
@@ -4850,6 +5285,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": 0.0007529177105248538,
+        "adjusted_hazard_disruption": 0.0007426037692847876,
+        "adjusted_hazard_disruption_damage_equivalent": 0.0001441949066572403,
         "adjusted_hazard_value_impact": 0.0008971126171820941,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Flood",
@@ -4887,6 +5325,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": 3.744020574088867e-05,
+        "adjusted_hazard_disruption_damage_equivalent": 7.269942862308479e-06,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Heat",
@@ -4924,6 +5365,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Landslide",
@@ -4949,6 +5393,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Precipitation",
@@ -4980,6 +5427,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Subsidence",
@@ -5005,6 +5455,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": 4.58225143920947e-05,
+        "adjusted_hazard_disruption": 4.519480871549068e-05,
+        "adjusted_hazard_disruption_damage_equivalent": 8.775691012716636e-06,
         "adjusted_hazard_value_impact": 5.459820540481134e-05,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Wildfire",
@@ -5042,6 +5495,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Wind",
@@ -5079,6 +5535,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Drought",
@@ -5116,6 +5575,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": 0.0007529177105248538,
+        "adjusted_hazard_disruption": 0.0007426037692847874,
+        "adjusted_hazard_disruption_damage_equivalent": 0.0001441949066572403,
         "adjusted_hazard_value_impact": 0.0008971126171820941,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Flood",
@@ -5153,6 +5615,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": 5.941095074168262e-05,
+        "adjusted_hazard_disruption_damage_equivalent": 1.153610694013255e-05,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Heat",
@@ -5190,6 +5655,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Landslide",
@@ -5215,6 +5683,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Precipitation",
@@ -5246,6 +5717,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Subsidence",
@@ -5271,6 +5745,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": 4.58225143920947e-05,
+        "adjusted_hazard_disruption": 4.519480871549068e-05,
+        "adjusted_hazard_disruption_damage_equivalent": 8.775691012716636e-06,
         "adjusted_hazard_value_impact": 5.459820540481134e-05,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Wildfire",
@@ -5308,6 +5785,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Wind",
@@ -5345,6 +5825,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Drought",
@@ -5382,6 +5865,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": 0.0007529177105248539,
+        "adjusted_hazard_disruption": 0.0007426037692847874,
+        "adjusted_hazard_disruption_damage_equivalent": 0.0001441949066572403,
         "adjusted_hazard_value_impact": 0.0008971126171820941,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Flood",
@@ -5419,6 +5905,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": 0.0001016409735940421,
+        "adjusted_hazard_disruption_damage_equivalent": 1.97361113774839e-05,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Heat",
@@ -5456,6 +5945,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Landslide",
@@ -5481,6 +5973,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Precipitation",
@@ -5512,6 +6007,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Subsidence",
@@ -5537,6 +6035,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": 4.58225143920947e-05,
+        "adjusted_hazard_disruption": 4.519480871549068e-05,
+        "adjusted_hazard_disruption_damage_equivalent": 8.775691012716636e-06,
         "adjusted_hazard_value_impact": 5.459820540481134e-05,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Wildfire",
@@ -5574,6 +6075,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Wind",
@@ -5611,6 +6115,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Drought",
@@ -5648,6 +6155,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": 0.0007529177105248538,
+        "adjusted_hazard_disruption": 0.0007426037692847873,
+        "adjusted_hazard_disruption_damage_equivalent": 0.0001441949066572402,
         "adjusted_hazard_value_impact": 0.000897112617182094,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Flood",
@@ -5685,6 +6195,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": 0.0001599346272310496,
+        "adjusted_hazard_disruption_damage_equivalent": 3.105526742350478e-05,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Heat",
@@ -5722,6 +6235,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Landslide",
@@ -5747,6 +6263,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Precipitation",
@@ -5778,6 +6297,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Subsidence",
@@ -5803,6 +6325,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": 4.582251439209471e-05,
+        "adjusted_hazard_disruption": 4.519480871549068e-05,
+        "adjusted_hazard_disruption_damage_equivalent": 8.775691012716636e-06,
         "adjusted_hazard_value_impact": 5.459820540481135e-05,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Wildfire",
@@ -5840,6 +6365,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Wind",
@@ -5877,6 +6405,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Drought",
@@ -5914,6 +6445,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": 0.0007529177105248538,
+        "adjusted_hazard_disruption": 0.0007426037692847874,
+        "adjusted_hazard_disruption_damage_equivalent": 0.0001441949066572403,
         "adjusted_hazard_value_impact": 0.0008971126171820941,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Flood",
@@ -5951,6 +6485,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": 0.0002117248633661877,
+        "adjusted_hazard_disruption_damage_equivalent": 4.111162395459956e-05,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Heat",
@@ -5988,6 +6525,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Landslide",
@@ -6013,6 +6553,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Precipitation",
@@ -6044,6 +6587,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Subsidence",
@@ -6069,6 +6615,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": 4.628061570195831e-05,
+        "adjusted_hazard_disruption": 4.56466346649452e-05,
+        "adjusted_hazard_disruption_damage_equivalent": 8.863424206785475e-06,
         "adjusted_hazard_value_impact": 5.514403990874379e-05,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Wildfire",
@@ -6106,6 +6655,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Wind",
@@ -6143,6 +6695,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Drought",
@@ -6180,6 +6735,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": 0.0007529177105248538,
+        "adjusted_hazard_disruption": 0.0007426037692847874,
+        "adjusted_hazard_disruption_damage_equivalent": 0.0001441949066572403,
         "adjusted_hazard_value_impact": 0.0008971126171820941,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Flood",
@@ -6217,6 +6775,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": 0.0002736185994854691,
+        "adjusted_hazard_disruption_damage_equivalent": 5.312982514280953e-05,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Heat",
@@ -6254,6 +6815,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Landslide",
@@ -6279,6 +6843,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Precipitation",
@@ -6310,6 +6877,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Subsidence",
@@ -6335,6 +6905,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": 4.72689268612011e-05,
+        "adjusted_hazard_disruption": 4.662140731515727e-05,
+        "adjusted_hazard_disruption_damage_equivalent": 9.0527004495451e-06,
         "adjusted_hazard_value_impact": 5.63216273107462e-05,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Wildfire",
@@ -6372,6 +6945,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Wind",
@@ -6409,6 +6985,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Drought",
@@ -6446,6 +7025,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": 0.0007529177105248538,
+        "adjusted_hazard_disruption": 0.0007426037692847874,
+        "adjusted_hazard_disruption_damage_equivalent": 0.0001441949066572403,
         "adjusted_hazard_value_impact": 0.0008971126171820941,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Flood",
@@ -6483,6 +7065,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": 0.0003504690211581521,
+        "adjusted_hazard_disruption_damage_equivalent": 6.805223711808777e-05,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Heat",
@@ -6520,6 +7105,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Landslide",
@@ -6545,6 +7133,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Precipitation",
@@ -6576,6 +7167,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Subsidence",
@@ -6601,6 +7195,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": 4.859346865663556e-05,
+        "adjusted_hazard_disruption": 4.792780470243508e-05,
+        "adjusted_hazard_disruption_damage_equivalent": 9.306369845133025e-06,
         "adjusted_hazard_value_impact": 5.789983850176858e-05,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Wildfire",
@@ -6638,6 +7235,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Wind",
@@ -6675,6 +7275,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Drought",
@@ -6712,6 +7315,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": 0.0007529177105248538,
+        "adjusted_hazard_disruption": 0.0007426037692847874,
+        "adjusted_hazard_disruption_damage_equivalent": 0.0001441949066572403,
         "adjusted_hazard_value_impact": 0.0008971126171820941,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Flood",
@@ -6749,6 +7355,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": 0.0004372497084642613,
+        "adjusted_hazard_disruption_damage_equivalent": 8.490285601247792e-05,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Heat",
@@ -6786,6 +7395,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Landslide",
@@ -6811,6 +7423,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Precipitation",
@@ -6842,6 +7457,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Subsidence",
@@ -6867,6 +7485,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": 5.014460066341659e-05,
+        "adjusted_hazard_disruption": 4.945768832556158e-05,
+        "adjusted_hazard_disruption_damage_equivalent": 9.603434626322636e-06,
         "adjusted_hazard_value_impact": 5.974803528973923e-05,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Wildfire",
@@ -6904,6 +7525,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Wind",
@@ -6941,6 +7565,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Drought",
@@ -6978,6 +7605,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": 0.0007529177105248539,
+        "adjusted_hazard_disruption": 0.0007426037692847874,
+        "adjusted_hazard_disruption_damage_equivalent": 0.0001441949066572403,
         "adjusted_hazard_value_impact": 0.0008971126171820941,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Flood",
@@ -7015,6 +7645,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": 0.0005364055260881318,
+        "adjusted_hazard_disruption_damage_equivalent": 0.0001041564128326469,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Heat",
@@ -7052,6 +7685,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Landslide",
@@ -7077,6 +7713,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Precipitation",
@@ -7108,6 +7747,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Subsidence",
@@ -7133,6 +7775,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": 5.185567870173636e-05,
+        "adjusted_hazard_disruption": 5.114532693869888e-05,
+        "adjusted_hazard_disruption_damage_equivalent": 9.931131444407549e-06,
         "adjusted_hazard_value_impact": 6.17868101461439e-05,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Wildfire",
@@ -7170,6 +7815,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Wind",
@@ -7207,6 +7855,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Drought",
@@ -7244,6 +7895,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": 0.0007529177105248538,
+        "adjusted_hazard_disruption": 0.0007426037692847874,
+        "adjusted_hazard_disruption_damage_equivalent": 0.0001441949066572403,
         "adjusted_hazard_value_impact": 0.0008971126171820941,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Flood",
@@ -7281,6 +7935,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": 0.0006527953418402731,
+        "adjusted_hazard_disruption_damage_equivalent": 0.0001267563770563637,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Heat",
@@ -7318,6 +7975,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Landslide",
@@ -7343,6 +8003,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Precipitation",
@@ -7374,6 +8037,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Subsidence",
@@ -7399,6 +8065,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": 5.368386008457557e-05,
+        "adjusted_hazard_disruption": 5.294846474095126e-05,
+        "adjusted_hazard_disruption_damage_equivalent": 1.02812552895051e-05,
         "adjusted_hazard_value_impact": 6.396511537408067e-05,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Wildfire",
@@ -7436,6 +8105,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Wind",
@@ -7473,6 +8145,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Drought",
@@ -7510,6 +8185,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": 0.0007529177105248538,
+        "adjusted_hazard_disruption": 0.0007426037692847874,
+        "adjusted_hazard_disruption_damage_equivalent": 0.0001441949066572403,
         "adjusted_hazard_value_impact": 0.0008971126171820941,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Flood",
@@ -7547,6 +8225,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": 0.0008070425356668852,
+        "adjusted_hazard_disruption_damage_equivalent": 0.0001567072884790068,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Heat",
@@ -7584,6 +8265,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Landslide",
@@ -7609,6 +8293,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Precipitation",
@@ -7640,6 +8327,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Subsidence",
@@ -7665,6 +8355,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": 5.56003489075442e-05,
+        "adjusted_hazard_disruption": 5.483870029237238e-05,
+        "adjusted_hazard_disruption_damage_equivalent": 1.064829131890726e-05,
         "adjusted_hazard_value_impact": 6.624864022645146e-05,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Wildfire",
@@ -7702,6 +8395,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Wind",
@@ -7739,6 +8435,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Drought",
@@ -7776,6 +8475,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": 0.0007529177105248538,
+        "adjusted_hazard_disruption": 0.0007426037692847874,
+        "adjusted_hazard_disruption_damage_equivalent": 0.0001441949066572403,
         "adjusted_hazard_value_impact": 0.0008971126171820941,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Flood",
@@ -7813,6 +8515,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": 0.0009857397839196404,
+        "adjusted_hazard_disruption_damage_equivalent": 0.0001914057832853671,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Heat",
@@ -7850,6 +8555,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Landslide",
@@ -7875,6 +8583,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Precipitation",
@@ -7906,6 +8617,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Subsidence",
@@ -7931,6 +8645,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": 5.758507529788557e-05,
+        "adjusted_hazard_disruption": 5.679623864996934e-05,
+        "adjusted_hazard_disruption_damage_equivalent": 1.102839585436298e-05,
         "adjusted_hazard_value_impact": 6.861347115224854e-05,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Wildfire",
@@ -7968,6 +8685,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Wind",
@@ -8005,6 +8725,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Drought",
@@ -8042,6 +8765,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": 0.0007529177105248538,
+        "adjusted_hazard_disruption": 0.0007426037692847874,
+        "adjusted_hazard_disruption_damage_equivalent": 0.0001441949066572403,
         "adjusted_hazard_value_impact": 0.0008971126171820941,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Flood",
@@ -8079,6 +8805,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": 0.001171754984923216,
+        "adjusted_hazard_disruption_damage_equivalent": 0.0002275252397909158,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Heat",
@@ -8116,6 +8845,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Landslide",
@@ -8141,6 +8873,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Precipitation",
@@ -8172,6 +8907,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Subsidence",
@@ -8197,6 +8935,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": 5.962362286812654e-05,
+        "adjusted_hazard_disruption": 5.880686091102893e-05,
+        "adjusted_hazard_disruption_damage_equivalent": 1.141880794388911e-05,
         "adjusted_hazard_value_impact": 7.104243081201566e-05,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Wildfire",
@@ -8234,6 +8975,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Wind",
@@ -8271,6 +9015,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Drought",
@@ -8308,6 +9055,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": 0.0007529177105248538,
+        "adjusted_hazard_disruption": 0.0007426037692847874,
+        "adjusted_hazard_disruption_damage_equivalent": 0.0001441949066572403,
         "adjusted_hazard_value_impact": 0.0008971126171820941,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Flood",
@@ -8345,6 +9095,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": 0.001381653372387103,
+        "adjusted_hazard_disruption_damage_equivalent": 0.0002682822082305054,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Heat",
@@ -8382,6 +9135,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Landslide",
@@ -8407,6 +9163,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Precipitation",
@@ -8438,6 +9197,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Subsidence",
@@ -8463,6 +9225,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": 6.170536901697116e-05,
+        "adjusted_hazard_disruption": 6.086008998934144e-05,
+        "adjusted_hazard_disruption_damage_equivalent": 1.181749320181387e-05,
         "adjusted_hazard_value_impact": 7.352286221878504e-05,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Wildfire",
@@ -8500,6 +9265,9 @@
         ]
       },
       {
+        "adjusted_hazard_damage": null,
+        "adjusted_hazard_disruption": null,
+        "adjusted_hazard_disruption_damage_equivalent": null,
         "adjusted_hazard_value_impact": null,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "hazard": "Wind",
@@ -17502,6 +18270,9 @@
     "trends": [
       {
         "adjusted_physical_exposure_rating": "A",
+        "adjusted_total_damage": 0.0007987402249169485,
+        "adjusted_total_disruption": 0.0008051206146005983,
+        "adjusted_total_disruption_damage_equivalent": 0.0001563340999224463,
         "adjusted_total_value_impact": 0.0009550743248393947,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "horizon": 2025,
@@ -17509,6 +18280,9 @@
       },
       {
         "adjusted_physical_exposure_rating": "A",
+        "adjusted_total_damage": 0.0007987402249169485,
+        "adjusted_total_disruption": 0.000838069508944776,
+        "adjusted_total_disruption_damage_equivalent": 0.0001627319434844225,
         "adjusted_total_value_impact": 0.000961472168401371,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "horizon": 2030,
@@ -17516,6 +18290,9 @@
       },
       {
         "adjusted_physical_exposure_rating": "A",
+        "adjusted_total_damage": 0.0007987402249169485,
+        "adjusted_total_disruption": 0.0008442275225738816,
+        "adjusted_total_disruption_damage_equivalent": 0.0001639276742861906,
         "adjusted_total_value_impact": 0.0009626678992031391,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "horizon": 2035,
@@ -17523,6 +18300,9 @@
       },
       {
         "adjusted_physical_exposure_rating": "A",
+        "adjusted_total_damage": 0.0007987402249169485,
+        "adjusted_total_disruption": 0.0008440932850904997,
+        "adjusted_total_disruption_damage_equivalent": 0.0001639016087554368,
         "adjusted_total_value_impact": 0.0009626418336723853,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "horizon": 2040,
@@ -17530,6 +18310,9 @@
       },
       {
         "adjusted_physical_exposure_rating": "A",
+        "adjusted_total_damage": 0.0007987402249169486,
+        "adjusted_total_disruption": 0.0008517162554409061,
+        "adjusted_total_disruption_damage_equivalent": 0.0001653817971729915,
         "adjusted_total_value_impact": 0.0009641220220899401,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "horizon": 2045,
@@ -17537,6 +18320,9 @@
       },
       {
         "adjusted_physical_exposure_rating": "A",
+        "adjusted_total_damage": 0.0007987402249169485,
+        "adjusted_total_disruption": 0.0008576786192322966,
+        "adjusted_total_disruption_damage_equivalent": 0.000166539537715009,
         "adjusted_total_value_impact": 0.0009652797626319575,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "horizon": 2050,
@@ -17544,6 +18330,9 @@
       },
       {
         "adjusted_physical_exposure_rating": "A",
+        "adjusted_total_damage": 0.0007987402249169485,
+        "adjusted_total_disruption": 0.0008645394591663769,
+        "adjusted_total_disruption_damage_equivalent": 0.0001678717396439567,
         "adjusted_total_value_impact": 0.0009666119645609051,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "horizon": 2055,
@@ -17551,6 +18340,9 @@
       },
       {
         "adjusted_physical_exposure_rating": "A",
+        "adjusted_total_damage": 0.0007987402249169485,
+        "adjusted_total_disruption": 0.0008815079257991624,
+        "adjusted_total_disruption_damage_equivalent": 0.0001711665875338179,
         "adjusted_total_value_impact": 0.0009699068124507664,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "horizon": 2060,
@@ -17558,6 +18350,9 @@
       },
       {
         "adjusted_physical_exposure_rating": "A",
+        "adjusted_total_damage": 0.0007987402249169485,
+        "adjusted_total_disruption": 0.0009133868190755262,
+        "adjusted_total_disruption_damage_equivalent": 0.0001773566638981604,
         "adjusted_total_value_impact": 0.0009760968888151089,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "horizon": 2065,
@@ -17565,6 +18360,9 @@
       },
       {
         "adjusted_physical_exposure_rating": "A",
+        "adjusted_total_damage": 0.0007987402249169485,
+        "adjusted_total_disruption": 0.00095616068042097,
+        "adjusted_total_disruption_damage_equivalent": 0.0001856622680429068,
         "adjusted_total_value_impact": 0.0009844024929598553,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "horizon": 2070,
@@ -17572,6 +18370,9 @@
       },
       {
         "adjusted_physical_exposure_rating": "A",
+        "adjusted_total_damage": 0.0007987402249169486,
+        "adjusted_total_disruption": 0.001003479797849111,
+        "adjusted_total_disruption_damage_equivalent": 0.0001948504461842935,
         "adjusted_total_value_impact": 0.000993590671101242,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "horizon": 2075,
@@ -17579,6 +18380,9 @@
       },
       {
         "adjusted_physical_exposure_rating": "A",
+        "adjusted_total_damage": 0.0007987402249169485,
+        "adjusted_total_disruption": 0.001047157142096205,
+        "adjusted_total_disruption_damage_equivalent": 0.0002033314839021757,
         "adjusted_total_value_impact": 0.001002071708819124,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "horizon": 2080,
@@ -17586,6 +18390,9 @@
       },
       {
         "adjusted_physical_exposure_rating": "A",
+        "adjusted_total_damage": 0.0007987402249169485,
+        "adjusted_total_disruption": 0.001078624596676572,
+        "adjusted_total_disruption_damage_equivalent": 0.0002094416692575867,
         "adjusted_total_value_impact": 0.001008181894174535,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "horizon": 2085,
@@ -17593,6 +18400,9 @@
       },
       {
         "adjusted_physical_exposure_rating": "A",
+        "adjusted_total_damage": 0.0007987402249169485,
+        "adjusted_total_disruption": 0.001103605148117001,
+        "adjusted_total_disruption_damage_equivalent": 0.0002142922617702914,
         "adjusted_total_value_impact": 0.00101303248668724,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "horizon": 2090,
@@ -17600,6 +18410,9 @@
       },
       {
         "adjusted_physical_exposure_rating": "A",
+        "adjusted_total_damage": 0.0007987402249169485,
+        "adjusted_total_disruption": 0.001130964334476515,
+        "adjusted_total_disruption_damage_equivalent": 0.0002196047251410709,
         "adjusted_total_value_impact": 0.001018344950058019,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "horizon": 2095,
@@ -17607,6 +18420,9 @@
       },
       {
         "adjusted_physical_exposure_rating": "A",
+        "adjusted_total_damage": 0.0007987402249169485,
+        "adjusted_total_disruption": 0.001156821469742813,
+        "adjusted_total_disruption_damage_equivalent": 0.0002246255281054005,
         "adjusted_total_value_impact": 0.001023365753022349,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "horizon": 2100,
@@ -17614,6 +18430,9 @@
       },
       {
         "adjusted_physical_exposure_rating": "A",
+        "adjusted_total_damage": 0.0007987402249169485,
+        "adjusted_total_disruption": 0.000795054292905508,
+        "adjusted_total_disruption_damage_equivalent": 0.0001543794743505841,
         "adjusted_total_value_impact": 0.0009531196992675325,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "horizon": 2025,
@@ -17621,6 +18440,9 @@
       },
       {
         "adjusted_physical_exposure_rating": "A",
+        "adjusted_total_damage": 0.0007987402249169485,
+        "adjusted_total_disruption": 0.0008099627676428487,
+        "adjusted_total_disruption_damage_equivalent": 0.0001572743238141454,
         "adjusted_total_value_impact": 0.0009560145487310938,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "horizon": 2030,
@@ -17628,6 +18450,9 @@
       },
       {
         "adjusted_physical_exposure_rating": "A",
+        "adjusted_total_damage": 0.0007987402249169485,
+        "adjusted_total_disruption": 0.0008252387837411669,
+        "adjusted_total_disruption_damage_equivalent": 0.0001602405405322654,
         "adjusted_total_value_impact": 0.0009589807654492139,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "horizon": 2035,
@@ -17635,6 +18460,9 @@
       },
       {
         "adjusted_physical_exposure_rating": "A",
+        "adjusted_total_damage": 0.0007987402249169485,
+        "adjusted_total_disruption": 0.0008472095287419607,
+        "adjusted_total_disruption_damage_equivalent": 0.0001645067046100895,
         "adjusted_total_value_impact": 0.000963246929527038,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "horizon": 2040,
@@ -17642,6 +18470,9 @@
       },
       {
         "adjusted_physical_exposure_rating": "A",
+        "adjusted_total_damage": 0.0007987402249169486,
+        "adjusted_total_disruption": 0.0008894395515943202,
+        "adjusted_total_disruption_damage_equivalent": 0.0001727067090474408,
         "adjusted_total_value_impact": 0.0009714469339643894,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "horizon": 2045,
@@ -17649,6 +18480,9 @@
       },
       {
         "adjusted_physical_exposure_rating": "A",
+        "adjusted_total_damage": 0.0007987402249169485,
+        "adjusted_total_disruption": 0.0009477332052313277,
+        "adjusted_total_disruption_damage_equivalent": 0.0001840258650934617,
         "adjusted_total_value_impact": 0.00098276609001041,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "horizon": 2050,
@@ -17656,6 +18490,9 @@
       },
       {
         "adjusted_physical_exposure_rating": "A",
+        "adjusted_total_damage": 0.000799198326226812,
+        "adjusted_total_disruption": 0.0009999752673159204,
+        "adjusted_total_disruption_damage_equivalent": 0.0001941699548186253,
         "adjusted_total_value_impact": 0.0009933682810454375,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "horizon": 2055,
@@ -17663,6 +18500,9 @@
       },
       {
         "adjusted_physical_exposure_rating": "A",
+        "adjusted_total_damage": 0.0008001866373860549,
+        "adjusted_total_disruption": 0.001062843776085414,
+        "adjusted_total_disruption_damage_equivalent": 0.0002063774322495949,
         "adjusted_total_value_impact": 0.00100656406963565,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "horizon": 2060,
@@ -17670,6 +18510,9 @@
       },
       {
         "adjusted_physical_exposure_rating": "A",
+        "adjusted_total_damage": 0.0008015111791814893,
+        "adjusted_total_disruption": 0.001141000595145375,
+        "adjusted_total_disruption_damage_equivalent": 0.0002215535136204611,
         "adjusted_total_value_impact": 0.00102306469280195,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "horizon": 2065,
@@ -17677,6 +18520,9 @@
       },
       {
         "adjusted_physical_exposure_rating": "A",
+        "adjusted_total_damage": 0.0008030623111882704,
+        "adjusted_total_disruption": 0.001229311166074611,
+        "adjusted_total_disruption_damage_equivalent": 0.0002387011972960409,
         "adjusted_total_value_impact": 0.001041763508484311,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "horizon": 2070,
@@ -17684,6 +18530,9 @@
       },
       {
         "adjusted_physical_exposure_rating": "A",
+        "adjusted_total_damage": 0.0008047733892265902,
+        "adjusted_total_disruption": 0.001330154622311618,
+        "adjusted_total_disruption_damage_equivalent": 0.0002582824509342948,
         "adjusted_total_value_impact": 0.001063055840160885,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "horizon": 2075,
@@ -17691,6 +18540,9 @@
       },
       {
         "adjusted_physical_exposure_rating": "A",
+        "adjusted_total_damage": 0.0008066015706094294,
+        "adjusted_total_disruption": 0.001448347575866012,
+        "adjusted_total_disruption_damage_equivalent": 0.000281232539003109,
         "adjusted_total_value_impact": 0.001087834109612538,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "horizon": 2080,
@@ -17698,6 +18550,9 @@
       },
       {
         "adjusted_physical_exposure_rating": "A",
+        "adjusted_total_damage": 0.000808518059432398,
+        "adjusted_total_disruption": 0.001604485005244045,
+        "adjusted_total_disruption_damage_equivalent": 0.0003115504864551543,
         "adjusted_total_value_impact": 0.001120068545887552,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "horizon": 2085,
@@ -17705,6 +18560,9 @@
       },
       {
         "adjusted_physical_exposure_rating": "A",
+        "adjusted_total_damage": 0.0008105027858227393,
+        "adjusted_total_disruption": 0.001785139791854397,
+        "adjusted_total_disruption_damage_equivalent": 0.0003466290857969703,
         "adjusted_total_value_impact": 0.00115713187161971,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "horizon": 2090,
@@ -17712,6 +18570,9 @@
       },
       {
         "adjusted_physical_exposure_rating": "A",
+        "adjusted_total_damage": 0.0008125413333929803,
+        "adjusted_total_disruption": 0.001973165615119033,
+        "adjusted_total_disruption_damage_equivalent": 0.0003831389543920451,
         "adjusted_total_value_impact": 0.001195680287785025,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "horizon": 2095,
@@ -17719,6 +18580,9 @@
       },
       {
         "adjusted_physical_exposure_rating": "A",
+        "adjusted_total_damage": 0.000814623079541825,
+        "adjusted_total_disruption": 0.002185117231661232,
+        "adjusted_total_disruption_damage_equivalent": 0.0004242946080895596,
         "adjusted_total_value_impact": 0.001238917687631385,
         "asset_name": "is_p_f0d551408183414598a0bd83bf10ee72",
         "horizon": 2100,

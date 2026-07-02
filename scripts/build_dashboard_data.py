@@ -41,6 +41,7 @@ PHYSICAL_REQUIRED_COLUMNS = {
     "adjustedHazardValueImpact",
     "hazardExposureRating",
     "adjustedHazardExposureRating",
+    "adjustedTotalDisruption",
     "adjustedTotalValueImpact",
     "physicalExposureRating",
     "adjustedPhysicalExposureRating",
@@ -306,10 +307,22 @@ def build_physical(physical_rows: list[dict[str, Any]]) -> dict[str, list[dict[s
                 "asset_name": asset_name,
                 "scenario": scenario,
                 "horizon": horizon,
+                "adjusted_total_damage": None,
+                "adjusted_total_disruption": None,
+                "adjusted_total_disruption_damage_equivalent": None,
                 "adjusted_total_value_impact": None,
                 "adjusted_physical_exposure_rating": None,
             },
         )
+        total_damage = to_float(row.get("adjustedTotalDamage"))
+        if total_damage is not None:
+            trend["adjusted_total_damage"] = total_damage
+        total_disruption = to_float(row.get("adjustedTotalDisruption"))
+        if total_disruption is not None:
+            trend["adjusted_total_disruption"] = total_disruption
+        disruption_equivalent = to_float(row.get("adjustedTotalDisruptionDamageEquivalent"))
+        if disruption_equivalent is not None:
+            trend["adjusted_total_disruption_damage_equivalent"] = disruption_equivalent
         value_impact = to_float(row.get("adjustedTotalValueImpact"))
         if value_impact is not None:
             trend["adjusted_total_value_impact"] = value_impact
@@ -342,12 +355,26 @@ def build_physical(physical_rows: list[dict[str, Any]]) -> dict[str, list[dict[s
                 "scenario": scenario,
                 "horizon": horizon,
                 "hazard": hazard_name,
+                "adjusted_hazard_damage": None,
+                "adjusted_hazard_disruption": None,
+                "adjusted_hazard_disruption_damage_equivalent": None,
                 "adjusted_hazard_value_impact": None,
                 "hazard_rating": None,
                 "_indicators": [],
                 "_rating_counts": Counter(),
             },
         )
+        hazard_damage = to_float(row.get("adjustedHazardDamage"))
+        if hazard_damage is not None and hazard_damage > value_for_sort(hazard["adjusted_hazard_damage"]):
+            hazard["adjusted_hazard_damage"] = hazard_damage
+        hazard_disruption = to_float(row.get("adjustedHazardDisruption"))
+        if hazard_disruption is not None and hazard_disruption > value_for_sort(hazard["adjusted_hazard_disruption"]):
+            hazard["adjusted_hazard_disruption"] = hazard_disruption
+        hazard_disruption_equivalent = to_float(row.get("adjustedHazardDisruptionDamageEquivalent"))
+        if hazard_disruption_equivalent is not None and hazard_disruption_equivalent > value_for_sort(
+            hazard["adjusted_hazard_disruption_damage_equivalent"]
+        ):
+            hazard["adjusted_hazard_disruption_damage_equivalent"] = hazard_disruption_equivalent
         hazard_value = to_float(row.get("adjustedHazardValueImpact"))
         if hazard_value is not None and hazard_value > value_for_sort(hazard["adjusted_hazard_value_impact"]):
             hazard["adjusted_hazard_value_impact"] = hazard_value

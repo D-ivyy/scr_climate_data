@@ -7,6 +7,22 @@ const DRIVER_LABELS = {
   Direct_carbon_cost: "Direct carbon cost",
   Market_demand_shifts: "Market demand shifts",
 };
+const PHYSICAL_METRICS = {
+  value_impact: {
+    field: "adjusted_total_value_impact",
+    title: "Physical Value Impact Trend",
+    shortLabel: "value impact",
+    label: "Physical value impact",
+    description: "adjustedTotalValueImpact, combining physical damage and disruption damage-equivalent into a value-impact signal.",
+  },
+  disruption: {
+    field: "adjusted_total_disruption",
+    title: "Physical Disruption Trend",
+    shortLabel: "disruption",
+    label: "Physical revenue/business disruption",
+    description: "adjustedTotalDisruption, SCR's physical disruption metric tied to revenue and business-continuity exposure.",
+  },
+};
 
 const state = {
   data: null,
@@ -15,6 +31,7 @@ const state = {
   physicalScenario: null,
   physicalHorizon: null,
   physicalDisplay: "percent",
+  physicalMetric: "value_impact",
   transitionScenario: null,
   transitionDriver: "all",
 };
@@ -41,7 +58,8 @@ const HELP_CONTENT = {
     eyebrow: "Physical",
     title: "Physical Impact",
     body: [
-      "This uses adjustedTotalValueImpact from the physical output for the selected scenario and horizon.",
+      "This card follows the selected physical trend metric. Value uses adjustedTotalValueImpact. Disruption uses adjustedTotalDisruption.",
+      "Physical disruption is SCR's revenue/business-continuity style physical metric. It is separate from transition adjustedSubriskRevenueImpact.",
       "The percent-style and basis-point displays are readability transforms of SCR's raw value. They are not confirmed vendor unit labels yet.",
     ],
   },
@@ -63,9 +81,10 @@ const HELP_CONTENT = {
   },
   physical_trend: {
     eyebrow: "Chart",
-    title: "Physical Value Impact Trend",
+    title: "Physical Trend",
     body: [
-      "This trend uses adjustedTotalValueImpact, one point per physical scenario and future horizon.",
+      "The Trend metric toggle switches this plot between adjustedTotalValueImpact and adjustedTotalDisruption.",
+      "Value impact is the physical value-impact signal. Disruption is the physical revenue/business-continuity signal. Both come from the physical SCR workbook.",
       "Physical horizons run from 2025 to 2100 in 5-year steps. SCR methodology describes indicator values as 10-year averages centered on the horizon, while financial impacts are average annual impacts from 2025 through the selected horizon.",
       "Use the Impact display control to inspect raw SCR values, percent-style values, or basis points. The underlying JSON keeps the raw SCR number.",
     ],
@@ -153,6 +172,10 @@ function unique(values) {
 
 function driverLabel(value) {
   return DRIVER_LABELS[value] || value || "n/a";
+}
+
+function physicalMetricConfig() {
+  return PHYSICAL_METRICS[state.physicalMetric] || PHYSICAL_METRICS.value_impact;
 }
 
 function sortNumeric(values) {
@@ -376,6 +399,14 @@ function bindControls() {
     state.physicalDisplay = event.target.value;
     render();
   });
+  el("physicalValueMetric").addEventListener("click", () => {
+    state.physicalMetric = "value_impact";
+    render();
+  });
+  el("physicalDisruptionMetric").addEventListener("click", () => {
+    state.physicalMetric = "disruption";
+    render();
+  });
   el("transitionScenarioSelect").addEventListener("change", (event) => {
     state.transitionScenario = event.target.value;
     render();
@@ -544,6 +575,7 @@ function selectedTransitionRanking(transition) {
 
 function renderSummary(asset, physical, transition) {
   const trend = selectedPhysicalTrend(physical);
+  const metricConfig = physicalMetricConfig();
   const hazards = selectedHazards(physical);
   const topHazard = hazards[0];
   const transitionRankings = transitionRankingsForDriver(transition);
@@ -564,8 +596,8 @@ function renderSummary(asset, physical, transition) {
       "kpi_physical_rating",
     ),
     metric(
-      "Physical Impact",
-      escapeHtml(formatPhysicalImpact(trend?.adjusted_total_value_impact)),
+      metricConfig.label,
+      escapeHtml(formatPhysicalImpact(trend?.[metricConfig.field])),
       topHazard ? `Top hazard: ${topHazard.hazard}` : "No hazard ranking",
       "kpi_physical_impact",
     ),
@@ -587,6 +619,7 @@ function renderSummary(asset, physical, transition) {
 }
 
 function renderPhysical(asset, physical) {
+  const metricConfig = physicalMetricConfig();
   const trendsByScenario = unique(physical.trends.map((row) => row.scenario)).map((scenario, index) => ({
     name: scenario,
     color: COLORS[index % COLORS.length],
@@ -596,19 +629,20 @@ function renderPhysical(asset, physical) {
       .sort((a, b) => Number(a.horizon) - Number(b.horizon))
       .map((row) => ({
         x: Number(row.horizon),
-        y: physicalDisplayValue(row.adjusted_total_value_impact),
-        raw: row.adjusted_total_value_impact,
+        y: physicalDisplayValue(row[metricConfig.field]),
+        raw: row[metricConfig.field],
         rating: row.adjusted_physical_exposure_rating,
       })),
   }));
 
-  el("physicalTrendKicker").textContent = `${asset.scr_asset_id || asset.asset_name} | ${state.physicalScenario} | ${physicalDisplayLabel()}`;
+  el("physicalTrendTitle").textContent = metricConfig.title;
+  el("physicalTrendKicker").textContent = `${asset.scr_asset_id || asset.asset_name} | ${state.physicalScenario} | ${metricConfig.shortLabel} | ${physicalDisplayLabel()}`;
   renderLineChart("physicalTrendChart", trendsByScenario, {
-    yLabel: `adjustedTotalValueImpact (${physicalDisplayLabel()})`,
+    yLabel: `${metricConfig.label} (${physicalDisplayLabel()})`,
     baselineZero: false,
     valueFormatter: formatCompact,
     tooltipFormatter: (point) =>
-      `${formatPhysicalImpact(point.raw, { includeRaw: true })} | rating ${point.rating || "-"}`,
+      `${formatPhysicalImpact(point.raw, { includeRaw: true })} | ${metricConfig.shortLabel} | rating ${point.rating || "-"}`,
   });
 
   renderHazardRanking(physical);
@@ -947,6 +981,7 @@ function renderLineChart(containerId, series, options) {
 }
 
 function renderInterpretation(asset, physical, transition) {
+  const metricConfig = physicalMetricConfig();
   const trend = selectedPhysicalTrend(physical);
   const hazards = selectedHazards(physical);
   const topHazard = hazards[0];
@@ -954,18 +989,19 @@ function renderInterpretation(asset, physical, transition) {
     .filter((row) => row.scenario === state.physicalScenario)
     .sort((a, b) => Number(a.horizon) - Number(b.horizon))[0];
   const change =
-    firstYearTrend && trend?.adjusted_total_value_impact
-      ? ((trend.adjusted_total_value_impact / firstYearTrend.adjusted_total_value_impact - 1) * 100).toFixed(1)
+    firstYearTrend && trend?.[metricConfig.field] && firstYearTrend?.[metricConfig.field]
+      ? ((trend[metricConfig.field] / firstYearTrend[metricConfig.field] - 1) * 100).toFixed(1)
       : null;
   const transitionRankings = transitionRankingsForDriver(transition);
   const selectedTransition = selectedTransitionRanking(transition);
   const topTransition = transitionRankings[0];
+  const selectedPhysicalValue = trend?.[metricConfig.field];
 
   el("interpretationBody").innerHTML = `
     <p><strong>Asset context:</strong> ${escapeHtml(asset.scr_asset_id || asset.asset_name)} is modeled as ${escapeHtml(asset.ticcs_sub_class_name || "an infrastructure asset")} at ${escapeHtml(asset.coordinates || "unknown coordinates")}.</p>
-    <p><strong>Physical:</strong> ${escapeHtml(state.physicalScenario)} at ${escapeHtml(state.physicalHorizon)} returns overall rating ${escapeHtml(trend?.adjusted_physical_exposure_rating || "-")} and adjusted total value impact ${escapeHtml(formatPhysicalImpact(trend?.adjusted_total_value_impact, { includeRaw: true }))}${change ? `, a ${escapeHtml(change)}% move from the first returned horizon` : ""}. ${topHazard ? `The top quantified hazard is ${escapeHtml(topHazard.hazard)}.` : ""}</p>
+    <p><strong>Physical:</strong> ${escapeHtml(state.physicalScenario)} at ${escapeHtml(state.physicalHorizon)} returns overall rating ${escapeHtml(trend?.adjusted_physical_exposure_rating || "-")} and ${escapeHtml(metricConfig.label)} ${escapeHtml(formatPhysicalImpact(selectedPhysicalValue, { includeRaw: true }))}${change ? `, a ${escapeHtml(change)}% move from the first returned ${escapeHtml(metricConfig.shortLabel)} horizon` : ""}. ${topHazard ? `The top quantified hazard is ${escapeHtml(topHazard.hazard)}.` : ""}</p>
     <p><strong>Transition:</strong> with the ${escapeHtml(driverLabel(state.transitionDriver))} filter, the highest peak scenario is ${escapeHtml(topTransition?.scenario || "-")} with ${escapeHtml(formatNumber(topTransition?.peak_impact))}. The selected scenario, ${escapeHtml(selectedTransition?.scenario || "-")}, is led by ${escapeHtml(driverLabel(selectedTransition?.peak_subrisk))} at ${escapeHtml(selectedTransition?.peak_year || "-")}.</p>
-    <p><strong>Caveat:</strong> physical impact can be toggled between raw, percent-style, and basis-point display. Percent-style and basis-point displays are readability conversions from the raw SCR value, not confirmed vendor unit labels.</p>
+    <p><strong>Caveat:</strong> physical impact can be toggled between raw, percent-style, and basis-point display. Percent-style and basis-point displays are readability conversions from the raw SCR value, not confirmed vendor unit labels. Current physical plot field: ${escapeHtml(metricConfig.description)}</p>
   `;
 }
 
@@ -976,6 +1012,8 @@ function render() {
 
   el("physicalTab").classList.toggle("is-active", state.activeView === "physical");
   el("transitionTab").classList.toggle("is-active", state.activeView === "transition");
+  el("physicalValueMetric").classList.toggle("is-active", state.physicalMetric === "value_impact");
+  el("physicalDisruptionMetric").classList.toggle("is-active", state.physicalMetric === "disruption");
   el("physicalView").classList.toggle("is-hidden", state.activeView !== "physical");
   el("transitionView").classList.toggle("is-hidden", state.activeView !== "transition");
   el("physicalControls").classList.toggle("is-hidden", state.activeView !== "physical");

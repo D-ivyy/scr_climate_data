@@ -67,6 +67,11 @@
             <select id="physicalScenarioSelect"></select>
             <label for="physicalHorizonSelect">Horizon</label>
             <select id="physicalHorizonSelect"></select>
+            <label>Trend metric</label>
+            <div class="segmented metric-toggle" role="group" aria-label="Physical trend metric">
+              <button id="physicalValueMetric" class="is-active" type="button">Value</button>
+              <button id="physicalDisruptionMetric" type="button">Disruption</button>
+            </div>
             <label for="physicalDisplaySelect">Impact display</label>
             <select id="physicalDisplaySelect">
               <option value="percent">Percent-style</option>
@@ -106,7 +111,7 @@
               <div class="panel-heading">
                 <div>
                   <p class="eyebrow">Physical Exposure</p>
-                  <h2>Value Impact Trend</h2>
+                  <h2 id="physicalTrendTitle">Physical Value Impact Trend</h2>
                 </div>
                 <div class="panel-heading-actions">
                   <p class="panel-kicker" id="physicalTrendKicker"></p>
