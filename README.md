@@ -9,6 +9,8 @@ transition risk outputs back to InfraSure assets.
 This repo contains:
 
 - `scripts/export_scr_upload.py`: dev/prod DB to SCR upload exporter
+- `scripts/build_dashboard_data.py`: returned SCR workbooks to dashboard JSON
+- `dashboard/`: local static dashboard for exploring returned SCR output
 - `docs/`: upload, manifest, output-schema, and ingestion notes
 - `docs/Climate_Metrics_Import_tempate.xlsx`: SCR upload template used by
   the exporter
@@ -80,10 +82,36 @@ Generated files are written under `runs/<run_id>/`. Review them before
 committing because manifests and generated uploads can contain client or asset
 context.
 
+## Dashboard
+
+Build dashboard data from the checked-in returned SCR examples:
+
+```bash
+python scripts/build_dashboard_data.py \
+  --physical docs/output_examples/asset_1232_physical_risks.xlsx \
+  --transition docs/output_examples/asset_1232_transition_risks.xlsx \
+  --out dashboard/data/example_asset_1232.json
+```
+
+Run the static dashboard locally:
+
+```bash
+python -m http.server 8765
+```
+
+Open:
+
+```text
+http://localhost:8765/dashboard/
+```
+
+More detail is in [`dashboard/README.md`](dashboard/README.md).
+
 ## Docs
 
 - [`docs/README.md`](docs/README.md): implementation notes
 - [`docs/guide.md`](docs/guide.md): operator guide
+- [`dashboard/README.md`](dashboard/README.md): local dashboard workflow
 - [`docs/output_examples/schema.md`](docs/output_examples/schema.md):
   returned SCR output schema and usage notes
 - [`docs/metadata/README.md`](docs/metadata/README.md): ClimateMetrics

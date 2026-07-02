@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SCR Climate Data Dashboard</title>
+    <link rel="stylesheet" href="assets/styles.css" />
+  </head>
+  <body>
+    <header class="app-header">
+      <div>
+        <p class="eyebrow">SCR Climate Data</p>
+        <h1>Local Risk Dashboard</h1>
+        <p class="lede">Returned physical and transition model output for uploaded SCR assets.</p>
+      </div>
+      <div class="header-controls">
+        <label class="select-label" for="assetSelect">Asset</label>
+        <select id="assetSelect"></select>
+        <span class="status-pill" id="dataStatus">Loading data</span>
+      </div>
+    </header>
+
+    <main>
+      <section class="summary-grid" id="assetSummary" aria-label="Asset summary"></section>
+
+      <section class="workspace">
+        <aside class="control-panel" aria-label="Dashboard filters">
+          <div class="control-group">
+            <p class="control-title">View</p>
+            <div class="segmented" role="tablist" aria-label="Risk view">
+              <button id="physicalTab" class="is-active" type="button">Physical</button>
+              <button id="transitionTab" type="button">Transition</button>
+            </div>
+          </div>
+
+          <div class="control-group" id="physicalControls">
+            <p class="control-title">Physical</p>
+            <label for="physicalScenarioSelect">Scenario</label>
+            <select id="physicalScenarioSelect"></select>
+            <label for="physicalHorizonSelect">Horizon</label>
+            <select id="physicalHorizonSelect"></select>
+          </div>
+
+          <div class="control-group" id="transitionControls">
+            <p class="control-title">Transition</p>
+            <label for="transitionScenarioSelect">Scenario</label>
+            <select id="transitionScenarioSelect"></select>
+          </div>
+
+          <div class="control-note">
+            <strong>Join key</strong>
+            <span>SCR assetName maps back through the private manifest.</span>
+          </div>
+        </aside>
+
+        <section class="dashboard-surface">
+          <section id="physicalView" class="view-stack">
+            <div class="panel panel-wide">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">Physical Exposure</p>
+                  <h2>Value Impact Trend</h2>
+                </div>
+                <p class="panel-kicker" id="physicalTrendKicker"></p>
+              </div>
+              <div id="physicalTrendChart" class="chart"></div>
+            </div>
+
+            <div class="split-grid">
+              <div class="panel">
+                <div class="panel-heading">
+                  <div>
+                    <p class="eyebrow">Selected Horizon</p>
+                    <h2>Hazard Ranking</h2>
+                  </div>
+                </div>
+                <div id="hazardRanking" class="bar-list"></div>
+              </div>
+
+              <div class="panel">
+                <div class="panel-heading">
+                  <div>
+                    <p class="eyebrow">Indicator Detail</p>
+                    <h2>Worst Ratings</h2>
+                  </div>
+                </div>
+                <div id="indicatorTable" class="table-wrap"></div>
+              </div>
+            </div>
+          </section>
+
+          <section id="transitionView" class="view-stack is-hidden">
+            <div class="panel panel-wide">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">Transition Exposure</p>
+                  <h2>Scenario Ranking</h2>
+                </div>
+                <p class="panel-kicker" id="transitionRankKicker"></p>
+              </div>
+              <div id="transitionRanking" class="bar-list scenario-list"></div>
+            </div>
+
+            <div class="split-grid">
+              <div class="panel">
+                <div class="panel-heading">
+                  <div>
+                    <p class="eyebrow">Transition Trend</p>
+                    <h2>Max Subrisk Impact</h2>
+                  </div>
+                </div>
+                <div id="transitionTrendChart" class="chart compact-chart"></div>
+              </div>
+
+              <div class="panel">
+                <div class="panel-heading">
+                  <div>
+                    <p class="eyebrow">Selected Scenario</p>
+                    <h2>Subrisk Drivers</h2>
+                  </div>
+                </div>
+                <div id="subriskTable" class="table-wrap"></div>
+              </div>
+            </div>
+          </section>
+
+          <section class="panel interpretation-panel">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Interpretation</p>
+                <h2>What This View Says</h2>
+              </div>
+            </div>
+            <div id="interpretationBody" class="interpretation-body"></div>
+          </section>
+        </section>
+      </section>
+    </main>
+
+    <noscript>This dashboard requires JavaScript.</noscript>
+    <script src="assets/app.js"></script>
+  </body>
+</html>

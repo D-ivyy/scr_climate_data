@@ -44,6 +44,10 @@ The detailed question-to-field map is in
 A compact single-asset view with actual values, rankings, and ASCII plots is
 in [`schema.md`](schema.md#single-asset-ascii-dashboard).
 
+The interactive local dashboard is in
+[`../../dashboard/`](../../dashboard/). It uses the same returned workbooks but
+lets you change scenarios, horizons, and ranking views in the browser.
+
 ## Files
 
 `asset_1232_physical_risks.xlsx`:
