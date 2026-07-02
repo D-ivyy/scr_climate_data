@@ -131,6 +131,84 @@ This is also the practical ingestion checklist: if a future parser cannot
 answer these questions, it is probably storing columns without preserving the
 analytical meaning of the output.
 
+## Single-Asset ASCII Dashboard
+
+For a single asset, the most useful ASCII layout is not one chart. It is a
+small dashboard arranged in this order:
+
+1. Asset identity and join-back fields.
+2. Physical trend by scenario.
+3. Physical hazard ranking at the selected stress horizon.
+4. Indicator severity distribution.
+5. Transition scenario ranking.
+6. Transition trend by scenario.
+
+That arrangement answers: what asset is this, which risk family matters, which
+scenario is worst, which hazard or subrisk is driving it, and whether the
+exposure is stable or changing through time.
+
+Example using the returned `asset_1232` files:
+
+```text
+Asset: is_p_f0d551408183414598a0bd83bf10ee72
+SCR assetId: USA_00490 | TICCS: IC101020 Gas-Fired Power Generation
+Location: (47.079722,-122.365) | Country: USA | Climate zone: Temperate
+
+PHYSICAL: adjustedTotalValueImpact trend by scenario
+Horizon: 2025 2030 2035 2040 2045 2050 2055 2060 2065 2070 2075 2080 2085 2090 2095 2100
+Scale: . low  _  -  ~  =  +  *  # high, scaled within each scenario
+
+ssp2-4.5 .______--~=++**#  2025=0.000955074  2100=0.001023366  change=+7.2%   peak=0.001023366@2100  rating=A
+ssp5-8.5 .....___--~~=+*#  2025=0.000953120  2100=0.001238918  change=+30.0%  peak=0.001238918@2100  rating=A
+
+PHYSICAL: 2100 hazard ranking under ssp5-8.5
+Rank  Hazard          Rating  AdjHazardValueImpact  Bar vs max          Worst visible indicators
+   1  Flood           D                0.000897113  ####################  D fluvial/pluvial 500y=0.185m; C fluvial/pluvial 100y=0.150m
+   2  Wildfire        C                0.000073523  ##------------------  F tree cover=13.447%; B fire weather index=30.284
+   3  Drought         F                0.000000000  --------------------  F drought magnitude=-12.242; E drought duration=5 months
+   4  Heat            F                0.000000000  --------------------  D heatwave days=48; C days above 99th percentile=28.667
+   5  Precipitation   F                0.000000000  --------------------  F max precip 5d=134.272mm; F max precip 1d=54.271mm
+   6  Wind            A                0.000000000  --------------------  F ETS wind 500y=45.985m/s; F ETS wind 100y=44.501m/s
+   7  Landslide       A                0.000000000  --------------------  A landslide susceptibility=1
+   8  Subsidence      -                0.000000000  --------------------
+
+Indicator rating count at 2100 / ssp5-8.5: A:9  B:4  C:4  D:2  E:1  F:7  G:0
+
+TRANSITION: scenario ranking by peak adjustedSubriskRevenueImpact
+Rank  Scenario              Peak    Bar vs max            Peak driver              Direct carbon cost     Market demand shifts
+   1  Net Zero 2050         22.868  ####################  Direct_carbon_cost        22.868@2035            0.027@2035
+   2  Delayed Transition    21.426  ###################-  Direct_carbon_cost        21.426@2045            2.476@2030
+   3  Low Demand            14.720  #############-------  Direct_carbon_cost        14.720@2035            0.914@2030
+   4  Current Policies       7.423  ######--------------  Market_demand_shifts       0.267@2040            7.423@2040
+   5  NDCs                   6.234  #####---------------  Market_demand_shifts       0.252@2030            6.234@2040
+   6  Below 2C               4.075  ####----------------  Market_demand_shifts       0.245@2030            4.075@2035
+
+TRANSITION: max subrisk impact trend by scenario
+Horizon: 2025 2030 2035 2040 2045 2050 2055 2060
+Scale: . low  _  -  ~  =  +  *  # high, scaled within each scenario
+
+Net Zero 2050        =#*=-_.  peak= 22.868@2035  2060= 13.854  rating_2060=G
+Delayed Transition   .+###*+  peak= 21.426@2045  2060= 17.157  rating_2060=G
+Low Demand           =#*=-_.  peak= 14.720@2035  2060=  8.407  rating_2060=G
+Current Policies     ~*#*~..  peak=  7.423@2040  2060=  0.241  rating_2060=E
+NDCs                 ~*#*~..  peak=  6.234@2040  2060=  0.200  rating_2060=F
+Below 2C             +#*=...  peak=  4.075@2035  2060=  0.158  rating_2060=F
+```
+
+Interpretation:
+
+- The physical output says this asset remains `A` overall in the returned
+  example, but the raw adjusted total value impact rises faster under
+  `ssp5-8.5`.
+- Flood is the only materially quantified physical hazard in the 2100
+  `ssp5-8.5` view. Other hazards can still have severe indicator ratings even
+  when SCR does not return a nonzero hazard value impact.
+- Transition risk is much more discriminating for this gas-fired asset. Net
+  Zero 2050, Delayed Transition, and Low Demand are led by direct carbon cost;
+  Current Policies, NDCs, and Below 2C are led by market-demand shifts.
+- The exact numeric units of value impact and revenue impact should remain raw
+  SCR model-output fields until SCR confirms how to label them in product UI.
+
 ## Metadata-Derived Interpretation Rules
 
 The metadata files change how we should interpret the returned rows:

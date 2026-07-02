@@ -41,6 +41,9 @@ The returned rows should be interpreted as evidence for concrete questions:
 The detailed question-to-field map is in
 [`schema.md`](schema.md#questions-this-output-answers).
 
+A compact single-asset view with actual values, rankings, and ASCII plots is
+in [`schema.md`](schema.md#single-asset-ascii-dashboard).
+
 ## Files
 
 `asset_1232_physical_risks.xlsx`:
