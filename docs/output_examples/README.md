@@ -27,6 +27,20 @@ Output.assetName -> scr_manifest.csv.scr_asset_name -> plant_uuid -> plants.id
 `assetId` is SCR's returned identifier, for example `USA_00490`. Keep it as
 vendor metadata, but do not use it as the InfraSure database key.
 
+## Why These Outputs Are Useful
+
+The returned rows should be interpreted as evidence for concrete questions:
+
+- Which assets have the worst physical exposure?
+- Which hazards drive the exposure?
+- How does exposure change across horizons and scenarios?
+- Is transition risk carbon-cost driven or market-demand driven?
+- How do assets compare inside a portfolio?
+- What should we show on an asset detail page or client risk report?
+
+The detailed question-to-field map is in
+[`schema.md`](schema.md#questions-this-output-answers).
+
 ## Files
 
 `asset_1232_physical_risks.xlsx`:

@@ -24,6 +24,23 @@ Database credentials remain local-only:
 .env
 ```
 
+## What SCR Outputs Help Answer
+
+The returned physical and transition files are useful because they let us ask
+product-level questions after joining SCR `assetName` back through the private
+manifest:
+
+- Which assets have the worst physical exposure?
+- Which hazards drive the exposure?
+- How does exposure change from 2025 to 2100?
+- Which scenario is worse for a plant?
+- Is transition risk mostly carbon-cost driven or market-demand driven?
+- How do assets compare inside a portfolio?
+- What should we show on an asset detail page or client risk report?
+
+The detailed question-to-field mapping is in
+[`docs/output_examples/schema.md`](docs/output_examples/schema.md#questions-this-output-answers).
+
 ## Setup
 
 ```bash

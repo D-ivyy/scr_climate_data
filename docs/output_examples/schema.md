@@ -103,6 +103,34 @@ Transition
 Both returned files contain static values only; no worksheet formulas were
 found in the workbook XML.
 
+## Questions This Output Answers
+
+The most useful way to read SCR output is question-first. The schema tells us
+which fields exist; this section captures why those fields are useful for
+InfraSure product and analysis work.
+
+```text
+SCR Output rows
+  -> join through scr_manifest.csv.scr_asset_name
+  -> recover plant_uuid / portfolio context
+  -> answer asset, portfolio, scenario, and driver questions
+```
+
+| Question | Best SCR evidence | InfraSure use |
+|---|---|---|
+| Which assets have the worst physical exposure? | `adjustedPhysicalExposureRating`, `adjustedTotalValueImpact` by `assetName`, `scenario`, and `timeHorizon`. | Rank assets for portfolio risk screens and asset detail badges. |
+| Which hazards drive physical exposure? | `hazard`, `adjustedHazardExposureRating`, `adjustedHazardValueImpact`, `indicator`, and `indicatorRating`. | Explain whether the issue is flood, heat, wind, drought, wildfire, or another physical driver. |
+| How does exposure change from 2025 to 2100? | Physical `timeHorizon` values in 5-year steps, compared across `ssp2-4.5` and `ssp5-8.5`. | Show trend lines and flag assets whose physical risk accelerates over time. |
+| Which scenario is worse for a plant? | Same metric and horizon compared across `scenario`. | Compare moderate and severe climate pathways without changing the asset join key. |
+| Is transition risk mostly carbon-cost driven or market-demand driven? | `subrisk`, `adjustedSubriskRevenueImpact`, and `adjustedSubriskExposureRating`. | Separate direct carbon cost from demand-shift sensitivity in transition-risk views. |
+| How do assets compare inside a portfolio? | SCR rows joined through the private manifest to `portfolio_id`, `portfolio_asset_id`, and `plant_uuid`. | Build portfolio rollups, top-risk lists, and client-facing comparisons. |
+| What should an asset detail page show? | Overall adjusted ratings, top hazards/subrisks, key indicator values, and scenario/horizon trends. | Turn long-format model output into a compact risk narrative for one asset. |
+| What should a client risk report show? | Portfolio rating distribution, top exposed assets, top hazard/subrisk drivers, scenario comparison, and run metadata. | Explain material risk drivers without exposing unnecessary internal database structure. |
+
+This is also the practical ingestion checklist: if a future parser cannot
+answer these questions, it is probably storing columns without preserving the
+analytical meaning of the output.
+
 ## Metadata-Derived Interpretation Rules
 
 The metadata files change how we should interpret the returned rows:
