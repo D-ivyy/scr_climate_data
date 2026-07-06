@@ -6,3 +6,8 @@ __pycache__/
 .env.*
 !.env.example
 .venv/
+
+# Scraper downloads and failures
+climatemetrics_scraper/downloads/
+climatemetrics_scraper/failures/
+
