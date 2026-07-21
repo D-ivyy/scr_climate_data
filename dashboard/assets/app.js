@@ -1,4 +1,7 @@
-const DATA_URL = "data/example_asset_1232.json";
+const DATA_URLS = [
+  "data/scr_multi_asset_test.json",
+  "data/example_asset_1232.json",
+];
 
 const COLORS = ["#2f6f9f", "#218a61", "#b7791f", "#6f5ab8", "#c2410c", "#0f8b8d"];
 const RATING_SCORE = { A: 1, B: 2, C: 3, D: 4, E: 5, F: 6, G: 7 };
@@ -8,19 +11,81 @@ const DRIVER_LABELS = {
   Market_demand_shifts: "Market demand shifts",
 };
 const PHYSICAL_METRICS = {
+  damage: {
+    field: "adjusted_total_damage",
+    title: "Physical Damage Trend",
+    shortLabel: "damage",
+    label: "Physical damage",
+    source: "adjustedTotalDamage",
+    description: "adjustedTotalDamage, the closest returned SCR field to a direct property-loss or EL basis. It is not asserted as InfraSure expected loss without validation.",
+  },
   value_impact: {
     field: "adjusted_total_value_impact",
-    title: "Physical Value Impact Trend",
-    shortLabel: "value impact",
-    label: "Physical value impact",
-    description: "adjustedTotalValueImpact, combining physical damage and disruption damage-equivalent into a value-impact signal.",
+    title: "Physical Combined Value Impact Trend",
+    shortLabel: "combined value impact",
+    label: "Physical combined value impact",
+    source: "adjustedTotalValueImpact",
+    description: "adjustedTotalValueImpact, combining physical damage and disruption damage-equivalent into a value-impact signal. It is not automatically an expected-loss metric.",
   },
   disruption: {
     field: "adjusted_total_disruption",
     title: "Physical Disruption Trend",
     shortLabel: "disruption",
     label: "Physical revenue/business disruption",
+    source: "adjustedTotalDisruption",
     description: "adjustedTotalDisruption, SCR's physical disruption metric tied to revenue and business-continuity exposure.",
+  },
+};
+const HAZARD_TREND_METRICS = {
+  damage: {
+    field: "adjusted_hazard_damage",
+    title: "Hazard Damage Trend",
+    shortLabel: "hazard damage",
+    label: "Hazard damage",
+    source: "adjustedHazardDamage",
+  },
+  value_impact: {
+    field: "adjusted_hazard_value_impact",
+    title: "Hazard Combined Value Impact Trend",
+    shortLabel: "hazard combined value impact",
+    label: "Hazard combined value impact",
+    source: "adjustedHazardValueImpact",
+    fallbackSource: "derived from available adjustedHazardDamage and adjustedHazardDisruptionDamageEquivalent components",
+  },
+  disruption: {
+    field: "adjusted_hazard_disruption",
+    title: "Hazard Disruption Trend",
+    shortLabel: "hazard disruption",
+    label: "Hazard disruption",
+    source: "adjustedHazardDisruption",
+  },
+};
+const DELTA_DENOMINATOR_SHARE_THRESHOLD = 0.01;
+const DELTA_LARGE_RATIO_THRESHOLD = 5;
+const DELTA_DIAGNOSTICS = {
+  "not-quantified": {
+    label: "Not quantified",
+    detail: "Baseline or selected metric is missing.",
+  },
+  "invalid-baseline": {
+    label: "Zero/invalid baseline",
+    detail: "A raw factor cannot be computed from this baseline.",
+  },
+  flat: {
+    label: "Flat",
+    detail: "No meaningful change at the returned precision.",
+  },
+  "denominator-sensitive": {
+    label: "Denominator-sensitive",
+    detail: "Hazard baseline is below 1% of the overall asset baseline.",
+  },
+  "large-ratio": {
+    label: "Large ratio",
+    detail: "Absolute raw factor is 5x or greater.",
+  },
+  usable: {
+    label: "Usable",
+    detail: "No initial screening flag was triggered.",
   },
 };
 const HAZARD_CURVE_METRICS = [
@@ -44,7 +109,7 @@ const HAZARD_CURVE_METRICS = [
   },
   {
     field: "adjusted_hazard_value_impact",
-    label: "Value impact",
+    label: "Combined value impact",
     source: "adjustedHazardValueImpact",
     color: COLORS[4],
   },
@@ -64,7 +129,7 @@ const HAZARD_RESPONSE_FALLBACKS = [
   },
   {
     field: "adjusted_hazard_value_impact",
-    label: "Value impact",
+    label: "Combined value impact",
     source: "adjustedHazardValueImpact",
     color: COLORS[4],
   },
@@ -78,6 +143,7 @@ const state = {
   physicalHorizon: null,
   physicalDisplay: "percent",
   physicalMetric: "value_impact",
+  hazardTrendSelection: [],
   transitionScenario: null,
   transitionDriver: "all",
 };
@@ -104,7 +170,9 @@ const HELP_CONTENT = {
     eyebrow: "Physical",
     title: "Physical Impact",
     body: [
-      "This card follows the selected physical trend metric. Value uses adjustedTotalValueImpact. Disruption uses adjustedTotalDisruption.",
+      "This card follows the selected physical trend metric. Damage uses adjustedTotalDamage. Combined Value uses adjustedTotalValueImpact, the combined physical damage plus disruption damage-equivalent signal. Disruption uses adjustedTotalDisruption.",
+      "Damage is the closest returned SCR field to a direct property-loss or EL basis, but it is not asserted as InfraSure expected loss until that mapping is validated.",
+      "Combined value impact is an SCR model-output signal. Do not automatically call it expected loss (EL) without confirming the intended vendor definition and the financial application.",
       "Physical disruption is SCR's revenue/business-continuity style physical metric. It is separate from transition adjustedSubriskRevenueImpact.",
       "The percent-style and basis-point displays are readability transforms of SCR's raw value. They are not confirmed vendor unit labels yet.",
     ],
@@ -129,17 +197,43 @@ const HELP_CONTENT = {
     eyebrow: "Chart",
     title: "Physical Trend",
     body: [
-      "The Trend metric toggle switches this plot between adjustedTotalValueImpact and adjustedTotalDisruption.",
-      "Value impact is the physical value-impact signal. Disruption is the physical revenue/business-continuity signal. Both come from the physical SCR workbook.",
+      "The Trend metric toggle switches this plot among adjustedTotalDamage, adjustedTotalValueImpact, and adjustedTotalDisruption.",
+      "Damage is the closest returned SCR field to a direct property-loss or EL basis, but it still needs mapping validation. Combined value impact is the physical damage plus disruption damage-equivalent signal and is not automatically expected loss. Disruption is the physical revenue/business-continuity signal.",
       "Physical horizons run from 2025 to 2100 in 5-year steps. SCR methodology describes indicator values as 10-year averages centered on the horizon, while financial impacts are average annual impacts from 2025 through the selected horizon.",
       "Use the Impact display control to inspect raw SCR values, percent-style values, or basis points. The underlying JSON keeps the raw SCR number.",
+    ],
+  },
+  hazard_trend: {
+    eyebrow: "Chart",
+    title: "Hazard Trend",
+    body: [
+      "This chart breaks the overall physical trend into returned hazard-level metrics for the selected physical scenario.",
+      "Damage uses adjustedHazardDamage. Combined Value uses adjustedHazardValueImpact when it is returned; otherwise it sums whichever adjustedHazardDamage and adjustedHazardDisruptionDamageEquivalent components are available and labels that fallback as derived. Disruption uses adjustedHazardDisruption.",
+      "Only hazards with quantified returned values are drawn as lines. Other returned hazards can still have ratings and indicators, but SCR did not return a numeric value for this specific hazard metric.",
+      "Use the Visible hazards buttons to show all quantified hazards, isolate one hazard on its own rescaled Y-axis, or select a smaller comparison set.",
+      "Hover a plotted point to see its horizon, displayed value, raw SCR value, rating, and source. The same values are available from the keyboard by tabbing to a point.",
+      "When exactly two hazards are shown, the chart uses a dual Y-axis local scale so small movement is visible for both hazards.",
+      "The selected horizon still controls the Hazard Ranking and Indicator Detail sections below; this chart shows the whole numeric horizon path for the selected scenario.",
+    ],
+  },
+  delta_test: {
+    eyebrow: "Screening Test",
+    title: "Climate Change Delta Test",
+    body: [
+      "This table compares the selected horizon with the earliest returned horizon for the same asset, scenario, and Damage/Combined Value/Disruption metric.",
+      "Raw factor is selected value divided by baseline value. Percent change is the same movement expressed as (factor - 1) times 100. Loss-magnitude change is absolute selected value minus absolute baseline value and stays in the current Impact display.",
+      "Baseline share compares each hazard baseline with the overall asset baseline. It is denominator context, not an assertion that hazard rows reconcile exactly to the overall asset value.",
+      "Diagnostics are screening flags only: below 1% baseline share is denominator-sensitive and an absolute factor of 5x or more is a large ratio. No ceiling, cap, or logarithmic compression is applied.",
+      "Current SCR physical-loss exports can use negative signed values. Raw values stay visible; selected divided by baseline is also the loss-magnitude ratio while both signs match.",
+      "For Combined Value, the hazard row uses adjustedHazardValueImpact when returned; otherwise it sums whichever adjustedHazardDamage and adjustedHazardDisruptionDamageEquivalent components are available and labels the source as derived. Damage is the closest SCR basis to direct property loss, but neither field is automatically InfraSure expected loss.",
     ],
   },
   hazard_ranking: {
     eyebrow: "Physical",
     title: "Hazard Ranking",
     body: [
-      "This section ranks physical hazards by adjustedHazardValueImpact for the selected scenario and horizon, then falls back to hazard rating when impacts tie.",
+      "This section follows the current Damage/Combined Value/Disruption toggle and ranks physical hazards by absolute impact magnitude for the selected scenario and horizon, then falls back to hazard rating when impacts tie. Raw signed values remain visible.",
+      "For Combined Value, it uses returned adjustedHazardValueImpact when available, otherwise the same labeled derived fallback used by the Hazard Trend and Delta Test. Damage is the closest returned SCR basis to direct property loss; neither is automatically InfraSure expected loss.",
       "A hazard marked not quantified does not mean no exposure. It means SCR did not return a numeric hazard value impact for that hazard in this view.",
       "Click a hazard row to open the worst returned indicators, returned horizon curves, and magnitude-response plots where the indicator magnitude varies.",
       "Magnitude-response plots are derived views: x is the returned indicator magnitude and y is the returned hazard damage, disruption, or value-impact metric across horizons. They are not a vendor-provided vulnerability function.",
@@ -225,8 +319,135 @@ function physicalMetricConfig() {
   return PHYSICAL_METRICS[state.physicalMetric] || PHYSICAL_METRICS.value_impact;
 }
 
+function hazardTrendMetricConfig() {
+  return HAZARD_TREND_METRICS[state.physicalMetric] || HAZARD_TREND_METRICS.value_impact;
+}
+
+function finiteMetricValue(value) {
+  return value !== null && value !== undefined && Number.isFinite(Number(value));
+}
+
+function hazardMetricResult(row, metricKey = state.physicalMetric) {
+  if (!row) {
+    return { value: null, source: null, derived: false };
+  }
+  if (metricKey === "damage") {
+    return finiteMetricValue(row.adjusted_hazard_damage)
+      ? {
+          value: Number(row.adjusted_hazard_damage),
+          source: "adjustedHazardDamage",
+          derived: false,
+        }
+      : { value: null, source: "adjustedHazardDamage", derived: false };
+  }
+  if (metricKey === "disruption") {
+    return finiteMetricValue(row.adjusted_hazard_disruption)
+      ? {
+          value: Number(row.adjusted_hazard_disruption),
+          source: "adjustedHazardDisruption",
+          derived: false,
+        }
+      : { value: null, source: "adjustedHazardDisruption", derived: false };
+  }
+  if (finiteMetricValue(row.adjusted_hazard_value_impact)) {
+    return {
+      value: Number(row.adjusted_hazard_value_impact),
+      source: "adjustedHazardValueImpact",
+      derived: false,
+    };
+  }
+  const hasDamage = finiteMetricValue(row.adjusted_hazard_damage);
+  const hasDisruptionEquivalent = finiteMetricValue(
+    row.adjusted_hazard_disruption_damage_equivalent,
+  );
+  if (hasDamage || hasDisruptionEquivalent) {
+    const availableComponents = [
+      hasDamage ? "adjustedHazardDamage" : null,
+      hasDisruptionEquivalent ? "adjustedHazardDisruptionDamageEquivalent" : null,
+    ].filter(Boolean);
+    return {
+      value:
+        (hasDamage ? Number(row.adjusted_hazard_damage) : 0) +
+        (hasDisruptionEquivalent
+          ? Number(row.adjusted_hazard_disruption_damage_equivalent)
+          : 0),
+      source: `derived from available components: ${availableComponents.join(" + ")}`,
+      derived: true,
+    };
+  }
+  return {
+    value: null,
+    source: "adjustedHazardValueImpact or derived damage + disruption equivalent",
+    derived: false,
+  };
+}
+
 function sortNumeric(values) {
   return [...values].sort((a, b) => Number(a) - Number(b));
+}
+
+function validChartValue(value) {
+  return value !== null && value !== undefined && !Number.isNaN(Number(value));
+}
+
+function chartSeriesValues(item) {
+  return item.points.map((point) => point.y).filter(validChartValue).map(Number);
+}
+
+function chartSeriesMagnitude(item) {
+  const values = chartSeriesValues(item);
+  if (!values.length) return 0;
+  return Math.max(...values.map((value) => Math.abs(value)));
+}
+
+function dualAxisSeriesPair(series) {
+  const candidates = series.filter((item) => chartSeriesValues(item).length);
+  if (candidates.length !== 2) return null;
+  return [...candidates].sort((a, b) => chartSeriesMagnitude(b) - chartSeriesMagnitude(a));
+}
+
+function chartAxisDomain(values, baselineZero = false) {
+  const numericValues = values.filter(validChartValue).map(Number);
+  const rawMin = Math.min(...numericValues);
+  const rawMax = Math.max(...numericValues);
+  let min = rawMin;
+  let max = rawMax;
+
+  if (baselineZero) {
+    min = Math.min(0, rawMin);
+    max = Math.max(0, rawMax);
+    max += Math.abs(max || 1) * 0.08;
+    if (min < 0) min -= Math.abs(min) * 0.08;
+  } else {
+    const magnitude = Math.max(Math.abs(rawMin), Math.abs(rawMax));
+    const rawSpan = rawMax - rawMin;
+    const noiseFloor = Math.max(magnitude * 1e-9, 1e-12);
+    const span = rawSpan > noiseFloor ? rawSpan : 0;
+    const padding = span > 0 ? span * 0.18 : magnitude > 0 ? magnitude * 0.02 : 1;
+    min -= padding;
+    max += padding;
+  }
+
+  if (min === max) {
+    const padding = Math.max(Math.abs(max), 1) * 0.05;
+    min -= padding;
+    max += padding;
+  }
+
+  return { min, max, range: max - min || 1 };
+}
+
+function formatChartAxisValue(value, formatter, domain) {
+  if (!validChartValue(value)) return "n/a";
+  const range = Math.abs(domain?.range || 0);
+  if (range > 0 && range < 0.1) {
+    const decimals = Math.min(9, Math.max(3, Math.ceil(-Math.log10(range)) + 2));
+    return Number(value).toLocaleString(undefined, {
+      maximumFractionDigits: decimals,
+      minimumFractionDigits: 0,
+    });
+  }
+  return formatter(value);
 }
 
 function escapeHtml(value) {
@@ -350,6 +571,35 @@ function setOptions(select, options, selected, labelFn = (value) => value) {
   }
 }
 
+function assetPrimaryLabel(asset) {
+  return asset.manifest?.plant_name || asset.scr_asset_id || asset.asset_name;
+}
+
+function assetContextLabel(asset, includeCoordinates = false) {
+  return unique([
+    asset.manifest?.plant_name ? asset.scr_asset_id : null,
+    asset.ticcs_sub_class_name || asset.ticcs_sub_class,
+    asset.country_code,
+    includeCoordinates ? asset.coordinates : null,
+  ]).join(" · ");
+}
+
+function assetOptionLabel(asset) {
+  const primary = assetPrimaryLabel(asset);
+  const context = assetContextLabel(asset);
+  return context ? `${primary} — ${context}` : primary;
+}
+
+function setAssetOptions() {
+  el("assetSelect").innerHTML = state.data.assets
+    .map(
+      (asset) =>
+        `<option value="${escapeHtml(asset.asset_name)}">${escapeHtml(assetOptionLabel(asset))}</option>`,
+    )
+    .join("");
+  el("assetSelect").value = state.assetName;
+}
+
 function currentAsset() {
   return state.data.assets.find((asset) => asset.asset_name === state.assetName) || state.data.assets[0];
 }
@@ -382,7 +632,9 @@ function preferredValue(values, preferred, fallbackIndex = 0) {
 }
 
 function initialiseState() {
-  const asset = state.data.assets[0];
+  const asset =
+    state.data.assets.find((item) => item.scr_asset_id === "USA_00490") ||
+    state.data.assets[0];
   state.assetName = asset.asset_name;
 
   const physical = physicalRows(state.assetName);
@@ -397,7 +649,7 @@ function initialiseState() {
   state.transitionScenario = preferredValue(transitionScenarios, "Net Zero 2050");
   state.transitionDriver = preferredValue(transitionDrivers, "all");
 
-  setOptions(el("assetSelect"), state.data.assets.map((item) => item.asset_name), state.assetName);
+  setAssetOptions();
   refreshControls();
 }
 
@@ -446,6 +698,10 @@ function bindControls() {
     state.physicalDisplay = event.target.value;
     render();
   });
+  el("physicalDamageMetric").addEventListener("click", () => {
+    state.physicalMetric = "damage";
+    render();
+  });
   el("physicalValueMetric").addEventListener("click", () => {
     state.physicalMetric = "value_impact";
     render();
@@ -453,6 +709,25 @@ function bindControls() {
   el("physicalDisruptionMetric").addEventListener("click", () => {
     state.physicalMetric = "disruption";
     render();
+  });
+  el("hazardTrendControls").addEventListener("click", (event) => {
+    const button = event.target.closest("button[data-hazard-series]");
+    if (!button) return;
+    const hazard = button.dataset.hazardSeries;
+    if (hazard === "all") {
+      state.hazardTrendSelection = [];
+    } else if (!state.hazardTrendSelection.length) {
+      state.hazardTrendSelection = [hazard];
+    } else if (state.hazardTrendSelection.includes(hazard)) {
+      const remaining = state.hazardTrendSelection.filter((item) => item !== hazard);
+      state.hazardTrendSelection = remaining.length ? remaining : [];
+    } else {
+      state.hazardTrendSelection = [...state.hazardTrendSelection, hazard];
+    }
+    render();
+    const replacementButton = [...el("hazardTrendControls").querySelectorAll("button[data-hazard-series]")]
+      .find((candidate) => candidate.dataset.hazardSeries === hazard);
+    replacementButton?.focus();
   });
   el("transitionScenarioSelect").addEventListener("change", (event) => {
     state.transitionScenario = event.target.value;
@@ -524,8 +799,14 @@ function selectedPhysicalTrend(physical) {
 function selectedHazards(physical) {
   return physical.hazards
     .filter((row) => row.scenario === state.physicalScenario && Number(row.horizon) === Number(state.physicalHorizon))
+    .map((row) => ({ ...row, metricResult: hazardMetricResult(row) }))
     .sort((a, b) => {
-      const impactDiff = Number(b.adjusted_hazard_value_impact || 0) - Number(a.adjusted_hazard_value_impact || 0);
+      const aQuantified = finiteMetricValue(a.metricResult.value);
+      const bQuantified = finiteMetricValue(b.metricResult.value);
+      if (aQuantified !== bQuantified) return aQuantified ? -1 : 1;
+      const impactDiff =
+        Math.abs(Number(b.metricResult.value || 0)) -
+        Math.abs(Number(a.metricResult.value || 0));
       if (impactDiff !== 0) return impactDiff;
       return ratingScore(b.hazard_rating) - ratingScore(a.hazard_rating);
     });
@@ -533,8 +814,8 @@ function selectedHazards(physical) {
 
 function hasStaticHazardImpact(physical, hazard) {
   const values = physical.hazards
-    .filter((row) => row.hazard === hazard && validImpact(row.adjusted_hazard_value_impact))
-    .map((row) => Number(row.adjusted_hazard_value_impact).toPrecision(12));
+    .filter((row) => row.hazard === hazard && finiteMetricValue(hazardMetricResult(row).value))
+    .map((row) => Number(hazardMetricResult(row).value).toPrecision(12));
   return values.length > 1 && unique(values).length === 1;
 }
 
@@ -628,9 +909,14 @@ function renderMiniHazardCurve(rows, metric) {
   const last = points[points.length - 1];
 
   const circles = points
-    .map(
-      (point) =>
-        `<circle cx="${xFor(point.horizon)}" cy="${yFor(yPlot(point))}" r="${point.selected ? 3.5 : 2}" fill="${metric.color}"><title>${escapeHtml(metric.label)} ${point.horizon}: ${formatPhysicalImpact(point.raw, { includeRaw: true })}</title></circle>`,
+    .map((point) =>
+      chartPointMarkup({
+        x: xFor(point.horizon),
+        y: yFor(yPlot(point)),
+        radius: point.selected ? 3.5 : 2,
+        color: metric.color,
+        label: `${metric.label} · horizon ${point.horizon}: ${formatPhysicalImpact(point.raw, { includeRaw: true })}`,
+      }),
     )
     .join("");
 
@@ -727,9 +1013,14 @@ function renderMagnitudeResponseCard(series, responseMetric, index) {
   const selected = series.points.find((point) => point.selected);
 
   const circles = series.points
-    .map(
-      (point) =>
-        `<circle cx="${xFor(point.x)}" cy="${yFor(yPlot(point))}" r="${point.selected ? 3.8 : 2.2}" fill="${color}"><title>${escapeHtml(point.horizon)} | ${escapeHtml(series.indicator)} ${formatValueWithUnit(point.x, series.unit)} -> ${formatPhysicalImpact(point.y, { includeRaw: true })}</title></circle>`,
+    .map((point) =>
+      chartPointMarkup({
+        x: xFor(point.x),
+        y: yFor(yPlot(point)),
+        radius: point.selected ? 3.8 : 2.2,
+        color,
+        label: `Horizon ${point.horizon} · ${series.indicator} ${formatValueWithUnit(point.x, series.unit)} -> ${formatPhysicalImpact(point.y, { includeRaw: true })}`,
+      }),
     )
     .join("");
 
@@ -920,6 +1211,478 @@ function renderPhysical(asset, physical) {
 
   renderHazardRanking(physical);
   renderIndicatorTable(physical);
+  renderHazardTrend(asset, physical);
+  renderDeltaTest(asset, physical);
+}
+
+function hazardTrendData(physical) {
+  const metricConfig = hazardTrendMetricConfig();
+  const rows = physical.hazards.filter((row) => row.scenario === state.physicalScenario);
+  const hazardNames = unique(rows.map((row) => row.hazard)).sort((a, b) => String(a).localeCompare(String(b)));
+  const quantifiedHazards = new Set(
+    rows.filter((row) => finiteMetricValue(hazardMetricResult(row).value)).map((row) => row.hazard),
+  );
+  const derivedHazards = new Set(
+    rows.filter((row) => hazardMetricResult(row).derived).map((row) => row.hazard),
+  );
+  const selectedRows = rows
+    .filter((row) => Number(row.horizon) === Number(state.physicalHorizon))
+    .map((row) => ({ ...row, metricResult: hazardMetricResult(row) }))
+    .filter((row) => finiteMetricValue(row.metricResult.value));
+  const topHazard = selectedRows.sort(
+    (a, b) =>
+      Math.abs(Number(b.metricResult.value || 0)) -
+      Math.abs(Number(a.metricResult.value || 0)),
+  )[0];
+  const series = hazardNames
+    .filter((hazard) => quantifiedHazards.has(hazard))
+    .map((hazard, index) => ({
+      name: hazard,
+      color: COLORS[index % COLORS.length],
+      selected: hazard === topHazard?.hazard,
+      points: rows
+        .filter((row) => row.hazard === hazard)
+        .sort((a, b) => Number(a.horizon) - Number(b.horizon))
+        .map((row) => {
+          const result = hazardMetricResult(row);
+          return {
+            x: Number(row.horizon),
+            y: physicalDisplayValue(result.value),
+            raw: result.value,
+            rating: row.hazard_rating,
+            source: result.source,
+            derived: result.derived,
+          };
+        }),
+    }));
+
+  return {
+    metricConfig,
+    series,
+    quantifiedHazards: [...quantifiedHazards].sort((a, b) => String(a).localeCompare(String(b))),
+    derivedHazards: [...derivedHazards].sort((a, b) => String(a).localeCompare(String(b))),
+    unquantifiedHazards: hazardNames.filter((hazard) => !quantifiedHazards.has(hazard)),
+    topHazard,
+    totalHazards: hazardNames.length,
+  };
+}
+
+function selectedHazardTrendSeries(series) {
+  const availableNames = new Set(series.map((item) => item.name));
+  const selectedNames = state.hazardTrendSelection.filter((name) => availableNames.has(name));
+  if (selectedNames.length !== state.hazardTrendSelection.length) {
+    state.hazardTrendSelection = selectedNames;
+  }
+  return {
+    selectedNames,
+    visibleSeries: selectedNames.length
+      ? series.filter((item) => selectedNames.includes(item.name))
+      : series,
+  };
+}
+
+function renderHazardTrendControls(series, selectedNames) {
+  const selected = new Set(selectedNames);
+  const allActive = selected.size === 0;
+  const buttons = [
+    `<button type="button" class="series-filter-button ${allActive ? "is-active" : ""}" data-hazard-series="all" aria-pressed="${allActive}">All</button>`,
+    ...series.map((item) => {
+      const isActive = selected.has(item.name);
+      return `
+        <button
+          type="button"
+          class="series-filter-button ${isActive ? "is-active" : ""}"
+          data-hazard-series="${escapeHtml(item.name)}"
+          aria-pressed="${isActive}"
+          title="${isActive ? "Remove" : allActive ? "Show only" : "Add"} ${escapeHtml(item.name)}"
+        >
+          <span class="series-filter-swatch" style="background:${item.color}"></span>
+          ${escapeHtml(item.name)}
+        </button>
+      `;
+    }),
+  ];
+  el("hazardTrendControls").innerHTML = buttons.join("");
+}
+
+function renderHazardTrend(asset, physical) {
+  const {
+    metricConfig,
+    series,
+    quantifiedHazards,
+    derivedHazards,
+    unquantifiedHazards,
+    totalHazards,
+  } = hazardTrendData(physical);
+
+  const { selectedNames, visibleSeries } = selectedHazardTrendSeries(series);
+  renderHazardTrendControls(series, selectedNames);
+
+  el("hazardTrendTitle").textContent = metricConfig.title;
+  el("hazardTrendKicker").textContent = `${asset.scr_asset_id || asset.asset_name} | ${state.physicalScenario} | ${metricConfig.shortLabel} | ${physicalDisplayLabel()}`;
+
+  renderLineChart("hazardTrendChart", visibleSeries, {
+    yLabel: `${metricConfig.label} (${physicalDisplayLabel()})`,
+    baselineZero: false,
+    dualAxis: true,
+    dualAxisBaselineZero: false,
+    highlightSelected: false,
+    valueFormatter: formatCompact,
+    tooltipFormatter: (point) =>
+      `${formatPhysicalImpact(point.raw, { includeRaw: true })} | ${point.source || metricConfig.source} | rating ${point.rating || "-"}`,
+  });
+
+  const sourceLabel =
+    state.physicalMetric === "value_impact"
+      ? "combined value impact (direct adjustedHazardValueImpact or derived fallback)"
+      : metricConfig.source;
+  const quantifiedText = `${quantifiedHazards.length} of ${totalHazards} hazards have quantified ${sourceLabel}`;
+  const topVisible = visibleSeries
+    .map((item) => ({
+      hazard: item.name,
+      point: item.points.find((point) => Number(point.x) === Number(state.physicalHorizon)),
+    }))
+    .filter((item) => finiteMetricValue(item.point?.raw))
+    .sort((a, b) => Math.abs(Number(b.point.raw)) - Math.abs(Number(a.point.raw)))[0];
+  const topText = topVisible
+    ? `Top among visible at ${state.physicalHorizon}: ${topVisible.hazard} (${formatPhysicalImpact(topVisible.point.raw)}${String(topVisible.point.source || "").startsWith("derived") ? ", derived" : ""}).`
+    : `No quantified ${metricConfig.source} at ${state.physicalHorizon}.`;
+  const derivedText = derivedHazards.length
+    ? `Derived fallback used for: ${derivedHazards.join(", ")}.`
+    : "No derived fallback was needed for the quantified hazard lines.";
+  const missingText = unquantifiedHazards.length
+    ? `Not quantified for this metric/scenario: ${unquantifiedHazards.join(", ")}.`
+    : "All returned hazards are quantified for this metric/scenario.";
+  const axisPair = dualAxisSeriesPair(visibleSeries);
+  const axisText = axisPair
+    ? `Dual Y-axis local scale: left is ${axisPair[0].name}; right is ${axisPair[1].name}; small horizon-to-horizon movement is intentionally visible.`
+    : visibleSeries.length === 1
+      ? `${visibleSeries[0].name} is shown alone on a rescaled Y-axis.`
+      : "";
+  const visibleText = selectedNames.length
+    ? `Showing ${visibleSeries.map((item) => item.name).join(", ")} (${visibleSeries.length} of ${series.length} quantified hazards).`
+    : `Showing all ${series.length} quantified hazards.`;
+  el("hazardTrendNote").textContent = `${visibleText} ${quantifiedText}. ${topText} ${derivedText} ${missingText} ${axisText}`.trim();
+}
+
+function deltaDiagnostic(baseline, selected, baselineShare, isOverall) {
+  if (!finiteMetricValue(baseline) || !finiteMetricValue(selected)) {
+    return "not-quantified";
+  }
+  if (Number(baseline) === 0) {
+    return "invalid-baseline";
+  }
+  const baselineNumber = Number(baseline);
+  const selectedNumber = Number(selected);
+  const magnitudeChange = Math.abs(selectedNumber) - Math.abs(baselineNumber);
+  const flatTolerance = Math.max(
+    Math.abs(baselineNumber),
+    Math.abs(selectedNumber),
+    1e-12,
+  ) * 1e-9;
+  if (Math.abs(magnitudeChange) <= flatTolerance) {
+    return "flat";
+  }
+  if (
+    !isOverall &&
+    finiteMetricValue(baselineShare) &&
+    Math.abs(Number(baselineShare)) < DELTA_DENOMINATOR_SHARE_THRESHOLD
+  ) {
+    return "denominator-sensitive";
+  }
+  const factor = selectedNumber / baselineNumber;
+  if (!Number.isFinite(factor)) {
+    return "invalid-baseline";
+  }
+  if (Math.abs(factor) >= DELTA_LARGE_RATIO_THRESHOLD) {
+    return "large-ratio";
+  }
+  return "usable";
+}
+
+function deltaSourceLabel(baselineResult, selectedResult, metricConfig, isOverall) {
+  if (isOverall) {
+    return metricConfig.source;
+  }
+  const sources = unique([baselineResult?.source, selectedResult?.source]);
+  return sources.join(" / ") || hazardTrendMetricConfig().source;
+}
+
+function deltaRecord({
+  name,
+  baselineResult,
+  selectedResult,
+  overallBaseline,
+  metricConfig,
+  isOverall = false,
+}) {
+  const baseline = baselineResult?.value;
+  const selected = selectedResult?.value;
+  const validPair = finiteMetricValue(baseline) && finiteMetricValue(selected);
+  const validBaseline = finiteMetricValue(baseline) && Number(baseline) !== 0;
+  const factor = validPair && validBaseline ? Number(selected) / Number(baseline) : null;
+  const percentChange = finiteMetricValue(factor) ? (Number(factor) - 1) * 100 : null;
+  const magnitudeChange = validPair
+    ? Math.abs(Number(selected)) - Math.abs(Number(baseline))
+    : null;
+  const baselineShare = isOverall
+    ? finiteMetricValue(baseline) && Number(baseline) !== 0
+      ? 1
+      : null
+    : finiteMetricValue(baseline) &&
+        finiteMetricValue(overallBaseline) &&
+        Number(overallBaseline) !== 0
+      ? Math.abs(Number(baseline)) / Math.abs(Number(overallBaseline))
+      : null;
+  const diagnosticKey = deltaDiagnostic(
+    baseline,
+    selected,
+    baselineShare,
+    isOverall,
+  );
+  return {
+    name,
+    baseline,
+    selected,
+    factor,
+    percentChange,
+    magnitudeChange,
+    baselineShare,
+    diagnosticKey,
+    diagnostic: DELTA_DIAGNOSTICS[diagnosticKey],
+    source: deltaSourceLabel(
+      baselineResult,
+      selectedResult,
+      metricConfig,
+      isOverall,
+    ),
+    derived: Boolean(baselineResult?.derived || selectedResult?.derived),
+    isOverall,
+  };
+}
+
+function deltaTestData(physical) {
+  const metricConfig = physicalMetricConfig();
+  const trendRows = physical.trends.filter(
+    (row) => row.scenario === state.physicalScenario,
+  );
+  const horizons = sortNumeric(unique(trendRows.map((row) => row.horizon)));
+  const baselineHorizon = horizons[0] ?? null;
+  const baselineTrend = trendRows.find(
+    (row) => Number(row.horizon) === Number(baselineHorizon),
+  );
+  const selectedTrend = trendRows.find(
+    (row) => Number(row.horizon) === Number(state.physicalHorizon),
+  );
+  const overallBaselineResult = {
+    value: finiteMetricValue(baselineTrend?.[metricConfig.field])
+      ? Number(baselineTrend[metricConfig.field])
+      : null,
+    source: metricConfig.source,
+    derived: false,
+  };
+  const overallSelectedResult = {
+    value: finiteMetricValue(selectedTrend?.[metricConfig.field])
+      ? Number(selectedTrend[metricConfig.field])
+      : null,
+    source: metricConfig.source,
+    derived: false,
+  };
+  const overall = deltaRecord({
+    name: "Overall asset",
+    baselineResult: overallBaselineResult,
+    selectedResult: overallSelectedResult,
+    overallBaseline: overallBaselineResult.value,
+    metricConfig,
+    isOverall: true,
+  });
+  const hazardRows = physical.hazards.filter(
+    (row) => row.scenario === state.physicalScenario,
+  );
+  const hazards = unique(hazardRows.map((row) => row.hazard))
+    .map((hazard) => {
+      const baselineRow = hazardRows.find(
+        (row) =>
+          row.hazard === hazard &&
+          Number(row.horizon) === Number(baselineHorizon),
+      );
+      const selectedRow = hazardRows.find(
+        (row) =>
+          row.hazard === hazard &&
+          Number(row.horizon) === Number(state.physicalHorizon),
+      );
+      return deltaRecord({
+        name: hazard,
+        baselineResult: hazardMetricResult(baselineRow),
+        selectedResult: hazardMetricResult(selectedRow),
+        overallBaseline: overallBaselineResult.value,
+        metricConfig,
+      });
+    })
+    .sort((a, b) => {
+      const aQuantified = finiteMetricValue(a.baseline) && finiteMetricValue(a.selected);
+      const bQuantified = finiteMetricValue(b.baseline) && finiteMetricValue(b.selected);
+      if (aQuantified !== bQuantified) return aQuantified ? -1 : 1;
+      const shareDiff =
+        Math.abs(Number(b.baselineShare || 0)) -
+        Math.abs(Number(a.baselineShare || 0));
+      if (shareDiff !== 0) return shareDiff;
+      return String(a.name).localeCompare(String(b.name));
+    });
+  return { baselineHorizon, metricConfig, rows: [overall, ...hazards] };
+}
+
+function formatDeltaFactor(value) {
+  if (!finiteMetricValue(value)) return "n/a";
+  return `${Number(value).toLocaleString(undefined, {
+    maximumSignificantDigits: 5,
+  })}x`;
+}
+
+function formatDeltaPercent(value) {
+  if (!finiteMetricValue(value)) return "n/a";
+  const number = Number(value);
+  const sign = number > 0 ? "+" : "";
+  return `${sign}${number.toLocaleString(undefined, {
+    maximumFractionDigits: Math.abs(number) >= 1000 ? 1 : 2,
+  })}%`;
+}
+
+function formatBaselineShare(value) {
+  if (!finiteMetricValue(value)) return "n/a";
+  return `${(Number(value) * 100).toLocaleString(undefined, {
+    maximumFractionDigits: 4,
+  })}%`;
+}
+
+function crossAssetDeltaRows() {
+  return state.data.assets
+    .map((asset) => {
+      const test = deltaTestData(physicalRows(asset.asset_name));
+      return {
+        asset,
+        baselineHorizon: test.baselineHorizon,
+        delta: test.rows[0],
+      };
+    })
+    .sort((a, b) => {
+      const aQuantified = finiteMetricValue(a.delta.factor);
+      const bQuantified = finiteMetricValue(b.delta.factor);
+      if (aQuantified !== bQuantified) return aQuantified ? -1 : 1;
+      const factorDiff =
+        Math.abs(Number(b.delta.factor || 0)) -
+        Math.abs(Number(a.delta.factor || 0));
+      if (factorDiff !== 0) return factorDiff;
+      return assetPrimaryLabel(a.asset).localeCompare(assetPrimaryLabel(b.asset));
+    });
+}
+
+function renderCrossAssetDelta() {
+  const rows = crossAssetDeltaRows();
+  if (!rows.length) {
+    el("deltaAssetTable").innerHTML =
+      '<div class="empty-state compact-empty">No assets are available for comparison.</div>';
+    return;
+  }
+  el("deltaAssetTable").innerHTML = `
+    <table class="delta-asset-table">
+      <thead>
+        <tr>
+          <th>Asset</th>
+          <th class="numeric-cell">Baseline (earliest)</th>
+          <th class="numeric-cell">Selected ${escapeHtml(state.physicalHorizon)}</th>
+          <th class="numeric-cell">Raw factor</th>
+          <th>Diagnostic</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${rows
+          .map(
+            ({ asset, baselineHorizon, delta }) => `
+              <tr class="${asset.asset_name === state.assetName ? "delta-current-asset" : ""}">
+                <td>
+                  <strong>${escapeHtml(assetPrimaryLabel(asset))}</strong>
+                  <span class="cell-note">${escapeHtml(assetContextLabel(asset, true) || asset.asset_name)}</span>
+                </td>
+                <td class="numeric-cell">
+                  ${escapeHtml(formatPhysicalImpact(delta.baseline))}
+                  <span class="cell-note">${escapeHtml(baselineHorizon ?? "no baseline")}</span>
+                </td>
+                <td class="numeric-cell">${escapeHtml(formatPhysicalImpact(delta.selected))}</td>
+                <td class="numeric-cell">${escapeHtml(formatDeltaFactor(delta.factor))}</td>
+                <td>
+                  <span class="diagnostic-badge diagnostic-${escapeHtml(delta.diagnosticKey)}">${escapeHtml(delta.diagnostic.label)}</span>
+                  <span class="cell-note">${escapeHtml(delta.diagnostic.detail)}</span>
+                </td>
+              </tr>
+            `,
+          )
+          .join("")}
+      </tbody>
+    </table>
+  `;
+}
+
+function renderDeltaTest(asset, physical) {
+  const { baselineHorizon, metricConfig, rows } = deltaTestData(physical);
+  el("deltaTestTitle").textContent = `${metricConfig.label}: Baseline-to-Horizon Test`;
+  el("deltaTestKicker").textContent = `${asset.scr_asset_id || asset.asset_name} | ${state.physicalScenario} | ${baselineHorizon ?? "n/a"} to ${state.physicalHorizon}`;
+  renderCrossAssetDelta();
+
+  if (baselineHorizon === null) {
+    el("deltaTestTable").innerHTML =
+      '<div class="empty-state">No physical horizons are available for this scenario.</div>';
+    el("deltaTestNote").textContent = "";
+    return;
+  }
+
+  el("deltaTestTable").innerHTML = `
+    <table class="delta-table">
+      <thead>
+        <tr>
+          <th>Scope</th>
+          <th>Metric source</th>
+          <th class="numeric-cell">Baseline ${escapeHtml(baselineHorizon)}</th>
+          <th class="numeric-cell">Selected ${escapeHtml(state.physicalHorizon)}</th>
+          <th class="numeric-cell">Raw factor</th>
+          <th class="numeric-cell">% change</th>
+          <th class="numeric-cell">Loss-magnitude change</th>
+          <th class="numeric-cell">Baseline share</th>
+          <th>Diagnostic</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${rows
+          .map(
+            (row) => `
+              <tr class="${row.isOverall ? "delta-overall-row" : ""}">
+                <td><strong>${escapeHtml(row.name)}</strong></td>
+                <td class="delta-source-cell">
+                  <span class="delta-source-kind ${row.derived ? "is-derived" : ""}">${row.derived ? "Derived" : "Returned"}</span>
+                  <span class="cell-note">${escapeHtml(row.source)}</span>
+                </td>
+                <td class="numeric-cell">${escapeHtml(formatPhysicalImpact(row.baseline))}</td>
+                <td class="numeric-cell">${escapeHtml(formatPhysicalImpact(row.selected))}</td>
+                <td class="numeric-cell">${escapeHtml(formatDeltaFactor(row.factor))}</td>
+                <td class="numeric-cell">${escapeHtml(formatDeltaPercent(row.percentChange))}</td>
+                <td class="numeric-cell">${escapeHtml(formatPhysicalImpact(row.magnitudeChange))}</td>
+                <td class="numeric-cell">${escapeHtml(formatBaselineShare(row.baselineShare))}</td>
+                <td>
+                  <span class="diagnostic-badge diagnostic-${escapeHtml(row.diagnosticKey)}">${escapeHtml(row.diagnostic.label)}</span>
+                  <span class="cell-note">${escapeHtml(row.diagnostic.detail)}</span>
+                </td>
+              </tr>
+            `,
+          )
+          .join("")}
+      </tbody>
+    </table>
+  `;
+  el("deltaTestNote").textContent =
+    `Screening only: factor = selected / baseline; loss-magnitude change = |selected| - |baseline|; baseline share uses absolute magnitudes. ` +
+    "Current SCR physical-loss exports can use negative signed values; raw values stay visible, and the factor is also the magnitude ratio while both signs match. " +
+    `Below ${(DELTA_DENOMINATOR_SHARE_THRESHOLD * 100).toFixed(0)}% share is denominator-sensitive; absolute factor at or above ${DELTA_LARGE_RATIO_THRESHOLD}x is a large ratio. ` +
+    "No ceiling, cap, or logarithmic compression is applied.";
 }
 
 function renderHazardRanking(physical) {
@@ -928,12 +1691,15 @@ function renderHazardRanking(physical) {
     el("hazardRanking").innerHTML = `<div class="empty-state">No hazard rows for this selection.</div>`;
     return;
   }
-  const maxValue = Math.max(...hazards.map((row) => Number(row.adjusted_hazard_value_impact || 0)), 0);
+  const maxValue = Math.max(
+    ...hazards.map((row) => Math.abs(Number(row.metricResult.value || 0))),
+    0,
+  );
   el("hazardRanking").innerHTML = hazards
     .map((row, index) => {
-      const rawImpact = row.adjusted_hazard_value_impact;
-      const numericImpact = Number(rawImpact || 0);
-      const hasImpact = validImpact(rawImpact);
+      const rawImpact = row.metricResult.value;
+      const numericImpact = Math.abs(Number(rawImpact || 0));
+      const hasImpact = finiteMetricValue(rawImpact);
       const width = maxValue > 0 ? (numericImpact / maxValue) * 100 : 0;
       const indicatorCount = row.worst_indicators?.length || 0;
       const staticImpact = hasStaticHazardImpact(physical, row.hazard);
@@ -947,6 +1713,7 @@ function renderHazardRanking(physical) {
             <div class="bar-track"><div class="bar-fill ${hasImpact ? "" : "is-empty"}" style="width:${width}%; background:${COLORS[0]}"></div></div>
             <div class="bar-value">
               <span>${escapeHtml(formatPhysicalImpact(rawImpact))}</span>
+              ${row.metricResult.derived ? '<span class="impact-note">derived combined value</span>' : ""}
               ${staticImpact ? '<span class="impact-note">static in SCR return</span>' : ""}
             </div>
             <span class="details-pill" aria-hidden="true"></span>
@@ -972,6 +1739,7 @@ function renderHazardRanking(physical) {
       `;
     })
     .join("");
+  bindChartPointInteractions(el("hazardRanking"));
 }
 
 function renderIndicatorTable(physical) {
@@ -1176,21 +1944,100 @@ function renderSubriskTable(transition) {
   `;
 }
 
+function chartPointMarkup({ x, y, radius, color, label }) {
+  const safeLabel = escapeHtml(label);
+  return `
+    <g
+      class="chart-point-group"
+      tabindex="0"
+      focusable="true"
+      role="img"
+      aria-label="${safeLabel}"
+      data-chart-tooltip="${safeLabel}"
+    >
+      <circle class="chart-point-hit" cx="${x}" cy="${y}" r="${Math.max(radius + 6, 9)}"></circle>
+      <circle class="chart-point-dot" cx="${x}" cy="${y}" r="${radius}" fill="${color}"></circle>
+    </g>
+  `;
+}
+
+function bindChartPointInteractions(container) {
+  const points = [...container.querySelectorAll(".chart-point-group")];
+  if (!points.length) return;
+
+  container.classList.add("has-chart-tooltips");
+  const tooltip = document.createElement("div");
+  tooltip.className = "chart-tooltip";
+  tooltip.setAttribute("role", "status");
+  tooltip.setAttribute("aria-live", "polite");
+  tooltip.hidden = true;
+  container.append(tooltip);
+  let activePoint = null;
+
+  const show = (point) => {
+    activePoint = point;
+    tooltip.textContent = point.dataset.chartTooltip || point.getAttribute("aria-label") || "";
+    tooltip.hidden = false;
+
+    const containerRect = container.getBoundingClientRect();
+    const pointRect = point.querySelector(".chart-point-dot").getBoundingClientRect();
+    const pointX = pointRect.left + pointRect.width / 2 - containerRect.left;
+    const pointY = pointRect.top - containerRect.top;
+    const halfWidth = tooltip.offsetWidth / 2;
+    const left = Math.min(
+      Math.max(pointX, halfWidth + 8),
+      Math.max(halfWidth + 8, containerRect.width - halfWidth - 8),
+    );
+    const top = Math.max(pointY - 10, tooltip.offsetHeight + 8);
+    tooltip.style.left = `${left}px`;
+    tooltip.style.top = `${top}px`;
+  };
+
+  const hide = (point) => {
+    if (activePoint !== point) return;
+    activePoint = null;
+    tooltip.hidden = true;
+  };
+
+  const hideIfInactive = (point) => {
+    if (point.matches(":hover") || document.activeElement === point) return;
+    hide(point);
+  };
+
+  points.forEach((point) => {
+    point.addEventListener("pointerenter", () => show(point));
+    point.addEventListener("pointerleave", () => hideIfInactive(point));
+    point.addEventListener("mouseenter", () => show(point));
+    point.addEventListener("mouseleave", () => hideIfInactive(point));
+    point.addEventListener("focus", () => show(point));
+    point.addEventListener("blur", () => hideIfInactive(point));
+    point.addEventListener("keydown", (event) => {
+      if (event.key !== "Escape") return;
+      hide(point);
+      point.blur();
+    });
+  });
+}
+
 function renderLineChart(containerId, series, options) {
   const container = el(containerId);
   const xValues = sortNumeric(unique(series.flatMap((item) => item.points.map((point) => point.x))));
   const yValues = series
     .flatMap((item) => item.points.map((point) => point.y))
-    .filter((value) => value !== null && value !== undefined && !Number.isNaN(Number(value)));
+    .filter(validChartValue);
 
   if (!xValues.length || !yValues.length) {
     container.innerHTML = `<div class="empty-state">No trend data available.</div>`;
     return;
   }
 
+  const dualPair = options.dualAxis ? dualAxisSeriesPair(series) : null;
+  const useDualAxis = Boolean(dualPair);
   const width = 760;
   const height = 260;
-  const margin = { top: 18, right: 22, bottom: 40, left: 76 };
+  const margin = useDualAxis
+    ? { top: 24, right: 86, bottom: 40, left: 76 }
+    : { top: 18, right: 22, bottom: 40, left: 76 };
   const innerWidth = width - margin.left - margin.right;
   const innerHeight = height - margin.top - margin.bottom;
   const yMinRaw = Math.min(...yValues);
@@ -1198,24 +2045,50 @@ function renderLineChart(containerId, series, options) {
   const yMin = options.baselineZero ? 0 : yMinRaw - Math.abs(yMinRaw) * 0.04;
   const yMax = yMaxRaw + Math.abs(yMaxRaw || 1) * 0.08;
   const yRange = yMax - yMin || 1;
+  const singleAxis = { domain: { min: yMin, max: yMax, range: yRange } };
+  const leftAxis = useDualAxis
+    ? { item: dualPair[0], domain: chartAxisDomain(chartSeriesValues(dualPair[0]), options.dualAxisBaselineZero === true) }
+    : singleAxis;
+  const rightAxis = useDualAxis
+    ? { item: dualPair[1], domain: chartAxisDomain(chartSeriesValues(dualPair[1]), options.dualAxisBaselineZero === true) }
+    : null;
+  const tickRatios = [0, 0.25, 0.5, 0.75, 1];
+  const formatAxisValue = options.valueFormatter || formatCompact;
 
   const xFor = (value) => {
     const index = xValues.indexOf(value);
     if (xValues.length === 1) return margin.left + innerWidth / 2;
     return margin.left + (index / (xValues.length - 1)) * innerWidth;
   };
-  const yFor = (value) => margin.top + innerHeight - ((Number(value) - yMin) / yRange) * innerHeight;
+  const yForDomain = (value, domain) =>
+    margin.top + innerHeight - ((Number(value) - domain.min) / domain.range) * innerHeight;
+  const axisForSeries = (item) => {
+    if (!useDualAxis) return singleAxis;
+    return item === rightAxis.item ? rightAxis : leftAxis;
+  };
+  const yForPoint = (item, value) => yForDomain(value, axisForSeries(item).domain);
 
-  const yTicks = [0, 0.25, 0.5, 0.75, 1].map((ratio) => yMin + yRange * ratio);
-  const grid = yTicks
-    .map((tick) => {
-      const y = yFor(tick);
+  const grid = tickRatios
+    .map((ratio) => {
+      const leftTick = leftAxis.domain.min + leftAxis.domain.range * ratio;
+      const y = yForDomain(leftTick, leftAxis.domain);
+      const rightTick = rightAxis ? rightAxis.domain.min + rightAxis.domain.range * ratio : null;
+      const rightTickLabel = rightAxis
+        ? `<text class="tick-label" style="fill:${rightAxis.item.color}" x="${width - margin.right + 10}" y="${y + 4}" text-anchor="start">${escapeHtml(formatChartAxisValue(rightTick, formatAxisValue, rightAxis.domain))}</text>`
+        : "";
       return `
         <line class="grid-line" x1="${margin.left}" x2="${width - margin.right}" y1="${y}" y2="${y}"></line>
-        <text class="tick-label" x="${margin.left - 10}" y="${y + 4}" text-anchor="end">${escapeHtml((options.valueFormatter || formatCompact)(tick))}</text>
+        <text class="tick-label" ${useDualAxis ? `style="fill:${leftAxis.item.color}"` : ""} x="${margin.left - 10}" y="${y + 4}" text-anchor="end">${escapeHtml(formatChartAxisValue(leftTick, formatAxisValue, leftAxis.domain))}</text>
+        ${rightTickLabel}
       `;
     })
     .join("");
+  const axisLabels = useDualAxis
+    ? `
+      <text class="tick-label" style="fill:${leftAxis.item.color}" x="${margin.left}" y="14" text-anchor="start">${escapeHtml(leftAxis.item.name)}</text>
+      <text class="tick-label" style="fill:${rightAxis.item.color}" x="${width - margin.right}" y="14" text-anchor="end">${escapeHtml(rightAxis.item.name)}</text>
+    `
+    : "";
 
   const xLabels = xValues
     .map((value, index) => {
@@ -1227,40 +2100,56 @@ function renderLineChart(containerId, series, options) {
 
   const lines = series
     .map((item) => {
-      const points = item.points.filter(
-        (point) => point.y !== null && point.y !== undefined && !Number.isNaN(Number(point.y)),
-      );
-      const path = points.map((point, index) => `${index === 0 ? "M" : "L"} ${xFor(point.x)} ${yFor(point.y)}`).join(" ");
+      const points = item.points.filter((point) => validChartValue(point.y));
+      const path = points
+        .map((point, index) => `${index === 0 ? "M" : "L"} ${xFor(point.x)} ${yForPoint(item, point.y)}`)
+        .join(" ");
+      const hasSelectedSeries = options.highlightSelected !== false && series.some((candidate) => candidate.selected);
+      const isHighlighted = !hasSelectedSeries || item.selected;
       const circles = points
-        .map(
-          (point) =>
-            `<circle cx="${xFor(point.x)}" cy="${yFor(point.y)}" r="${item.selected ? 3.5 : 2.5}" fill="${item.color}"><title>${escapeHtml(item.name)} ${point.x}: ${options.tooltipFormatter ? options.tooltipFormatter(point) : `${formatNumber(point.y)} rating ${point.rating || "-"}`}</title></circle>`,
-        )
+        .map((point) => {
+          const detail = options.tooltipFormatter
+            ? options.tooltipFormatter(point)
+            : `${formatNumber(point.y)} | rating ${point.rating || "-"}`;
+          return chartPointMarkup({
+            x: xFor(point.x),
+            y: yForPoint(item, point.y),
+            radius: item.selected && hasSelectedSeries ? 3.5 : 2.5,
+            color: item.color,
+            label: `${item.name} · horizon ${point.x}: ${detail}`,
+          });
+        })
         .join("");
       return `
-        <path d="${path}" fill="none" stroke="${item.color}" stroke-width="${item.selected ? 3 : 2}" opacity="${item.selected ? 1 : 0.45}"></path>
-        <g opacity="${item.selected ? 1 : 0.7}">${circles}</g>
+        <path d="${path}" fill="none" stroke="${item.color}" stroke-width="${item.selected && hasSelectedSeries ? 3 : 2}" opacity="${isHighlighted ? 1 : 0.45}"></path>
+        <g opacity="${isHighlighted ? 1 : 0.7}">${circles}</g>
       `;
     })
     .join("");
 
   const legend = series
     .map(
-      (item) =>
-        `<span class="legend-item"><span class="legend-swatch" style="background:${item.color}"></span>${escapeHtml(item.name)}</span>`,
+      (item) => {
+        const axisSuffix = useDualAxis ? (item === leftAxis.item ? " (left Y)" : " (right Y)") : "";
+        return `<span class="legend-item"><span class="legend-swatch" style="background:${item.color}"></span>${escapeHtml(item.name)}${escapeHtml(axisSuffix)}</span>`;
+      },
     )
     .join("");
 
   container.innerHTML = `
     <svg viewBox="0 0 ${width} ${height}" role="img" aria-label="${escapeHtml(options.yLabel)} trend">
       ${grid}
+      ${axisLabels}
       <line class="axis-line" x1="${margin.left}" x2="${width - margin.right}" y1="${height - margin.bottom}" y2="${height - margin.bottom}"></line>
       <line class="axis-line" x1="${margin.left}" x2="${margin.left}" y1="${margin.top}" y2="${height - margin.bottom}"></line>
+      ${useDualAxis ? `<line class="axis-line" x1="${width - margin.right}" x2="${width - margin.right}" y1="${margin.top}" y2="${height - margin.bottom}"></line>` : ""}
       ${xLabels}
       ${lines}
     </svg>
     <div class="legend">${legend}</div>
+    <p class="chart-interaction-hint">Hover a point to inspect its value. Keyboard users can tab to each point.</p>
   `;
+  bindChartPointInteractions(container);
 }
 
 function renderInterpretation(asset, physical, transition) {
@@ -1295,6 +2184,7 @@ function render() {
 
   el("physicalTab").classList.toggle("is-active", state.activeView === "physical");
   el("transitionTab").classList.toggle("is-active", state.activeView === "transition");
+  el("physicalDamageMetric").classList.toggle("is-active", state.physicalMetric === "damage");
   el("physicalValueMetric").classList.toggle("is-active", state.physicalMetric === "value_impact");
   el("physicalDisruptionMetric").classList.toggle("is-active", state.physicalMetric === "disruption");
   el("physicalView").classList.toggle("is-hidden", state.activeView !== "physical");
@@ -1310,14 +2200,26 @@ function render() {
 
 async function init() {
   try {
-    const response = await fetch(DATA_URL);
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}`);
+    let loaded = null;
+    let lastError = null;
+    for (const url of DATA_URLS) {
+      try {
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error(`${url}: HTTP ${response.status}`);
+        }
+        loaded = { data: await response.json(), url };
+        break;
+      } catch (error) {
+        lastError = error;
+      }
     }
-    state.data = await response.json();
+    if (!loaded) throw lastError || new Error("No dashboard data source could be loaded.");
+    state.data = loaded.data;
     initialiseState();
     bindControls();
-    el("dataStatus").textContent = `${state.data.meta.physical_rows} physical rows | ${state.data.meta.transition_rows} transition rows`;
+    el("dataStatus").textContent = `${state.data.assets.length} assets | ${state.data.meta.physical_rows} physical rows | ${state.data.meta.transition_rows} transition rows`;
+    el("dataStatus").title = `Loaded ${loaded.url}`;
     render();
   } catch (error) {
     el("dataStatus").textContent = "Data load failed";
