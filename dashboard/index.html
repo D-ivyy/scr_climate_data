@@ -32,7 +32,7 @@
         <div class="help-grid">
           <p><strong>Raw values are preserved.</strong> SCR returns small physical impact values such as <code>0.001238918</code>. The dashboard defaults to a percent-style display, <code>0.1239%</code>, but keeps the raw value in labels and hover text.</p>
           <p><strong>Percent-style display is not a confirmed vendor unit.</strong> It is a readability conversion of raw value times 100. Until SCR confirms the exact product-facing label, treat it as a display view, not a final financial percentage.</p>
-          <p><strong>Hazards have two signals.</strong> Quantified value impact is one signal. Indicator severity ratings are another. If a hazard says "not quantified," SCR did not return a numeric hazard value impact for that hazard in the selected scenario/horizon.</p>
+          <p><strong>Hazards have two signals.</strong> Quantified physical impact is one signal. Indicator severity ratings are another. If a hazard says "not quantified," SCR did not return a numeric value for the selected hazard metric and scenario/horizon.</p>
           <p><strong>Missing magnitude is not missing meaning.</strong> Some indicator rows have a rating but no numeric value or unit. Those rows are still useful for severity screening, but the dashboard marks the magnitude as "rating only."</p>
           <p><strong>Ratings are relative benchmarks.</strong> A-G ratings compare exposure against SCR's reference infrastructure universe. They are not a percentile within only this dashboard file or only InfraSure assets.</p>
         </div>
@@ -69,7 +69,8 @@
             <select id="physicalHorizonSelect"></select>
             <label>Trend metric</label>
             <div class="segmented metric-toggle" role="group" aria-label="Physical trend metric">
-              <button id="physicalValueMetric" class="is-active" type="button">Value</button>
+              <button id="physicalDamageMetric" type="button">Damage</button>
+              <button id="physicalValueMetric" class="is-active" type="button">Combined Value</button>
               <button id="physicalDisruptionMetric" type="button">Disruption</button>
             </div>
             <label for="physicalDisplaySelect">Impact display</label>
@@ -119,6 +120,53 @@
                 </div>
               </div>
               <div id="physicalTrendChart" class="chart"></div>
+            </div>
+
+            <div class="panel panel-wide">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">Hazard Breakdown</p>
+                  <h2 id="hazardTrendTitle">Hazard Combined Value Impact Trend</h2>
+                </div>
+                <div class="panel-heading-actions">
+                  <p class="panel-kicker" id="hazardTrendKicker"></p>
+                  <button class="eye-button" data-help="hazard_trend" type="button">View</button>
+                </div>
+              </div>
+              <div class="chart-series-toolbar">
+                <div>
+                  <span class="chart-series-label">Visible hazards</span>
+                  <span class="chart-series-help">Choose one to give it the full Y-axis, or select several to compare.</span>
+                </div>
+                <div id="hazardTrendControls" class="series-filter" role="group" aria-label="Visible hazard series"></div>
+              </div>
+              <div id="hazardTrendChart" class="chart"></div>
+              <p id="hazardTrendNote" class="chart-note"></p>
+            </div>
+
+            <div class="panel panel-wide delta-panel">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">Climate Change Factor Screening</p>
+                  <h2 id="deltaTestTitle">Combined Value Impact: Baseline-to-Horizon Test</h2>
+                </div>
+                <div class="panel-heading-actions">
+                  <p class="panel-kicker" id="deltaTestKicker"></p>
+                  <button class="eye-button" data-help="delta_test" type="button">View</button>
+                </div>
+              </div>
+              <div id="deltaTestTable" class="table-wrap delta-table-wrap"></div>
+              <p id="deltaTestNote" class="chart-note"></p>
+              <div class="delta-comparison">
+                <div class="delta-comparison-heading">
+                  <div>
+                    <p class="eyebrow">Location / Asset Test</p>
+                    <h3>Cross-Asset Delta Comparison</h3>
+                  </div>
+                  <p>Same scenario, selected horizon, and metric; baseline is each asset's earliest returned horizon.</p>
+                </div>
+                <div id="deltaAssetTable" class="table-wrap delta-asset-table-wrap"></div>
+              </div>
             </div>
 
             <div class="split-grid">

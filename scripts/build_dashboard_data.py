@@ -22,6 +22,24 @@ OFFICE_REL = "http://schemas.openxmlformats.org/officeDocument/2006/relationship
 CELL_REF_RE = re.compile(r"([A-Z]+)([0-9]+)")
 RATING_ORDER = {letter: index for index, letter in enumerate("ABCDEFG", start=1)}
 
+PHYSICAL_NATURAL_KEY = (
+    "assetId",
+    "assetName",
+    "scenario",
+    "timeHorizon",
+    "hazard",
+    "indicator",
+)
+
+TRANSITION_NATURAL_KEY = (
+    "assetId",
+    "assetName",
+    "scenario",
+    "timeHorizon",
+    "subrisk",
+    "indicator",
+)
+
 PHYSICAL_REQUIRED_COLUMNS = {
     "assetId",
     "assetName",
@@ -208,6 +226,191 @@ def validate_columns(label: str, columns: list[str], required: set[str]) -> list
     if missing:
         print(f"{label}: missing required columns: {', '.join(missing)}", file=sys.stderr)
     return missing
+
+
+def flatten_paths(value: Any) -> list[Path]:
+    """Normalize CLI path arguments and direct Namespace callers to one list."""
+    if isinstance(value, (str, Path)):
+        return [Path(value)]
+
+    paths: list[Path] = []
+    for item in value or []:
+        if isinstance(item, (list, tuple)):
+            paths.extend(Path(path) for path in item)
+        else:
+            paths.append(Path(item))
+    return paths
+
+
+def canonical_key_value(value: Any) -> str:
+    """Use a stable representation for cross-workbook identity comparisons."""
+    if value in (None, ""):
+        return ""
+    if isinstance(value, float) and value.is_integer():
+        return str(int(value))
+    return str(value).strip()
+
+
+def row_natural_key(row: dict[str, Any], fields: tuple[str, ...]) -> tuple[str, ...]:
+    return tuple(canonical_key_value(row.get(field)) for field in fields)
+
+
+def row_asset_key(row: dict[str, Any], source: Path, row_number: int) -> tuple[str, str]:
+    asset_id = canonical_key_value(row.get("assetId"))
+    asset_name = canonical_key_value(row.get("assetName"))
+    if not asset_id or not asset_name:
+        missing = "assetId" if not asset_id else "assetName"
+        raise WorkbookError(f"{source}: Output row {row_number} has no {missing}.")
+    return asset_id, asset_name
+
+
+def display_asset_key(asset_key: tuple[str, str]) -> str:
+    asset_id, asset_name = asset_key
+    return f"{asset_name} (assetId={asset_id})"
+
+
+def load_workbooks(
+    label: str,
+    paths: list[Path],
+    required_columns: set[str],
+    natural_key_fields: tuple[str, ...],
+) -> dict[str, Any]:
+    """Read, validate, de-duplicate, and retain provenance for SCR workbooks."""
+    if not paths:
+        raise WorkbookError(f"At least one {label} workbook is required.")
+
+    accepted_rows: list[dict[str, Any]] = []
+    rows_by_key: dict[tuple[str, ...], tuple[dict[str, Any], Path, int]] = {}
+    report_date_by_asset: dict[tuple[str, str], tuple[str, Any, Path]] = {}
+    asset_id_by_name: dict[str, tuple[str, Path]] = {}
+    asset_keys: set[tuple[str, str]] = set()
+    files: list[dict[str, Any]] = []
+    total_input_rows = 0
+    total_exact_duplicates = 0
+
+    for path in paths:
+        rows, columns = read_output_rows(path)
+        missing = validate_columns(f"{label} ({path})", columns, required_columns)
+        if missing:
+            raise WorkbookError(
+                f"Cannot build dashboard data because {path} is missing required "
+                f"{label} columns: {', '.join(missing)}."
+            )
+
+        total_input_rows += len(rows)
+        file_accepted = 0
+        file_exact_duplicates = 0
+        file_asset_keys: set[tuple[str, str]] = set()
+        file_report_dates: dict[str, Any] = {}
+
+        for row_number, row in enumerate(rows, start=2):
+            asset_key = row_asset_key(row, path, row_number)
+            asset_id, asset_name = asset_key
+            prior_identity = asset_id_by_name.get(asset_name)
+            if prior_identity and prior_identity[0] != asset_id:
+                raise WorkbookError(
+                    f"{label}: assetName={asset_name!r} maps to multiple assetId values: "
+                    f"{prior_identity[0]!r} in {prior_identity[1]} and {asset_id!r} in "
+                    f"{path}. Refuse to merge ambiguous asset identities."
+                )
+            asset_id_by_name[asset_name] = (asset_id, path)
+            asset_keys.add(asset_key)
+            file_asset_keys.add(asset_key)
+
+            report_date = row.get("reportDate")
+            report_date_key = canonical_key_value(report_date)
+            if report_date_key:
+                file_report_dates.setdefault(report_date_key, report_date)
+                prior_report = report_date_by_asset.get(asset_key)
+                if prior_report and prior_report[0] != report_date_key:
+                    raise WorkbookError(
+                        f"{label}: {display_asset_key(asset_key)} has multiple reportDate "
+                        f"values: {prior_report[1]!r} in {prior_report[2]} and "
+                        f"{report_date!r} in {path}. Refuse to mix report vintages."
+                    )
+                report_date_by_asset[asset_key] = (report_date_key, report_date, path)
+
+            natural_key = row_natural_key(row, natural_key_fields)
+            prior = rows_by_key.get(natural_key)
+            if prior is None:
+                rows_by_key[natural_key] = (row, path, row_number)
+                accepted_rows.append(row)
+                file_accepted += 1
+                continue
+
+            prior_row, prior_path, prior_row_number = prior
+            if row == prior_row:
+                file_exact_duplicates += 1
+                total_exact_duplicates += 1
+                continue
+
+            differing_fields = sorted(
+                field
+                for field in set(prior_row).union(row)
+                if prior_row.get(field) != row.get(field)
+            )
+            differences = ", ".join(differing_fields[:8])
+            if len(differing_fields) > 8:
+                differences += ", ..."
+            key_description = ", ".join(
+                f"{field}={value!r}"
+                for field, value in zip(natural_key_fields, natural_key)
+            )
+            raise WorkbookError(
+                f"{label}: conflicting rows share a natural key ({key_description}). "
+                f"First seen at {prior_path} row {prior_row_number}; conflict at "
+                f"{path} row {row_number}. Differing fields: {differences or 'unknown'}."
+            )
+
+        files.append(
+            {
+                "source": str(path),
+                "input_rows": len(rows),
+                "accepted_rows": file_accepted,
+                "exact_duplicate_rows": file_exact_duplicates,
+                "asset_count": len(file_asset_keys),
+                "report_dates": [file_report_dates[key] for key in sorted(file_report_dates)],
+            }
+        )
+
+    return {
+        "rows": accepted_rows,
+        "asset_keys": asset_keys,
+        "report_dates": report_date_by_asset,
+        "files": files,
+        "input_rows": total_input_rows,
+        "exact_duplicate_rows": total_exact_duplicates,
+    }
+
+
+def validate_asset_pairing(physical: dict[str, Any], transition: dict[str, Any]) -> None:
+    physical_assets = physical["asset_keys"]
+    transition_assets = transition["asset_keys"]
+    if physical_assets != transition_assets:
+        physical_only = sorted(physical_assets.difference(transition_assets))
+        transition_only = sorted(transition_assets.difference(physical_assets))
+        details: list[str] = []
+        if physical_only:
+            details.append(
+                "missing transition results for "
+                + ", ".join(display_asset_key(asset) for asset in physical_only[:5])
+            )
+        if transition_only:
+            details.append(
+                "missing physical results for "
+                + ", ".join(display_asset_key(asset) for asset in transition_only[:5])
+            )
+        raise WorkbookError("Physical/transition asset pairing failed: " + "; ".join(details) + ".")
+
+    for asset_key in sorted(physical_assets):
+        physical_report = physical["report_dates"].get(asset_key)
+        transition_report = transition["report_dates"].get(asset_key)
+        if physical_report and transition_report and physical_report[0] != transition_report[0]:
+            raise WorkbookError(
+                f"Physical/transition reportDate mismatch for {display_asset_key(asset_key)}: "
+                f"{physical_report[1]!r} in {physical_report[2]} versus "
+                f"{transition_report[1]!r} in {transition_report[2]}."
+            )
 
 
 def to_float(value: Any) -> float | None:
@@ -532,25 +735,43 @@ def build_transition(transition_rows: list[dict[str, Any]]) -> dict[str, list[di
 
 
 def build_dashboard_data(args: argparse.Namespace) -> dict[str, Any]:
-    physical_rows, physical_columns = read_output_rows(args.physical)
-    transition_rows, transition_columns = read_output_rows(args.transition)
+    physical_paths = flatten_paths(args.physical)
+    transition_paths = flatten_paths(args.transition)
+    physical = load_workbooks(
+        "physical",
+        physical_paths,
+        PHYSICAL_REQUIRED_COLUMNS,
+        PHYSICAL_NATURAL_KEY,
+    )
+    transition = load_workbooks(
+        "transition",
+        transition_paths,
+        TRANSITION_REQUIRED_COLUMNS,
+        TRANSITION_NATURAL_KEY,
+    )
+    validate_asset_pairing(physical, transition)
 
-    missing = {
-        "physical": validate_columns("physical", physical_columns, PHYSICAL_REQUIRED_COLUMNS),
-        "transition": validate_columns("transition", transition_columns, TRANSITION_REQUIRED_COLUMNS),
-    }
-    if missing["physical"] or missing["transition"]:
-        raise SystemExit("Cannot build dashboard data because required SCR columns are missing.")
+    physical_rows = physical["rows"]
+    transition_rows = transition["rows"]
+    missing = {"physical": [], "transition": []}
 
     manifest = read_manifest(args.manifest)
     data = {
         "meta": {
             "generated_at": datetime.now(timezone.utc).isoformat(),
-            "physical_source": str(args.physical),
-            "transition_source": str(args.transition),
+            "physical_source": str(physical_paths[0]) if len(physical_paths) == 1 else None,
+            "transition_source": str(transition_paths[0]) if len(transition_paths) == 1 else None,
+            "physical_sources": [str(path) for path in physical_paths],
+            "transition_sources": [str(path) for path in transition_paths],
+            "physical_files": physical["files"],
+            "transition_files": transition["files"],
             "manifest_source": str(args.manifest) if args.manifest else None,
             "physical_rows": len(physical_rows),
             "transition_rows": len(transition_rows),
+            "physical_input_rows": physical["input_rows"],
+            "transition_input_rows": transition["input_rows"],
+            "physical_exact_duplicate_rows": physical["exact_duplicate_rows"],
+            "transition_exact_duplicate_rows": transition["exact_duplicate_rows"],
             "missing_fields": missing,
         },
         "assets": build_assets(physical_rows, transition_rows, manifest),
@@ -562,8 +783,22 @@ def build_dashboard_data(args: argparse.Namespace) -> dict[str, Any]:
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--physical", type=Path, required=True, help="SCR returned physical-risks workbook.")
-    parser.add_argument("--transition", type=Path, required=True, help="SCR returned transition-risks workbook.")
+    parser.add_argument(
+        "--physical",
+        type=Path,
+        required=True,
+        action="append",
+        nargs="+",
+        help="SCR returned physical-risks workbook(s); repeat the flag or list multiple paths.",
+    )
+    parser.add_argument(
+        "--transition",
+        type=Path,
+        required=True,
+        action="append",
+        nargs="+",
+        help="SCR returned transition-risks workbook(s); repeat the flag or list multiple paths.",
+    )
     parser.add_argument("--manifest", type=Path, help="Optional private SCR manifest CSV for join-back fields.")
     parser.add_argument("--out", type=Path, required=True, help="Output JSON path for the static dashboard.")
     return parser.parse_args()
@@ -571,7 +806,10 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> None:
     args = parse_args()
-    data = build_dashboard_data(args)
+    try:
+        data = build_dashboard_data(args)
+    except (FileNotFoundError, WorkbookError) as error:
+        raise SystemExit(f"Error: {error}") from error
     args.out.parent.mkdir(parents=True, exist_ok=True)
     args.out.write_text(json.dumps(data, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     print(f"Wrote {args.out}")
