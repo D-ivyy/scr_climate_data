@@ -1,0 +1,1234 @@
+{
+  "dataset": {
+    "source_zip": "docs/extra/physical_risk_data.zip",
+    "csv_files": 146,
+    "xlsx_files": 146,
+    "paired_csv_xlsx_stems": 146,
+    "unique_cell_ids": 146,
+    "duplicate_cell_ids": 0,
+    "row_counts": {
+      "986": 146
+    },
+    "column_counts": {
+      "36": 146
+    },
+    "schema_variants": 1,
+    "report_dates": [
+      "2026-08-04"
+    ],
+    "ticcs_subclasses": [
+      "IC101020"
+    ],
+    "ticcs_subclass_names": [
+      "Gas-Fired Power Generation"
+    ],
+    "asset_types": [
+      "Gas power Plant"
+    ],
+    "asset_values": [
+      10000000.0
+    ],
+    "asset_revenues": [
+      1000000.0
+    ],
+    "scenarios": [
+      "ssp2-4.5",
+      "ssp5-8.5"
+    ],
+    "time_horizons": [
+      "Historical",
+      "2025",
+      "2030",
+      "2035",
+      "2040",
+      "2045",
+      "2050",
+      "2055",
+      "2060",
+      "2065",
+      "2070",
+      "2075",
+      "2080",
+      "2085",
+      "2090",
+      "2095",
+      "2100"
+    ],
+    "hazards": [
+      "Drought",
+      "Earthquake",
+      "Flood",
+      "Heat",
+      "Landslide",
+      "Precipitation",
+      "Subsidence",
+      "Wildfire",
+      "Wind"
+    ],
+    "inconsistent_total_groups": 0,
+    "inconsistent_hazard_groups": 0
+  },
+  "grid_center_verification": {
+    "grid_row_count": 13085,
+    "matched_cell_ids": 146,
+    "coordinate_matches": 146,
+    "state_matches": 146,
+    "iso_name_matches": 146
+  },
+  "hazard_coverage": {
+    "Drought": {
+      "files_present": 146,
+      "indicator_value_files": 146,
+      "indicator_rating_files": 146,
+      "hazard_rating_files": 146,
+      "any_adjusted_hazard_damage_files": 0,
+      "usable_2050_factor_files": 0,
+      "usable_2100_factor_files": 0,
+      "indicators": [
+        "Drought duration",
+        "Drought magnitude",
+        "Water stress"
+      ]
+    },
+    "Earthquake": {
+      "files_present": 146,
+      "indicator_value_files": 140,
+      "indicator_rating_files": 146,
+      "hazard_rating_files": 146,
+      "any_adjusted_hazard_damage_files": 0,
+      "usable_2050_factor_files": 0,
+      "usable_2100_factor_files": 0,
+      "indicators": [
+        "earthquake_pga"
+      ]
+    },
+    "Flood": {
+      "files_present": 146,
+      "indicator_value_files": 32,
+      "indicator_rating_files": 146,
+      "hazard_rating_files": 146,
+      "any_adjusted_hazard_damage_files": 33,
+      "usable_2050_factor_files": 33,
+      "usable_2100_factor_files": 33,
+      "indicators": [
+        "Coastal flood depth - 10 years RP",
+        "Coastal flood depth - 100 years RP",
+        "Coastal flood depth - 500 years RP",
+        "Fluvial & Pluvial Flood depth - 10 years RP",
+        "Fluvial & Pluvial Flood depth - 100 years RP",
+        "Fluvial & Pluvial Flood depth - 500 years RP"
+      ]
+    },
+    "Heat": {
+      "files_present": 146,
+      "indicator_value_files": 146,
+      "indicator_rating_files": 146,
+      "hazard_rating_files": 146,
+      "any_adjusted_hazard_damage_files": 0,
+      "usable_2050_factor_files": 0,
+      "usable_2100_factor_files": 0,
+      "indicators": [
+        "Days above 35\u00b0C",
+        "Days above 38\u00b0C",
+        "Days above 99th percentile",
+        "Heatwave average length",
+        "Heatwave days",
+        "WBGT days"
+      ]
+    },
+    "Landslide": {
+      "files_present": 146,
+      "indicator_value_files": 146,
+      "indicator_rating_files": 146,
+      "hazard_rating_files": 146,
+      "any_adjusted_hazard_damage_files": 0,
+      "usable_2050_factor_files": 0,
+      "usable_2100_factor_files": 0,
+      "indicators": [
+        "Landslide susceptibility"
+      ]
+    },
+    "Precipitation": {
+      "files_present": 146,
+      "indicator_value_files": 146,
+      "indicator_rating_files": 146,
+      "hazard_rating_files": 146,
+      "any_adjusted_hazard_damage_files": 0,
+      "usable_2050_factor_files": 0,
+      "usable_2100_factor_files": 0,
+      "indicators": [
+        "Max precipitation 1 day",
+        "Max precipitation 5 days"
+      ]
+    },
+    "Subsidence": {
+      "files_present": 146,
+      "indicator_value_files": 143,
+      "indicator_rating_files": 146,
+      "hazard_rating_files": 146,
+      "any_adjusted_hazard_damage_files": 0,
+      "usable_2050_factor_files": 0,
+      "usable_2100_factor_files": 0,
+      "indicators": [
+        "Subsidence rate"
+      ]
+    },
+    "Wildfire": {
+      "files_present": 146,
+      "indicator_value_files": 146,
+      "indicator_rating_files": 146,
+      "hazard_rating_files": 146,
+      "any_adjusted_hazard_damage_files": 145,
+      "usable_2050_factor_files": 145,
+      "usable_2100_factor_files": 145,
+      "indicators": [
+        "Burn probability",
+        "Fire Weather Index (FWI)",
+        "Tree cover"
+      ]
+    },
+    "Wind": {
+      "files_present": 146,
+      "indicator_value_files": 146,
+      "indicator_rating_files": 146,
+      "hazard_rating_files": 146,
+      "any_adjusted_hazard_damage_files": 10,
+      "usable_2050_factor_files": 0,
+      "usable_2100_factor_files": 0,
+      "indicators": [
+        "ETS wind speed - 10 years RP",
+        "ETS wind speed - 100 years RP",
+        "ETS wind speed - 500 years RP",
+        "TC wind speed - 10 years RP",
+        "TC wind speed - 100 years RP",
+        "TC wind speed - 500 years RP"
+      ]
+    }
+  },
+  "hazard_factor_summaries": {
+    "Drought": {
+      "ssp2-4.5": {
+        "2050": {
+          "baseline_present": 0,
+          "future_present": 0,
+          "factor_summary": {
+            "n": 0,
+            "min": null,
+            "median": null,
+            "max": null
+          },
+          "factor_direction_counts": {
+            "below_1x": 0,
+            "equal_1x": 0,
+            "above_1x": 0
+          },
+          "unchanged_factor_count": 0
+        },
+        "2100": {
+          "baseline_present": 0,
+          "future_present": 0,
+          "factor_summary": {
+            "n": 0,
+            "min": null,
+            "median": null,
+            "max": null
+          },
+          "factor_direction_counts": {
+            "below_1x": 0,
+            "equal_1x": 0,
+            "above_1x": 0
+          },
+          "unchanged_factor_count": 0
+        }
+      },
+      "ssp5-8.5": {
+        "2050": {
+          "baseline_present": 0,
+          "future_present": 0,
+          "factor_summary": {
+            "n": 0,
+            "min": null,
+            "median": null,
+            "max": null
+          },
+          "factor_direction_counts": {
+            "below_1x": 0,
+            "equal_1x": 0,
+            "above_1x": 0
+          },
+          "unchanged_factor_count": 0
+        },
+        "2100": {
+          "baseline_present": 0,
+          "future_present": 0,
+          "factor_summary": {
+            "n": 0,
+            "min": null,
+            "median": null,
+            "max": null
+          },
+          "factor_direction_counts": {
+            "below_1x": 0,
+            "equal_1x": 0,
+            "above_1x": 0
+          },
+          "unchanged_factor_count": 0
+        }
+      }
+    },
+    "Earthquake": {
+      "ssp2-4.5": {
+        "2050": {
+          "baseline_present": 0,
+          "future_present": 0,
+          "factor_summary": {
+            "n": 0,
+            "min": null,
+            "median": null,
+            "max": null
+          },
+          "factor_direction_counts": {
+            "below_1x": 0,
+            "equal_1x": 0,
+            "above_1x": 0
+          },
+          "unchanged_factor_count": 0
+        },
+        "2100": {
+          "baseline_present": 0,
+          "future_present": 0,
+          "factor_summary": {
+            "n": 0,
+            "min": null,
+            "median": null,
+            "max": null
+          },
+          "factor_direction_counts": {
+            "below_1x": 0,
+            "equal_1x": 0,
+            "above_1x": 0
+          },
+          "unchanged_factor_count": 0
+        }
+      },
+      "ssp5-8.5": {
+        "2050": {
+          "baseline_present": 0,
+          "future_present": 0,
+          "factor_summary": {
+            "n": 0,
+            "min": null,
+            "median": null,
+            "max": null
+          },
+          "factor_direction_counts": {
+            "below_1x": 0,
+            "equal_1x": 0,
+            "above_1x": 0
+          },
+          "unchanged_factor_count": 0
+        },
+        "2100": {
+          "baseline_present": 0,
+          "future_present": 0,
+          "factor_summary": {
+            "n": 0,
+            "min": null,
+            "median": null,
+            "max": null
+          },
+          "factor_direction_counts": {
+            "below_1x": 0,
+            "equal_1x": 0,
+            "above_1x": 0
+          },
+          "unchanged_factor_count": 0
+        }
+      }
+    },
+    "Flood": {
+      "ssp2-4.5": {
+        "2050": {
+          "baseline_present": 33,
+          "future_present": 33,
+          "factor_summary": {
+            "n": 33,
+            "min": 0.8764176383823171,
+            "median": 1.0183207647213581,
+            "max": 1.9870590032072486
+          },
+          "factor_direction_counts": {
+            "below_1x": 13,
+            "equal_1x": 0,
+            "above_1x": 20
+          },
+          "unchanged_factor_count": 0
+        },
+        "2100": {
+          "baseline_present": 33,
+          "future_present": 33,
+          "factor_summary": {
+            "n": 33,
+            "min": 0.7071453046352802,
+            "median": 1.0431373874146528,
+            "max": 17.560181476192128
+          },
+          "factor_direction_counts": {
+            "below_1x": 13,
+            "equal_1x": 0,
+            "above_1x": 20
+          },
+          "unchanged_factor_count": 0
+        }
+      },
+      "ssp5-8.5": {
+        "2050": {
+          "baseline_present": 33,
+          "future_present": 33,
+          "factor_summary": {
+            "n": 33,
+            "min": 0.8103460057187509,
+            "median": 1.025726919052573,
+            "max": 2.2478362596290156
+          },
+          "factor_direction_counts": {
+            "below_1x": 13,
+            "equal_1x": 0,
+            "above_1x": 20
+          },
+          "unchanged_factor_count": 0
+        },
+        "2100": {
+          "baseline_present": 33,
+          "future_present": 33,
+          "factor_summary": {
+            "n": 33,
+            "min": 0.5212789480860859,
+            "median": 1.0863409683188743,
+            "max": 36.53505086245024
+          },
+          "factor_direction_counts": {
+            "below_1x": 13,
+            "equal_1x": 0,
+            "above_1x": 20
+          },
+          "unchanged_factor_count": 0
+        }
+      }
+    },
+    "Heat": {
+      "ssp2-4.5": {
+        "2050": {
+          "baseline_present": 0,
+          "future_present": 0,
+          "factor_summary": {
+            "n": 0,
+            "min": null,
+            "median": null,
+            "max": null
+          },
+          "factor_direction_counts": {
+            "below_1x": 0,
+            "equal_1x": 0,
+            "above_1x": 0
+          },
+          "unchanged_factor_count": 0
+        },
+        "2100": {
+          "baseline_present": 0,
+          "future_present": 0,
+          "factor_summary": {
+            "n": 0,
+            "min": null,
+            "median": null,
+            "max": null
+          },
+          "factor_direction_counts": {
+            "below_1x": 0,
+            "equal_1x": 0,
+            "above_1x": 0
+          },
+          "unchanged_factor_count": 0
+        }
+      },
+      "ssp5-8.5": {
+        "2050": {
+          "baseline_present": 0,
+          "future_present": 0,
+          "factor_summary": {
+            "n": 0,
+            "min": null,
+            "median": null,
+            "max": null
+          },
+          "factor_direction_counts": {
+            "below_1x": 0,
+            "equal_1x": 0,
+            "above_1x": 0
+          },
+          "unchanged_factor_count": 0
+        },
+        "2100": {
+          "baseline_present": 0,
+          "future_present": 0,
+          "factor_summary": {
+            "n": 0,
+            "min": null,
+            "median": null,
+            "max": null
+          },
+          "factor_direction_counts": {
+            "below_1x": 0,
+            "equal_1x": 0,
+            "above_1x": 0
+          },
+          "unchanged_factor_count": 0
+        }
+      }
+    },
+    "Landslide": {
+      "ssp2-4.5": {
+        "2050": {
+          "baseline_present": 0,
+          "future_present": 0,
+          "factor_summary": {
+            "n": 0,
+            "min": null,
+            "median": null,
+            "max": null
+          },
+          "factor_direction_counts": {
+            "below_1x": 0,
+            "equal_1x": 0,
+            "above_1x": 0
+          },
+          "unchanged_factor_count": 0
+        },
+        "2100": {
+          "baseline_present": 0,
+          "future_present": 0,
+          "factor_summary": {
+            "n": 0,
+            "min": null,
+            "median": null,
+            "max": null
+          },
+          "factor_direction_counts": {
+            "below_1x": 0,
+            "equal_1x": 0,
+            "above_1x": 0
+          },
+          "unchanged_factor_count": 0
+        }
+      },
+      "ssp5-8.5": {
+        "2050": {
+          "baseline_present": 0,
+          "future_present": 0,
+          "factor_summary": {
+            "n": 0,
+            "min": null,
+            "median": null,
+            "max": null
+          },
+          "factor_direction_counts": {
+            "below_1x": 0,
+            "equal_1x": 0,
+            "above_1x": 0
+          },
+          "unchanged_factor_count": 0
+        },
+        "2100": {
+          "baseline_present": 0,
+          "future_present": 0,
+          "factor_summary": {
+            "n": 0,
+            "min": null,
+            "median": null,
+            "max": null
+          },
+          "factor_direction_counts": {
+            "below_1x": 0,
+            "equal_1x": 0,
+            "above_1x": 0
+          },
+          "unchanged_factor_count": 0
+        }
+      }
+    },
+    "Precipitation": {
+      "ssp2-4.5": {
+        "2050": {
+          "baseline_present": 0,
+          "future_present": 0,
+          "factor_summary": {
+            "n": 0,
+            "min": null,
+            "median": null,
+            "max": null
+          },
+          "factor_direction_counts": {
+            "below_1x": 0,
+            "equal_1x": 0,
+            "above_1x": 0
+          },
+          "unchanged_factor_count": 0
+        },
+        "2100": {
+          "baseline_present": 0,
+          "future_present": 0,
+          "factor_summary": {
+            "n": 0,
+            "min": null,
+            "median": null,
+            "max": null
+          },
+          "factor_direction_counts": {
+            "below_1x": 0,
+            "equal_1x": 0,
+            "above_1x": 0
+          },
+          "unchanged_factor_count": 0
+        }
+      },
+      "ssp5-8.5": {
+        "2050": {
+          "baseline_present": 0,
+          "future_present": 0,
+          "factor_summary": {
+            "n": 0,
+            "min": null,
+            "median": null,
+            "max": null
+          },
+          "factor_direction_counts": {
+            "below_1x": 0,
+            "equal_1x": 0,
+            "above_1x": 0
+          },
+          "unchanged_factor_count": 0
+        },
+        "2100": {
+          "baseline_present": 0,
+          "future_present": 0,
+          "factor_summary": {
+            "n": 0,
+            "min": null,
+            "median": null,
+            "max": null
+          },
+          "factor_direction_counts": {
+            "below_1x": 0,
+            "equal_1x": 0,
+            "above_1x": 0
+          },
+          "unchanged_factor_count": 0
+        }
+      }
+    },
+    "Subsidence": {
+      "ssp2-4.5": {
+        "2050": {
+          "baseline_present": 0,
+          "future_present": 0,
+          "factor_summary": {
+            "n": 0,
+            "min": null,
+            "median": null,
+            "max": null
+          },
+          "factor_direction_counts": {
+            "below_1x": 0,
+            "equal_1x": 0,
+            "above_1x": 0
+          },
+          "unchanged_factor_count": 0
+        },
+        "2100": {
+          "baseline_present": 0,
+          "future_present": 0,
+          "factor_summary": {
+            "n": 0,
+            "min": null,
+            "median": null,
+            "max": null
+          },
+          "factor_direction_counts": {
+            "below_1x": 0,
+            "equal_1x": 0,
+            "above_1x": 0
+          },
+          "unchanged_factor_count": 0
+        }
+      },
+      "ssp5-8.5": {
+        "2050": {
+          "baseline_present": 0,
+          "future_present": 0,
+          "factor_summary": {
+            "n": 0,
+            "min": null,
+            "median": null,
+            "max": null
+          },
+          "factor_direction_counts": {
+            "below_1x": 0,
+            "equal_1x": 0,
+            "above_1x": 0
+          },
+          "unchanged_factor_count": 0
+        },
+        "2100": {
+          "baseline_present": 0,
+          "future_present": 0,
+          "factor_summary": {
+            "n": 0,
+            "min": null,
+            "median": null,
+            "max": null
+          },
+          "factor_direction_counts": {
+            "below_1x": 0,
+            "equal_1x": 0,
+            "above_1x": 0
+          },
+          "unchanged_factor_count": 0
+        }
+      }
+    },
+    "Wildfire": {
+      "ssp2-4.5": {
+        "2050": {
+          "baseline_present": 145,
+          "future_present": 145,
+          "factor_summary": {
+            "n": 145,
+            "min": 0.994299229267352,
+            "median": 1.0,
+            "max": 1.0599881514098737
+          },
+          "factor_direction_counts": {
+            "below_1x": 6,
+            "equal_1x": 93,
+            "above_1x": 46
+          },
+          "unchanged_factor_count": 93
+        },
+        "2100": {
+          "baseline_present": 145,
+          "future_present": 145,
+          "factor_summary": {
+            "n": 145,
+            "min": 0.9961275333973015,
+            "median": 1.0,
+            "max": 1.1848745108851773
+          },
+          "factor_direction_counts": {
+            "below_1x": 1,
+            "equal_1x": 91,
+            "above_1x": 53
+          },
+          "unchanged_factor_count": 91
+        }
+      },
+      "ssp5-8.5": {
+        "2050": {
+          "baseline_present": 145,
+          "future_present": 145,
+          "factor_summary": {
+            "n": 145,
+            "min": 0.9999999999999997,
+            "median": 1.0,
+            "max": 1.1316423106406877
+          },
+          "factor_direction_counts": {
+            "below_1x": 0,
+            "equal_1x": 93,
+            "above_1x": 52
+          },
+          "unchanged_factor_count": 93
+        },
+        "2100": {
+          "baseline_present": 145,
+          "future_present": 145,
+          "factor_summary": {
+            "n": 145,
+            "min": 1.0,
+            "median": 1.0,
+            "max": 1.7778499380965973
+          },
+          "factor_direction_counts": {
+            "below_1x": 0,
+            "equal_1x": 80,
+            "above_1x": 65
+          },
+          "unchanged_factor_count": 80
+        }
+      }
+    },
+    "Wind": {
+      "ssp2-4.5": {
+        "2050": {
+          "baseline_present": 0,
+          "future_present": 0,
+          "factor_summary": {
+            "n": 0,
+            "min": null,
+            "median": null,
+            "max": null
+          },
+          "factor_direction_counts": {
+            "below_1x": 0,
+            "equal_1x": 0,
+            "above_1x": 0
+          },
+          "unchanged_factor_count": 0
+        },
+        "2100": {
+          "baseline_present": 0,
+          "future_present": 10,
+          "factor_summary": {
+            "n": 0,
+            "min": null,
+            "median": null,
+            "max": null
+          },
+          "factor_direction_counts": {
+            "below_1x": 0,
+            "equal_1x": 0,
+            "above_1x": 0
+          },
+          "unchanged_factor_count": 0
+        }
+      },
+      "ssp5-8.5": {
+        "2050": {
+          "baseline_present": 0,
+          "future_present": 0,
+          "factor_summary": {
+            "n": 0,
+            "min": null,
+            "median": null,
+            "max": null
+          },
+          "factor_direction_counts": {
+            "below_1x": 0,
+            "equal_1x": 0,
+            "above_1x": 0
+          },
+          "unchanged_factor_count": 0
+        },
+        "2100": {
+          "baseline_present": 0,
+          "future_present": 2,
+          "factor_summary": {
+            "n": 0,
+            "min": null,
+            "median": null,
+            "max": null
+          },
+          "factor_direction_counts": {
+            "below_1x": 0,
+            "equal_1x": 0,
+            "above_1x": 0
+          },
+          "unchanged_factor_count": 0
+        }
+      }
+    }
+  },
+  "total_metric_coverage_and_factors": {
+    "adjustedTotalDamage": {
+      "ssp2-4.5": {
+        "baseline_present": 146,
+        "baseline_nonzero": 146,
+        "future": {
+          "2050": {
+            "future_present": 146,
+            "factor_summary": {
+              "n": 146,
+              "min": 0.9421579314694597,
+              "median": 1.0,
+              "max": 1.2170269461514809
+            },
+            "factor_direction_counts": {
+              "below_1x": 16,
+              "equal_1x": 68,
+              "above_1x": 62
+            },
+            "unchanged_factor_count": 68
+          },
+          "2100": {
+            "future_present": 146,
+            "factor_summary": {
+              "n": 146,
+              "min": 0.8795524552329809,
+              "median": 1.0,
+              "max": 1.7187852399966799
+            },
+            "factor_direction_counts": {
+              "below_1x": 13,
+              "equal_1x": 65,
+              "above_1x": 68
+            },
+            "unchanged_factor_count": 65
+          }
+        }
+      },
+      "ssp5-8.5": {
+        "baseline_present": 146,
+        "baseline_nonzero": 146,
+        "future": {
+          "2050": {
+            "future_present": 146,
+            "factor_summary": {
+              "n": 146,
+              "min": 0.9242006773852933,
+              "median": 1.0,
+              "max": 1.2415824912036177
+            },
+            "factor_direction_counts": {
+              "below_1x": 12,
+              "equal_1x": 68,
+              "above_1x": 66
+            },
+            "unchanged_factor_count": 68
+          },
+          "2100": {
+            "future_present": 146,
+            "factor_summary": {
+              "n": 146,
+              "min": 0.8304143375896509,
+              "median": 1.0077949638306447,
+              "max": 1.9108521513373384
+            },
+            "factor_direction_counts": {
+              "below_1x": 10,
+              "equal_1x": 57,
+              "above_1x": 79
+            },
+            "unchanged_factor_count": 57
+          }
+        }
+      }
+    },
+    "adjustedTotalDisruption": {
+      "ssp2-4.5": {
+        "baseline_present": 146,
+        "baseline_nonzero": 146,
+        "future": {
+          "2050": {
+            "future_present": 146,
+            "factor_summary": {
+              "n": 146,
+              "min": 0.9986404951355148,
+              "median": 1.0898484670429789,
+              "max": 424.9287329286518
+            },
+            "factor_direction_counts": {
+              "below_1x": 1,
+              "equal_1x": 0,
+              "above_1x": 145
+            },
+            "unchanged_factor_count": 0
+          },
+          "2100": {
+            "future_present": 146,
+            "factor_summary": {
+              "n": 146,
+              "min": 0.9964053363277771,
+              "median": 1.2323222524927155,
+              "max": 1015.2892328329193
+            },
+            "factor_direction_counts": {
+              "below_1x": 1,
+              "equal_1x": 0,
+              "above_1x": 145
+            },
+            "unchanged_factor_count": 0
+          }
+        }
+      },
+      "ssp5-8.5": {
+        "baseline_present": 146,
+        "baseline_nonzero": 146,
+        "future": {
+          "2050": {
+            "future_present": 146,
+            "factor_summary": {
+              "n": 146,
+              "min": 0.9991520215582657,
+              "median": 1.1051821199443004,
+              "max": 514.4950801968808
+            },
+            "factor_direction_counts": {
+              "below_1x": 1,
+              "equal_1x": 0,
+              "above_1x": 145
+            },
+            "unchanged_factor_count": 0
+          },
+          "2100": {
+            "future_present": 146,
+            "factor_summary": {
+              "n": 146,
+              "min": 1.0000164816110653,
+              "median": 1.4783635083826514,
+              "max": 3131.147628840582
+            },
+            "factor_direction_counts": {
+              "below_1x": 0,
+              "equal_1x": 0,
+              "above_1x": 146
+            },
+            "unchanged_factor_count": 0
+          }
+        }
+      }
+    },
+    "adjustedTotalDisruptionDamageEquivalent": {
+      "ssp2-4.5": {
+        "baseline_present": 146,
+        "baseline_nonzero": 146,
+        "future": {
+          "2050": {
+            "future_present": 146,
+            "factor_summary": {
+              "n": 146,
+              "min": 0.9986404951355146,
+              "median": 1.0898484670429789,
+              "max": 424.92873292865175
+            },
+            "factor_direction_counts": {
+              "below_1x": 1,
+              "equal_1x": 0,
+              "above_1x": 145
+            },
+            "unchanged_factor_count": 0
+          },
+          "2100": {
+            "future_present": 146,
+            "factor_summary": {
+              "n": 146,
+              "min": 0.9964053363277771,
+              "median": 1.2323222524927155,
+              "max": 1015.2892328329193
+            },
+            "factor_direction_counts": {
+              "below_1x": 1,
+              "equal_1x": 0,
+              "above_1x": 145
+            },
+            "unchanged_factor_count": 0
+          }
+        }
+      },
+      "ssp5-8.5": {
+        "baseline_present": 146,
+        "baseline_nonzero": 146,
+        "future": {
+          "2050": {
+            "future_present": 146,
+            "factor_summary": {
+              "n": 146,
+              "min": 0.9991520215582657,
+              "median": 1.1051821199443006,
+              "max": 514.4950801968808
+            },
+            "factor_direction_counts": {
+              "below_1x": 1,
+              "equal_1x": 0,
+              "above_1x": 145
+            },
+            "unchanged_factor_count": 0
+          },
+          "2100": {
+            "future_present": 146,
+            "factor_summary": {
+              "n": 146,
+              "min": 1.0000164816110653,
+              "median": 1.4783635083826518,
+              "max": 3131.147628840582
+            },
+            "factor_direction_counts": {
+              "below_1x": 0,
+              "equal_1x": 0,
+              "above_1x": 146
+            },
+            "unchanged_factor_count": 0
+          }
+        }
+      }
+    },
+    "adjustedTotalValueImpact": {
+      "ssp2-4.5": {
+        "baseline_present": 146,
+        "baseline_nonzero": 146,
+        "future": {
+          "2050": {
+            "future_present": 146,
+            "factor_summary": {
+              "n": 146,
+              "min": 0.992673709005649,
+              "median": 1.0172358432918092,
+              "max": 21.058678389269293
+            },
+            "factor_direction_counts": {
+              "below_1x": 3,
+              "equal_1x": 0,
+              "above_1x": 143
+            },
+            "unchanged_factor_count": 0
+          },
+          "2100": {
+            "future_present": 146,
+            "factor_summary": {
+              "n": 146,
+              "min": 0.9958896373039677,
+              "median": 1.0432433390105622,
+              "max": 50.2087399712553
+            },
+            "factor_direction_counts": {
+              "below_1x": 2,
+              "equal_1x": 0,
+              "above_1x": 144
+            },
+            "unchanged_factor_count": 0
+          }
+        }
+      },
+      "ssp5-8.5": {
+        "baseline_present": 146,
+        "baseline_nonzero": 146,
+        "future": {
+          "2050": {
+            "future_present": 146,
+            "factor_summary": {
+              "n": 146,
+              "min": 0.9881487182556417,
+              "median": 1.0202181364767808,
+              "max": 23.3564927799937
+            },
+            "factor_direction_counts": {
+              "below_1x": 2,
+              "equal_1x": 0,
+              "above_1x": 144
+            },
+            "unchanged_factor_count": 0
+          },
+          "2100": {
+            "future_present": 146,
+            "factor_summary": {
+              "n": 146,
+              "min": 0.9985123300984163,
+              "median": 1.1083086859724371,
+              "max": 186.53957181283306
+            },
+            "factor_direction_counts": {
+              "below_1x": 1,
+              "equal_1x": 0,
+              "above_1x": 145
+            },
+            "unchanged_factor_count": 0
+          }
+        }
+      }
+    }
+  },
+  "total_damage_reconciliation": {
+    "groups_checked": 876,
+    "groups_matching": 876,
+    "tolerance": 1e-12,
+    "max_absolute_difference": 1.3877787807814457e-17
+  },
+  "damage_contributors": {
+    "ssp2-4.5": {
+      "2025": {
+        "hazard_file_counts": {
+          "Flood": 33,
+          "Wildfire": 145
+        },
+        "combination_file_counts": {
+          "Flood + Wildfire": 32,
+          "Wildfire": 113,
+          "Flood": 1
+        }
+      },
+      "2050": {
+        "hazard_file_counts": {
+          "Flood": 33,
+          "Wildfire": 145
+        },
+        "combination_file_counts": {
+          "Flood + Wildfire": 32,
+          "Wildfire": 113,
+          "Flood": 1
+        }
+      },
+      "2100": {
+        "hazard_file_counts": {
+          "Flood": 33,
+          "Wildfire": 145,
+          "Wind": 10
+        },
+        "combination_file_counts": {
+          "Flood + Wildfire": 24,
+          "Wildfire": 112,
+          "Flood + Wildfire + Wind": 8,
+          "Wildfire + Wind": 1,
+          "Flood + Wind": 1
+        }
+      }
+    },
+    "ssp5-8.5": {
+      "2025": {
+        "hazard_file_counts": {
+          "Flood": 33,
+          "Wildfire": 145
+        },
+        "combination_file_counts": {
+          "Flood + Wildfire": 32,
+          "Wildfire": 113,
+          "Flood": 1
+        }
+      },
+      "2050": {
+        "hazard_file_counts": {
+          "Flood": 33,
+          "Wildfire": 145
+        },
+        "combination_file_counts": {
+          "Flood + Wildfire": 32,
+          "Wildfire": 113,
+          "Flood": 1
+        }
+      },
+      "2100": {
+        "hazard_file_counts": {
+          "Flood": 33,
+          "Wildfire": 145,
+          "Wind": 2
+        },
+        "combination_file_counts": {
+          "Flood + Wildfire": 31,
+          "Wildfire": 113,
+          "Flood + Wildfire + Wind": 1,
+          "Flood + Wind": 1
+        }
+      }
+    }
+  },
+  "raw_adjusted_comparison": {
+    "comparable_row_counts": {
+      "totalDamage|adjustedTotalDamage": 135488,
+      "totalDisruption|adjustedTotalDisruption": 135488,
+      "totalDisruptionDamageEquivalent|adjustedTotalDisruptionDamageEquivalent": 135488,
+      "totalValueImpact|adjustedTotalValueImpact": 135488,
+      "hazardDamage|adjustedHazardDamage": 20628,
+      "hazardDisruption|adjustedHazardDisruption": 48642,
+      "hazardDisruptionDamageEquivalent|adjustedHazardDisruptionDamageEquivalent": 48642,
+      "hazardValueImpact|adjustedHazardValueImpact": 20628
+    },
+    "mismatch_counts": {}
+  }
+}
