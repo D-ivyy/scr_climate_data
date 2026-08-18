@@ -1,72 +1,104 @@
 # SCR → InfraSure Scope
 
-**Working title:** Asset- and Hazard-Specific SCR Climate Change Factors
+**Working title:** Asset-Level SCR Overall Physical-Damage Delta
 
-**Status:** Execution scope for the controlled and regional validation with Divy, Prashant, and Utkarsh
+**Status:** Solar V1/V2 research delivery complete; InfraSure EAL/TIV calibration
+and Wind/Gas replication pending
 
-**Date:** 2026-08-02 (updated from 2026-07-20)
+**Date:** 2026-08-18 (updated from 2026-07-20)
 
-**V1 objective:** Use SCR's change in hazard-level physical damage to scale InfraSure's current physical-damage expected loss without rerunning InfraSure's complete future hazard and damage models.
+**V1 objective:** Use the change in SCR's overall physical-damage result,
+`adjustedTotalDamage`, as an asset-level climate-change factor without rerunning
+InfraSure's complete future hazard and damage models.
+
+### Current execution status — 2026-08-18
+
+```text
+V1 raw/filled Solar surface       COMPLETE and published to GCS
+  13,085 cells x 2 scenarios x 16 horizons
+                     |
+                     v
+15-method stabilization test      COMPLETE
+                     |
+                     v
+V2 arctangent soft-log candidate  COMPLETE and published to GCS
+  unchanged 0.333333x-3x; approaches 0.20x/5x bounds
+                     |
+                     v
+Representative InfraSure EAL/TIV calibration  PENDING
+Wind/Gas replication                         PENDING
+```
+
+V2 is a numerically validated screening candidate, not a client-facing
+financial approval. The raw V1 fields remain available and unchanged.
 
 ---
 
 ## 1. The decision in one sentence
 
-For each supported asset and hazard, calculate the change in SCR's `adjustedHazardDamage` between a baseline and a future scenario/horizon, then apply that change directly to InfraSure's current physical-damage expected loss for the same asset and hazard.
+For each standardized asset and location, calculate the change in SCR's
+`adjustedTotalDamage` between 2025 and each future scenario/horizon. Deliver that
+overall factor on the canonical grid. Hazard-level values remain QA and research
+evidence, not the main V1 output.
 
 ```text
-                          SCR result for this asset and hazard
+                          SCR overall damage for this asset
                      baseline -----------------------> future
                                           |
                                           v
                                   SCR change factor
                                           |
                                           v
-InfraSure current hazard EL ----------- multiply ---------> InfraSure future hazard EL
+InfraSure current asset EL ------------ multiply ---------> screened future asset EL
 ```
 
 This is the intended shortcut. InfraSure does **not** need to run a complete future hazard simulation, reconstruct SCR's hazard maps, or reproduce SCR's damage functions for V1.
 
 ### The execution path agreed with the team
 
-The work should move from a small controlled test to a larger regional test before any CONUS-scale build:
+The Solar CONUS workbooks are now available, so the current execution path is:
 
 ```text
-6-10 controlled locations
-  isolate location, asset type, value, geometry, and resilience
+11,928 observed Solar workbooks
+  exact join to the 13,085-cell canonical grid
                     |
                     v
-state or climate-region batch
-  run the available 25 km x 25 km reference-cell center points
+extract adjustedTotalDamage
+  preserve signed 2025 and future values
                     |
                     v
-measure within-region and between-region variation
-  test whether climate-region averages are representative
+derive overall factor
+  abs(future total damage) / abs(2025 total damage)
                     |
                     v
-choose the smallest defensible lookup
-  global factor | regional factor | spatial grid | per-asset SCR run
+retain raw missing-source status for 1,157 cells
+  fill the complete surface from one closest observed donor per cell
                     |
                     v
-only then consider broader CONUS coverage
+one 13,085-cell overall-delta Parquet
+  scenario x horizon x standardized asset type
 ```
 
-The regional batch is not a full CONUS implementation. It is the decision test that tells the team whether a broader grid is necessary at all.
+Regional and hazard-level views remain QA tools for understanding spatial
+patterns and total composition. They are not additional V1 delivery dimensions.
 
 ## 2. Does this idea make sense?
 
 Yes. It makes sense as a practical expected-loss scaling method, subject to a small set of tests before implementation.
 
-SCR is useful because it does not give only a generic statement such as “wildfire risk rises 20%.” It analyzes a particular asset at a particular location and returns separate results for different hazards, scenarios, and future periods. The desired signal is therefore:
+SCR is useful because it analyzes a particular asset at a particular location
+and provides a physical-damage rollup across the hazards it can financially
+quantify. The desired V1 signal is therefore:
 
-> For this asset, at this location, how much does SCR say this hazard's expected physical damage changes under the future climate case?
+> For this standardized asset at this location, how much does SCR's overall
+> modeled physical damage change under the future climate case?
 
 InfraSure can use that relative change while retaining its own current expected-loss number.
 
 ```text
 What SCR contributes                    What InfraSure retains
 --------------------                    ----------------------
-future change by hazard                 current EL by hazard
+overall physical-damage change          current asset-level EL or loss metric
 location and asset context      x       InfraSure's financial baseline
 scenario and horizon                    InfraSure reporting and aggregation
 ```
@@ -85,21 +117,22 @@ The second route is the intended scope.
 
 ## 3. The calculation we want
 
-For asset `a`, hazard `h`, scenario `s`, and horizon `t`, first convert SCR's signed loss convention into loss magnitudes:
+For asset `a`, location `l`, scenario `s`, and horizon `t`, first convert SCR's
+signed loss convention into loss magnitudes:
 
 ```text
-SCR baseline magnitude = abs(adjustedHazardDamage(a,h,baseline))
-SCR future magnitude   = abs(adjustedHazardDamage(a,h,s,t))
+SCR baseline magnitude = abs(adjustedTotalDamage(a,l,s,2025))
+SCR future magnitude   = abs(adjustedTotalDamage(a,l,s,t))
 
-SCR Physical Damage Factor Raw(a,h,s,t)
+SCR Overall Physical Damage Factor Raw(a,l,s,t)
     = SCR future magnitude / SCR baseline magnitude
       only when the baseline passes the baseline-validity check
 
-SCR Physical Damage Absolute Change(a,h,s,t)
+SCR Overall Physical Damage Absolute Change(a,l,s,t)
     = SCR future magnitude - SCR baseline magnitude
 
-InfraSure Future EL(a,h,s,t)
-    = InfraSure Current EL(a,h) x SCR Delta Applied(a,h,s,t)
+InfraSure Screened Future Loss(a,l,s,t)
+    = InfraSure Current Asset Loss(a,l) x SCR Delta Applied(a,l,s,t)
 
 SCR Damage Factor Applied = SCR Physical Damage Factor Raw
                             unless an approved guardrail is triggered
@@ -107,21 +140,24 @@ SCR Damage Factor Applied = SCR Physical Damage Factor Raw
 
 Using magnitudes is intentional because SCR exports damage as a negative loss. It does not erase the direction of change: a smaller future loss magnitude produces a factor below `1.0`, and a larger future loss magnitude produces a factor above `1.0`. A sign flip or positive credit is not a normal damage observation and must be flagged rather than silently converted.
 
-The ratio is not calculated when the baseline is zero. For near-zero baselines, the implementer must preserve the absolute change, set the factor to null, and flag the row until the Phase 0 distribution review establishes an approved baseline floor. No numerical threshold or cap is adopted without evidence from the test data.
+The ratio is not calculated when the baseline is zero. All observed Solar 2025
+totals were nonzero, but near-zero denominators produced an unstable raw tail.
+V1 preserves that raw evidence. V2 preserves the same raw factor and provides a
+separate stabilized candidate plus a compression flag; it never silently
+replaces the source ratio.
 
 Illustrative example:
 
 ```text
 Asset:                 Solar Plant A
-Hazard:                Wildfire
-SCR baseline impact:   0.80%
-SCR 2050 impact:       1.00%
+SCR 2025 total damage: 0.80%
+SCR 2050 total damage: 1.00%
 
-SCR wildfire delta:    1.00% / 0.80% = 1.25
+SCR overall delta:     1.00% / 0.80% = 1.25
 Applied delta:         1.25 (passes validation; no guardrail needed)
 
 InfraSure current
-wildfire EL:           $100,000
+asset loss metric:     $100,000
 
 InfraSure 2050
 wildfire EL:           $100,000 x 1.25 = $125,000
@@ -131,38 +167,26 @@ The `$125,000` is an InfraSure result adjusted by an SCR-derived factor. SCR's r
 
 ### Across the whole asset
 
-There is no single SCR factor for the complete asset before the hazard results are calculated. Each hazard is adjusted separately, and the adjusted hazard ELs are then added using InfraSure's normal aggregation rule.
+The V1 delivery intentionally uses one overall SCR physical-damage factor for
+the complete standardized asset. SCR calculates this rollup from the hazard
+damage components it has quantified:
 
 ```text
-                         SCR Delta        Future InfraSure EL
-Current flood EL    x    Flood factor     =    Future flood EL
-Current wind EL     x    Wind factor      =    Future wind EL
-Current wildfire EL x    Wildfire factor  =    Future wildfire EL
-                                                    |
-                                                    v
-                                      Future total asset expected loss
+Flood damage returned --------+
+Wind damage returned  --------+|
+Wildfire damage returned -----++--> adjustedTotalDamage
+                                      |
+                               future / 2025
+                                      |
+                                      v
+                              overall SCR delta
 ```
 
-In the simplest additive case for the SCR-covered portion:
-
-```text
-Future modeled subtotal = sum(Future EL for each SCR-covered hazard)
-```
-
-If InfraSure uses dependency or correlation adjustments in its existing aggregation, those existing rules remain in place.
-
-An uncovered hazard must not disappear from a complete asset total. Retain its current InfraSure EL in the arithmetic, but tag it as `uncovered_baseline_retained` so the Platform does not imply that SCR found no climate change:
-
-```text
-Complete future asset EL
-  = scaled future EL for SCR-covered hazards
-  + current InfraSure EL retained for uncovered hazards
-
-Coverage label
-  = modeled by SCR | baseline retained / future change unknown
-```
-
-If the Platform cannot show that distinction clearly, show the SCR-covered subtotal separately instead of presenting it as the complete future asset EL.
+This is an all-available-SCR-hazards rollup, not proof that SCR physically
+quantified every hazard. The final delivery must retain a coverage note and must
+not describe blank hazard damage fields as zero risk. Hazard-level extraction is
+kept for reconciliation and future research, but it is not required in the V1
+Parquet grain.
 
 ### Small guardrail caveat — ceiling or compression
 
@@ -180,14 +204,21 @@ The rule should remain simple:
 - If the factors are small and reasonable, use them unchanged.
 - If extreme factors appear, use a documented hard ceiling/floor or soft/log compression and retain both the raw and applied values.
 
-No numerical cap should be invented now. The initial asset/location examples must show whether a guardrail is needed and whether it should vary by hazard or horizon. Any compression must be visible and reproducible—not a hidden Platform adjustment.
+The full Solar distribution has now been tested. The leading V2 numerical
+candidate is a symmetric arctangent soft-log transform: factors from
+`0.333333x` through `3x` remain unchanged; values outside that identity band
+approach reciprocal `0.20x` and `5x` bounds. Raw and stabilized fields remain
+separate. This is approved for screening/calibration work only; the parameters
+still require representative InfraSure EAL/TIV testing before Platform or
+client-facing financial use. See the
+[factor stabilization experiment](discussions/conus_solar_physical_delta/04_factor_stabilization_experiment.md).
 
 ## 4. What this scope is—and is not
 
 ### V1 is
 
-- An **asset-specific, hazard-specific physical-damage change factor**.
-- A way to scale InfraSure's current physical-damage expected loss.
+- An **asset- and location-specific overall physical-damage change factor**.
+- A way to screen the change in an InfraSure asset-level loss metric.
 - A baseline-to-future comparison by SCR scenario and horizon.
 - A deliberately lightweight alternative to running complete future hazard models.
 - A test-first project: determine the dimensions along which SCR's delta actually varies before building a large grid.
@@ -195,11 +226,11 @@ No numerical cap should be invented now. The initial asset/location examples mus
 ### V1 is not
 
 - A rebuild of SCR's climate or hazard models.
-- A full CONUS grid-processing project before the controlled and regional tests prove that spatial storage is needed.
+- A rerun of the complete InfraSure future hazard-modeling stack.
 - A replacement for InfraSure's current expected-loss calculations.
 - A reconstruction of SCR's proprietary damage curves.
 - A disruption, business-interruption, workability, or combined-value model.
-- A generic multiplier applied to every hazard.
+- A hazard-by-hazard EL scaling table in the first delivery.
 - A tail-risk adjustment unless SCR provides a separate defensible tail-change signal.
 
 ## What the SCR repository has already established
@@ -215,9 +246,60 @@ This scope starts from working evidence rather than proposing that work again:
 
 Therefore, V1 does **not** need another workbook-discovery dashboard. On 2026-07-21, a focused six-asset set was downloaded from the live SCR portal and added to the local dashboard. It now gives initial evidence on location and asset differences. It does **not** yet isolate every variable: the assets have different inputs, and the set is not a controlled national sample.
 
+### Current Solar CONUS source status — 2026-08-18
+
+The Solar photovoltaic batch has now arrived earlier than the original staged
+sequence anticipated. This changes the order of investigation, not the purpose
+or acceptance standard.
+
+```text
+InfraSure canonical served grid             SCR Solar workbook drop
+13,085 cells                                11,928 unique cells
+        \                                      /
+         +-- exact shared cell_id contract ---+
+                          |
+                          v
+              1,157 canonical cells absent
+                          |
+                          v
+       preserve raw missing status
+       + closest observed donor for complete surface
+```
+
+The filename inventory proves that every returned SCR ID is canonical, with no
+duplicates, extras, or state-label mismatches. A
+17-workbook sample also has exact canonical center coordinates and one common
+986-row, 36-column schema. Overall `adjustedTotalDamage` supports a factor in all
+17 sampled workbooks; hazard damage is concentrated in Wildfire, Flood, and
+Wind, while Heat remains disruption-only.
+
+The full Solar corpus has now produced governed V1 and V2 research Parquets. It
+is not an already approved Platform financial factor surface. The raw fields
+preserve the 1,157 absent workbooks as explicit missing-source records; the
+complete surface uses one closest observed donor per missing cell, with donor
+lineage retained. V2 keeps the raw and filled ratios and adds separate
+stabilized-candidate fields. See the
+[investigation findings](discussions/conus_solar_physical_delta/01_investigation_findings.md)
+and [execution plan](plans/SCR%20Solar%20CONUS%20Physical%20Delta%20Parquet%20Plan.md).
+
+The completed full-corpus extraction strengthens the overall-factor case:
+
+- all 11,928 returned workbooks parse successfully;
+- every workbook has a nonzero 2025 `adjustedTotalDamage` and a future total at
+  every five-year horizon under both scenarios;
+- 2035–2040 central factors remain close to `1.0x` for nearly all cells;
+- the distribution widens materially toward 2100, especially under SSP5-8.5;
+- extreme raw ratios exist and are often associated with very small baseline
+  magnitudes, so raw and applied factors must remain separate.
+
+See the [full distribution analysis](discussions/conus_solar_physical_delta/03_full_overall_delta_distribution.md).
+
 ## 5. Questions that must be answered before implementation
 
-These questions determine the size and usefulness of the project. They should be answered with a small test set before the team designs a national grid, production database, or Platform interface.
+These questions determine the size and usefulness of the project. The national
+Solar files are now available, but they remain investigation evidence until the
+controlled logic, full-corpus QA, missingness treatment, and Platform semantics
+are approved.
 
 ### Question 1 — Does the SCR delta actually vary by location?
 
@@ -227,7 +309,7 @@ SCR's absolute risk will clearly vary by location. What is not yet proven is whe
 
 ```text
 Hold constant:
-  asset type + asset value + geometry + hazard + scenario + horizon
+  asset type + asset value + geometry + scenario + horizon
 
 Change only location:
 
@@ -242,7 +324,7 @@ Possible outcomes:
 ```text
 Is the delta materially different across locations?
         |
-        +-- NO  -> Store one factor per hazard/scenario/horizon.
+        +-- NO  -> Store one overall factor per asset type/scenario/horizon.
         |          No national SCR grid is needed for that factor.
         |
         +-- YES -> Store the factor by location or lookup cell.
@@ -259,7 +341,7 @@ The answer requires two tests, not one:
 
 Only the second test can support a decision about regional averaging or broader CONUS coverage.
 
-### Question 2 — Which hazards provide a usable physical-damage delta?
+### Supporting QA — Which hazards contribute to overall physical damage?
 
 The checked-in physical workbook contains eight hazard families and 28 continuous indicators:
 
@@ -268,15 +350,16 @@ Drought       Flood          Heat          Landslide
 Subsidence    Precipitation  Wildfire      Wind
 ```
 
-However, “a hazard appears in the workbook” does not necessarily mean “SCR provides a usable `adjustedHazardDamage` delta for that hazard.”
+However, “a hazard appears in the workbook” does not necessarily mean that it
+contributes a numeric `adjustedHazardDamage` value to `adjustedTotalDamage`.
 
 The current evidence suggests:
 
 | Hazard family | What is returned | Initial V1 interpretation |
 |---|---|---|
-| Flood | Inland/coastal depths plus `adjustedHazardDamage` for several sampled asset classes | Primary V1 candidate; flat results in some samples still require validation |
-| Wind | Wind-speed indicators and a displayed damage function; numeric `adjustedHazardDamage` is sparse in the sample | V1 candidate only where baseline and future physical-damage values are populated |
-| Wildfire | Burn probability, tree cover, FWI, and populated `adjustedHazardDamage` in sampled assets | Demonstrated V1 physical-damage candidate |
+| Flood | Inland/coastal depths plus `adjustedHazardDamage` for several sampled asset classes | QA component of overall damage where populated |
+| Wind | Wind-speed indicators and a displayed damage function; numeric `adjustedHazardDamage` is sparse in the sample | QA component; tiny denominators can expose factor instability |
+| Wildfire | Burn probability, tree cover, FWI, and populated `adjustedHazardDamage` in sampled assets | QA component with broad sampled coverage |
 | Heat | Workability and disruption fields; direct structural damage is blank in the sample | Outside V1; retain as reference only |
 | Drought | Water stress, duration, and magnitude indicators | Outside direct physical-damage V1 unless SCR later returns damage values |
 | Precipitation | Maximum 1-day and 5-day precipitation indicators | Outside direct physical-damage V1; avoid double counting with Flood |
@@ -284,12 +367,13 @@ The current evidence suggests:
 | Subsidence | Rate indicator | Outside direct physical-damage V1 |
 | Hail, tornado, winter weather | Not present in the example | Requires another source or remains explicitly uncovered |
 
-The output must therefore be classified hazard by hazard:
+The QA output should therefore classify hazards without expanding the V1
+delivery grain:
 
 ```text
 Hazard present
      |
-     +-- Has baseline and future adjustedHazardDamage? --> V1 damage factor
+     +-- Has baseline and future adjustedHazardDamage? --> contributes to QA
      |
      +-- Has only continuous hazard indicator? ----> possible later factor,
      |                                               but outside direct-EL V1
@@ -300,7 +384,9 @@ Hazard present
 
 ### First live evidence — six-asset portal test (2026-07-21)
 
-The first multi-asset test supports a **per asset × hazard × scenario × horizon physical-damage factor**, not one universal scalar.
+The first multi-asset test shows that the overall physical-damage factor must
+retain **asset type × location × scenario × horizon**. It does not support one
+universal scalar across every asset and location.
 
 The two gas assets are the clearest initial location test. Their Flood physical-damage factor is flat at `1.00x`, while their 2100 Wildfire physical-damage factors differ: Whitehorn is approximately `1.00x` and Frederickson approximately `1.35x`. This is enough to reject a single global physical-damage factor, but not enough to determine the final spatial lookup resolution.
 
@@ -313,7 +399,7 @@ The dashboard may retain disruption, disruption damage equivalent, Heat workabil
 The same location should be tested with at least a solar asset and a wind asset while holding asset value and resilience assumptions constant.
 
 ```text
-Same location + same hazard + same physical-damage inputs
+Same location + same physical-damage inputs
 
 Solar asset -> future / baseline = ?
 Wind asset  -> future / baseline = ?
@@ -389,14 +475,18 @@ Expected-loss delta  -X-> automatic scaling of PML, VaR, OEP, or AEP tails
 
 Flood and Wind contain return-period hazard indicators, but that does not prove SCR returns return-period-specific **financial-loss** changes. V1 should therefore target expected loss. Tail scaling is a separate extension only if the source supports reconstructing the loss distribution or provides tail-specific factors.
 
-### Question 8 — How should we use the overall asset curve versus the hazard curves?
+### Question 8 — Which overall field should drive the V1 delta?
 
 The repository already exposes both:
 
 ```text
-Overall asset curves
-  adjustedTotalValueImpact
+Overall physical damage
+  adjustedTotalDamage
+
+Other overall curves
   adjustedTotalDisruption
+  adjustedTotalDisruptionDamageEquivalent
+  adjustedTotalValueImpact
 
 Hazard-level curves
   adjustedHazardDamage
@@ -405,17 +495,18 @@ Hazard-level curves
   adjustedHazardValueImpact
 ```
 
-They support two different deltas:
+The primary V1 calculation is:
 
 ```text
-Overall asset delta = total future impact / total baseline impact
-Hazard delta        = hazard future impact / hazard baseline impact
+Overall physical-damage delta
+  = abs(adjustedTotalDamage at future horizon)
+    / abs(adjustedTotalDamage at 2025)
 ```
 
-The recommended use is:
+The agreed V1 use is:
 
-- **`adjustedHazardDamage` by hazard:** the only primary V1 input for scaling InfraSure physical-damage EL.
-- **Overall asset curve:** reconciliation and research only; it is not an approved fallback factor.
+- **`adjustedTotalDamage`:** primary final-delivery input.
+- **`adjustedHazardDamage`:** component reconciliation and research only.
 - **Disruption, DDE, Heat, and combined-value curves:** research and QA only.
 - **Derived magnitude-response curve:** research and QA only unless SCR confirms it represents an official vulnerability relationship.
 
@@ -429,11 +520,15 @@ adjustedTotalValueImpact
 
 At `ssp5-8.5 / 2100` in the example, the total value impact reconciles exactly to those two total components. The hazard rows also explain the composition: Flood and Wildfire contribute quantified value impact, while Heat contributes disruption damage-equivalent even though its hazard value-impact field is blank.
 
-This matters because the overall asset curve includes disruption damage equivalent and can rise while a hazard's physical-damage result is flat. The overall curve must therefore **not** be reused as a physical-damage factor for Flood or any other hazard.
+This distinction matters because `adjustedTotalValueImpact` includes disruption
+damage equivalent. It is not the overall physical-damage field. The V1 overall
+factor must use `adjustedTotalDamage`, not `adjustedTotalValueImpact`.
 
 ## 6. The minimum experiment and regional validation
 
-Do not begin with every U.S. grid cell. Use the following two-stage test.
+The original decision path used the following two-stage test. The Solar source
+drop now covers most of CONUS, so apply the same controlled logic and regional
+diagnostics inside that corpus before promoting any national factor table.
 
 ### Stage A — controlled matrix
 
@@ -512,7 +607,9 @@ cell factors in selected region
           +--> unstable or sparse ----------> keep per-asset workflow or reject
 ```
 
-The regional test must be completed before anyone builds a nationwide factor table. Expanding to broader CONUS coverage is a later implementation choice, not an assumption in this scope.
+The regional diagnostics must be completed before the existing Solar corpus is
+promoted into a nationwide production factor table. National files being
+available is not the same as national methodology approval.
 
 ## 7. The four possible architectures
 
@@ -521,17 +618,17 @@ The test result—not an assumption—selects the architecture.
 ```text
 Outcome A: delta does not vary materially by location or asset type
 
-  Delta[hazard, scenario, horizon]
+  Delta[asset_type, scenario, horizon]
   -> smallest scope; no spatial lookup required
 
 Outcome B: delta varies by location but not asset type
 
-  Delta[location/cell, hazard, scenario, horizon]
+  Delta[location/cell, scenario, horizon]
   -> spatial lookup; reusable across assets
 
 Outcome C: delta varies by location and asset type
 
-  Delta[location/cell, asset_type, hazard, scenario, horizon]
+  Delta[location/cell, asset_type, scenario, horizon]
   -> solar/wind-specific spatial lookup
 
 Outcome D: delta also varies with value, geometry, or resilience
@@ -549,49 +646,45 @@ This decision is the main deliverable of the first phase. It tells us whether th
 
 | Role | Responsibility |
 |---|---|
-| **Utkarsh — implementation owner** | Run the controlled and regional batches, preserve manifests and raw outputs, calculate the variance report, and deliver an architecture recommendation. |
+| **Utkarsh — SCR fetch owner** | Preserve the submitted Solar configuration and fetch logs and support equivalent Wind/Gas runs after review of the Solar V2 method. No Solar retry is required for the current V1/V2 release. |
+| **Data-pipeline owner** | Parse the frozen workbooks, derive raw factors, run spatial/missingness QA, and produce the governed Parquet and variance report. |
 | **Divy — model/product decision owner** | Select the initial region and standard asset configurations; approve baseline, decrease-factor, guardrail, hazard-coverage, and Platform presentation decisions. |
 | **Prashant / SCR contact — dependency owner** | Close any unresolved SCR input requirements and confirm metric units, baseline semantics, loss-sign convention, inflation treatment, and usage/licensing constraints. |
 
 ### What Utkarsh needs to do now
 
 ```text
-1. Freeze test configuration
-   -> region, cell centers, standard assets, scenarios, horizons, baseline
+1. Preserve the completed Solar run contract
+   -> input template, Solar TICCS class, value/revenue assumptions,
+      scenarios, horizons, submitted cell manifest, and fetch logs
 
-2. Prove the controlled batch
-   -> 6-10 locations; one-variable-at-a-time comparisons
+2. Preserve the frozen missing-source manifest
+   -> 1,157 canonical cells absent; current V1/V2 uses closest observed donors
 
-3. Run the regional batch
-   -> standardized assets at 25 km x 25 km cell center points
+3. Freeze the final Solar source inventory
+   -> do not replace observed files without version/provenance tracking
 
-4. Join and calculate
-   -> returned assetName -> private manifest -> InfraSure asset/location ID
-   -> raw factor, absolute change, coverage status, guardrail status
+4. Support controlled comparisons
+   -> confirm which prior gas locations/configurations are directly comparable
 
-5. Analyze spatial consistency
-   -> cell values, regional average, spread, outliers, missingness
-
-6. Recommend Architecture A, B, C, or D
-   -> include evidence and estimated coverage/storage implications
-
-7. Hand off reproducible artifacts
-   -> configuration, upload, private manifest, raw SCR returns,
-      normalized factor table, variance report, and decision summary
+5. Prepare one next asset-class run only after review
+   -> Wind or Gas, using the same immutable inventory and QA pattern
 ```
 
-Utkarsh should not build the complete CONUS grid, select a production cap, or wire factors into client-facing EL until Divy reviews the regional evidence and approves the architecture.
+Utkarsh should review the Solar method and help reproduce the source pattern for
+Wind or Gas. He should not change the stabilization parameters or wire factors
+into client-facing EL; those choices remain with Divy's model/product review.
 
 ### Phase 0 — Prove the delta
 
-1. Confirm the `adjustedHazardDamage` definition and units.
+1. Confirm the `adjustedTotalDamage` definition and units.
 2. Confirm the baseline and future-period semantics.
 3. Confirm that physical-damage values are annualized asset-value impacts.
 4. Confirm whether the metric is inflation-neutral and suitable for scaling a current-value InfraSure EL.
 5. Run the controlled location/asset/input test matrix.
 6. Run the selected state/climate-region batch at the available 25 km x 25 km reference-cell centers.
 7. Quantify location, within-region, asset-type, value, geometry, and resilience sensitivity; compare between regions when the test includes more than one.
-8. Classify each hazard as physical-damage capable, indicator-only, or unavailable.
+8. Reconcile `adjustedTotalDamage` to populated hazard-damage components as QA.
 9. Review zero/near-zero baselines and the observed delta distribution; propose a baseline floor and any ceiling/floor or soft/log compression only if supported by evidence.
 10. Decide whether factors below `1.0` may reduce InfraSure EL or whether the applied underwriting factor has a conservative floor of `1.0`; always retain the raw factor.
 11. Select Architecture A, B, C, or D.
@@ -600,37 +693,38 @@ Utkarsh should not build the complete CONUS grid, select a production cap, or wi
 
 1. Extend the existing workbook-to-JSON builder into the selected production ingestion path; do not rebuild the proven parser from scratch.
 2. Join returned `Output.assetName` through the private manifest to the InfraSure asset ID.
-3. Calculate and store the approved delta with its baseline, scenario, horizon, hazard, and necessary asset/location dimensions.
+3. Calculate and store the approved overall delta with its baseline, scenario,
+   horizon, and necessary asset/location dimensions.
 4. Retain the raw SCR workbook and values for reproducibility.
 5. Do not build unused grid or asset dimensions.
 6. Version the calculation logic and attach every record to its SCR batch run and portfolio/context where applicable.
 
 ### Phase 2 — Apply to InfraSure expected loss
 
-1. Retrieve InfraSure current EL by asset and hazard.
-2. Retrieve the matching SCR delta.
-3. Calculate future EL.
-4. Retain current EL for uncovered hazards with an explicit `uncovered_baseline_retained` status; do not describe the future change as zero.
-5. Apply InfraSure's existing dependency/correlation aggregation rules where they exist. Otherwise, label a simple sum as an additive V1 subtotal rather than introducing a new compound-risk model.
-6. Aggregate adjusted hazard ELs to the asset and portfolio.
-7. Preserve current and future values separately.
+1. Retrieve the InfraSure current asset-level loss metric selected for screening.
+2. Retrieve the matching overall SCR delta.
+3. Calculate the screened future asset-level loss.
+4. Preserve current and future values separately.
+5. Label the result as an overall SCR physical-damage screen; do not imply
+   hazard-level completeness.
 
 ```text
-current_el
-    x scr_delta_applied(asset/location, hazard, scenario, horizon)
-    = future_el
+current_asset_loss
+    x scr_overall_delta_applied(asset/location, scenario, horizon)
+    = screened_future_asset_loss
 ```
 
 ### Phase 3 — Present in the Platform
 
-Reuse the distinctions already demonstrated in the local SCR dashboard: overall asset trend, hazard-level trend, hazard ranking, and clear labeling of unquantified hazards.
+Lead with the overall asset trend. Hazard-level detail may remain available in
+research views, but it is not required in the first delivery.
 
 Show:
 
 - Current InfraSure EL.
 - Future InfraSure EL.
 - Absolute and percentage change.
-- Hazard, scenario, horizon, and source.
+- Scenario, horizon, asset type, location, and source.
 - A clear missing-coverage status.
 
 Do not show:
@@ -638,7 +732,7 @@ Do not show:
 - An unlabeled SCR percentage beside an InfraSure percentage.
 - A tail-risk result derived only from an EL multiplier.
 - An uncovered hazard as unchanged.
-- A universal asset factor that hides hazard-level differences.
+- A claim that the overall factor represents every individual hazard.
 
 ## 9. V1 factor record
 
@@ -646,13 +740,12 @@ Store only the fields needed to reproduce and understand the change:
 
 | Field | Purpose |
 |---|---|
-| `asset_id` or `location_id` | Determined by the spatial/asset-dependence test |
-| `asset_type` | Required only if the delta varies by asset type |
-| `hazard` | The specific hazard being scaled |
+| `cell_id` | Exact InfraSure canonical-grid join key |
+| `asset_type` | Standardized SCR asset configuration |
 | `scenario` | Original SCR scenario |
 | `baseline_period` | Exact denominator definition |
 | `future_horizon` | Future comparison year/period |
-| `scr_metric_name` | Exact source field; V1 is `adjustedHazardDamage` |
+| `scr_metric_name` | Exact source field; V1 is `adjustedTotalDamage` |
 | `scr_baseline_value` | Preserved source denominator |
 | `scr_future_value` | Preserved source numerator |
 | `scr_delta_raw` | Future divided by baseline, preserved without modification |
@@ -661,13 +754,15 @@ Store only the fields needed to reproduce and understand the change:
 | `source_product_version` | Reproducibility |
 | `raw_record_reference` | Link to the source row/workbook |
 | `quality_status` | Approved, provisional, unavailable, or invalid baseline |
-| `coverage_status` | SCR modeled, indicator-only, unavailable, or uncovered baseline retained |
+| `coverage_status` | Observed workbook, missing source, unavailable total, or invalid baseline |
 | `scr_run_id` | Join to the reproducible batch-run directory and manifest |
 | `portfolio_id` | InfraSure portfolio context where applicable |
 | `created_at` | Factor-record creation timestamp |
 | `schema_version` | Version of the factor-calculation and guardrail logic |
 
-Value, geometry, and resilience belong in the key only if the experiment proves they affect the delta.
+The final V1 record is keyed by canonical cell, standardized asset type,
+scenario, and horizon. Value, geometry, and resilience belong in the key only
+if the experiment proves they affect the overall delta.
 
 ## 10. Acceptance criteria
 
@@ -675,10 +770,11 @@ The focused scope is complete when:
 
 1. We know whether SCR's delta varies materially by location, based on both the controlled matrix and a larger state/climate-region batch.
 2. We know whether it varies by asset type, value, geometry, or resilience.
-3. Every InfraSure hazard is classified as physical-damage capable, indicator-only, unavailable, or not applicable.
-4. `adjustedHazardDamage` and its baseline are documented for each V1 hazard.
-5. At least Flood, Wind, and Wildfire have been evaluated for direct EL scaling.
-6. Heat and disruption are explicitly excluded from the applied V1 factor.
+3. `adjustedTotalDamage` and the 2025 baseline are documented and validated.
+4. Overall damage reconciles to available hazard-damage components within the
+   approved tolerance.
+5. Hazard-level outputs are retained as QA rather than required delivery rows.
+6. Heat disruption and combined value are explicitly excluded from the applied V1 factor.
 7. Architecture A, B, C, or D has been selected from evidence.
 8. One current-to-future InfraSure physical-damage EL calculation can be reproduced end to end.
 9. The observed delta distribution has been reviewed and any ceiling/compression rule is documented; raw and applied deltas remain separate.
@@ -686,23 +782,32 @@ The focused scope is complete when:
 11. Licensing permits storing derived deltas and using them in client-facing calculations.
 12. The team has measured the error/spread around a climate-region average and decided whether regional averaging, a cell lookup, or per-asset processing is defensible.
 13. Zero and near-zero baselines return an explicit status rather than an infinite or arbitrary multiplier.
-14. Complete asset totals retain uncovered current EL with a visible coverage status, or the output is explicitly labeled as an SCR-covered subtotal.
+14. The result is labeled as SCR's overall available physical-damage rollup,
+    not proof of complete hazard coverage.
 15. Each result is traceable to a run, raw workbook row, schema version, and creation time.
 
 ## 11. Recommended decision
 
-Approve the concept as an **SCR-derived, asset- and hazard-specific physical-damage expected-loss delta**.
+Approve the concept as an **SCR-derived, asset- and location-specific overall
+physical-damage delta**.
 
-Before building a national grid or a detailed integration, run the controlled and regional experiments to answer two primary questions:
+The Solar national grid and numerical V2 candidate now exist. Before detailed
+Platform integration, use representative InfraSure assets to answer two primary
+questions:
 
-1. Does the delta vary enough by location to require spatial storage?
-2. Which hazards actually provide a usable `adjustedHazardDamage` delta?
+1. Does the stabilized candidate produce defensible EAL/TIV outcomes?
+2. Do Wind and Gas require different compression parameters?
 
-Then test asset type and financial-input dependence. These results determine the smallest correct architecture. If a climate-region average is representative, use it. If not, retain cell-level or per-asset processing. A broader CONUS build is justified only after this decision.
+Retain the cell-level Solar surface while those tests are conducted. Do not
+replace it with regional averages or treat the V2 candidate as a PML/TVaR
+adjustment.
 
 The simplest intended product remains:
 
-> SCR tells us how the expected physical damage from a particular hazard changes for a particular asset. InfraSure uses that relative change to scale its own current physical-damage EL, without rerunning the full future hazard and damage model.
+> SCR tells us how its overall modeled physical damage changes for a standardized
+> asset at a particular location. InfraSure uses that relative change as an
+> asset-level screening factor without rerunning the full future hazard and
+> damage model.
 
 ---
 
