@@ -11,3 +11,9 @@ __pycache__/
 climatemetrics_scraper/downloads/
 climatemetrics_scraper/failures/
 
+# API_Spoof data, exports, and failure logs
+API_Spoof/physical_risks_exports*/
+API_Spoof/*.json
+API_Spoof/*.csv
+
+
