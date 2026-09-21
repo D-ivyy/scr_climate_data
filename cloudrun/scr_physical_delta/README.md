@@ -1,9 +1,15 @@
 # SCR physical-delta Cloud Run extraction
 
 This folder owns the task-indexed workbook extraction used by the Solar V1
-delivery. `run_task.py` reads a SHA-pinned JSON source inventory, assigns files
-by `CLOUD_RUN_TASK_INDEX / CLOUD_RUN_TASK_COUNT`, extracts the fixed SCR
+delivery and subsequent physical-risk asset extensions. `run_task.py` reads a
+SHA-pinned JSON source inventory, assigns files by
+`CLOUD_RUN_TASK_INDEX / CLOUD_RUN_TASK_COUNT`, extracts the fixed SCR
 `adjustedTotalDamage` contract, and writes one JSON result per task.
+
+`prepare_run.py` freezes one asset-specific source inventory and can stage its
+workbooks under an immutable `run_id=...` prefix when the Cloud Run service
+account cannot read the upstream SCR bucket. It uses destination generation-zero
+preconditions so an existing run cannot be silently overwritten.
 
 ## Solar V1 proof
 

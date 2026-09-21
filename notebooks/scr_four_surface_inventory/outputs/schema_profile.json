@@ -1,0 +1,4580 @@
+[
+  {
+    "surface": "solar_physical",
+    "cell_id": 235780,
+    "source_uri": "gs://infrasure-scr-data/Solar-asset/physical_risk/CONUS13K_Cell_235780_MN_MISO_SolarPV_physical_risks.xlsx",
+    "sheet_names": [
+      "ReadMe",
+      "Output"
+    ],
+    "rows": 986,
+    "columns": 36,
+    "headers": [
+      "assetId",
+      "assetName",
+      "reportDate",
+      "geolocationCoordinates",
+      "countryCode",
+      "climateZone",
+      "ticcsSubClass",
+      "ticcsSubClassName",
+      "scenario",
+      "timeHorizon",
+      "indicator",
+      "indicatorUnit",
+      "indicatorValue",
+      "indicatorRating",
+      "hazard",
+      "HazardRating",
+      "hazardDamage",
+      "adjustedHazardDamage",
+      "hazardDisruption",
+      "adjustedHazardDisruption",
+      "hazardDisruptionDamageEquivalent",
+      "adjustedHazardDisruptionDamageEquivalent",
+      "hazardValueImpact",
+      "adjustedHazardValueImpact",
+      "hazardExposureRating",
+      "adjustedHazardExposureRating",
+      "totalDamage",
+      "adjustedTotalDamage",
+      "totalDisruption",
+      "adjustedTotalDisruption",
+      "totalDisruptionDamageEquivalent",
+      "adjustedTotalDisruptionDamageEquivalent",
+      "totalValueImpact",
+      "adjustedTotalValueImpact",
+      "physicalExposureRating",
+      "adjustedPhysicalExposureRating"
+    ],
+    "schema_hash_sha256": "711db3defab6048804706e83a42af849c164d7c7b63d4905d7e6461c71e61f02",
+    "dimensions": {
+      "ticcsSubClass": [
+        "IC702010"
+      ],
+      "ticcsSubClassName": [
+        "Photovoltaic Power Generation"
+      ],
+      "assetId": [
+        "USA_01223"
+      ],
+      "countryCode": [
+        "USA"
+      ],
+      "climateZone": [
+        "Cold"
+      ],
+      "geolocationCoordinates": [
+        "(49.25,-95.0)"
+      ],
+      "scenario": [
+        "ssp2-4.5",
+        "ssp5-8.5"
+      ],
+      "timeHorizon": [
+        "2025",
+        "2030",
+        "2035",
+        "2040",
+        "2045",
+        "2050",
+        "2055",
+        "2060",
+        "2065",
+        "2070",
+        "2075",
+        "2080",
+        "2085",
+        "2090",
+        "2095",
+        "2100",
+        "Historical"
+      ],
+      "hazard": [
+        "Drought",
+        "Earthquake",
+        "Flood",
+        "Heat",
+        "Landslide",
+        "Precipitation",
+        "Subsidence",
+        "Wildfire",
+        "Wind"
+      ],
+      "indicator": [
+        "Burn probability",
+        "Coastal flood depth - 10 years RP",
+        "Coastal flood depth - 100 years RP",
+        "Coastal flood depth - 500 years RP",
+        "Days above 35°C",
+        "Days above 38°C",
+        "Days above 99th percentile",
+        "Drought duration (SPEI-6)",
+        "Drought magnitude (SPEI-6)",
+        "ETS wind speed - 10 years RP",
+        "ETS wind speed - 100 years RP",
+        "ETS wind speed - 500 years RP",
+        "Fire Weather Index (FWI)",
+        "Fluvial & Pluvial Flood depth - 10 years RP",
+        "Fluvial & Pluvial Flood depth - 100 years RP",
+        "Fluvial & Pluvial Flood depth - 500 years RP",
+        "Heatwave average length",
+        "Heatwave count",
+        "Landslide susceptibility",
+        "Max precipitation 1 day",
+        "Max precipitation 5 days",
+        "Peak Ground acceleration",
+        "Subsidence rate",
+        "TC wind speed - 10 years RP",
+        "TC wind speed - 100 years RP",
+        "TC wind speed - 500 years RP",
+        "Tree cover",
+        "WBGT days",
+        "Water stress"
+      ],
+      "indicatorUnit": [
+        "%",
+        "cm/year",
+        "days",
+        "events/decade",
+        "g",
+        "m",
+        "m/s",
+        "mm",
+        "months"
+      ]
+    },
+    "null_counts": {
+      "assetId": 0,
+      "assetName": 0,
+      "reportDate": 0,
+      "geolocationCoordinates": 0,
+      "countryCode": 0,
+      "climateZone": 0,
+      "ticcsSubClass": 0,
+      "ticcsSubClassName": 0,
+      "scenario": 0,
+      "timeHorizon": 0,
+      "indicator": 0,
+      "indicatorUnit": 102,
+      "indicatorValue": 381,
+      "indicatorRating": 19,
+      "hazard": 0,
+      "HazardRating": 0,
+      "hazardDamage": 890,
+      "adjustedHazardDamage": 890,
+      "hazardDisruption": 698,
+      "adjustedHazardDisruption": 698,
+      "hazardDisruptionDamageEquivalent": 698,
+      "adjustedHazardDisruptionDamageEquivalent": 698,
+      "hazardValueImpact": 890,
+      "adjustedHazardValueImpact": 890,
+      "hazardExposureRating": 314,
+      "adjustedHazardExposureRating": 314,
+      "totalDamage": 58,
+      "adjustedTotalDamage": 58,
+      "totalDisruption": 58,
+      "adjustedTotalDisruption": 58,
+      "totalDisruptionDamageEquivalent": 58,
+      "adjustedTotalDisruptionDamageEquivalent": 58,
+      "totalValueImpact": 58,
+      "adjustedTotalValueImpact": 58,
+      "physicalExposureRating": 58,
+      "adjustedPhysicalExposureRating": 58
+    },
+    "source_grain_columns": [
+      "assetId",
+      "scenario",
+      "timeHorizon",
+      "hazard",
+      "indicator"
+    ],
+    "source_grain_unique_count": 986,
+    "source_grain_duplicate_count": 0,
+    "repeated_measure": "adjustedTotalDamage",
+    "repeated_measure_group_columns": [
+      "assetId",
+      "scenario",
+      "timeHorizon"
+    ],
+    "repeated_measure_inconsistent_group_count": 0
+  },
+  {
+    "surface": "solar_physical",
+    "cell_id": 251603,
+    "source_uri": "gs://infrasure-scr-data/Solar-asset/physical_risk/CONUS13K_Cell_251603_ND_MISO_SolarPV_physical_risks.xlsx",
+    "sheet_names": [
+      "ReadMe",
+      "Output"
+    ],
+    "rows": 986,
+    "columns": 36,
+    "headers": [
+      "assetId",
+      "assetName",
+      "reportDate",
+      "geolocationCoordinates",
+      "countryCode",
+      "climateZone",
+      "ticcsSubClass",
+      "ticcsSubClassName",
+      "scenario",
+      "timeHorizon",
+      "indicator",
+      "indicatorUnit",
+      "indicatorValue",
+      "indicatorRating",
+      "hazard",
+      "HazardRating",
+      "hazardDamage",
+      "adjustedHazardDamage",
+      "hazardDisruption",
+      "adjustedHazardDisruption",
+      "hazardDisruptionDamageEquivalent",
+      "adjustedHazardDisruptionDamageEquivalent",
+      "hazardValueImpact",
+      "adjustedHazardValueImpact",
+      "hazardExposureRating",
+      "adjustedHazardExposureRating",
+      "totalDamage",
+      "adjustedTotalDamage",
+      "totalDisruption",
+      "adjustedTotalDisruption",
+      "totalDisruptionDamageEquivalent",
+      "adjustedTotalDisruptionDamageEquivalent",
+      "totalValueImpact",
+      "adjustedTotalValueImpact",
+      "physicalExposureRating",
+      "adjustedPhysicalExposureRating"
+    ],
+    "schema_hash_sha256": "711db3defab6048804706e83a42af849c164d7c7b63d4905d7e6461c71e61f02",
+    "dimensions": {
+      "ticcsSubClass": [
+        "IC702010"
+      ],
+      "ticcsSubClassName": [
+        "Photovoltaic Power Generation"
+      ],
+      "assetId": [
+        "USA_03836"
+      ],
+      "countryCode": [
+        "USA"
+      ],
+      "climateZone": [
+        "Cold"
+      ],
+      "geolocationCoordinates": [
+        "(46.5,-99.25)"
+      ],
+      "scenario": [
+        "ssp2-4.5",
+        "ssp5-8.5"
+      ],
+      "timeHorizon": [
+        "2025",
+        "2030",
+        "2035",
+        "2040",
+        "2045",
+        "2050",
+        "2055",
+        "2060",
+        "2065",
+        "2070",
+        "2075",
+        "2080",
+        "2085",
+        "2090",
+        "2095",
+        "2100",
+        "Historical"
+      ],
+      "hazard": [
+        "Drought",
+        "Earthquake",
+        "Flood",
+        "Heat",
+        "Landslide",
+        "Precipitation",
+        "Subsidence",
+        "Wildfire",
+        "Wind"
+      ],
+      "indicator": [
+        "Burn probability",
+        "Coastal flood depth - 10 years RP",
+        "Coastal flood depth - 100 years RP",
+        "Coastal flood depth - 500 years RP",
+        "Days above 35°C",
+        "Days above 38°C",
+        "Days above 99th percentile",
+        "Drought duration (SPEI-6)",
+        "Drought magnitude (SPEI-6)",
+        "ETS wind speed - 10 years RP",
+        "ETS wind speed - 100 years RP",
+        "ETS wind speed - 500 years RP",
+        "Fire Weather Index (FWI)",
+        "Fluvial & Pluvial Flood depth - 10 years RP",
+        "Fluvial & Pluvial Flood depth - 100 years RP",
+        "Fluvial & Pluvial Flood depth - 500 years RP",
+        "Heatwave average length",
+        "Heatwave count",
+        "Landslide susceptibility",
+        "Max precipitation 1 day",
+        "Max precipitation 5 days",
+        "Peak Ground acceleration",
+        "Subsidence rate",
+        "TC wind speed - 10 years RP",
+        "TC wind speed - 100 years RP",
+        "TC wind speed - 500 years RP",
+        "Tree cover",
+        "WBGT days",
+        "Water stress"
+      ],
+      "indicatorUnit": [
+        "%",
+        "cm/year",
+        "days",
+        "events/decade",
+        "g",
+        "m",
+        "m/s",
+        "mm",
+        "months"
+      ]
+    },
+    "null_counts": {
+      "assetId": 0,
+      "assetName": 0,
+      "reportDate": 0,
+      "geolocationCoordinates": 0,
+      "countryCode": 0,
+      "climateZone": 0,
+      "ticcsSubClass": 0,
+      "ticcsSubClassName": 0,
+      "scenario": 0,
+      "timeHorizon": 0,
+      "indicator": 0,
+      "indicatorUnit": 102,
+      "indicatorValue": 325,
+      "indicatorRating": 19,
+      "hazard": 0,
+      "HazardRating": 0,
+      "hazardDamage": 890,
+      "adjustedHazardDamage": 890,
+      "hazardDisruption": 698,
+      "adjustedHazardDisruption": 698,
+      "hazardDisruptionDamageEquivalent": 698,
+      "adjustedHazardDisruptionDamageEquivalent": 698,
+      "hazardValueImpact": 890,
+      "adjustedHazardValueImpact": 890,
+      "hazardExposureRating": 314,
+      "adjustedHazardExposureRating": 314,
+      "totalDamage": 58,
+      "adjustedTotalDamage": 58,
+      "totalDisruption": 58,
+      "adjustedTotalDisruption": 58,
+      "totalDisruptionDamageEquivalent": 58,
+      "adjustedTotalDisruptionDamageEquivalent": 58,
+      "totalValueImpact": 58,
+      "adjustedTotalValueImpact": 58,
+      "physicalExposureRating": 58,
+      "adjustedPhysicalExposureRating": 58
+    },
+    "source_grain_columns": [
+      "assetId",
+      "scenario",
+      "timeHorizon",
+      "hazard",
+      "indicator"
+    ],
+    "source_grain_unique_count": 986,
+    "source_grain_duplicate_count": 0,
+    "repeated_measure": "adjustedTotalDamage",
+    "repeated_measure_group_columns": [
+      "assetId",
+      "scenario",
+      "timeHorizon"
+    ],
+    "repeated_measure_inconsistent_group_count": 0
+  },
+  {
+    "surface": "solar_physical",
+    "cell_id": 267495,
+    "source_uri": "gs://infrasure-scr-data/Solar-asset/physical_risk/CONUS13K_Cell_267495_MI_MISO_SolarPV_physical_risks.xlsx",
+    "sheet_names": [
+      "ReadMe",
+      "Output"
+    ],
+    "rows": 986,
+    "columns": 36,
+    "headers": [
+      "assetId",
+      "assetName",
+      "reportDate",
+      "geolocationCoordinates",
+      "countryCode",
+      "climateZone",
+      "ticcsSubClass",
+      "ticcsSubClassName",
+      "scenario",
+      "timeHorizon",
+      "indicator",
+      "indicatorUnit",
+      "indicatorValue",
+      "indicatorRating",
+      "hazard",
+      "HazardRating",
+      "hazardDamage",
+      "adjustedHazardDamage",
+      "hazardDisruption",
+      "adjustedHazardDisruption",
+      "hazardDisruptionDamageEquivalent",
+      "adjustedHazardDisruptionDamageEquivalent",
+      "hazardValueImpact",
+      "adjustedHazardValueImpact",
+      "hazardExposureRating",
+      "adjustedHazardExposureRating",
+      "totalDamage",
+      "adjustedTotalDamage",
+      "totalDisruption",
+      "adjustedTotalDisruption",
+      "totalDisruptionDamageEquivalent",
+      "adjustedTotalDisruptionDamageEquivalent",
+      "totalValueImpact",
+      "adjustedTotalValueImpact",
+      "physicalExposureRating",
+      "adjustedPhysicalExposureRating"
+    ],
+    "schema_hash_sha256": "711db3defab6048804706e83a42af849c164d7c7b63d4905d7e6461c71e61f02",
+    "dimensions": {
+      "ticcsSubClass": [
+        "IC702010"
+      ],
+      "ticcsSubClassName": [
+        "Photovoltaic Power Generation"
+      ],
+      "assetId": [
+        "USA_07438"
+      ],
+      "countryCode": [
+        "USA"
+      ],
+      "climateZone": [
+        "Cold"
+      ],
+      "geolocationCoordinates": [
+        "(43.75,-86.25)"
+      ],
+      "scenario": [
+        "ssp2-4.5",
+        "ssp5-8.5"
+      ],
+      "timeHorizon": [
+        "2025",
+        "2030",
+        "2035",
+        "2040",
+        "2045",
+        "2050",
+        "2055",
+        "2060",
+        "2065",
+        "2070",
+        "2075",
+        "2080",
+        "2085",
+        "2090",
+        "2095",
+        "2100",
+        "Historical"
+      ],
+      "hazard": [
+        "Drought",
+        "Earthquake",
+        "Flood",
+        "Heat",
+        "Landslide",
+        "Precipitation",
+        "Subsidence",
+        "Wildfire",
+        "Wind"
+      ],
+      "indicator": [
+        "Burn probability",
+        "Coastal flood depth - 10 years RP",
+        "Coastal flood depth - 100 years RP",
+        "Coastal flood depth - 500 years RP",
+        "Days above 35°C",
+        "Days above 38°C",
+        "Days above 99th percentile",
+        "Drought duration (SPEI-6)",
+        "Drought magnitude (SPEI-6)",
+        "ETS wind speed - 10 years RP",
+        "ETS wind speed - 100 years RP",
+        "ETS wind speed - 500 years RP",
+        "Fire Weather Index (FWI)",
+        "Fluvial & Pluvial Flood depth - 10 years RP",
+        "Fluvial & Pluvial Flood depth - 100 years RP",
+        "Fluvial & Pluvial Flood depth - 500 years RP",
+        "Heatwave average length",
+        "Heatwave count",
+        "Landslide susceptibility",
+        "Max precipitation 1 day",
+        "Max precipitation 5 days",
+        "Peak Ground acceleration",
+        "Subsidence rate",
+        "TC wind speed - 10 years RP",
+        "TC wind speed - 100 years RP",
+        "TC wind speed - 500 years RP",
+        "Tree cover",
+        "WBGT days",
+        "Water stress"
+      ],
+      "indicatorUnit": [
+        "%",
+        "cm/year",
+        "days",
+        "events/decade",
+        "g",
+        "m",
+        "m/s",
+        "mm",
+        "months"
+      ]
+    },
+    "null_counts": {
+      "assetId": 0,
+      "assetName": 0,
+      "reportDate": 0,
+      "geolocationCoordinates": 0,
+      "countryCode": 0,
+      "climateZone": 0,
+      "ticcsSubClass": 0,
+      "ticcsSubClassName": 0,
+      "scenario": 0,
+      "timeHorizon": 0,
+      "indicator": 0,
+      "indicatorUnit": 102,
+      "indicatorValue": 389,
+      "indicatorRating": 19,
+      "hazard": 0,
+      "HazardRating": 0,
+      "hazardDamage": 890,
+      "adjustedHazardDamage": 890,
+      "hazardDisruption": 698,
+      "adjustedHazardDisruption": 698,
+      "hazardDisruptionDamageEquivalent": 698,
+      "adjustedHazardDisruptionDamageEquivalent": 698,
+      "hazardValueImpact": 890,
+      "adjustedHazardValueImpact": 890,
+      "hazardExposureRating": 314,
+      "adjustedHazardExposureRating": 314,
+      "totalDamage": 58,
+      "adjustedTotalDamage": 58,
+      "totalDisruption": 58,
+      "adjustedTotalDisruption": 58,
+      "totalDisruptionDamageEquivalent": 58,
+      "adjustedTotalDisruptionDamageEquivalent": 58,
+      "totalValueImpact": 58,
+      "adjustedTotalValueImpact": 58,
+      "physicalExposureRating": 58,
+      "adjustedPhysicalExposureRating": 58
+    },
+    "source_grain_columns": [
+      "assetId",
+      "scenario",
+      "timeHorizon",
+      "hazard",
+      "indicator"
+    ],
+    "source_grain_unique_count": 986,
+    "source_grain_duplicate_count": 0,
+    "repeated_measure": "adjustedTotalDamage",
+    "repeated_measure_group_columns": [
+      "assetId",
+      "scenario",
+      "timeHorizon"
+    ],
+    "repeated_measure_inconsistent_group_count": 0
+  },
+  {
+    "surface": "solar_physical",
+    "cell_id": 291861,
+    "source_uri": "gs://infrasure-scr-data/Solar-asset/physical_risk/CONUS13K_Cell_291861_NV_WEIM_SolarPV_physical_risks.xlsx",
+    "sheet_names": [
+      "ReadMe",
+      "Output"
+    ],
+    "rows": 986,
+    "columns": 36,
+    "headers": [
+      "assetId",
+      "assetName",
+      "reportDate",
+      "geolocationCoordinates",
+      "countryCode",
+      "climateZone",
+      "ticcsSubClass",
+      "ticcsSubClassName",
+      "scenario",
+      "timeHorizon",
+      "indicator",
+      "indicatorUnit",
+      "indicatorValue",
+      "indicatorRating",
+      "hazard",
+      "HazardRating",
+      "hazardDamage",
+      "adjustedHazardDamage",
+      "hazardDisruption",
+      "adjustedHazardDisruption",
+      "hazardDisruptionDamageEquivalent",
+      "adjustedHazardDisruptionDamageEquivalent",
+      "hazardValueImpact",
+      "adjustedHazardValueImpact",
+      "hazardExposureRating",
+      "adjustedHazardExposureRating",
+      "totalDamage",
+      "adjustedTotalDamage",
+      "totalDisruption",
+      "adjustedTotalDisruption",
+      "totalDisruptionDamageEquivalent",
+      "adjustedTotalDisruptionDamageEquivalent",
+      "totalValueImpact",
+      "adjustedTotalValueImpact",
+      "physicalExposureRating",
+      "adjustedPhysicalExposureRating"
+    ],
+    "schema_hash_sha256": "711db3defab6048804706e83a42af849c164d7c7b63d4905d7e6461c71e61f02",
+    "dimensions": {
+      "ticcsSubClass": [
+        "IC702010"
+      ],
+      "ticcsSubClassName": [
+        "Photovoltaic Power Generation"
+      ],
+      "assetId": [
+        "USA_10699"
+      ],
+      "countryCode": [
+        "USA"
+      ],
+      "climateZone": [
+        "Arid"
+      ],
+      "geolocationCoordinates": [
+        "(39.5,-114.75)"
+      ],
+      "scenario": [
+        "ssp2-4.5",
+        "ssp5-8.5"
+      ],
+      "timeHorizon": [
+        "2025",
+        "2030",
+        "2035",
+        "2040",
+        "2045",
+        "2050",
+        "2055",
+        "2060",
+        "2065",
+        "2070",
+        "2075",
+        "2080",
+        "2085",
+        "2090",
+        "2095",
+        "2100",
+        "Historical"
+      ],
+      "hazard": [
+        "Drought",
+        "Earthquake",
+        "Flood",
+        "Heat",
+        "Landslide",
+        "Precipitation",
+        "Subsidence",
+        "Wildfire",
+        "Wind"
+      ],
+      "indicator": [
+        "Burn probability",
+        "Coastal flood depth - 10 years RP",
+        "Coastal flood depth - 100 years RP",
+        "Coastal flood depth - 500 years RP",
+        "Days above 35°C",
+        "Days above 38°C",
+        "Days above 99th percentile",
+        "Drought duration (SPEI-6)",
+        "Drought magnitude (SPEI-6)",
+        "ETS wind speed - 10 years RP",
+        "ETS wind speed - 100 years RP",
+        "ETS wind speed - 500 years RP",
+        "Fire Weather Index (FWI)",
+        "Fluvial & Pluvial Flood depth - 10 years RP",
+        "Fluvial & Pluvial Flood depth - 100 years RP",
+        "Fluvial & Pluvial Flood depth - 500 years RP",
+        "Heatwave average length",
+        "Heatwave count",
+        "Landslide susceptibility",
+        "Max precipitation 1 day",
+        "Max precipitation 5 days",
+        "Peak Ground acceleration",
+        "Subsidence rate",
+        "TC wind speed - 10 years RP",
+        "TC wind speed - 100 years RP",
+        "TC wind speed - 500 years RP",
+        "Tree cover",
+        "WBGT days",
+        "Water stress"
+      ],
+      "indicatorUnit": [
+        "%",
+        "cm/year",
+        "days",
+        "events/decade",
+        "g",
+        "m",
+        "m/s",
+        "mm",
+        "months"
+      ]
+    },
+    "null_counts": {
+      "assetId": 0,
+      "assetName": 0,
+      "reportDate": 0,
+      "geolocationCoordinates": 0,
+      "countryCode": 0,
+      "climateZone": 0,
+      "ticcsSubClass": 0,
+      "ticcsSubClassName": 0,
+      "scenario": 0,
+      "timeHorizon": 0,
+      "indicator": 0,
+      "indicatorUnit": 102,
+      "indicatorValue": 397,
+      "indicatorRating": 19,
+      "hazard": 0,
+      "HazardRating": 0,
+      "hazardDamage": 986,
+      "adjustedHazardDamage": 986,
+      "hazardDisruption": 794,
+      "adjustedHazardDisruption": 794,
+      "hazardDisruptionDamageEquivalent": 794,
+      "adjustedHazardDisruptionDamageEquivalent": 794,
+      "hazardValueImpact": 986,
+      "adjustedHazardValueImpact": 986,
+      "hazardExposureRating": 314,
+      "adjustedHazardExposureRating": 314,
+      "totalDamage": 986,
+      "adjustedTotalDamage": 986,
+      "totalDisruption": 58,
+      "adjustedTotalDisruption": 58,
+      "totalDisruptionDamageEquivalent": 58,
+      "adjustedTotalDisruptionDamageEquivalent": 58,
+      "totalValueImpact": 986,
+      "adjustedTotalValueImpact": 986,
+      "physicalExposureRating": 58,
+      "adjustedPhysicalExposureRating": 58
+    },
+    "source_grain_columns": [
+      "assetId",
+      "scenario",
+      "timeHorizon",
+      "hazard",
+      "indicator"
+    ],
+    "source_grain_unique_count": 986,
+    "source_grain_duplicate_count": 0,
+    "repeated_measure": "adjustedTotalDamage",
+    "repeated_measure_group_columns": [
+      "assetId",
+      "scenario",
+      "timeHorizon"
+    ],
+    "repeated_measure_inconsistent_group_count": 0
+  },
+  {
+    "surface": "solar_physical",
+    "cell_id": 316436,
+    "source_uri": "gs://infrasure-scr-data/Solar-asset/physical_risk/CONUS13K_Cell_316436_AR_MISO_SolarPV_physical_risks.xlsx",
+    "sheet_names": [
+      "ReadMe",
+      "Output"
+    ],
+    "rows": 986,
+    "columns": 36,
+    "headers": [
+      "assetId",
+      "assetName",
+      "reportDate",
+      "geolocationCoordinates",
+      "countryCode",
+      "climateZone",
+      "ticcsSubClass",
+      "ticcsSubClassName",
+      "scenario",
+      "timeHorizon",
+      "indicator",
+      "indicatorUnit",
+      "indicatorValue",
+      "indicatorRating",
+      "hazard",
+      "HazardRating",
+      "hazardDamage",
+      "adjustedHazardDamage",
+      "hazardDisruption",
+      "adjustedHazardDisruption",
+      "hazardDisruptionDamageEquivalent",
+      "adjustedHazardDisruptionDamageEquivalent",
+      "hazardValueImpact",
+      "adjustedHazardValueImpact",
+      "hazardExposureRating",
+      "adjustedHazardExposureRating",
+      "totalDamage",
+      "adjustedTotalDamage",
+      "totalDisruption",
+      "adjustedTotalDisruption",
+      "totalDisruptionDamageEquivalent",
+      "adjustedTotalDisruptionDamageEquivalent",
+      "totalValueImpact",
+      "adjustedTotalValueImpact",
+      "physicalExposureRating",
+      "adjustedPhysicalExposureRating"
+    ],
+    "schema_hash_sha256": "711db3defab6048804706e83a42af849c164d7c7b63d4905d7e6461c71e61f02",
+    "dimensions": {
+      "ticcsSubClass": [
+        "IC702010"
+      ],
+      "ticcsSubClassName": [
+        "Photovoltaic Power Generation"
+      ],
+      "assetId": [
+        "USA_13959"
+      ],
+      "countryCode": [
+        "USA"
+      ],
+      "climateZone": [
+        "Temperate"
+      ],
+      "geolocationCoordinates": [
+        "(35.25,-91.0)"
+      ],
+      "scenario": [
+        "ssp2-4.5",
+        "ssp5-8.5"
+      ],
+      "timeHorizon": [
+        "2025",
+        "2030",
+        "2035",
+        "2040",
+        "2045",
+        "2050",
+        "2055",
+        "2060",
+        "2065",
+        "2070",
+        "2075",
+        "2080",
+        "2085",
+        "2090",
+        "2095",
+        "2100",
+        "Historical"
+      ],
+      "hazard": [
+        "Drought",
+        "Earthquake",
+        "Flood",
+        "Heat",
+        "Landslide",
+        "Precipitation",
+        "Subsidence",
+        "Wildfire",
+        "Wind"
+      ],
+      "indicator": [
+        "Burn probability",
+        "Coastal flood depth - 10 years RP",
+        "Coastal flood depth - 100 years RP",
+        "Coastal flood depth - 500 years RP",
+        "Days above 35°C",
+        "Days above 38°C",
+        "Days above 99th percentile",
+        "Drought duration (SPEI-6)",
+        "Drought magnitude (SPEI-6)",
+        "ETS wind speed - 10 years RP",
+        "ETS wind speed - 100 years RP",
+        "ETS wind speed - 500 years RP",
+        "Fire Weather Index (FWI)",
+        "Fluvial & Pluvial Flood depth - 10 years RP",
+        "Fluvial & Pluvial Flood depth - 100 years RP",
+        "Fluvial & Pluvial Flood depth - 500 years RP",
+        "Heatwave average length",
+        "Heatwave count",
+        "Landslide susceptibility",
+        "Max precipitation 1 day",
+        "Max precipitation 5 days",
+        "Peak Ground acceleration",
+        "Subsidence rate",
+        "TC wind speed - 10 years RP",
+        "TC wind speed - 100 years RP",
+        "TC wind speed - 500 years RP",
+        "Tree cover",
+        "WBGT days",
+        "Water stress"
+      ],
+      "indicatorUnit": [
+        "%",
+        "cm/year",
+        "days",
+        "events/decade",
+        "g",
+        "m",
+        "m/s",
+        "mm",
+        "months"
+      ]
+    },
+    "null_counts": {
+      "assetId": 0,
+      "assetName": 0,
+      "reportDate": 0,
+      "geolocationCoordinates": 0,
+      "countryCode": 0,
+      "climateZone": 0,
+      "ticcsSubClass": 0,
+      "ticcsSubClassName": 0,
+      "scenario": 0,
+      "timeHorizon": 0,
+      "indicator": 0,
+      "indicatorUnit": 102,
+      "indicatorValue": 257,
+      "indicatorRating": 19,
+      "hazard": 0,
+      "HazardRating": 0,
+      "hazardDamage": 698,
+      "adjustedHazardDamage": 698,
+      "hazardDisruption": 506,
+      "adjustedHazardDisruption": 506,
+      "hazardDisruptionDamageEquivalent": 506,
+      "adjustedHazardDisruptionDamageEquivalent": 506,
+      "hazardValueImpact": 698,
+      "adjustedHazardValueImpact": 698,
+      "hazardExposureRating": 314,
+      "adjustedHazardExposureRating": 314,
+      "totalDamage": 58,
+      "adjustedTotalDamage": 58,
+      "totalDisruption": 58,
+      "adjustedTotalDisruption": 58,
+      "totalDisruptionDamageEquivalent": 58,
+      "adjustedTotalDisruptionDamageEquivalent": 58,
+      "totalValueImpact": 58,
+      "adjustedTotalValueImpact": 58,
+      "physicalExposureRating": 58,
+      "adjustedPhysicalExposureRating": 58
+    },
+    "source_grain_columns": [
+      "assetId",
+      "scenario",
+      "timeHorizon",
+      "hazard",
+      "indicator"
+    ],
+    "source_grain_unique_count": 986,
+    "source_grain_duplicate_count": 0,
+    "repeated_measure": "adjustedTotalDamage",
+    "repeated_measure_group_columns": [
+      "assetId",
+      "scenario",
+      "timeHorizon"
+    ],
+    "repeated_measure_inconsistent_group_count": 0
+  },
+  {
+    "surface": "solar_physical",
+    "cell_id": 335072,
+    "source_uri": "gs://infrasure-scr-data/Solar-asset/physical_risk/CONUS13K_Cell_335072_AZ_WEIM_SolarPV_physical_risks.xlsx",
+    "sheet_names": [
+      "ReadMe",
+      "Output"
+    ],
+    "rows": 986,
+    "columns": 36,
+    "headers": [
+      "assetId",
+      "assetName",
+      "reportDate",
+      "geolocationCoordinates",
+      "countryCode",
+      "climateZone",
+      "ticcsSubClass",
+      "ticcsSubClassName",
+      "scenario",
+      "timeHorizon",
+      "indicator",
+      "indicatorUnit",
+      "indicatorValue",
+      "indicatorRating",
+      "hazard",
+      "HazardRating",
+      "hazardDamage",
+      "adjustedHazardDamage",
+      "hazardDisruption",
+      "adjustedHazardDisruption",
+      "hazardDisruptionDamageEquivalent",
+      "adjustedHazardDisruptionDamageEquivalent",
+      "hazardValueImpact",
+      "adjustedHazardValueImpact",
+      "hazardExposureRating",
+      "adjustedHazardExposureRating",
+      "totalDamage",
+      "adjustedTotalDamage",
+      "totalDisruption",
+      "adjustedTotalDisruption",
+      "totalDisruptionDamageEquivalent",
+      "adjustedTotalDisruptionDamageEquivalent",
+      "totalValueImpact",
+      "adjustedTotalValueImpact",
+      "physicalExposureRating",
+      "adjustedPhysicalExposureRating"
+    ],
+    "schema_hash_sha256": "711db3defab6048804706e83a42af849c164d7c7b63d4905d7e6461c71e61f02",
+    "dimensions": {
+      "ticcsSubClass": [
+        "IC702010"
+      ],
+      "ticcsSubClassName": [
+        "Photovoltaic Power Generation"
+      ],
+      "assetId": [
+        "USA_15915"
+      ],
+      "countryCode": [
+        "USA"
+      ],
+      "climateZone": [
+        "Arid"
+      ],
+      "geolocationCoordinates": [
+        "(32.0,-112.0)"
+      ],
+      "scenario": [
+        "ssp2-4.5",
+        "ssp5-8.5"
+      ],
+      "timeHorizon": [
+        "2025",
+        "2030",
+        "2035",
+        "2040",
+        "2045",
+        "2050",
+        "2055",
+        "2060",
+        "2065",
+        "2070",
+        "2075",
+        "2080",
+        "2085",
+        "2090",
+        "2095",
+        "2100",
+        "Historical"
+      ],
+      "hazard": [
+        "Drought",
+        "Earthquake",
+        "Flood",
+        "Heat",
+        "Landslide",
+        "Precipitation",
+        "Subsidence",
+        "Wildfire",
+        "Wind"
+      ],
+      "indicator": [
+        "Burn probability",
+        "Coastal flood depth - 10 years RP",
+        "Coastal flood depth - 100 years RP",
+        "Coastal flood depth - 500 years RP",
+        "Days above 35°C",
+        "Days above 38°C",
+        "Days above 99th percentile",
+        "Drought duration (SPEI-6)",
+        "Drought magnitude (SPEI-6)",
+        "ETS wind speed - 10 years RP",
+        "ETS wind speed - 100 years RP",
+        "ETS wind speed - 500 years RP",
+        "Fire Weather Index (FWI)",
+        "Fluvial & Pluvial Flood depth - 10 years RP",
+        "Fluvial & Pluvial Flood depth - 100 years RP",
+        "Fluvial & Pluvial Flood depth - 500 years RP",
+        "Heatwave average length",
+        "Heatwave count",
+        "Landslide susceptibility",
+        "Max precipitation 1 day",
+        "Max precipitation 5 days",
+        "Peak Ground acceleration",
+        "Subsidence rate",
+        "TC wind speed - 10 years RP",
+        "TC wind speed - 100 years RP",
+        "TC wind speed - 500 years RP",
+        "Tree cover",
+        "WBGT days",
+        "Water stress"
+      ],
+      "indicatorUnit": [
+        "%",
+        "cm/year",
+        "days",
+        "events/decade",
+        "g",
+        "m",
+        "m/s",
+        "mm",
+        "months"
+      ]
+    },
+    "null_counts": {
+      "assetId": 0,
+      "assetName": 0,
+      "reportDate": 0,
+      "geolocationCoordinates": 0,
+      "countryCode": 0,
+      "climateZone": 0,
+      "ticcsSubClass": 0,
+      "ticcsSubClassName": 0,
+      "scenario": 0,
+      "timeHorizon": 0,
+      "indicator": 0,
+      "indicatorUnit": 102,
+      "indicatorValue": 361,
+      "indicatorRating": 19,
+      "hazard": 0,
+      "HazardRating": 0,
+      "hazardDamage": 986,
+      "adjustedHazardDamage": 986,
+      "hazardDisruption": 794,
+      "adjustedHazardDisruption": 794,
+      "hazardDisruptionDamageEquivalent": 794,
+      "adjustedHazardDisruptionDamageEquivalent": 794,
+      "hazardValueImpact": 986,
+      "adjustedHazardValueImpact": 986,
+      "hazardExposureRating": 314,
+      "adjustedHazardExposureRating": 314,
+      "totalDamage": 986,
+      "adjustedTotalDamage": 986,
+      "totalDisruption": 58,
+      "adjustedTotalDisruption": 58,
+      "totalDisruptionDamageEquivalent": 58,
+      "adjustedTotalDisruptionDamageEquivalent": 58,
+      "totalValueImpact": 986,
+      "adjustedTotalValueImpact": 986,
+      "physicalExposureRating": 58,
+      "adjustedPhysicalExposureRating": 58
+    },
+    "source_grain_columns": [
+      "assetId",
+      "scenario",
+      "timeHorizon",
+      "hazard",
+      "indicator"
+    ],
+    "source_grain_unique_count": 986,
+    "source_grain_duplicate_count": 0,
+    "repeated_measure": "adjustedTotalDamage",
+    "repeated_measure_group_columns": [
+      "assetId",
+      "scenario",
+      "timeHorizon"
+    ],
+    "repeated_measure_inconsistent_group_count": 0
+  },
+  {
+    "surface": "solar_physical",
+    "cell_id": 376954,
+    "source_uri": "gs://infrasure-scr-data/Solar-asset/physical_risk/CONUS13K_Cell_376954_FL_Non-ISO_FRCC_SolarPV_physical_risks.xlsx",
+    "sheet_names": [
+      "ReadMe",
+      "Output"
+    ],
+    "rows": 986,
+    "columns": 36,
+    "headers": [
+      "assetId",
+      "assetName",
+      "reportDate",
+      "geolocationCoordinates",
+      "countryCode",
+      "climateZone",
+      "ticcsSubClass",
+      "ticcsSubClassName",
+      "scenario",
+      "timeHorizon",
+      "indicator",
+      "indicatorUnit",
+      "indicatorValue",
+      "indicatorRating",
+      "hazard",
+      "HazardRating",
+      "hazardDamage",
+      "adjustedHazardDamage",
+      "hazardDisruption",
+      "adjustedHazardDisruption",
+      "hazardDisruptionDamageEquivalent",
+      "adjustedHazardDisruptionDamageEquivalent",
+      "hazardValueImpact",
+      "adjustedHazardValueImpact",
+      "hazardExposureRating",
+      "adjustedHazardExposureRating",
+      "totalDamage",
+      "adjustedTotalDamage",
+      "totalDisruption",
+      "adjustedTotalDisruption",
+      "totalDisruptionDamageEquivalent",
+      "adjustedTotalDisruptionDamageEquivalent",
+      "totalValueImpact",
+      "adjustedTotalValueImpact",
+      "physicalExposureRating",
+      "adjustedPhysicalExposureRating"
+    ],
+    "schema_hash_sha256": "711db3defab6048804706e83a42af849c164d7c7b63d4905d7e6461c71e61f02",
+    "dimensions": {
+      "ticcsSubClass": [
+        "IC702010"
+      ],
+      "ticcsSubClassName": [
+        "Photovoltaic Power Generation"
+      ],
+      "assetId": [
+        "USA_17219"
+      ],
+      "countryCode": [
+        "USA"
+      ],
+      "climateZone": [
+        "Tropical"
+      ],
+      "geolocationCoordinates": [
+        "(24.75,-81.5)"
+      ],
+      "scenario": [
+        "ssp2-4.5",
+        "ssp5-8.5"
+      ],
+      "timeHorizon": [
+        "2025",
+        "2030",
+        "2035",
+        "2040",
+        "2045",
+        "2050",
+        "2055",
+        "2060",
+        "2065",
+        "2070",
+        "2075",
+        "2080",
+        "2085",
+        "2090",
+        "2095",
+        "2100",
+        "Historical"
+      ],
+      "hazard": [
+        "Drought",
+        "Earthquake",
+        "Flood",
+        "Heat",
+        "Landslide",
+        "Precipitation",
+        "Subsidence",
+        "Wildfire",
+        "Wind"
+      ],
+      "indicator": [
+        "Burn probability",
+        "Coastal flood depth - 10 years RP",
+        "Coastal flood depth - 100 years RP",
+        "Coastal flood depth - 500 years RP",
+        "Days above 35°C",
+        "Days above 38°C",
+        "Days above 99th percentile",
+        "Drought duration (SPEI-6)",
+        "Drought magnitude (SPEI-6)",
+        "ETS wind speed - 10 years RP",
+        "ETS wind speed - 100 years RP",
+        "ETS wind speed - 500 years RP",
+        "Fire Weather Index (FWI)",
+        "Fluvial & Pluvial Flood depth - 10 years RP",
+        "Fluvial & Pluvial Flood depth - 100 years RP",
+        "Fluvial & Pluvial Flood depth - 500 years RP",
+        "Heatwave average length",
+        "Heatwave count",
+        "Landslide susceptibility",
+        "Max precipitation 1 day",
+        "Max precipitation 5 days",
+        "Peak Ground acceleration",
+        "Subsidence rate",
+        "TC wind speed - 10 years RP",
+        "TC wind speed - 100 years RP",
+        "TC wind speed - 500 years RP",
+        "Tree cover",
+        "WBGT days",
+        "Water stress"
+      ],
+      "indicatorUnit": [
+        "%",
+        "cm/year",
+        "days",
+        "events/decade",
+        "g",
+        "m",
+        "m/s",
+        "mm",
+        "months"
+      ]
+    },
+    "null_counts": {
+      "assetId": 0,
+      "assetName": 0,
+      "reportDate": 0,
+      "geolocationCoordinates": 0,
+      "countryCode": 0,
+      "climateZone": 0,
+      "ticcsSubClass": 0,
+      "ticcsSubClassName": 0,
+      "scenario": 0,
+      "timeHorizon": 0,
+      "indicator": 0,
+      "indicatorUnit": 102,
+      "indicatorValue": 266,
+      "indicatorRating": 19,
+      "hazard": 0,
+      "HazardRating": 0,
+      "hazardDamage": 602,
+      "adjustedHazardDamage": 602,
+      "hazardDisruption": 410,
+      "adjustedHazardDisruption": 410,
+      "hazardDisruptionDamageEquivalent": 410,
+      "adjustedHazardDisruptionDamageEquivalent": 410,
+      "hazardValueImpact": 602,
+      "adjustedHazardValueImpact": 602,
+      "hazardExposureRating": 314,
+      "adjustedHazardExposureRating": 314,
+      "totalDamage": 58,
+      "adjustedTotalDamage": 58,
+      "totalDisruption": 58,
+      "adjustedTotalDisruption": 58,
+      "totalDisruptionDamageEquivalent": 58,
+      "adjustedTotalDisruptionDamageEquivalent": 58,
+      "totalValueImpact": 58,
+      "adjustedTotalValueImpact": 58,
+      "physicalExposureRating": 58,
+      "adjustedPhysicalExposureRating": 58
+    },
+    "source_grain_columns": [
+      "assetId",
+      "scenario",
+      "timeHorizon",
+      "hazard",
+      "indicator"
+    ],
+    "source_grain_unique_count": 986,
+    "source_grain_duplicate_count": 0,
+    "repeated_measure": "adjustedTotalDamage",
+    "repeated_measure_group_columns": [
+      "assetId",
+      "scenario",
+      "timeHorizon"
+    ],
+    "repeated_measure_inconsistent_group_count": 0
+  },
+  {
+    "surface": "solar_transition",
+    "cell_id": 235780,
+    "source_uri": "gs://infrasure-scr-data/Solar-asset/transition_risk/CONUS13K_Cell_235780_MN_MISO_SolarPV_transition_risks.xlsx",
+    "sheet_names": [
+      "ReadMe",
+      "Output"
+    ],
+    "rows": 216,
+    "columns": 20,
+    "headers": [
+      "assetId",
+      "assetName",
+      "reportDate",
+      "geolocationCoordinates",
+      "countryCode",
+      "climateZone",
+      "ticcsSubClass",
+      "ticcsSubClassName",
+      "scenario",
+      "timeHorizon",
+      "indicator",
+      "indicatorUnit",
+      "indicatorValue",
+      "subrisk",
+      "subriskRevenueImpact",
+      "adjustedSubriskRevenueImpact",
+      "subriskExposureRating",
+      "adjustedSubriskExposureRating",
+      "transitionExposureRating",
+      "adjustedTransitionExposureRating"
+    ],
+    "schema_hash_sha256": "de3472cfb77ea09f0b42e3cd0d5c875924b6b25e45c35afbdb339c2bd1121151",
+    "dimensions": {
+      "ticcsSubClass": [
+        "IC702010"
+      ],
+      "ticcsSubClassName": [
+        "Photovoltaic Power Generation"
+      ],
+      "assetId": [
+        "USA_01223"
+      ],
+      "countryCode": [
+        "USA"
+      ],
+      "climateZone": [
+        "Cold"
+      ],
+      "geolocationCoordinates": [
+        "(49.25,-95.0)"
+      ],
+      "scenario": [
+        "Below 2°C",
+        "Climate Breakdown",
+        "Climate Destabilization",
+        "Current Policies",
+        "Delayed transition",
+        "Expected",
+        "Fragmented World",
+        "Nationally Determined Contributions (NDCs)",
+        "Net Zero 2050"
+      ],
+      "timeHorizon": [
+        "2025",
+        "2030",
+        "2035",
+        "2040",
+        "2045",
+        "2050"
+      ],
+      "indicator": [
+        "Carbon price",
+        "Revenue growth",
+        "Scope 1&2 emissions intensity",
+        "Scope 3 emissions intensity"
+      ],
+      "indicatorUnit": [
+        "$/tCO2",
+        "%",
+        "tCO2/M$"
+      ],
+      "subrisk": [
+        "Direct Carbon Cost",
+        "Market Demand Shifts"
+      ]
+    },
+    "null_counts": {
+      "assetId": 0,
+      "assetName": 0,
+      "reportDate": 0,
+      "geolocationCoordinates": 0,
+      "countryCode": 0,
+      "climateZone": 0,
+      "ticcsSubClass": 0,
+      "ticcsSubClassName": 0,
+      "scenario": 0,
+      "timeHorizon": 0,
+      "indicator": 0,
+      "indicatorUnit": 0,
+      "indicatorValue": 26,
+      "subrisk": 0,
+      "subriskRevenueImpact": 64,
+      "adjustedSubriskRevenueImpact": 64,
+      "subriskExposureRating": 0,
+      "adjustedSubriskExposureRating": 0,
+      "transitionExposureRating": 0,
+      "adjustedTransitionExposureRating": 0
+    },
+    "source_grain_columns": [
+      "assetId",
+      "scenario",
+      "timeHorizon",
+      "subrisk",
+      "indicator"
+    ],
+    "source_grain_unique_count": 216,
+    "source_grain_duplicate_count": 0,
+    "repeated_measure": "adjustedSubriskRevenueImpact",
+    "repeated_measure_group_columns": [
+      "assetId",
+      "scenario",
+      "timeHorizon",
+      "subrisk"
+    ],
+    "repeated_measure_inconsistent_group_count": 0
+  },
+  {
+    "surface": "solar_transition",
+    "cell_id": 251603,
+    "source_uri": "gs://infrasure-scr-data/Solar-asset/transition_risk/CONUS13K_Cell_251603_ND_MISO_SolarPV_transition_risks.xlsx",
+    "sheet_names": [
+      "ReadMe",
+      "Output"
+    ],
+    "rows": 216,
+    "columns": 20,
+    "headers": [
+      "assetId",
+      "assetName",
+      "reportDate",
+      "geolocationCoordinates",
+      "countryCode",
+      "climateZone",
+      "ticcsSubClass",
+      "ticcsSubClassName",
+      "scenario",
+      "timeHorizon",
+      "indicator",
+      "indicatorUnit",
+      "indicatorValue",
+      "subrisk",
+      "subriskRevenueImpact",
+      "adjustedSubriskRevenueImpact",
+      "subriskExposureRating",
+      "adjustedSubriskExposureRating",
+      "transitionExposureRating",
+      "adjustedTransitionExposureRating"
+    ],
+    "schema_hash_sha256": "de3472cfb77ea09f0b42e3cd0d5c875924b6b25e45c35afbdb339c2bd1121151",
+    "dimensions": {
+      "ticcsSubClass": [
+        "IC702010"
+      ],
+      "ticcsSubClassName": [
+        "Photovoltaic Power Generation"
+      ],
+      "assetId": [
+        "USA_03836"
+      ],
+      "countryCode": [
+        "USA"
+      ],
+      "climateZone": [
+        "Cold"
+      ],
+      "geolocationCoordinates": [
+        "(46.5,-99.25)"
+      ],
+      "scenario": [
+        "Below 2°C",
+        "Climate Breakdown",
+        "Climate Destabilization",
+        "Current Policies",
+        "Delayed transition",
+        "Expected",
+        "Fragmented World",
+        "Nationally Determined Contributions (NDCs)",
+        "Net Zero 2050"
+      ],
+      "timeHorizon": [
+        "2025",
+        "2030",
+        "2035",
+        "2040",
+        "2045",
+        "2050"
+      ],
+      "indicator": [
+        "Carbon price",
+        "Revenue growth",
+        "Scope 1&2 emissions intensity",
+        "Scope 3 emissions intensity"
+      ],
+      "indicatorUnit": [
+        "$/tCO2",
+        "%",
+        "tCO2/M$"
+      ],
+      "subrisk": [
+        "Direct Carbon Cost",
+        "Market Demand Shifts"
+      ]
+    },
+    "null_counts": {
+      "assetId": 0,
+      "assetName": 0,
+      "reportDate": 0,
+      "geolocationCoordinates": 0,
+      "countryCode": 0,
+      "climateZone": 0,
+      "ticcsSubClass": 0,
+      "ticcsSubClassName": 0,
+      "scenario": 0,
+      "timeHorizon": 0,
+      "indicator": 0,
+      "indicatorUnit": 0,
+      "indicatorValue": 26,
+      "subrisk": 0,
+      "subriskRevenueImpact": 64,
+      "adjustedSubriskRevenueImpact": 64,
+      "subriskExposureRating": 0,
+      "adjustedSubriskExposureRating": 0,
+      "transitionExposureRating": 0,
+      "adjustedTransitionExposureRating": 0
+    },
+    "source_grain_columns": [
+      "assetId",
+      "scenario",
+      "timeHorizon",
+      "subrisk",
+      "indicator"
+    ],
+    "source_grain_unique_count": 216,
+    "source_grain_duplicate_count": 0,
+    "repeated_measure": "adjustedSubriskRevenueImpact",
+    "repeated_measure_group_columns": [
+      "assetId",
+      "scenario",
+      "timeHorizon",
+      "subrisk"
+    ],
+    "repeated_measure_inconsistent_group_count": 0
+  },
+  {
+    "surface": "solar_transition",
+    "cell_id": 267495,
+    "source_uri": "gs://infrasure-scr-data/Solar-asset/transition_risk/CONUS13K_Cell_267495_MI_MISO_SolarPV_transition_risks.xlsx",
+    "sheet_names": [
+      "ReadMe",
+      "Output"
+    ],
+    "rows": 216,
+    "columns": 20,
+    "headers": [
+      "assetId",
+      "assetName",
+      "reportDate",
+      "geolocationCoordinates",
+      "countryCode",
+      "climateZone",
+      "ticcsSubClass",
+      "ticcsSubClassName",
+      "scenario",
+      "timeHorizon",
+      "indicator",
+      "indicatorUnit",
+      "indicatorValue",
+      "subrisk",
+      "subriskRevenueImpact",
+      "adjustedSubriskRevenueImpact",
+      "subriskExposureRating",
+      "adjustedSubriskExposureRating",
+      "transitionExposureRating",
+      "adjustedTransitionExposureRating"
+    ],
+    "schema_hash_sha256": "de3472cfb77ea09f0b42e3cd0d5c875924b6b25e45c35afbdb339c2bd1121151",
+    "dimensions": {
+      "ticcsSubClass": [
+        "IC702010"
+      ],
+      "ticcsSubClassName": [
+        "Photovoltaic Power Generation"
+      ],
+      "assetId": [
+        "USA_07438"
+      ],
+      "countryCode": [
+        "USA"
+      ],
+      "climateZone": [
+        "Cold"
+      ],
+      "geolocationCoordinates": [
+        "(43.75,-86.25)"
+      ],
+      "scenario": [
+        "Below 2°C",
+        "Climate Breakdown",
+        "Climate Destabilization",
+        "Current Policies",
+        "Delayed transition",
+        "Expected",
+        "Fragmented World",
+        "Nationally Determined Contributions (NDCs)",
+        "Net Zero 2050"
+      ],
+      "timeHorizon": [
+        "2025",
+        "2030",
+        "2035",
+        "2040",
+        "2045",
+        "2050"
+      ],
+      "indicator": [
+        "Carbon price",
+        "Revenue growth",
+        "Scope 1&2 emissions intensity",
+        "Scope 3 emissions intensity"
+      ],
+      "indicatorUnit": [
+        "$/tCO2",
+        "%",
+        "tCO2/M$"
+      ],
+      "subrisk": [
+        "Direct Carbon Cost",
+        "Market Demand Shifts"
+      ]
+    },
+    "null_counts": {
+      "assetId": 0,
+      "assetName": 0,
+      "reportDate": 0,
+      "geolocationCoordinates": 0,
+      "countryCode": 0,
+      "climateZone": 0,
+      "ticcsSubClass": 0,
+      "ticcsSubClassName": 0,
+      "scenario": 0,
+      "timeHorizon": 0,
+      "indicator": 0,
+      "indicatorUnit": 0,
+      "indicatorValue": 26,
+      "subrisk": 0,
+      "subriskRevenueImpact": 64,
+      "adjustedSubriskRevenueImpact": 64,
+      "subriskExposureRating": 0,
+      "adjustedSubriskExposureRating": 0,
+      "transitionExposureRating": 0,
+      "adjustedTransitionExposureRating": 0
+    },
+    "source_grain_columns": [
+      "assetId",
+      "scenario",
+      "timeHorizon",
+      "subrisk",
+      "indicator"
+    ],
+    "source_grain_unique_count": 216,
+    "source_grain_duplicate_count": 0,
+    "repeated_measure": "adjustedSubriskRevenueImpact",
+    "repeated_measure_group_columns": [
+      "assetId",
+      "scenario",
+      "timeHorizon",
+      "subrisk"
+    ],
+    "repeated_measure_inconsistent_group_count": 0
+  },
+  {
+    "surface": "solar_transition",
+    "cell_id": 291861,
+    "source_uri": "gs://infrasure-scr-data/Solar-asset/transition_risk/CONUS13K_Cell_291861_NV_WEIM_SolarPV_transition_risks.xlsx",
+    "sheet_names": [
+      "ReadMe",
+      "Output"
+    ],
+    "rows": 216,
+    "columns": 20,
+    "headers": [
+      "assetId",
+      "assetName",
+      "reportDate",
+      "geolocationCoordinates",
+      "countryCode",
+      "climateZone",
+      "ticcsSubClass",
+      "ticcsSubClassName",
+      "scenario",
+      "timeHorizon",
+      "indicator",
+      "indicatorUnit",
+      "indicatorValue",
+      "subrisk",
+      "subriskRevenueImpact",
+      "adjustedSubriskRevenueImpact",
+      "subriskExposureRating",
+      "adjustedSubriskExposureRating",
+      "transitionExposureRating",
+      "adjustedTransitionExposureRating"
+    ],
+    "schema_hash_sha256": "de3472cfb77ea09f0b42e3cd0d5c875924b6b25e45c35afbdb339c2bd1121151",
+    "dimensions": {
+      "ticcsSubClass": [
+        "IC702010"
+      ],
+      "ticcsSubClassName": [
+        "Photovoltaic Power Generation"
+      ],
+      "assetId": [
+        "USA_10699"
+      ],
+      "countryCode": [
+        "USA"
+      ],
+      "climateZone": [
+        "Arid"
+      ],
+      "geolocationCoordinates": [
+        "(39.5,-114.75)"
+      ],
+      "scenario": [
+        "Below 2°C",
+        "Climate Breakdown",
+        "Climate Destabilization",
+        "Current Policies",
+        "Delayed transition",
+        "Expected",
+        "Fragmented World",
+        "Nationally Determined Contributions (NDCs)",
+        "Net Zero 2050"
+      ],
+      "timeHorizon": [
+        "2025",
+        "2030",
+        "2035",
+        "2040",
+        "2045",
+        "2050"
+      ],
+      "indicator": [
+        "Carbon price",
+        "Revenue growth",
+        "Scope 1&2 emissions intensity",
+        "Scope 3 emissions intensity"
+      ],
+      "indicatorUnit": [
+        "$/tCO2",
+        "%",
+        "tCO2/M$"
+      ],
+      "subrisk": [
+        "Direct Carbon Cost",
+        "Market Demand Shifts"
+      ]
+    },
+    "null_counts": {
+      "assetId": 0,
+      "assetName": 0,
+      "reportDate": 0,
+      "geolocationCoordinates": 0,
+      "countryCode": 0,
+      "climateZone": 0,
+      "ticcsSubClass": 0,
+      "ticcsSubClassName": 0,
+      "scenario": 0,
+      "timeHorizon": 0,
+      "indicator": 0,
+      "indicatorUnit": 0,
+      "indicatorValue": 26,
+      "subrisk": 0,
+      "subriskRevenueImpact": 64,
+      "adjustedSubriskRevenueImpact": 64,
+      "subriskExposureRating": 0,
+      "adjustedSubriskExposureRating": 0,
+      "transitionExposureRating": 0,
+      "adjustedTransitionExposureRating": 0
+    },
+    "source_grain_columns": [
+      "assetId",
+      "scenario",
+      "timeHorizon",
+      "subrisk",
+      "indicator"
+    ],
+    "source_grain_unique_count": 216,
+    "source_grain_duplicate_count": 0,
+    "repeated_measure": "adjustedSubriskRevenueImpact",
+    "repeated_measure_group_columns": [
+      "assetId",
+      "scenario",
+      "timeHorizon",
+      "subrisk"
+    ],
+    "repeated_measure_inconsistent_group_count": 0
+  },
+  {
+    "surface": "solar_transition",
+    "cell_id": 316436,
+    "source_uri": "gs://infrasure-scr-data/Solar-asset/transition_risk/CONUS13K_Cell_316436_AR_MISO_SolarPV_transition_risks.xlsx",
+    "sheet_names": [
+      "ReadMe",
+      "Output"
+    ],
+    "rows": 216,
+    "columns": 20,
+    "headers": [
+      "assetId",
+      "assetName",
+      "reportDate",
+      "geolocationCoordinates",
+      "countryCode",
+      "climateZone",
+      "ticcsSubClass",
+      "ticcsSubClassName",
+      "scenario",
+      "timeHorizon",
+      "indicator",
+      "indicatorUnit",
+      "indicatorValue",
+      "subrisk",
+      "subriskRevenueImpact",
+      "adjustedSubriskRevenueImpact",
+      "subriskExposureRating",
+      "adjustedSubriskExposureRating",
+      "transitionExposureRating",
+      "adjustedTransitionExposureRating"
+    ],
+    "schema_hash_sha256": "de3472cfb77ea09f0b42e3cd0d5c875924b6b25e45c35afbdb339c2bd1121151",
+    "dimensions": {
+      "ticcsSubClass": [
+        "IC702010"
+      ],
+      "ticcsSubClassName": [
+        "Photovoltaic Power Generation"
+      ],
+      "assetId": [
+        "USA_13959"
+      ],
+      "countryCode": [
+        "USA"
+      ],
+      "climateZone": [
+        "Temperate"
+      ],
+      "geolocationCoordinates": [
+        "(35.25,-91.0)"
+      ],
+      "scenario": [
+        "Below 2°C",
+        "Climate Breakdown",
+        "Climate Destabilization",
+        "Current Policies",
+        "Delayed transition",
+        "Expected",
+        "Fragmented World",
+        "Nationally Determined Contributions (NDCs)",
+        "Net Zero 2050"
+      ],
+      "timeHorizon": [
+        "2025",
+        "2030",
+        "2035",
+        "2040",
+        "2045",
+        "2050"
+      ],
+      "indicator": [
+        "Carbon price",
+        "Revenue growth",
+        "Scope 1&2 emissions intensity",
+        "Scope 3 emissions intensity"
+      ],
+      "indicatorUnit": [
+        "$/tCO2",
+        "%",
+        "tCO2/M$"
+      ],
+      "subrisk": [
+        "Direct Carbon Cost",
+        "Market Demand Shifts"
+      ]
+    },
+    "null_counts": {
+      "assetId": 0,
+      "assetName": 0,
+      "reportDate": 0,
+      "geolocationCoordinates": 0,
+      "countryCode": 0,
+      "climateZone": 0,
+      "ticcsSubClass": 0,
+      "ticcsSubClassName": 0,
+      "scenario": 0,
+      "timeHorizon": 0,
+      "indicator": 0,
+      "indicatorUnit": 0,
+      "indicatorValue": 26,
+      "subrisk": 0,
+      "subriskRevenueImpact": 64,
+      "adjustedSubriskRevenueImpact": 64,
+      "subriskExposureRating": 0,
+      "adjustedSubriskExposureRating": 0,
+      "transitionExposureRating": 0,
+      "adjustedTransitionExposureRating": 0
+    },
+    "source_grain_columns": [
+      "assetId",
+      "scenario",
+      "timeHorizon",
+      "subrisk",
+      "indicator"
+    ],
+    "source_grain_unique_count": 216,
+    "source_grain_duplicate_count": 0,
+    "repeated_measure": "adjustedSubriskRevenueImpact",
+    "repeated_measure_group_columns": [
+      "assetId",
+      "scenario",
+      "timeHorizon",
+      "subrisk"
+    ],
+    "repeated_measure_inconsistent_group_count": 0
+  },
+  {
+    "surface": "solar_transition",
+    "cell_id": 335072,
+    "source_uri": "gs://infrasure-scr-data/Solar-asset/transition_risk/CONUS13K_Cell_335072_AZ_WEIM_SolarPV_transition_risks.xlsx",
+    "sheet_names": [
+      "ReadMe",
+      "Output"
+    ],
+    "rows": 216,
+    "columns": 20,
+    "headers": [
+      "assetId",
+      "assetName",
+      "reportDate",
+      "geolocationCoordinates",
+      "countryCode",
+      "climateZone",
+      "ticcsSubClass",
+      "ticcsSubClassName",
+      "scenario",
+      "timeHorizon",
+      "indicator",
+      "indicatorUnit",
+      "indicatorValue",
+      "subrisk",
+      "subriskRevenueImpact",
+      "adjustedSubriskRevenueImpact",
+      "subriskExposureRating",
+      "adjustedSubriskExposureRating",
+      "transitionExposureRating",
+      "adjustedTransitionExposureRating"
+    ],
+    "schema_hash_sha256": "de3472cfb77ea09f0b42e3cd0d5c875924b6b25e45c35afbdb339c2bd1121151",
+    "dimensions": {
+      "ticcsSubClass": [
+        "IC702010"
+      ],
+      "ticcsSubClassName": [
+        "Photovoltaic Power Generation"
+      ],
+      "assetId": [
+        "USA_15915"
+      ],
+      "countryCode": [
+        "USA"
+      ],
+      "climateZone": [
+        "Arid"
+      ],
+      "geolocationCoordinates": [
+        "(32.0,-112.0)"
+      ],
+      "scenario": [
+        "Below 2°C",
+        "Climate Breakdown",
+        "Climate Destabilization",
+        "Current Policies",
+        "Delayed transition",
+        "Expected",
+        "Fragmented World",
+        "Nationally Determined Contributions (NDCs)",
+        "Net Zero 2050"
+      ],
+      "timeHorizon": [
+        "2025",
+        "2030",
+        "2035",
+        "2040",
+        "2045",
+        "2050"
+      ],
+      "indicator": [
+        "Carbon price",
+        "Revenue growth",
+        "Scope 1&2 emissions intensity",
+        "Scope 3 emissions intensity"
+      ],
+      "indicatorUnit": [
+        "$/tCO2",
+        "%",
+        "tCO2/M$"
+      ],
+      "subrisk": [
+        "Direct Carbon Cost",
+        "Market Demand Shifts"
+      ]
+    },
+    "null_counts": {
+      "assetId": 0,
+      "assetName": 0,
+      "reportDate": 0,
+      "geolocationCoordinates": 0,
+      "countryCode": 0,
+      "climateZone": 0,
+      "ticcsSubClass": 0,
+      "ticcsSubClassName": 0,
+      "scenario": 0,
+      "timeHorizon": 0,
+      "indicator": 0,
+      "indicatorUnit": 0,
+      "indicatorValue": 26,
+      "subrisk": 0,
+      "subriskRevenueImpact": 64,
+      "adjustedSubriskRevenueImpact": 64,
+      "subriskExposureRating": 0,
+      "adjustedSubriskExposureRating": 0,
+      "transitionExposureRating": 0,
+      "adjustedTransitionExposureRating": 0
+    },
+    "source_grain_columns": [
+      "assetId",
+      "scenario",
+      "timeHorizon",
+      "subrisk",
+      "indicator"
+    ],
+    "source_grain_unique_count": 216,
+    "source_grain_duplicate_count": 0,
+    "repeated_measure": "adjustedSubriskRevenueImpact",
+    "repeated_measure_group_columns": [
+      "assetId",
+      "scenario",
+      "timeHorizon",
+      "subrisk"
+    ],
+    "repeated_measure_inconsistent_group_count": 0
+  },
+  {
+    "surface": "solar_transition",
+    "cell_id": 376954,
+    "source_uri": "gs://infrasure-scr-data/Solar-asset/transition_risk/CONUS13K_Cell_376954_FL_Non-ISO_FRCC_SolarPV_transition_risks.xlsx",
+    "sheet_names": [
+      "ReadMe",
+      "Output"
+    ],
+    "rows": 216,
+    "columns": 20,
+    "headers": [
+      "assetId",
+      "assetName",
+      "reportDate",
+      "geolocationCoordinates",
+      "countryCode",
+      "climateZone",
+      "ticcsSubClass",
+      "ticcsSubClassName",
+      "scenario",
+      "timeHorizon",
+      "indicator",
+      "indicatorUnit",
+      "indicatorValue",
+      "subrisk",
+      "subriskRevenueImpact",
+      "adjustedSubriskRevenueImpact",
+      "subriskExposureRating",
+      "adjustedSubriskExposureRating",
+      "transitionExposureRating",
+      "adjustedTransitionExposureRating"
+    ],
+    "schema_hash_sha256": "de3472cfb77ea09f0b42e3cd0d5c875924b6b25e45c35afbdb339c2bd1121151",
+    "dimensions": {
+      "ticcsSubClass": [
+        "IC702010"
+      ],
+      "ticcsSubClassName": [
+        "Photovoltaic Power Generation"
+      ],
+      "assetId": [
+        "USA_17219"
+      ],
+      "countryCode": [
+        "USA"
+      ],
+      "climateZone": [
+        "Tropical"
+      ],
+      "geolocationCoordinates": [
+        "(24.75,-81.5)"
+      ],
+      "scenario": [
+        "Below 2°C",
+        "Climate Breakdown",
+        "Climate Destabilization",
+        "Current Policies",
+        "Delayed transition",
+        "Expected",
+        "Fragmented World",
+        "Nationally Determined Contributions (NDCs)",
+        "Net Zero 2050"
+      ],
+      "timeHorizon": [
+        "2025",
+        "2030",
+        "2035",
+        "2040",
+        "2045",
+        "2050"
+      ],
+      "indicator": [
+        "Carbon price",
+        "Revenue growth",
+        "Scope 1&2 emissions intensity",
+        "Scope 3 emissions intensity"
+      ],
+      "indicatorUnit": [
+        "$/tCO2",
+        "%",
+        "tCO2/M$"
+      ],
+      "subrisk": [
+        "Direct Carbon Cost",
+        "Market Demand Shifts"
+      ]
+    },
+    "null_counts": {
+      "assetId": 0,
+      "assetName": 0,
+      "reportDate": 0,
+      "geolocationCoordinates": 0,
+      "countryCode": 0,
+      "climateZone": 0,
+      "ticcsSubClass": 0,
+      "ticcsSubClassName": 0,
+      "scenario": 0,
+      "timeHorizon": 0,
+      "indicator": 0,
+      "indicatorUnit": 0,
+      "indicatorValue": 26,
+      "subrisk": 0,
+      "subriskRevenueImpact": 64,
+      "adjustedSubriskRevenueImpact": 64,
+      "subriskExposureRating": 0,
+      "adjustedSubriskExposureRating": 0,
+      "transitionExposureRating": 0,
+      "adjustedTransitionExposureRating": 0
+    },
+    "source_grain_columns": [
+      "assetId",
+      "scenario",
+      "timeHorizon",
+      "subrisk",
+      "indicator"
+    ],
+    "source_grain_unique_count": 216,
+    "source_grain_duplicate_count": 0,
+    "repeated_measure": "adjustedSubriskRevenueImpact",
+    "repeated_measure_group_columns": [
+      "assetId",
+      "scenario",
+      "timeHorizon",
+      "subrisk"
+    ],
+    "repeated_measure_inconsistent_group_count": 0
+  },
+  {
+    "surface": "wind_physical",
+    "cell_id": 235780,
+    "source_uri": "gs://infrasure-scr-data/onshore_wind/physical_risk/CONUS13K_Cell_235780_MN_MISO_OnshoreWind_physical_risks.xlsx",
+    "sheet_names": [
+      "ReadMe",
+      "Output"
+    ],
+    "rows": 986,
+    "columns": 36,
+    "headers": [
+      "assetId",
+      "assetName",
+      "reportDate",
+      "geolocationCoordinates",
+      "countryCode",
+      "climateZone",
+      "ticcsSubClass",
+      "ticcsSubClassName",
+      "scenario",
+      "timeHorizon",
+      "indicator",
+      "indicatorUnit",
+      "indicatorValue",
+      "indicatorRating",
+      "hazard",
+      "HazardRating",
+      "hazardDamage",
+      "adjustedHazardDamage",
+      "hazardDisruption",
+      "adjustedHazardDisruption",
+      "hazardDisruptionDamageEquivalent",
+      "adjustedHazardDisruptionDamageEquivalent",
+      "hazardValueImpact",
+      "adjustedHazardValueImpact",
+      "hazardExposureRating",
+      "adjustedHazardExposureRating",
+      "totalDamage",
+      "adjustedTotalDamage",
+      "totalDisruption",
+      "adjustedTotalDisruption",
+      "totalDisruptionDamageEquivalent",
+      "adjustedTotalDisruptionDamageEquivalent",
+      "totalValueImpact",
+      "adjustedTotalValueImpact",
+      "physicalExposureRating",
+      "adjustedPhysicalExposureRating"
+    ],
+    "schema_hash_sha256": "711db3defab6048804706e83a42af849c164d7c7b63d4905d7e6461c71e61f02",
+    "dimensions": {
+      "ticcsSubClass": [
+        "IC701010"
+      ],
+      "ticcsSubClassName": [
+        "On-Shore Wind Power Generation"
+      ],
+      "assetId": [
+        "USA_17220"
+      ],
+      "countryCode": [
+        "USA"
+      ],
+      "climateZone": [
+        "Cold"
+      ],
+      "geolocationCoordinates": [
+        "(49.25,-95.0)"
+      ],
+      "scenario": [
+        "ssp2-4.5",
+        "ssp5-8.5"
+      ],
+      "timeHorizon": [
+        "2025",
+        "2030",
+        "2035",
+        "2040",
+        "2045",
+        "2050",
+        "2055",
+        "2060",
+        "2065",
+        "2070",
+        "2075",
+        "2080",
+        "2085",
+        "2090",
+        "2095",
+        "2100",
+        "Historical"
+      ],
+      "hazard": [
+        "Drought",
+        "Earthquake",
+        "Flood",
+        "Heat",
+        "Landslide",
+        "Precipitation",
+        "Subsidence",
+        "Wildfire",
+        "Wind"
+      ],
+      "indicator": [
+        "Burn probability",
+        "Coastal flood depth - 10 years RP",
+        "Coastal flood depth - 100 years RP",
+        "Coastal flood depth - 500 years RP",
+        "Days above 35°C",
+        "Days above 38°C",
+        "Days above 99th percentile",
+        "Drought duration (SPEI-6)",
+        "Drought magnitude (SPEI-6)",
+        "ETS wind speed - 10 years RP",
+        "ETS wind speed - 100 years RP",
+        "ETS wind speed - 500 years RP",
+        "Fire Weather Index (FWI)",
+        "Fluvial & Pluvial Flood depth - 10 years RP",
+        "Fluvial & Pluvial Flood depth - 100 years RP",
+        "Fluvial & Pluvial Flood depth - 500 years RP",
+        "Heatwave average length",
+        "Heatwave count",
+        "Landslide susceptibility",
+        "Max precipitation 1 day",
+        "Max precipitation 5 days",
+        "Peak Ground acceleration",
+        "Subsidence rate",
+        "TC wind speed - 10 years RP",
+        "TC wind speed - 100 years RP",
+        "TC wind speed - 500 years RP",
+        "Tree cover",
+        "WBGT days",
+        "Water stress"
+      ],
+      "indicatorUnit": [
+        "%",
+        "cm/year",
+        "days",
+        "events/decade",
+        "g",
+        "m",
+        "m/s",
+        "mm",
+        "months"
+      ]
+    },
+    "null_counts": {
+      "assetId": 0,
+      "assetName": 0,
+      "reportDate": 0,
+      "geolocationCoordinates": 0,
+      "countryCode": 0,
+      "climateZone": 0,
+      "ticcsSubClass": 0,
+      "ticcsSubClassName": 0,
+      "scenario": 0,
+      "timeHorizon": 0,
+      "indicator": 0,
+      "indicatorUnit": 102,
+      "indicatorValue": 381,
+      "indicatorRating": 19,
+      "hazard": 0,
+      "HazardRating": 0,
+      "hazardDamage": 890,
+      "adjustedHazardDamage": 890,
+      "hazardDisruption": 698,
+      "adjustedHazardDisruption": 698,
+      "hazardDisruptionDamageEquivalent": 698,
+      "adjustedHazardDisruptionDamageEquivalent": 698,
+      "hazardValueImpact": 890,
+      "adjustedHazardValueImpact": 890,
+      "hazardExposureRating": 314,
+      "adjustedHazardExposureRating": 314,
+      "totalDamage": 58,
+      "adjustedTotalDamage": 58,
+      "totalDisruption": 58,
+      "adjustedTotalDisruption": 58,
+      "totalDisruptionDamageEquivalent": 58,
+      "adjustedTotalDisruptionDamageEquivalent": 58,
+      "totalValueImpact": 58,
+      "adjustedTotalValueImpact": 58,
+      "physicalExposureRating": 58,
+      "adjustedPhysicalExposureRating": 58
+    },
+    "source_grain_columns": [
+      "assetId",
+      "scenario",
+      "timeHorizon",
+      "hazard",
+      "indicator"
+    ],
+    "source_grain_unique_count": 986,
+    "source_grain_duplicate_count": 0,
+    "repeated_measure": "adjustedTotalDamage",
+    "repeated_measure_group_columns": [
+      "assetId",
+      "scenario",
+      "timeHorizon"
+    ],
+    "repeated_measure_inconsistent_group_count": 0
+  },
+  {
+    "surface": "wind_physical",
+    "cell_id": 251585,
+    "source_uri": "gs://infrasure-scr-data/onshore_wind/physical_risk/CONUS13K_Cell_251585_ND_MISO_OnshoreWind_physical_risks.xlsx",
+    "sheet_names": [
+      "ReadMe",
+      "Output"
+    ],
+    "rows": 986,
+    "columns": 36,
+    "headers": [
+      "assetId",
+      "assetName",
+      "reportDate",
+      "geolocationCoordinates",
+      "countryCode",
+      "climateZone",
+      "ticcsSubClass",
+      "ticcsSubClassName",
+      "scenario",
+      "timeHorizon",
+      "indicator",
+      "indicatorUnit",
+      "indicatorValue",
+      "indicatorRating",
+      "hazard",
+      "HazardRating",
+      "hazardDamage",
+      "adjustedHazardDamage",
+      "hazardDisruption",
+      "adjustedHazardDisruption",
+      "hazardDisruptionDamageEquivalent",
+      "adjustedHazardDisruptionDamageEquivalent",
+      "hazardValueImpact",
+      "adjustedHazardValueImpact",
+      "hazardExposureRating",
+      "adjustedHazardExposureRating",
+      "totalDamage",
+      "adjustedTotalDamage",
+      "totalDisruption",
+      "adjustedTotalDisruption",
+      "totalDisruptionDamageEquivalent",
+      "adjustedTotalDisruptionDamageEquivalent",
+      "totalValueImpact",
+      "adjustedTotalValueImpact",
+      "physicalExposureRating",
+      "adjustedPhysicalExposureRating"
+    ],
+    "schema_hash_sha256": "711db3defab6048804706e83a42af849c164d7c7b63d4905d7e6461c71e61f02",
+    "dimensions": {
+      "ticcsSubClass": [
+        "IC701010"
+      ],
+      "ticcsSubClassName": [
+        "On-Shore Wind Power Generation"
+      ],
+      "assetId": [
+        "USA_18528"
+      ],
+      "countryCode": [
+        "USA"
+      ],
+      "climateZone": [
+        "Arid"
+      ],
+      "geolocationCoordinates": [
+        "(46.5,-103.75)"
+      ],
+      "scenario": [
+        "ssp2-4.5",
+        "ssp5-8.5"
+      ],
+      "timeHorizon": [
+        "2025",
+        "2030",
+        "2035",
+        "2040",
+        "2045",
+        "2050",
+        "2055",
+        "2060",
+        "2065",
+        "2070",
+        "2075",
+        "2080",
+        "2085",
+        "2090",
+        "2095",
+        "2100",
+        "Historical"
+      ],
+      "hazard": [
+        "Drought",
+        "Earthquake",
+        "Flood",
+        "Heat",
+        "Landslide",
+        "Precipitation",
+        "Subsidence",
+        "Wildfire",
+        "Wind"
+      ],
+      "indicator": [
+        "Burn probability",
+        "Coastal flood depth - 10 years RP",
+        "Coastal flood depth - 100 years RP",
+        "Coastal flood depth - 500 years RP",
+        "Days above 35°C",
+        "Days above 38°C",
+        "Days above 99th percentile",
+        "Drought duration (SPEI-6)",
+        "Drought magnitude (SPEI-6)",
+        "ETS wind speed - 10 years RP",
+        "ETS wind speed - 100 years RP",
+        "ETS wind speed - 500 years RP",
+        "Fire Weather Index (FWI)",
+        "Fluvial & Pluvial Flood depth - 10 years RP",
+        "Fluvial & Pluvial Flood depth - 100 years RP",
+        "Fluvial & Pluvial Flood depth - 500 years RP",
+        "Heatwave average length",
+        "Heatwave count",
+        "Landslide susceptibility",
+        "Max precipitation 1 day",
+        "Max precipitation 5 days",
+        "Peak Ground acceleration",
+        "Subsidence rate",
+        "TC wind speed - 10 years RP",
+        "TC wind speed - 100 years RP",
+        "TC wind speed - 500 years RP",
+        "Tree cover",
+        "WBGT days",
+        "Water stress"
+      ],
+      "indicatorUnit": [
+        "%",
+        "cm/year",
+        "days",
+        "events/decade",
+        "g",
+        "m",
+        "m/s",
+        "mm",
+        "months"
+      ]
+    },
+    "null_counts": {
+      "assetId": 0,
+      "assetName": 0,
+      "reportDate": 0,
+      "geolocationCoordinates": 0,
+      "countryCode": 0,
+      "climateZone": 0,
+      "ticcsSubClass": 0,
+      "ticcsSubClassName": 0,
+      "scenario": 0,
+      "timeHorizon": 0,
+      "indicator": 0,
+      "indicatorUnit": 102,
+      "indicatorValue": 342,
+      "indicatorRating": 19,
+      "hazard": 0,
+      "HazardRating": 0,
+      "hazardDamage": 890,
+      "adjustedHazardDamage": 890,
+      "hazardDisruption": 698,
+      "adjustedHazardDisruption": 698,
+      "hazardDisruptionDamageEquivalent": 698,
+      "adjustedHazardDisruptionDamageEquivalent": 698,
+      "hazardValueImpact": 890,
+      "adjustedHazardValueImpact": 890,
+      "hazardExposureRating": 314,
+      "adjustedHazardExposureRating": 314,
+      "totalDamage": 58,
+      "adjustedTotalDamage": 58,
+      "totalDisruption": 58,
+      "adjustedTotalDisruption": 58,
+      "totalDisruptionDamageEquivalent": 58,
+      "adjustedTotalDisruptionDamageEquivalent": 58,
+      "totalValueImpact": 58,
+      "adjustedTotalValueImpact": 58,
+      "physicalExposureRating": 58,
+      "adjustedPhysicalExposureRating": 58
+    },
+    "source_grain_columns": [
+      "assetId",
+      "scenario",
+      "timeHorizon",
+      "hazard",
+      "indicator"
+    ],
+    "source_grain_unique_count": 986,
+    "source_grain_duplicate_count": 0,
+    "repeated_measure": "adjustedTotalDamage",
+    "repeated_measure_group_columns": [
+      "assetId",
+      "scenario",
+      "timeHorizon"
+    ],
+    "repeated_measure_inconsistent_group_count": 0
+  },
+  {
+    "surface": "wind_physical",
+    "cell_id": 267458,
+    "source_uri": "gs://infrasure-scr-data/onshore_wind/physical_risk/CONUS13K_Cell_267458_MN_MISO_OnshoreWind_physical_risks.xlsx",
+    "sheet_names": [
+      "ReadMe",
+      "Output"
+    ],
+    "rows": 986,
+    "columns": 36,
+    "headers": [
+      "assetId",
+      "assetName",
+      "reportDate",
+      "geolocationCoordinates",
+      "countryCode",
+      "climateZone",
+      "ticcsSubClass",
+      "ticcsSubClassName",
+      "scenario",
+      "timeHorizon",
+      "indicator",
+      "indicatorUnit",
+      "indicatorValue",
+      "indicatorRating",
+      "hazard",
+      "HazardRating",
+      "hazardDamage",
+      "adjustedHazardDamage",
+      "hazardDisruption",
+      "adjustedHazardDisruption",
+      "hazardDisruptionDamageEquivalent",
+      "adjustedHazardDisruptionDamageEquivalent",
+      "hazardValueImpact",
+      "adjustedHazardValueImpact",
+      "hazardExposureRating",
+      "adjustedHazardExposureRating",
+      "totalDamage",
+      "adjustedTotalDamage",
+      "totalDisruption",
+      "adjustedTotalDisruption",
+      "totalDisruptionDamageEquivalent",
+      "adjustedTotalDisruptionDamageEquivalent",
+      "totalValueImpact",
+      "adjustedTotalValueImpact",
+      "physicalExposureRating",
+      "adjustedPhysicalExposureRating"
+    ],
+    "schema_hash_sha256": "711db3defab6048804706e83a42af849c164d7c7b63d4905d7e6461c71e61f02",
+    "dimensions": {
+      "ticcsSubClass": [
+        "IC701010"
+      ],
+      "ticcsSubClassName": [
+        "On-Shore Wind Power Generation"
+      ],
+      "assetId": [
+        "USA_20491"
+      ],
+      "countryCode": [
+        "USA"
+      ],
+      "climateZone": [
+        "Cold"
+      ],
+      "geolocationCoordinates": [
+        "(43.75,-95.5)"
+      ],
+      "scenario": [
+        "ssp2-4.5",
+        "ssp5-8.5"
+      ],
+      "timeHorizon": [
+        "2025",
+        "2030",
+        "2035",
+        "2040",
+        "2045",
+        "2050",
+        "2055",
+        "2060",
+        "2065",
+        "2070",
+        "2075",
+        "2080",
+        "2085",
+        "2090",
+        "2095",
+        "2100",
+        "Historical"
+      ],
+      "hazard": [
+        "Drought",
+        "Earthquake",
+        "Flood",
+        "Heat",
+        "Landslide",
+        "Precipitation",
+        "Subsidence",
+        "Wildfire",
+        "Wind"
+      ],
+      "indicator": [
+        "Burn probability",
+        "Coastal flood depth - 10 years RP",
+        "Coastal flood depth - 100 years RP",
+        "Coastal flood depth - 500 years RP",
+        "Days above 35°C",
+        "Days above 38°C",
+        "Days above 99th percentile",
+        "Drought duration (SPEI-6)",
+        "Drought magnitude (SPEI-6)",
+        "ETS wind speed - 10 years RP",
+        "ETS wind speed - 100 years RP",
+        "ETS wind speed - 500 years RP",
+        "Fire Weather Index (FWI)",
+        "Fluvial & Pluvial Flood depth - 10 years RP",
+        "Fluvial & Pluvial Flood depth - 100 years RP",
+        "Fluvial & Pluvial Flood depth - 500 years RP",
+        "Heatwave average length",
+        "Heatwave count",
+        "Landslide susceptibility",
+        "Max precipitation 1 day",
+        "Max precipitation 5 days",
+        "Peak Ground acceleration",
+        "Subsidence rate",
+        "TC wind speed - 10 years RP",
+        "TC wind speed - 100 years RP",
+        "TC wind speed - 500 years RP",
+        "Tree cover",
+        "WBGT days",
+        "Water stress"
+      ],
+      "indicatorUnit": [
+        "%",
+        "cm/year",
+        "days",
+        "events/decade",
+        "g",
+        "m",
+        "m/s",
+        "mm",
+        "months"
+      ]
+    },
+    "null_counts": {
+      "assetId": 0,
+      "assetName": 0,
+      "reportDate": 0,
+      "geolocationCoordinates": 0,
+      "countryCode": 0,
+      "climateZone": 0,
+      "ticcsSubClass": 0,
+      "ticcsSubClassName": 0,
+      "scenario": 0,
+      "timeHorizon": 0,
+      "indicator": 0,
+      "indicatorUnit": 102,
+      "indicatorValue": 325,
+      "indicatorRating": 19,
+      "hazard": 0,
+      "HazardRating": 0,
+      "hazardDamage": 698,
+      "adjustedHazardDamage": 698,
+      "hazardDisruption": 506,
+      "adjustedHazardDisruption": 506,
+      "hazardDisruptionDamageEquivalent": 506,
+      "adjustedHazardDisruptionDamageEquivalent": 506,
+      "hazardValueImpact": 698,
+      "adjustedHazardValueImpact": 698,
+      "hazardExposureRating": 314,
+      "adjustedHazardExposureRating": 314,
+      "totalDamage": 58,
+      "adjustedTotalDamage": 58,
+      "totalDisruption": 58,
+      "adjustedTotalDisruption": 58,
+      "totalDisruptionDamageEquivalent": 58,
+      "adjustedTotalDisruptionDamageEquivalent": 58,
+      "totalValueImpact": 58,
+      "adjustedTotalValueImpact": 58,
+      "physicalExposureRating": 58,
+      "adjustedPhysicalExposureRating": 58
+    },
+    "source_grain_columns": [
+      "assetId",
+      "scenario",
+      "timeHorizon",
+      "hazard",
+      "indicator"
+    ],
+    "source_grain_unique_count": 986,
+    "source_grain_duplicate_count": 0,
+    "repeated_measure": "adjustedTotalDamage",
+    "repeated_measure_group_columns": [
+      "assetId",
+      "scenario",
+      "timeHorizon"
+    ],
+    "repeated_measure_inconsistent_group_count": 0
+  },
+  {
+    "surface": "wind_physical",
+    "cell_id": 291839,
+    "source_uri": "gs://infrasure-scr-data/onshore_wind/physical_risk/CONUS13K_Cell_291839_CA_CAISO_OnshoreWind_physical_risks.xlsx",
+    "sheet_names": [
+      "ReadMe",
+      "Output"
+    ],
+    "rows": 986,
+    "columns": 36,
+    "headers": [
+      "assetId",
+      "assetName",
+      "reportDate",
+      "geolocationCoordinates",
+      "countryCode",
+      "climateZone",
+      "ticcsSubClass",
+      "ticcsSubClassName",
+      "scenario",
+      "timeHorizon",
+      "indicator",
+      "indicatorUnit",
+      "indicatorValue",
+      "indicatorRating",
+      "hazard",
+      "HazardRating",
+      "hazardDamage",
+      "adjustedHazardDamage",
+      "hazardDisruption",
+      "adjustedHazardDisruption",
+      "hazardDisruptionDamageEquivalent",
+      "adjustedHazardDisruptionDamageEquivalent",
+      "hazardValueImpact",
+      "adjustedHazardValueImpact",
+      "hazardExposureRating",
+      "adjustedHazardExposureRating",
+      "totalDamage",
+      "adjustedTotalDamage",
+      "totalDisruption",
+      "adjustedTotalDisruption",
+      "totalDisruptionDamageEquivalent",
+      "adjustedTotalDisruptionDamageEquivalent",
+      "totalValueImpact",
+      "adjustedTotalValueImpact",
+      "physicalExposureRating",
+      "adjustedPhysicalExposureRating"
+    ],
+    "schema_hash_sha256": "711db3defab6048804706e83a42af849c164d7c7b63d4905d7e6461c71e61f02",
+    "dimensions": {
+      "ticcsSubClass": [
+        "IC701010"
+      ],
+      "ticcsSubClassName": [
+        "On-Shore Wind Power Generation"
+      ],
+      "assetId": [
+        "USA_23762"
+      ],
+      "countryCode": [
+        "USA"
+      ],
+      "climateZone": [
+        "Cold"
+      ],
+      "geolocationCoordinates": [
+        "(39.5,-120.25)"
+      ],
+      "scenario": [
+        "ssp2-4.5",
+        "ssp5-8.5"
+      ],
+      "timeHorizon": [
+        "2025",
+        "2030",
+        "2035",
+        "2040",
+        "2045",
+        "2050",
+        "2055",
+        "2060",
+        "2065",
+        "2070",
+        "2075",
+        "2080",
+        "2085",
+        "2090",
+        "2095",
+        "2100",
+        "Historical"
+      ],
+      "hazard": [
+        "Drought",
+        "Earthquake",
+        "Flood",
+        "Heat",
+        "Landslide",
+        "Precipitation",
+        "Subsidence",
+        "Wildfire",
+        "Wind"
+      ],
+      "indicator": [
+        "Burn probability",
+        "Coastal flood depth - 10 years RP",
+        "Coastal flood depth - 100 years RP",
+        "Coastal flood depth - 500 years RP",
+        "Days above 35°C",
+        "Days above 38°C",
+        "Days above 99th percentile",
+        "Drought duration (SPEI-6)",
+        "Drought magnitude (SPEI-6)",
+        "ETS wind speed - 10 years RP",
+        "ETS wind speed - 100 years RP",
+        "ETS wind speed - 500 years RP",
+        "Fire Weather Index (FWI)",
+        "Fluvial & Pluvial Flood depth - 10 years RP",
+        "Fluvial & Pluvial Flood depth - 100 years RP",
+        "Fluvial & Pluvial Flood depth - 500 years RP",
+        "Heatwave average length",
+        "Heatwave count",
+        "Landslide susceptibility",
+        "Max precipitation 1 day",
+        "Max precipitation 5 days",
+        "Peak Ground acceleration",
+        "Subsidence rate",
+        "TC wind speed - 10 years RP",
+        "TC wind speed - 100 years RP",
+        "TC wind speed - 500 years RP",
+        "Tree cover",
+        "WBGT days",
+        "Water stress"
+      ],
+      "indicatorUnit": [
+        "%",
+        "cm/year",
+        "days",
+        "events/decade",
+        "g",
+        "m",
+        "m/s",
+        "mm",
+        "months"
+      ]
+    },
+    "null_counts": {
+      "assetId": 0,
+      "assetName": 0,
+      "reportDate": 0,
+      "geolocationCoordinates": 0,
+      "countryCode": 0,
+      "climateZone": 0,
+      "ticcsSubClass": 0,
+      "ticcsSubClassName": 0,
+      "scenario": 0,
+      "timeHorizon": 0,
+      "indicator": 0,
+      "indicatorUnit": 102,
+      "indicatorValue": 359,
+      "indicatorRating": 19,
+      "hazard": 0,
+      "HazardRating": 0,
+      "hazardDamage": 890,
+      "adjustedHazardDamage": 890,
+      "hazardDisruption": 698,
+      "adjustedHazardDisruption": 698,
+      "hazardDisruptionDamageEquivalent": 698,
+      "adjustedHazardDisruptionDamageEquivalent": 698,
+      "hazardValueImpact": 890,
+      "adjustedHazardValueImpact": 890,
+      "hazardExposureRating": 314,
+      "adjustedHazardExposureRating": 314,
+      "totalDamage": 58,
+      "adjustedTotalDamage": 58,
+      "totalDisruption": 58,
+      "adjustedTotalDisruption": 58,
+      "totalDisruptionDamageEquivalent": 58,
+      "adjustedTotalDisruptionDamageEquivalent": 58,
+      "totalValueImpact": 58,
+      "adjustedTotalValueImpact": 58,
+      "physicalExposureRating": 58,
+      "adjustedPhysicalExposureRating": 58
+    },
+    "source_grain_columns": [
+      "assetId",
+      "scenario",
+      "timeHorizon",
+      "hazard",
+      "indicator"
+    ],
+    "source_grain_unique_count": 986,
+    "source_grain_duplicate_count": 0,
+    "repeated_measure": "adjustedTotalDamage",
+    "repeated_measure_group_columns": [
+      "assetId",
+      "scenario",
+      "timeHorizon"
+    ],
+    "repeated_measure_inconsistent_group_count": 0
+  },
+  {
+    "surface": "wind_physical",
+    "cell_id": 316425,
+    "source_uri": "gs://infrasure-scr-data/onshore_wind/physical_risk/CONUS13K_Cell_316425_AR_MISO_OnshoreWind_physical_risks.xlsx",
+    "sheet_names": [
+      "ReadMe",
+      "Output"
+    ],
+    "rows": 986,
+    "columns": 36,
+    "headers": [
+      "assetId",
+      "assetName",
+      "reportDate",
+      "geolocationCoordinates",
+      "countryCode",
+      "climateZone",
+      "ticcsSubClass",
+      "ticcsSubClassName",
+      "scenario",
+      "timeHorizon",
+      "indicator",
+      "indicatorUnit",
+      "indicatorValue",
+      "indicatorRating",
+      "hazard",
+      "HazardRating",
+      "hazardDamage",
+      "adjustedHazardDamage",
+      "hazardDisruption",
+      "adjustedHazardDisruption",
+      "hazardDisruptionDamageEquivalent",
+      "adjustedHazardDisruptionDamageEquivalent",
+      "hazardValueImpact",
+      "adjustedHazardValueImpact",
+      "hazardExposureRating",
+      "adjustedHazardExposureRating",
+      "totalDamage",
+      "adjustedTotalDamage",
+      "totalDisruption",
+      "adjustedTotalDisruption",
+      "totalDisruptionDamageEquivalent",
+      "adjustedTotalDisruptionDamageEquivalent",
+      "totalValueImpact",
+      "adjustedTotalValueImpact",
+      "physicalExposureRating",
+      "adjustedPhysicalExposureRating"
+    ],
+    "schema_hash_sha256": "711db3defab6048804706e83a42af849c164d7c7b63d4905d7e6461c71e61f02",
+    "dimensions": {
+      "ticcsSubClass": [
+        "IC701010"
+      ],
+      "ticcsSubClassName": [
+        "On-Shore Wind Power Generation"
+      ],
+      "assetId": [
+        "USA_27033"
+      ],
+      "countryCode": [
+        "USA"
+      ],
+      "climateZone": [
+        "Temperate"
+      ],
+      "geolocationCoordinates": [
+        "(35.25,-93.75)"
+      ],
+      "scenario": [
+        "ssp2-4.5",
+        "ssp5-8.5"
+      ],
+      "timeHorizon": [
+        "2025",
+        "2030",
+        "2035",
+        "2040",
+        "2045",
+        "2050",
+        "2055",
+        "2060",
+        "2065",
+        "2070",
+        "2075",
+        "2080",
+        "2085",
+        "2090",
+        "2095",
+        "2100",
+        "Historical"
+      ],
+      "hazard": [
+        "Drought",
+        "Earthquake",
+        "Flood",
+        "Heat",
+        "Landslide",
+        "Precipitation",
+        "Subsidence",
+        "Wildfire",
+        "Wind"
+      ],
+      "indicator": [
+        "Burn probability",
+        "Coastal flood depth - 10 years RP",
+        "Coastal flood depth - 100 years RP",
+        "Coastal flood depth - 500 years RP",
+        "Days above 35°C",
+        "Days above 38°C",
+        "Days above 99th percentile",
+        "Drought duration (SPEI-6)",
+        "Drought magnitude (SPEI-6)",
+        "ETS wind speed - 10 years RP",
+        "ETS wind speed - 100 years RP",
+        "ETS wind speed - 500 years RP",
+        "Fire Weather Index (FWI)",
+        "Fluvial & Pluvial Flood depth - 10 years RP",
+        "Fluvial & Pluvial Flood depth - 100 years RP",
+        "Fluvial & Pluvial Flood depth - 500 years RP",
+        "Heatwave average length",
+        "Heatwave count",
+        "Landslide susceptibility",
+        "Max precipitation 1 day",
+        "Max precipitation 5 days",
+        "Peak Ground acceleration",
+        "Subsidence rate",
+        "TC wind speed - 10 years RP",
+        "TC wind speed - 100 years RP",
+        "TC wind speed - 500 years RP",
+        "Tree cover",
+        "WBGT days",
+        "Water stress"
+      ],
+      "indicatorUnit": [
+        "%",
+        "cm/year",
+        "days",
+        "events/decade",
+        "g",
+        "m",
+        "m/s",
+        "mm",
+        "months"
+      ]
+    },
+    "null_counts": {
+      "assetId": 0,
+      "assetName": 0,
+      "reportDate": 0,
+      "geolocationCoordinates": 0,
+      "countryCode": 0,
+      "climateZone": 0,
+      "ticcsSubClass": 0,
+      "ticcsSubClassName": 0,
+      "scenario": 0,
+      "timeHorizon": 0,
+      "indicator": 0,
+      "indicatorUnit": 102,
+      "indicatorValue": 342,
+      "indicatorRating": 19,
+      "hazard": 0,
+      "HazardRating": 0,
+      "hazardDamage": 890,
+      "adjustedHazardDamage": 890,
+      "hazardDisruption": 698,
+      "adjustedHazardDisruption": 698,
+      "hazardDisruptionDamageEquivalent": 698,
+      "adjustedHazardDisruptionDamageEquivalent": 698,
+      "hazardValueImpact": 890,
+      "adjustedHazardValueImpact": 890,
+      "hazardExposureRating": 314,
+      "adjustedHazardExposureRating": 314,
+      "totalDamage": 58,
+      "adjustedTotalDamage": 58,
+      "totalDisruption": 58,
+      "adjustedTotalDisruption": 58,
+      "totalDisruptionDamageEquivalent": 58,
+      "adjustedTotalDisruptionDamageEquivalent": 58,
+      "totalValueImpact": 58,
+      "adjustedTotalValueImpact": 58,
+      "physicalExposureRating": 58,
+      "adjustedPhysicalExposureRating": 58
+    },
+    "source_grain_columns": [
+      "assetId",
+      "scenario",
+      "timeHorizon",
+      "hazard",
+      "indicator"
+    ],
+    "source_grain_unique_count": 986,
+    "source_grain_duplicate_count": 0,
+    "repeated_measure": "adjustedTotalDamage",
+    "repeated_measure_group_columns": [
+      "assetId",
+      "scenario",
+      "timeHorizon"
+    ],
+    "repeated_measure_inconsistent_group_count": 0
+  },
+  {
+    "surface": "wind_physical",
+    "cell_id": 335068,
+    "source_uri": "gs://infrasure-scr-data/onshore_wind/physical_risk/CONUS13K_Cell_335068_AZ_WEIM_OnshoreWind_physical_risks.xlsx",
+    "sheet_names": [
+      "ReadMe",
+      "Output"
+    ],
+    "rows": 986,
+    "columns": 36,
+    "headers": [
+      "assetId",
+      "assetName",
+      "reportDate",
+      "geolocationCoordinates",
+      "countryCode",
+      "climateZone",
+      "ticcsSubClass",
+      "ticcsSubClassName",
+      "scenario",
+      "timeHorizon",
+      "indicator",
+      "indicatorUnit",
+      "indicatorValue",
+      "indicatorRating",
+      "hazard",
+      "HazardRating",
+      "hazardDamage",
+      "adjustedHazardDamage",
+      "hazardDisruption",
+      "adjustedHazardDisruption",
+      "hazardDisruptionDamageEquivalent",
+      "adjustedHazardDisruptionDamageEquivalent",
+      "hazardValueImpact",
+      "adjustedHazardValueImpact",
+      "hazardExposureRating",
+      "adjustedHazardExposureRating",
+      "totalDamage",
+      "adjustedTotalDamage",
+      "totalDisruption",
+      "adjustedTotalDisruption",
+      "totalDisruptionDamageEquivalent",
+      "adjustedTotalDisruptionDamageEquivalent",
+      "totalValueImpact",
+      "adjustedTotalValueImpact",
+      "physicalExposureRating",
+      "adjustedPhysicalExposureRating"
+    ],
+    "schema_hash_sha256": "711db3defab6048804706e83a42af849c164d7c7b63d4905d7e6461c71e61f02",
+    "dimensions": {
+      "ticcsSubClass": [
+        "IC701010"
+      ],
+      "ticcsSubClassName": [
+        "On-Shore Wind Power Generation"
+      ],
+      "assetId": [
+        "USA_29978"
+      ],
+      "countryCode": [
+        "USA"
+      ],
+      "climateZone": [
+        "Arid"
+      ],
+      "geolocationCoordinates": [
+        "(32.0,-113.0)"
+      ],
+      "scenario": [
+        "ssp2-4.5",
+        "ssp5-8.5"
+      ],
+      "timeHorizon": [
+        "2025",
+        "2030",
+        "2035",
+        "2040",
+        "2045",
+        "2050",
+        "2055",
+        "2060",
+        "2065",
+        "2070",
+        "2075",
+        "2080",
+        "2085",
+        "2090",
+        "2095",
+        "2100",
+        "Historical"
+      ],
+      "hazard": [
+        "Drought",
+        "Earthquake",
+        "Flood",
+        "Heat",
+        "Landslide",
+        "Precipitation",
+        "Subsidence",
+        "Wildfire",
+        "Wind"
+      ],
+      "indicator": [
+        "Burn probability",
+        "Coastal flood depth - 10 years RP",
+        "Coastal flood depth - 100 years RP",
+        "Coastal flood depth - 500 years RP",
+        "Days above 35°C",
+        "Days above 38°C",
+        "Days above 99th percentile",
+        "Drought duration (SPEI-6)",
+        "Drought magnitude (SPEI-6)",
+        "ETS wind speed - 10 years RP",
+        "ETS wind speed - 100 years RP",
+        "ETS wind speed - 500 years RP",
+        "Fire Weather Index (FWI)",
+        "Fluvial & Pluvial Flood depth - 10 years RP",
+        "Fluvial & Pluvial Flood depth - 100 years RP",
+        "Fluvial & Pluvial Flood depth - 500 years RP",
+        "Heatwave average length",
+        "Heatwave count",
+        "Landslide susceptibility",
+        "Max precipitation 1 day",
+        "Max precipitation 5 days",
+        "Peak Ground acceleration",
+        "Subsidence rate",
+        "TC wind speed - 10 years RP",
+        "TC wind speed - 100 years RP",
+        "TC wind speed - 500 years RP",
+        "Tree cover",
+        "WBGT days",
+        "Water stress"
+      ],
+      "indicatorUnit": [
+        "%",
+        "cm/year",
+        "days",
+        "events/decade",
+        "g",
+        "m",
+        "m/s",
+        "mm",
+        "months"
+      ]
+    },
+    "null_counts": {
+      "assetId": 0,
+      "assetName": 0,
+      "reportDate": 0,
+      "geolocationCoordinates": 0,
+      "countryCode": 0,
+      "climateZone": 0,
+      "ticcsSubClass": 0,
+      "ticcsSubClassName": 0,
+      "scenario": 0,
+      "timeHorizon": 0,
+      "indicator": 0,
+      "indicatorUnit": 102,
+      "indicatorValue": 361,
+      "indicatorRating": 19,
+      "hazard": 0,
+      "HazardRating": 0,
+      "hazardDamage": 986,
+      "adjustedHazardDamage": 986,
+      "hazardDisruption": 794,
+      "adjustedHazardDisruption": 794,
+      "hazardDisruptionDamageEquivalent": 794,
+      "adjustedHazardDisruptionDamageEquivalent": 794,
+      "hazardValueImpact": 986,
+      "adjustedHazardValueImpact": 986,
+      "hazardExposureRating": 314,
+      "adjustedHazardExposureRating": 314,
+      "totalDamage": 986,
+      "adjustedTotalDamage": 986,
+      "totalDisruption": 58,
+      "adjustedTotalDisruption": 58,
+      "totalDisruptionDamageEquivalent": 58,
+      "adjustedTotalDisruptionDamageEquivalent": 58,
+      "totalValueImpact": 986,
+      "adjustedTotalValueImpact": 986,
+      "physicalExposureRating": 58,
+      "adjustedPhysicalExposureRating": 58
+    },
+    "source_grain_columns": [
+      "assetId",
+      "scenario",
+      "timeHorizon",
+      "hazard",
+      "indicator"
+    ],
+    "source_grain_unique_count": 986,
+    "source_grain_duplicate_count": 0,
+    "repeated_measure": "adjustedTotalDamage",
+    "repeated_measure_group_columns": [
+      "assetId",
+      "scenario",
+      "timeHorizon"
+    ],
+    "repeated_measure_inconsistent_group_count": 0
+  },
+  {
+    "surface": "wind_physical",
+    "cell_id": 376954,
+    "source_uri": "gs://infrasure-scr-data/onshore_wind/physical_risk/CONUS13K_Cell_376954_FL_Non-ISO_FRCC_OnshoreWind_physical_risks.xlsx",
+    "sheet_names": [
+      "ReadMe",
+      "Output"
+    ],
+    "rows": 986,
+    "columns": 36,
+    "headers": [
+      "assetId",
+      "assetName",
+      "reportDate",
+      "geolocationCoordinates",
+      "countryCode",
+      "climateZone",
+      "ticcsSubClass",
+      "ticcsSubClassName",
+      "scenario",
+      "timeHorizon",
+      "indicator",
+      "indicatorUnit",
+      "indicatorValue",
+      "indicatorRating",
+      "hazard",
+      "HazardRating",
+      "hazardDamage",
+      "adjustedHazardDamage",
+      "hazardDisruption",
+      "adjustedHazardDisruption",
+      "hazardDisruptionDamageEquivalent",
+      "adjustedHazardDisruptionDamageEquivalent",
+      "hazardValueImpact",
+      "adjustedHazardValueImpact",
+      "hazardExposureRating",
+      "adjustedHazardExposureRating",
+      "totalDamage",
+      "adjustedTotalDamage",
+      "totalDisruption",
+      "adjustedTotalDisruption",
+      "totalDisruptionDamageEquivalent",
+      "adjustedTotalDisruptionDamageEquivalent",
+      "totalValueImpact",
+      "adjustedTotalValueImpact",
+      "physicalExposureRating",
+      "adjustedPhysicalExposureRating"
+    ],
+    "schema_hash_sha256": "711db3defab6048804706e83a42af849c164d7c7b63d4905d7e6461c71e61f02",
+    "dimensions": {
+      "ticcsSubClass": [
+        "IC701010"
+      ],
+      "ticcsSubClassName": [
+        "On-Shore Wind Power Generation"
+      ],
+      "assetId": [
+        "USA_31286"
+      ],
+      "countryCode": [
+        "USA"
+      ],
+      "climateZone": [
+        "Tropical"
+      ],
+      "geolocationCoordinates": [
+        "(24.75,-81.5)"
+      ],
+      "scenario": [
+        "ssp2-4.5",
+        "ssp5-8.5"
+      ],
+      "timeHorizon": [
+        "2025",
+        "2030",
+        "2035",
+        "2040",
+        "2045",
+        "2050",
+        "2055",
+        "2060",
+        "2065",
+        "2070",
+        "2075",
+        "2080",
+        "2085",
+        "2090",
+        "2095",
+        "2100",
+        "Historical"
+      ],
+      "hazard": [
+        "Drought",
+        "Earthquake",
+        "Flood",
+        "Heat",
+        "Landslide",
+        "Precipitation",
+        "Subsidence",
+        "Wildfire",
+        "Wind"
+      ],
+      "indicator": [
+        "Burn probability",
+        "Coastal flood depth - 10 years RP",
+        "Coastal flood depth - 100 years RP",
+        "Coastal flood depth - 500 years RP",
+        "Days above 35°C",
+        "Days above 38°C",
+        "Days above 99th percentile",
+        "Drought duration (SPEI-6)",
+        "Drought magnitude (SPEI-6)",
+        "ETS wind speed - 10 years RP",
+        "ETS wind speed - 100 years RP",
+        "ETS wind speed - 500 years RP",
+        "Fire Weather Index (FWI)",
+        "Fluvial & Pluvial Flood depth - 10 years RP",
+        "Fluvial & Pluvial Flood depth - 100 years RP",
+        "Fluvial & Pluvial Flood depth - 500 years RP",
+        "Heatwave average length",
+        "Heatwave count",
+        "Landslide susceptibility",
+        "Max precipitation 1 day",
+        "Max precipitation 5 days",
+        "Peak Ground acceleration",
+        "Subsidence rate",
+        "TC wind speed - 10 years RP",
+        "TC wind speed - 100 years RP",
+        "TC wind speed - 500 years RP",
+        "Tree cover",
+        "WBGT days",
+        "Water stress"
+      ],
+      "indicatorUnit": [
+        "%",
+        "cm/year",
+        "days",
+        "events/decade",
+        "g",
+        "m",
+        "m/s",
+        "mm",
+        "months"
+      ]
+    },
+    "null_counts": {
+      "assetId": 0,
+      "assetName": 0,
+      "reportDate": 0,
+      "geolocationCoordinates": 0,
+      "countryCode": 0,
+      "climateZone": 0,
+      "ticcsSubClass": 0,
+      "ticcsSubClassName": 0,
+      "scenario": 0,
+      "timeHorizon": 0,
+      "indicator": 0,
+      "indicatorUnit": 102,
+      "indicatorValue": 266,
+      "indicatorRating": 19,
+      "hazard": 0,
+      "HazardRating": 0,
+      "hazardDamage": 602,
+      "adjustedHazardDamage": 602,
+      "hazardDisruption": 410,
+      "adjustedHazardDisruption": 410,
+      "hazardDisruptionDamageEquivalent": 410,
+      "adjustedHazardDisruptionDamageEquivalent": 410,
+      "hazardValueImpact": 602,
+      "adjustedHazardValueImpact": 602,
+      "hazardExposureRating": 314,
+      "adjustedHazardExposureRating": 314,
+      "totalDamage": 58,
+      "adjustedTotalDamage": 58,
+      "totalDisruption": 58,
+      "adjustedTotalDisruption": 58,
+      "totalDisruptionDamageEquivalent": 58,
+      "adjustedTotalDisruptionDamageEquivalent": 58,
+      "totalValueImpact": 58,
+      "adjustedTotalValueImpact": 58,
+      "physicalExposureRating": 58,
+      "adjustedPhysicalExposureRating": 58
+    },
+    "source_grain_columns": [
+      "assetId",
+      "scenario",
+      "timeHorizon",
+      "hazard",
+      "indicator"
+    ],
+    "source_grain_unique_count": 986,
+    "source_grain_duplicate_count": 0,
+    "repeated_measure": "adjustedTotalDamage",
+    "repeated_measure_group_columns": [
+      "assetId",
+      "scenario",
+      "timeHorizon"
+    ],
+    "repeated_measure_inconsistent_group_count": 0
+  },
+  {
+    "surface": "wind_transition",
+    "cell_id": 235780,
+    "source_uri": "gs://infrasure-scr-data/onshore_wind/transition_risk/CONUS13K_Cell_235780_MN_MISO_OnshoreWind_transition_risks.xlsx",
+    "sheet_names": [
+      "ReadMe",
+      "Output"
+    ],
+    "rows": 216,
+    "columns": 20,
+    "headers": [
+      "assetId",
+      "assetName",
+      "reportDate",
+      "geolocationCoordinates",
+      "countryCode",
+      "climateZone",
+      "ticcsSubClass",
+      "ticcsSubClassName",
+      "scenario",
+      "timeHorizon",
+      "indicator",
+      "indicatorUnit",
+      "indicatorValue",
+      "subrisk",
+      "subriskRevenueImpact",
+      "adjustedSubriskRevenueImpact",
+      "subriskExposureRating",
+      "adjustedSubriskExposureRating",
+      "transitionExposureRating",
+      "adjustedTransitionExposureRating"
+    ],
+    "schema_hash_sha256": "de3472cfb77ea09f0b42e3cd0d5c875924b6b25e45c35afbdb339c2bd1121151",
+    "dimensions": {
+      "ticcsSubClass": [
+        "IC701010"
+      ],
+      "ticcsSubClassName": [
+        "On-Shore Wind Power Generation"
+      ],
+      "assetId": [
+        "USA_17220"
+      ],
+      "countryCode": [
+        "USA"
+      ],
+      "climateZone": [
+        "Cold"
+      ],
+      "geolocationCoordinates": [
+        "(49.25,-95.0)"
+      ],
+      "scenario": [
+        "Below 2°C",
+        "Climate Breakdown",
+        "Climate Destabilization",
+        "Current Policies",
+        "Delayed transition",
+        "Expected",
+        "Fragmented World",
+        "Nationally Determined Contributions (NDCs)",
+        "Net Zero 2050"
+      ],
+      "timeHorizon": [
+        "2025",
+        "2030",
+        "2035",
+        "2040",
+        "2045",
+        "2050"
+      ],
+      "indicator": [
+        "Carbon price",
+        "Revenue growth",
+        "Scope 1&2 emissions intensity",
+        "Scope 3 emissions intensity"
+      ],
+      "indicatorUnit": [
+        "$/tCO2",
+        "%",
+        "tCO2/M$"
+      ],
+      "subrisk": [
+        "Direct Carbon Cost",
+        "Market Demand Shifts"
+      ]
+    },
+    "null_counts": {
+      "assetId": 0,
+      "assetName": 0,
+      "reportDate": 0,
+      "geolocationCoordinates": 0,
+      "countryCode": 0,
+      "climateZone": 0,
+      "ticcsSubClass": 0,
+      "ticcsSubClassName": 0,
+      "scenario": 0,
+      "timeHorizon": 0,
+      "indicator": 0,
+      "indicatorUnit": 0,
+      "indicatorValue": 26,
+      "subrisk": 0,
+      "subriskRevenueImpact": 64,
+      "adjustedSubriskRevenueImpact": 64,
+      "subriskExposureRating": 0,
+      "adjustedSubriskExposureRating": 0,
+      "transitionExposureRating": 0,
+      "adjustedTransitionExposureRating": 0
+    },
+    "source_grain_columns": [
+      "assetId",
+      "scenario",
+      "timeHorizon",
+      "subrisk",
+      "indicator"
+    ],
+    "source_grain_unique_count": 216,
+    "source_grain_duplicate_count": 0,
+    "repeated_measure": "adjustedSubriskRevenueImpact",
+    "repeated_measure_group_columns": [
+      "assetId",
+      "scenario",
+      "timeHorizon",
+      "subrisk"
+    ],
+    "repeated_measure_inconsistent_group_count": 0
+  },
+  {
+    "surface": "wind_transition",
+    "cell_id": 251585,
+    "source_uri": "gs://infrasure-scr-data/onshore_wind/transition_risk/CONUS13K_Cell_251585_ND_MISO_OnshoreWind_transition_risks.xlsx",
+    "sheet_names": [
+      "ReadMe",
+      "Output"
+    ],
+    "rows": 216,
+    "columns": 20,
+    "headers": [
+      "assetId",
+      "assetName",
+      "reportDate",
+      "geolocationCoordinates",
+      "countryCode",
+      "climateZone",
+      "ticcsSubClass",
+      "ticcsSubClassName",
+      "scenario",
+      "timeHorizon",
+      "indicator",
+      "indicatorUnit",
+      "indicatorValue",
+      "subrisk",
+      "subriskRevenueImpact",
+      "adjustedSubriskRevenueImpact",
+      "subriskExposureRating",
+      "adjustedSubriskExposureRating",
+      "transitionExposureRating",
+      "adjustedTransitionExposureRating"
+    ],
+    "schema_hash_sha256": "de3472cfb77ea09f0b42e3cd0d5c875924b6b25e45c35afbdb339c2bd1121151",
+    "dimensions": {
+      "ticcsSubClass": [
+        "IC701010"
+      ],
+      "ticcsSubClassName": [
+        "On-Shore Wind Power Generation"
+      ],
+      "assetId": [
+        "USA_18528"
+      ],
+      "countryCode": [
+        "USA"
+      ],
+      "climateZone": [
+        "Arid"
+      ],
+      "geolocationCoordinates": [
+        "(46.5,-103.75)"
+      ],
+      "scenario": [
+        "Below 2°C",
+        "Climate Breakdown",
+        "Climate Destabilization",
+        "Current Policies",
+        "Delayed transition",
+        "Expected",
+        "Fragmented World",
+        "Nationally Determined Contributions (NDCs)",
+        "Net Zero 2050"
+      ],
+      "timeHorizon": [
+        "2025",
+        "2030",
+        "2035",
+        "2040",
+        "2045",
+        "2050"
+      ],
+      "indicator": [
+        "Carbon price",
+        "Revenue growth",
+        "Scope 1&2 emissions intensity",
+        "Scope 3 emissions intensity"
+      ],
+      "indicatorUnit": [
+        "$/tCO2",
+        "%",
+        "tCO2/M$"
+      ],
+      "subrisk": [
+        "Direct Carbon Cost",
+        "Market Demand Shifts"
+      ]
+    },
+    "null_counts": {
+      "assetId": 0,
+      "assetName": 0,
+      "reportDate": 0,
+      "geolocationCoordinates": 0,
+      "countryCode": 0,
+      "climateZone": 0,
+      "ticcsSubClass": 0,
+      "ticcsSubClassName": 0,
+      "scenario": 0,
+      "timeHorizon": 0,
+      "indicator": 0,
+      "indicatorUnit": 0,
+      "indicatorValue": 26,
+      "subrisk": 0,
+      "subriskRevenueImpact": 64,
+      "adjustedSubriskRevenueImpact": 64,
+      "subriskExposureRating": 0,
+      "adjustedSubriskExposureRating": 0,
+      "transitionExposureRating": 0,
+      "adjustedTransitionExposureRating": 0
+    },
+    "source_grain_columns": [
+      "assetId",
+      "scenario",
+      "timeHorizon",
+      "subrisk",
+      "indicator"
+    ],
+    "source_grain_unique_count": 216,
+    "source_grain_duplicate_count": 0,
+    "repeated_measure": "adjustedSubriskRevenueImpact",
+    "repeated_measure_group_columns": [
+      "assetId",
+      "scenario",
+      "timeHorizon",
+      "subrisk"
+    ],
+    "repeated_measure_inconsistent_group_count": 0
+  },
+  {
+    "surface": "wind_transition",
+    "cell_id": 267458,
+    "source_uri": "gs://infrasure-scr-data/onshore_wind/transition_risk/CONUS13K_Cell_267458_MN_MISO_OnshoreWind_transition_risks.xlsx",
+    "sheet_names": [
+      "ReadMe",
+      "Output"
+    ],
+    "rows": 216,
+    "columns": 20,
+    "headers": [
+      "assetId",
+      "assetName",
+      "reportDate",
+      "geolocationCoordinates",
+      "countryCode",
+      "climateZone",
+      "ticcsSubClass",
+      "ticcsSubClassName",
+      "scenario",
+      "timeHorizon",
+      "indicator",
+      "indicatorUnit",
+      "indicatorValue",
+      "subrisk",
+      "subriskRevenueImpact",
+      "adjustedSubriskRevenueImpact",
+      "subriskExposureRating",
+      "adjustedSubriskExposureRating",
+      "transitionExposureRating",
+      "adjustedTransitionExposureRating"
+    ],
+    "schema_hash_sha256": "de3472cfb77ea09f0b42e3cd0d5c875924b6b25e45c35afbdb339c2bd1121151",
+    "dimensions": {
+      "ticcsSubClass": [
+        "IC701010"
+      ],
+      "ticcsSubClassName": [
+        "On-Shore Wind Power Generation"
+      ],
+      "assetId": [
+        "USA_20491"
+      ],
+      "countryCode": [
+        "USA"
+      ],
+      "climateZone": [
+        "Cold"
+      ],
+      "geolocationCoordinates": [
+        "(43.75,-95.5)"
+      ],
+      "scenario": [
+        "Below 2°C",
+        "Climate Breakdown",
+        "Climate Destabilization",
+        "Current Policies",
+        "Delayed transition",
+        "Expected",
+        "Fragmented World",
+        "Nationally Determined Contributions (NDCs)",
+        "Net Zero 2050"
+      ],
+      "timeHorizon": [
+        "2025",
+        "2030",
+        "2035",
+        "2040",
+        "2045",
+        "2050"
+      ],
+      "indicator": [
+        "Carbon price",
+        "Revenue growth",
+        "Scope 1&2 emissions intensity",
+        "Scope 3 emissions intensity"
+      ],
+      "indicatorUnit": [
+        "$/tCO2",
+        "%",
+        "tCO2/M$"
+      ],
+      "subrisk": [
+        "Direct Carbon Cost",
+        "Market Demand Shifts"
+      ]
+    },
+    "null_counts": {
+      "assetId": 0,
+      "assetName": 0,
+      "reportDate": 0,
+      "geolocationCoordinates": 0,
+      "countryCode": 0,
+      "climateZone": 0,
+      "ticcsSubClass": 0,
+      "ticcsSubClassName": 0,
+      "scenario": 0,
+      "timeHorizon": 0,
+      "indicator": 0,
+      "indicatorUnit": 0,
+      "indicatorValue": 26,
+      "subrisk": 0,
+      "subriskRevenueImpact": 64,
+      "adjustedSubriskRevenueImpact": 64,
+      "subriskExposureRating": 0,
+      "adjustedSubriskExposureRating": 0,
+      "transitionExposureRating": 0,
+      "adjustedTransitionExposureRating": 0
+    },
+    "source_grain_columns": [
+      "assetId",
+      "scenario",
+      "timeHorizon",
+      "subrisk",
+      "indicator"
+    ],
+    "source_grain_unique_count": 216,
+    "source_grain_duplicate_count": 0,
+    "repeated_measure": "adjustedSubriskRevenueImpact",
+    "repeated_measure_group_columns": [
+      "assetId",
+      "scenario",
+      "timeHorizon",
+      "subrisk"
+    ],
+    "repeated_measure_inconsistent_group_count": 0
+  },
+  {
+    "surface": "wind_transition",
+    "cell_id": 291839,
+    "source_uri": "gs://infrasure-scr-data/onshore_wind/transition_risk/CONUS13K_Cell_291839_CA_CAISO_OnshoreWind_transition_risks.xlsx",
+    "sheet_names": [
+      "ReadMe",
+      "Output"
+    ],
+    "rows": 216,
+    "columns": 20,
+    "headers": [
+      "assetId",
+      "assetName",
+      "reportDate",
+      "geolocationCoordinates",
+      "countryCode",
+      "climateZone",
+      "ticcsSubClass",
+      "ticcsSubClassName",
+      "scenario",
+      "timeHorizon",
+      "indicator",
+      "indicatorUnit",
+      "indicatorValue",
+      "subrisk",
+      "subriskRevenueImpact",
+      "adjustedSubriskRevenueImpact",
+      "subriskExposureRating",
+      "adjustedSubriskExposureRating",
+      "transitionExposureRating",
+      "adjustedTransitionExposureRating"
+    ],
+    "schema_hash_sha256": "de3472cfb77ea09f0b42e3cd0d5c875924b6b25e45c35afbdb339c2bd1121151",
+    "dimensions": {
+      "ticcsSubClass": [
+        "IC701010"
+      ],
+      "ticcsSubClassName": [
+        "On-Shore Wind Power Generation"
+      ],
+      "assetId": [
+        "USA_23762"
+      ],
+      "countryCode": [
+        "USA"
+      ],
+      "climateZone": [
+        "Cold"
+      ],
+      "geolocationCoordinates": [
+        "(39.5,-120.25)"
+      ],
+      "scenario": [
+        "Below 2°C",
+        "Climate Breakdown",
+        "Climate Destabilization",
+        "Current Policies",
+        "Delayed transition",
+        "Expected",
+        "Fragmented World",
+        "Nationally Determined Contributions (NDCs)",
+        "Net Zero 2050"
+      ],
+      "timeHorizon": [
+        "2025",
+        "2030",
+        "2035",
+        "2040",
+        "2045",
+        "2050"
+      ],
+      "indicator": [
+        "Carbon price",
+        "Revenue growth",
+        "Scope 1&2 emissions intensity",
+        "Scope 3 emissions intensity"
+      ],
+      "indicatorUnit": [
+        "$/tCO2",
+        "%",
+        "tCO2/M$"
+      ],
+      "subrisk": [
+        "Direct Carbon Cost",
+        "Market Demand Shifts"
+      ]
+    },
+    "null_counts": {
+      "assetId": 0,
+      "assetName": 0,
+      "reportDate": 0,
+      "geolocationCoordinates": 0,
+      "countryCode": 0,
+      "climateZone": 0,
+      "ticcsSubClass": 0,
+      "ticcsSubClassName": 0,
+      "scenario": 0,
+      "timeHorizon": 0,
+      "indicator": 0,
+      "indicatorUnit": 0,
+      "indicatorValue": 26,
+      "subrisk": 0,
+      "subriskRevenueImpact": 64,
+      "adjustedSubriskRevenueImpact": 64,
+      "subriskExposureRating": 0,
+      "adjustedSubriskExposureRating": 0,
+      "transitionExposureRating": 0,
+      "adjustedTransitionExposureRating": 0
+    },
+    "source_grain_columns": [
+      "assetId",
+      "scenario",
+      "timeHorizon",
+      "subrisk",
+      "indicator"
+    ],
+    "source_grain_unique_count": 216,
+    "source_grain_duplicate_count": 0,
+    "repeated_measure": "adjustedSubriskRevenueImpact",
+    "repeated_measure_group_columns": [
+      "assetId",
+      "scenario",
+      "timeHorizon",
+      "subrisk"
+    ],
+    "repeated_measure_inconsistent_group_count": 0
+  },
+  {
+    "surface": "wind_transition",
+    "cell_id": 316425,
+    "source_uri": "gs://infrasure-scr-data/onshore_wind/transition_risk/CONUS13K_Cell_316425_AR_MISO_OnshoreWind_transition_risks.xlsx",
+    "sheet_names": [
+      "ReadMe",
+      "Output"
+    ],
+    "rows": 216,
+    "columns": 20,
+    "headers": [
+      "assetId",
+      "assetName",
+      "reportDate",
+      "geolocationCoordinates",
+      "countryCode",
+      "climateZone",
+      "ticcsSubClass",
+      "ticcsSubClassName",
+      "scenario",
+      "timeHorizon",
+      "indicator",
+      "indicatorUnit",
+      "indicatorValue",
+      "subrisk",
+      "subriskRevenueImpact",
+      "adjustedSubriskRevenueImpact",
+      "subriskExposureRating",
+      "adjustedSubriskExposureRating",
+      "transitionExposureRating",
+      "adjustedTransitionExposureRating"
+    ],
+    "schema_hash_sha256": "de3472cfb77ea09f0b42e3cd0d5c875924b6b25e45c35afbdb339c2bd1121151",
+    "dimensions": {
+      "ticcsSubClass": [
+        "IC701010"
+      ],
+      "ticcsSubClassName": [
+        "On-Shore Wind Power Generation"
+      ],
+      "assetId": [
+        "USA_27033"
+      ],
+      "countryCode": [
+        "USA"
+      ],
+      "climateZone": [
+        "Temperate"
+      ],
+      "geolocationCoordinates": [
+        "(35.25,-93.75)"
+      ],
+      "scenario": [
+        "Below 2°C",
+        "Climate Breakdown",
+        "Climate Destabilization",
+        "Current Policies",
+        "Delayed transition",
+        "Expected",
+        "Fragmented World",
+        "Nationally Determined Contributions (NDCs)",
+        "Net Zero 2050"
+      ],
+      "timeHorizon": [
+        "2025",
+        "2030",
+        "2035",
+        "2040",
+        "2045",
+        "2050"
+      ],
+      "indicator": [
+        "Carbon price",
+        "Revenue growth",
+        "Scope 1&2 emissions intensity",
+        "Scope 3 emissions intensity"
+      ],
+      "indicatorUnit": [
+        "$/tCO2",
+        "%",
+        "tCO2/M$"
+      ],
+      "subrisk": [
+        "Direct Carbon Cost",
+        "Market Demand Shifts"
+      ]
+    },
+    "null_counts": {
+      "assetId": 0,
+      "assetName": 0,
+      "reportDate": 0,
+      "geolocationCoordinates": 0,
+      "countryCode": 0,
+      "climateZone": 0,
+      "ticcsSubClass": 0,
+      "ticcsSubClassName": 0,
+      "scenario": 0,
+      "timeHorizon": 0,
+      "indicator": 0,
+      "indicatorUnit": 0,
+      "indicatorValue": 26,
+      "subrisk": 0,
+      "subriskRevenueImpact": 64,
+      "adjustedSubriskRevenueImpact": 64,
+      "subriskExposureRating": 0,
+      "adjustedSubriskExposureRating": 0,
+      "transitionExposureRating": 0,
+      "adjustedTransitionExposureRating": 0
+    },
+    "source_grain_columns": [
+      "assetId",
+      "scenario",
+      "timeHorizon",
+      "subrisk",
+      "indicator"
+    ],
+    "source_grain_unique_count": 216,
+    "source_grain_duplicate_count": 0,
+    "repeated_measure": "adjustedSubriskRevenueImpact",
+    "repeated_measure_group_columns": [
+      "assetId",
+      "scenario",
+      "timeHorizon",
+      "subrisk"
+    ],
+    "repeated_measure_inconsistent_group_count": 0
+  },
+  {
+    "surface": "wind_transition",
+    "cell_id": 335068,
+    "source_uri": "gs://infrasure-scr-data/onshore_wind/transition_risk/CONUS13K_Cell_335068_AZ_WEIM_OnshoreWind_transition_risks.xlsx",
+    "sheet_names": [
+      "ReadMe",
+      "Output"
+    ],
+    "rows": 216,
+    "columns": 20,
+    "headers": [
+      "assetId",
+      "assetName",
+      "reportDate",
+      "geolocationCoordinates",
+      "countryCode",
+      "climateZone",
+      "ticcsSubClass",
+      "ticcsSubClassName",
+      "scenario",
+      "timeHorizon",
+      "indicator",
+      "indicatorUnit",
+      "indicatorValue",
+      "subrisk",
+      "subriskRevenueImpact",
+      "adjustedSubriskRevenueImpact",
+      "subriskExposureRating",
+      "adjustedSubriskExposureRating",
+      "transitionExposureRating",
+      "adjustedTransitionExposureRating"
+    ],
+    "schema_hash_sha256": "de3472cfb77ea09f0b42e3cd0d5c875924b6b25e45c35afbdb339c2bd1121151",
+    "dimensions": {
+      "ticcsSubClass": [
+        "IC701010"
+      ],
+      "ticcsSubClassName": [
+        "On-Shore Wind Power Generation"
+      ],
+      "assetId": [
+        "USA_29978"
+      ],
+      "countryCode": [
+        "USA"
+      ],
+      "climateZone": [
+        "Arid"
+      ],
+      "geolocationCoordinates": [
+        "(32.0,-113.0)"
+      ],
+      "scenario": [
+        "Below 2°C",
+        "Climate Breakdown",
+        "Climate Destabilization",
+        "Current Policies",
+        "Delayed transition",
+        "Expected",
+        "Fragmented World",
+        "Nationally Determined Contributions (NDCs)",
+        "Net Zero 2050"
+      ],
+      "timeHorizon": [
+        "2025",
+        "2030",
+        "2035",
+        "2040",
+        "2045",
+        "2050"
+      ],
+      "indicator": [
+        "Carbon price",
+        "Revenue growth",
+        "Scope 1&2 emissions intensity",
+        "Scope 3 emissions intensity"
+      ],
+      "indicatorUnit": [
+        "$/tCO2",
+        "%",
+        "tCO2/M$"
+      ],
+      "subrisk": [
+        "Direct Carbon Cost",
+        "Market Demand Shifts"
+      ]
+    },
+    "null_counts": {
+      "assetId": 0,
+      "assetName": 0,
+      "reportDate": 0,
+      "geolocationCoordinates": 0,
+      "countryCode": 0,
+      "climateZone": 0,
+      "ticcsSubClass": 0,
+      "ticcsSubClassName": 0,
+      "scenario": 0,
+      "timeHorizon": 0,
+      "indicator": 0,
+      "indicatorUnit": 0,
+      "indicatorValue": 26,
+      "subrisk": 0,
+      "subriskRevenueImpact": 64,
+      "adjustedSubriskRevenueImpact": 64,
+      "subriskExposureRating": 0,
+      "adjustedSubriskExposureRating": 0,
+      "transitionExposureRating": 0,
+      "adjustedTransitionExposureRating": 0
+    },
+    "source_grain_columns": [
+      "assetId",
+      "scenario",
+      "timeHorizon",
+      "subrisk",
+      "indicator"
+    ],
+    "source_grain_unique_count": 216,
+    "source_grain_duplicate_count": 0,
+    "repeated_measure": "adjustedSubriskRevenueImpact",
+    "repeated_measure_group_columns": [
+      "assetId",
+      "scenario",
+      "timeHorizon",
+      "subrisk"
+    ],
+    "repeated_measure_inconsistent_group_count": 0
+  },
+  {
+    "surface": "wind_transition",
+    "cell_id": 376954,
+    "source_uri": "gs://infrasure-scr-data/onshore_wind/transition_risk/CONUS13K_Cell_376954_FL_Non-ISO_FRCC_OnshoreWind_transition_risks.xlsx",
+    "sheet_names": [
+      "ReadMe",
+      "Output"
+    ],
+    "rows": 216,
+    "columns": 20,
+    "headers": [
+      "assetId",
+      "assetName",
+      "reportDate",
+      "geolocationCoordinates",
+      "countryCode",
+      "climateZone",
+      "ticcsSubClass",
+      "ticcsSubClassName",
+      "scenario",
+      "timeHorizon",
+      "indicator",
+      "indicatorUnit",
+      "indicatorValue",
+      "subrisk",
+      "subriskRevenueImpact",
+      "adjustedSubriskRevenueImpact",
+      "subriskExposureRating",
+      "adjustedSubriskExposureRating",
+      "transitionExposureRating",
+      "adjustedTransitionExposureRating"
+    ],
+    "schema_hash_sha256": "de3472cfb77ea09f0b42e3cd0d5c875924b6b25e45c35afbdb339c2bd1121151",
+    "dimensions": {
+      "ticcsSubClass": [
+        "IC701010"
+      ],
+      "ticcsSubClassName": [
+        "On-Shore Wind Power Generation"
+      ],
+      "assetId": [
+        "USA_31286"
+      ],
+      "countryCode": [
+        "USA"
+      ],
+      "climateZone": [
+        "Tropical"
+      ],
+      "geolocationCoordinates": [
+        "(24.75,-81.5)"
+      ],
+      "scenario": [
+        "Below 2°C",
+        "Climate Breakdown",
+        "Climate Destabilization",
+        "Current Policies",
+        "Delayed transition",
+        "Expected",
+        "Fragmented World",
+        "Nationally Determined Contributions (NDCs)",
+        "Net Zero 2050"
+      ],
+      "timeHorizon": [
+        "2025",
+        "2030",
+        "2035",
+        "2040",
+        "2045",
+        "2050"
+      ],
+      "indicator": [
+        "Carbon price",
+        "Revenue growth",
+        "Scope 1&2 emissions intensity",
+        "Scope 3 emissions intensity"
+      ],
+      "indicatorUnit": [
+        "$/tCO2",
+        "%",
+        "tCO2/M$"
+      ],
+      "subrisk": [
+        "Direct Carbon Cost",
+        "Market Demand Shifts"
+      ]
+    },
+    "null_counts": {
+      "assetId": 0,
+      "assetName": 0,
+      "reportDate": 0,
+      "geolocationCoordinates": 0,
+      "countryCode": 0,
+      "climateZone": 0,
+      "ticcsSubClass": 0,
+      "ticcsSubClassName": 0,
+      "scenario": 0,
+      "timeHorizon": 0,
+      "indicator": 0,
+      "indicatorUnit": 0,
+      "indicatorValue": 26,
+      "subrisk": 0,
+      "subriskRevenueImpact": 64,
+      "adjustedSubriskRevenueImpact": 64,
+      "subriskExposureRating": 0,
+      "adjustedSubriskExposureRating": 0,
+      "transitionExposureRating": 0,
+      "adjustedTransitionExposureRating": 0
+    },
+    "source_grain_columns": [
+      "assetId",
+      "scenario",
+      "timeHorizon",
+      "subrisk",
+      "indicator"
+    ],
+    "source_grain_unique_count": 216,
+    "source_grain_duplicate_count": 0,
+    "repeated_measure": "adjustedSubriskRevenueImpact",
+    "repeated_measure_group_columns": [
+      "assetId",
+      "scenario",
+      "timeHorizon",
+      "subrisk"
+    ],
+    "repeated_measure_inconsistent_group_count": 0
+  }
+]

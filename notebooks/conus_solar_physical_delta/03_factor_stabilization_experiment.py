@@ -3,7 +3,9 @@
 
 This is an investigation script. It never edits the canonical Parquet. Inputs
 are the JSON result shards emitted by the Cloud Run total-damage extractor and
-the canonical CONUS grid CSV.
+the canonical CONUS grid CSV. Source workbooks whose 2025 baseline or selected
+future metric is unavailable are retained in coverage counts but excluded from
+ratio transformations; the experiment never invents their factor.
 """
 
 from __future__ import annotations
@@ -247,17 +249,23 @@ def main() -> None:
     raw_maps: dict[tuple[str, int], dict[int, float]] = {}
     for scenario in SCENARIOS:
         for horizon in HORIZONS:
-            baseline = {
-                cell_id: abs(float(totals[scenario]["2025"])) for cell_id, totals in observed.items()
-            }
-            future = {
-                cell_id: abs(float(totals[scenario][str(horizon)]))
-                for cell_id, totals in observed.items()
-            }
+            baseline = {}
+            future = {}
+            for cell_id, totals in observed.items():
+                scenario_values = totals.get(scenario, {})
+                baseline_value = scenario_values.get("2025")
+                future_value = scenario_values.get(str(horizon))
+                if baseline_value is None or future_value is None:
+                    continue
+                baseline_magnitude = abs(float(baseline_value))
+                if baseline_magnitude == 0:
+                    continue
+                baseline[cell_id] = baseline_magnitude
+                future[cell_id] = abs(float(future_value))
             baseline_maps[(scenario, horizon)] = baseline
             future_maps[(scenario, horizon)] = future
             raw_maps[(scenario, horizon)] = {
-                cell_id: future[cell_id] / baseline[cell_id] for cell_id in observed
+                cell_id: future[cell_id] / baseline[cell_id] for cell_id in baseline
             }
 
     horizon_rows = []
@@ -265,7 +273,12 @@ def main() -> None:
     financial_rows = []
     mapping_rows = []
     experiment = {
-        "observed_cells": len(observed),
+        "source_workbook_cells": len(observed),
+        "factor_cells_by_slice": {
+            f"{scenario}|{horizon}": len(raw_maps[(scenario, horizon)])
+            for scenario in SCENARIOS
+            for horizon in HORIZONS
+        },
         "scenarios": list(SCENARIOS),
         "horizons": list(HORIZONS),
         "methods": METHODS,
@@ -333,7 +346,8 @@ def main() -> None:
                 raw_current = raw_maps[(scenario, horizon)]
                 adj_previous = adjusted_maps[(scenario, previous_horizon)]
                 adj_current = adjusted_maps[(scenario, horizon)]
-                for cell_id in observed:
+                common_cells = set(raw_previous) & set(raw_current)
+                for cell_id in common_cells:
                     raw_difference = raw_current[cell_id] - raw_previous[cell_id]
                     adjusted_difference = adj_current[cell_id] - adj_previous[cell_id]
                     raw_zero = math.isclose(raw_difference, 0, rel_tol=1e-12, abs_tol=1e-15)
@@ -352,7 +366,8 @@ def main() -> None:
             raw_high = raw_maps[(SCENARIOS[1], horizon)]
             adj_low = adjusted_maps[(SCENARIOS[0], horizon)]
             adj_high = adjusted_maps[(SCENARIOS[1], horizon)]
-            for cell_id in observed:
+            common_cells = set(raw_low) & set(raw_high)
+            for cell_id in common_cells:
                 raw_difference = raw_high[cell_id] - raw_low[cell_id]
                 adjusted_difference = adj_high[cell_id] - adj_low[cell_id]
                 raw_zero = math.isclose(raw_difference, 0, rel_tol=1e-12, abs_tol=1e-15)
