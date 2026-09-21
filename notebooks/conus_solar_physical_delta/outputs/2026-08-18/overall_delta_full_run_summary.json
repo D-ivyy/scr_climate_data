@@ -1,0 +1,38 @@
+{
+  "generated_at": "2026-08-18T14:29:51.085067+00:00",
+  "extracted_workbooks": 11928,
+  "parse_status_counts": {
+    "ok": 11928
+  },
+  "canonical_cells": 13085,
+  "observed_canonical_cells": 11928,
+  "missing_source_cells": 1157,
+  "scenarios": [
+    "ssp2-4.5",
+    "ssp5-8.5"
+  ],
+  "horizons": [
+    "2025",
+    "2030",
+    "2035",
+    "2040",
+    "2045",
+    "2050",
+    "2055",
+    "2060",
+    "2065",
+    "2070",
+    "2075",
+    "2080",
+    "2085",
+    "2090",
+    "2095",
+    "2100"
+  ],
+  "selected_horizons": [
+    "2035",
+    "2040",
+    "2050",
+    "2100"
+  ]
+}

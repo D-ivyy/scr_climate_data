@@ -1,0 +1,177 @@
+{
+  "status": "passed",
+  "sample_count": 7,
+  "passed_count": 7,
+  "failed_count": 0,
+  "extractor": "cloudrun/scr_physical_delta/run_task.py",
+  "results": [
+    {
+      "cell_id": 235780,
+      "source_uri": "gs://infrasure-scr-data/onshore_wind/physical_risk/CONUS13K_Cell_235780_MN_MISO_OnshoreWind_physical_risks.xlsx",
+      "identity": {
+        "assetId": [
+          "USA_17220"
+        ],
+        "ticcsSubClass": [
+          "IC701010"
+        ],
+        "ticcsSubClassName": [
+          "On-Shore Wind Power Generation"
+        ]
+      },
+      "checks": {
+        "production_status_ok": true,
+        "cell_id_matches": true,
+        "row_count_matches": true,
+        "headers_match": true,
+        "totals_match": true,
+        "wind_ticcs_matches": true
+      },
+      "status": "passed"
+    },
+    {
+      "cell_id": 251585,
+      "source_uri": "gs://infrasure-scr-data/onshore_wind/physical_risk/CONUS13K_Cell_251585_ND_MISO_OnshoreWind_physical_risks.xlsx",
+      "identity": {
+        "assetId": [
+          "USA_18528"
+        ],
+        "ticcsSubClass": [
+          "IC701010"
+        ],
+        "ticcsSubClassName": [
+          "On-Shore Wind Power Generation"
+        ]
+      },
+      "checks": {
+        "production_status_ok": true,
+        "cell_id_matches": true,
+        "row_count_matches": true,
+        "headers_match": true,
+        "totals_match": true,
+        "wind_ticcs_matches": true
+      },
+      "status": "passed"
+    },
+    {
+      "cell_id": 267458,
+      "source_uri": "gs://infrasure-scr-data/onshore_wind/physical_risk/CONUS13K_Cell_267458_MN_MISO_OnshoreWind_physical_risks.xlsx",
+      "identity": {
+        "assetId": [
+          "USA_20491"
+        ],
+        "ticcsSubClass": [
+          "IC701010"
+        ],
+        "ticcsSubClassName": [
+          "On-Shore Wind Power Generation"
+        ]
+      },
+      "checks": {
+        "production_status_ok": true,
+        "cell_id_matches": true,
+        "row_count_matches": true,
+        "headers_match": true,
+        "totals_match": true,
+        "wind_ticcs_matches": true
+      },
+      "status": "passed"
+    },
+    {
+      "cell_id": 291839,
+      "source_uri": "gs://infrasure-scr-data/onshore_wind/physical_risk/CONUS13K_Cell_291839_CA_CAISO_OnshoreWind_physical_risks.xlsx",
+      "identity": {
+        "assetId": [
+          "USA_23762"
+        ],
+        "ticcsSubClass": [
+          "IC701010"
+        ],
+        "ticcsSubClassName": [
+          "On-Shore Wind Power Generation"
+        ]
+      },
+      "checks": {
+        "production_status_ok": true,
+        "cell_id_matches": true,
+        "row_count_matches": true,
+        "headers_match": true,
+        "totals_match": true,
+        "wind_ticcs_matches": true
+      },
+      "status": "passed"
+    },
+    {
+      "cell_id": 316425,
+      "source_uri": "gs://infrasure-scr-data/onshore_wind/physical_risk/CONUS13K_Cell_316425_AR_MISO_OnshoreWind_physical_risks.xlsx",
+      "identity": {
+        "assetId": [
+          "USA_27033"
+        ],
+        "ticcsSubClass": [
+          "IC701010"
+        ],
+        "ticcsSubClassName": [
+          "On-Shore Wind Power Generation"
+        ]
+      },
+      "checks": {
+        "production_status_ok": true,
+        "cell_id_matches": true,
+        "row_count_matches": true,
+        "headers_match": true,
+        "totals_match": true,
+        "wind_ticcs_matches": true
+      },
+      "status": "passed"
+    },
+    {
+      "cell_id": 335068,
+      "source_uri": "gs://infrasure-scr-data/onshore_wind/physical_risk/CONUS13K_Cell_335068_AZ_WEIM_OnshoreWind_physical_risks.xlsx",
+      "identity": {
+        "assetId": [
+          "USA_29978"
+        ],
+        "ticcsSubClass": [
+          "IC701010"
+        ],
+        "ticcsSubClassName": [
+          "On-Shore Wind Power Generation"
+        ]
+      },
+      "checks": {
+        "production_status_ok": true,
+        "cell_id_matches": true,
+        "row_count_matches": true,
+        "headers_match": true,
+        "totals_match": true,
+        "wind_ticcs_matches": true
+      },
+      "status": "passed"
+    },
+    {
+      "cell_id": 376954,
+      "source_uri": "gs://infrasure-scr-data/onshore_wind/physical_risk/CONUS13K_Cell_376954_FL_Non-ISO_FRCC_OnshoreWind_physical_risks.xlsx",
+      "identity": {
+        "assetId": [
+          "USA_31286"
+        ],
+        "ticcsSubClass": [
+          "IC701010"
+        ],
+        "ticcsSubClassName": [
+          "On-Shore Wind Power Generation"
+        ]
+      },
+      "checks": {
+        "production_status_ok": true,
+        "cell_id_matches": true,
+        "row_count_matches": true,
+        "headers_match": true,
+        "totals_match": true,
+        "wind_ticcs_matches": true
+      },
+      "status": "passed"
+    }
+  ]
+}

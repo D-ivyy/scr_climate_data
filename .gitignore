@@ -16,4 +16,10 @@ API_Spoof/physical_risks_exports*/
 API_Spoof/*.json
 API_Spoof/*.csv
 
+# Governed data artifacts are published to GCS; keep large local copies out of Git.
+runs/**/*.parquet
+runs/**/cloud/
 
+# Authenticated/private SCR-derived analysis inputs stay local.
+dashboard/data/scr_multi_asset_test.json
+docs/extra/physical_risk_data.zip

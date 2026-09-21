@@ -1,0 +1,508 @@
+{
+  "generated_at": "2026-08-18T13:19:02.031900+00:00",
+  "sample_method": "deterministic geographic deciles plus smallest/largest workbook sizes",
+  "sample_files": 17,
+  "exact_coordinate_matches": 17,
+  "schema_variants": 1,
+  "row_counts": [
+    986
+  ],
+  "column_counts": [
+    36
+  ],
+  "output_ranges": [
+    "A1:AJ987"
+  ],
+  "scenario_variants": 1,
+  "horizon_variants": 1,
+  "hazard_variants": 1,
+  "scenarios": [
+    "ssp2-4.5",
+    "ssp5-8.5"
+  ],
+  "horizons": [
+    "Historical",
+    "2025",
+    "2030",
+    "2035",
+    "2040",
+    "2045",
+    "2050",
+    "2055",
+    "2060",
+    "2065",
+    "2070",
+    "2075",
+    "2080",
+    "2085",
+    "2090",
+    "2095",
+    "2100"
+  ],
+  "hazards": [
+    "Drought",
+    "Flood",
+    "Heat",
+    "Landslide",
+    "Subsidence",
+    "Precipitation",
+    "Wildfire",
+    "Wind",
+    "Earthquake"
+  ],
+  "asset_type": [
+    "Photovoltaic Power Generation"
+  ],
+  "asset_ticcs_subclass": [
+    "IC702010"
+  ],
+  "raw_adjusted_comparisons": {
+    "hazardDamage|adjustedHazardDamage": {
+      "pairs": 3606,
+      "equal": 3606,
+      "different": 0
+    },
+    "hazardDisruptionDamageEquivalent|adjustedHazardDisruptionDamageEquivalent": {
+      "pairs": 6834,
+      "equal": 6834,
+      "different": 0
+    },
+    "hazardDisruption|adjustedHazardDisruption": {
+      "pairs": 6834,
+      "equal": 6834,
+      "different": 0
+    },
+    "hazardValueImpact|adjustedHazardValueImpact": {
+      "pairs": 3606,
+      "equal": 3606,
+      "different": 0
+    },
+    "totalDamage|adjustedTotalDamage": {
+      "pairs": 15776,
+      "equal": 15776,
+      "different": 0
+    },
+    "totalDisruptionDamageEquivalent|adjustedTotalDisruptionDamageEquivalent": {
+      "pairs": 15776,
+      "equal": 15776,
+      "different": 0
+    },
+    "totalDisruption|adjustedTotalDisruption": {
+      "pairs": 15776,
+      "equal": 15776,
+      "different": 0
+    },
+    "totalValueImpact|adjustedTotalValueImpact": {
+      "pairs": 15776,
+      "equal": 15776,
+      "different": 0
+    }
+  },
+  "total_damage_reconciliation": {
+    "tested": 544,
+    "matched": 544,
+    "mismatched": 0
+  },
+  "factor_distributions": [
+    {
+      "scope": "overall",
+      "hazard": "Overall",
+      "scenario": "ssp2-4.5",
+      "horizon": "2050",
+      "n": 17,
+      "minimum": 0.9926570790519074,
+      "median": 1.0,
+      "maximum": 1.3316822257799985
+    },
+    {
+      "scope": "overall",
+      "hazard": "Overall",
+      "scenario": "ssp2-4.5",
+      "horizon": "2100",
+      "n": 17,
+      "minimum": 0.9836085529843265,
+      "median": 1.000101366026637,
+      "maximum": 2.0456914988310384
+    },
+    {
+      "scope": "overall",
+      "hazard": "Overall",
+      "scenario": "ssp5-8.5",
+      "horizon": "2050",
+      "n": 17,
+      "minimum": 0.9897915713688024,
+      "median": 1.0,
+      "maximum": 1.3027170223287625
+    },
+    {
+      "scope": "overall",
+      "hazard": "Overall",
+      "scenario": "ssp5-8.5",
+      "horizon": "2100",
+      "n": 17,
+      "minimum": 0.9728982631137908,
+      "median": 1.0252655321440622,
+      "maximum": 2.8012395966808685
+    },
+    {
+      "scope": "hazard",
+      "hazard": "Drought",
+      "scenario": "ssp2-4.5",
+      "horizon": "2050",
+      "n": 0,
+      "minimum": null,
+      "median": null,
+      "maximum": null
+    },
+    {
+      "scope": "hazard",
+      "hazard": "Drought",
+      "scenario": "ssp2-4.5",
+      "horizon": "2100",
+      "n": 0,
+      "minimum": null,
+      "median": null,
+      "maximum": null
+    },
+    {
+      "scope": "hazard",
+      "hazard": "Drought",
+      "scenario": "ssp5-8.5",
+      "horizon": "2050",
+      "n": 0,
+      "minimum": null,
+      "median": null,
+      "maximum": null
+    },
+    {
+      "scope": "hazard",
+      "hazard": "Drought",
+      "scenario": "ssp5-8.5",
+      "horizon": "2100",
+      "n": 0,
+      "minimum": null,
+      "median": null,
+      "maximum": null
+    },
+    {
+      "scope": "hazard",
+      "hazard": "Earthquake",
+      "scenario": "ssp2-4.5",
+      "horizon": "2050",
+      "n": 0,
+      "minimum": null,
+      "median": null,
+      "maximum": null
+    },
+    {
+      "scope": "hazard",
+      "hazard": "Earthquake",
+      "scenario": "ssp2-4.5",
+      "horizon": "2100",
+      "n": 0,
+      "minimum": null,
+      "median": null,
+      "maximum": null
+    },
+    {
+      "scope": "hazard",
+      "hazard": "Earthquake",
+      "scenario": "ssp5-8.5",
+      "horizon": "2050",
+      "n": 0,
+      "minimum": null,
+      "median": null,
+      "maximum": null
+    },
+    {
+      "scope": "hazard",
+      "hazard": "Earthquake",
+      "scenario": "ssp5-8.5",
+      "horizon": "2100",
+      "n": 0,
+      "minimum": null,
+      "median": null,
+      "maximum": null
+    },
+    {
+      "scope": "hazard",
+      "hazard": "Flood",
+      "scenario": "ssp2-4.5",
+      "horizon": "2050",
+      "n": 5,
+      "minimum": 0.9925899519729716,
+      "median": 1.0988649829187003,
+      "maximum": 1.4445851160323868
+    },
+    {
+      "scope": "hazard",
+      "hazard": "Flood",
+      "scenario": "ssp2-4.5",
+      "horizon": "2100",
+      "n": 5,
+      "minimum": 0.9834587066267981,
+      "median": 1.320595630208391,
+      "maximum": 2.0592841444258854
+    },
+    {
+      "scope": "hazard",
+      "hazard": "Flood",
+      "scenario": "ssp5-8.5",
+      "horizon": "2050",
+      "n": 5,
+      "minimum": 0.9896982092582599,
+      "median": 1.1124764048461901,
+      "maximum": 1.4620910542483139
+    },
+    {
+      "scope": "hazard",
+      "hazard": "Flood",
+      "scenario": "ssp5-8.5",
+      "horizon": "2100",
+      "n": 5,
+      "minimum": 0.9671916177106327,
+      "median": 1.4192499798814413,
+      "maximum": 2.2477205969162375
+    },
+    {
+      "scope": "hazard",
+      "hazard": "Heat",
+      "scenario": "ssp2-4.5",
+      "horizon": "2050",
+      "n": 0,
+      "minimum": null,
+      "median": null,
+      "maximum": null
+    },
+    {
+      "scope": "hazard",
+      "hazard": "Heat",
+      "scenario": "ssp2-4.5",
+      "horizon": "2100",
+      "n": 0,
+      "minimum": null,
+      "median": null,
+      "maximum": null
+    },
+    {
+      "scope": "hazard",
+      "hazard": "Heat",
+      "scenario": "ssp5-8.5",
+      "horizon": "2050",
+      "n": 0,
+      "minimum": null,
+      "median": null,
+      "maximum": null
+    },
+    {
+      "scope": "hazard",
+      "hazard": "Heat",
+      "scenario": "ssp5-8.5",
+      "horizon": "2100",
+      "n": 0,
+      "minimum": null,
+      "median": null,
+      "maximum": null
+    },
+    {
+      "scope": "hazard",
+      "hazard": "Landslide",
+      "scenario": "ssp2-4.5",
+      "horizon": "2050",
+      "n": 0,
+      "minimum": null,
+      "median": null,
+      "maximum": null
+    },
+    {
+      "scope": "hazard",
+      "hazard": "Landslide",
+      "scenario": "ssp2-4.5",
+      "horizon": "2100",
+      "n": 0,
+      "minimum": null,
+      "median": null,
+      "maximum": null
+    },
+    {
+      "scope": "hazard",
+      "hazard": "Landslide",
+      "scenario": "ssp5-8.5",
+      "horizon": "2050",
+      "n": 0,
+      "minimum": null,
+      "median": null,
+      "maximum": null
+    },
+    {
+      "scope": "hazard",
+      "hazard": "Landslide",
+      "scenario": "ssp5-8.5",
+      "horizon": "2100",
+      "n": 0,
+      "minimum": null,
+      "median": null,
+      "maximum": null
+    },
+    {
+      "scope": "hazard",
+      "hazard": "Precipitation",
+      "scenario": "ssp2-4.5",
+      "horizon": "2050",
+      "n": 0,
+      "minimum": null,
+      "median": null,
+      "maximum": null
+    },
+    {
+      "scope": "hazard",
+      "hazard": "Precipitation",
+      "scenario": "ssp2-4.5",
+      "horizon": "2100",
+      "n": 0,
+      "minimum": null,
+      "median": null,
+      "maximum": null
+    },
+    {
+      "scope": "hazard",
+      "hazard": "Precipitation",
+      "scenario": "ssp5-8.5",
+      "horizon": "2050",
+      "n": 0,
+      "minimum": null,
+      "median": null,
+      "maximum": null
+    },
+    {
+      "scope": "hazard",
+      "hazard": "Precipitation",
+      "scenario": "ssp5-8.5",
+      "horizon": "2100",
+      "n": 0,
+      "minimum": null,
+      "median": null,
+      "maximum": null
+    },
+    {
+      "scope": "hazard",
+      "hazard": "Subsidence",
+      "scenario": "ssp2-4.5",
+      "horizon": "2050",
+      "n": 0,
+      "minimum": null,
+      "median": null,
+      "maximum": null
+    },
+    {
+      "scope": "hazard",
+      "hazard": "Subsidence",
+      "scenario": "ssp2-4.5",
+      "horizon": "2100",
+      "n": 0,
+      "minimum": null,
+      "median": null,
+      "maximum": null
+    },
+    {
+      "scope": "hazard",
+      "hazard": "Subsidence",
+      "scenario": "ssp5-8.5",
+      "horizon": "2050",
+      "n": 0,
+      "minimum": null,
+      "median": null,
+      "maximum": null
+    },
+    {
+      "scope": "hazard",
+      "hazard": "Subsidence",
+      "scenario": "ssp5-8.5",
+      "horizon": "2100",
+      "n": 0,
+      "minimum": null,
+      "median": null,
+      "maximum": null
+    },
+    {
+      "scope": "hazard",
+      "hazard": "Wildfire",
+      "scenario": "ssp2-4.5",
+      "horizon": "2050",
+      "n": 16,
+      "minimum": 1.0,
+      "median": 1.0,
+      "maximum": 1.0436815712088592
+    },
+    {
+      "scope": "hazard",
+      "hazard": "Wildfire",
+      "scenario": "ssp2-4.5",
+      "horizon": "2100",
+      "n": 16,
+      "minimum": 0.9999999999999999,
+      "median": 1.0,
+      "maximum": 1.0807333417426879
+    },
+    {
+      "scope": "hazard",
+      "hazard": "Wildfire",
+      "scenario": "ssp5-8.5",
+      "horizon": "2050",
+      "n": 16,
+      "minimum": 1.0,
+      "median": 1.0,
+      "maximum": 1.0817116374826714
+    },
+    {
+      "scope": "hazard",
+      "hazard": "Wildfire",
+      "scenario": "ssp5-8.5",
+      "horizon": "2100",
+      "n": 16,
+      "minimum": 0.9999999999999999,
+      "median": 1.0,
+      "maximum": 1.596876041498921
+    },
+    {
+      "scope": "hazard",
+      "hazard": "Wind",
+      "scenario": "ssp2-4.5",
+      "horizon": "2050",
+      "n": 5,
+      "minimum": 0.9999999999999999,
+      "median": 1.0507578345339184,
+      "maximum": 48.16705988278031
+    },
+    {
+      "scope": "hazard",
+      "hazard": "Wind",
+      "scenario": "ssp2-4.5",
+      "horizon": "2100",
+      "n": 5,
+      "minimum": 1.0536975646327031,
+      "median": 6.8793967527469,
+      "maximum": 140.76312415595314
+    },
+    {
+      "scope": "hazard",
+      "hazard": "Wind",
+      "scenario": "ssp5-8.5",
+      "horizon": "2050",
+      "n": 6,
+      "minimum": 0.9999999999999999,
+      "median": 1.029840368521514,
+      "maximum": 60.29159076825894
+    },
+    {
+      "scope": "hazard",
+      "hazard": "Wind",
+      "scenario": "ssp5-8.5",
+      "horizon": "2100",
+      "n": 6,
+      "minimum": 1.0990256222602015,
+      "median": 27.797178611998525,
+      "maximum": 753.6856189114502
+    }
+  ]
+}

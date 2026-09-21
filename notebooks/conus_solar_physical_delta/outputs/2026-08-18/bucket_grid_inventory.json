@@ -1,0 +1,502 @@
+{
+  "generated_at": "2026-08-18T13:30:28.160721+00:00",
+  "bucket_glob": "gs://infrasure-scr-data/physical_risks_exports/**",
+  "canonical_grid_path": "/Users/divy/code/work/infrasure_git_codes/Hazard_modeling/data/hazard_conus_grid/common/benchmark_grid/served_conus_cell_ids_v2026_06.csv",
+  "canonical_grid_rows": 13085,
+  "parsed_workbooks": 11928,
+  "unparsed_objects": 0,
+  "unique_workbook_cell_ids": 11928,
+  "duplicate_cell_ids": 0,
+  "missing_canonical_cells": 1157,
+  "extra_noncanonical_cells": 0,
+  "coverage_rate": 0.911578142911731,
+  "state_label_mismatches": 0,
+  "object_size_bytes": {
+    "min": 158877,
+    "p01": 160278.62,
+    "p50": 163319.0,
+    "p99": 175943.73,
+    "max": 178986,
+    "total": 1960040286
+  },
+  "missing_components": {
+    "count": 387,
+    "largest_20": [
+      77,
+      53,
+      41,
+      40,
+      36,
+      34,
+      30,
+      22,
+      22,
+      21,
+      20,
+      20,
+      14,
+      13,
+      13,
+      12,
+      12,
+      12,
+      11,
+      11
+    ],
+    "singletons": 256
+  },
+  "missing_by_state": [
+    {
+      "state": "NV",
+      "missing": 158,
+      "served": 461,
+      "missing_rate": 0.34273318872017355
+    },
+    {
+      "state": "UT",
+      "missing": 91,
+      "served": 348,
+      "missing_rate": 0.2614942528735632
+    },
+    {
+      "state": "AZ",
+      "missing": 109,
+      "served": 466,
+      "missing_rate": 0.23390557939914164
+    },
+    {
+      "state": "WY",
+      "missing": 102,
+      "served": 459,
+      "missing_rate": 0.2222222222222222
+    },
+    {
+      "state": "NM",
+      "missing": 103,
+      "served": 495,
+      "missing_rate": 0.2080808080808081
+    },
+    {
+      "state": "CO",
+      "missing": 80,
+      "served": 461,
+      "missing_rate": 0.1735357917570499
+    },
+    {
+      "state": "MT",
+      "missing": 109,
+      "served": 691,
+      "missing_rate": 0.1577424023154848
+    },
+    {
+      "state": "CA",
+      "missing": 92,
+      "served": 675,
+      "missing_rate": 0.1362962962962963
+    },
+    {
+      "state": "OH",
+      "missing": 22,
+      "served": 179,
+      "missing_rate": 0.12290502793296089
+    },
+    {
+      "state": "NE",
+      "missing": 30,
+      "served": 328,
+      "missing_rate": 0.09146341463414634
+    },
+    {
+      "state": "OR",
+      "missing": 37,
+      "served": 442,
+      "missing_rate": 0.083710407239819
+    },
+    {
+      "state": "ND",
+      "missing": 29,
+      "served": 354,
+      "missing_rate": 0.08192090395480225
+    },
+    {
+      "state": "ID",
+      "missing": 31,
+      "served": 403,
+      "missing_rate": 0.07692307692307693
+    },
+    {
+      "state": "SD",
+      "missing": 24,
+      "served": 362,
+      "missing_rate": 0.06629834254143646
+    },
+    {
+      "state": "IA",
+      "missing": 17,
+      "served": 262,
+      "missing_rate": 0.0648854961832061
+    },
+    {
+      "state": "IN",
+      "missing": 9,
+      "served": 163,
+      "missing_rate": 0.05521472392638037
+    },
+    {
+      "state": "TX",
+      "missing": 44,
+      "served": 1038,
+      "missing_rate": 0.04238921001926782
+    },
+    {
+      "state": "MI",
+      "missing": 11,
+      "served": 267,
+      "missing_rate": 0.04119850187265917
+    },
+    {
+      "state": "WI",
+      "missing": 10,
+      "served": 268,
+      "missing_rate": 0.03731343283582089
+    },
+    {
+      "state": "IL",
+      "missing": 9,
+      "served": 242,
+      "missing_rate": 0.0371900826446281
+    },
+    {
+      "state": "MN",
+      "missing": 14,
+      "served": 395,
+      "missing_rate": 0.035443037974683546
+    },
+    {
+      "state": "WA",
+      "missing": 8,
+      "served": 343,
+      "missing_rate": 0.023323615160349854
+    },
+    {
+      "state": "VT",
+      "missing": 1,
+      "served": 51,
+      "missing_rate": 0.0196078431372549
+    },
+    {
+      "state": "KS",
+      "missing": 7,
+      "served": 361,
+      "missing_rate": 0.019390581717451522
+    },
+    {
+      "state": "NY",
+      "missing": 4,
+      "served": 215,
+      "missing_rate": 0.018604651162790697
+    },
+    {
+      "state": "PA",
+      "missing": 3,
+      "served": 219,
+      "missing_rate": 0.0136986301369863
+    },
+    {
+      "state": "ME",
+      "missing": 2,
+      "served": 153,
+      "missing_rate": 0.013071895424836602
+    },
+    {
+      "state": "KY",
+      "missing": 1,
+      "served": 167,
+      "missing_rate": 0.005988023952095809
+    },
+    {
+      "state": "AL",
+      "missing": 0,
+      "served": 204,
+      "missing_rate": 0.0
+    },
+    {
+      "state": "AR",
+      "missing": 0,
+      "served": 205,
+      "missing_rate": 0.0
+    },
+    {
+      "state": "CT",
+      "missing": 0,
+      "served": 24,
+      "missing_rate": 0.0
+    },
+    {
+      "state": "DE",
+      "missing": 0,
+      "served": 9,
+      "missing_rate": 0.0
+    },
+    {
+      "state": "FL",
+      "missing": 0,
+      "served": 219,
+      "missing_rate": 0.0
+    },
+    {
+      "state": "GA",
+      "missing": 0,
+      "served": 233,
+      "missing_rate": 0.0
+    },
+    {
+      "state": "LA",
+      "missing": 0,
+      "served": 187,
+      "missing_rate": 0.0
+    },
+    {
+      "state": "MA",
+      "missing": 0,
+      "served": 30,
+      "missing_rate": 0.0
+    },
+    {
+      "state": "MD",
+      "missing": 0,
+      "served": 38,
+      "missing_rate": 0.0
+    },
+    {
+      "state": "MO",
+      "missing": 0,
+      "served": 306,
+      "missing_rate": 0.0
+    },
+    {
+      "state": "MS",
+      "missing": 0,
+      "served": 192,
+      "missing_rate": 0.0
+    },
+    {
+      "state": "NC",
+      "missing": 0,
+      "served": 213,
+      "missing_rate": 0.0
+    },
+    {
+      "state": "NH",
+      "missing": 0,
+      "served": 45,
+      "missing_rate": 0.0
+    },
+    {
+      "state": "NJ",
+      "missing": 0,
+      "served": 35,
+      "missing_rate": 0.0
+    },
+    {
+      "state": "OK",
+      "missing": 0,
+      "served": 296,
+      "missing_rate": 0.0
+    },
+    {
+      "state": "RI",
+      "missing": 0,
+      "served": 7,
+      "missing_rate": 0.0
+    },
+    {
+      "state": "SC",
+      "missing": 0,
+      "served": 123,
+      "missing_rate": 0.0
+    },
+    {
+      "state": "TN",
+      "missing": 0,
+      "served": 186,
+      "missing_rate": 0.0
+    },
+    {
+      "state": "VA",
+      "missing": 0,
+      "served": 162,
+      "missing_rate": 0.0
+    },
+    {
+      "state": "WV",
+      "missing": 0,
+      "served": 103,
+      "missing_rate": 0.0
+    }
+  ],
+  "duplicate_id_sample": [],
+  "extra_id_sample": [],
+  "missing_id_sample": [
+    237163,
+    237220,
+    237221,
+    238579,
+    238591,
+    238594,
+    238597,
+    238598,
+    238599,
+    238600,
+    238601,
+    238608,
+    238613,
+    238614,
+    238617,
+    238618,
+    238620,
+    238623,
+    238655,
+    240032
+  ],
+  "unparsed_sample": [],
+  "state_mismatch_sample": [],
+  "workbook_sample": [
+    {
+      "cell_id": 235780,
+      "state": "MN",
+      "asset": "SolarPV",
+      "size_bytes": 160951,
+      "updated": "2026-08-12T16:46:39Z",
+      "uri": "gs://infrasure-scr-data/physical_risks_exports/CONUS13K_Cell_235780_MN_MISO_SolarPV_physical_risks.xlsx"
+    },
+    {
+      "cell_id": 242863,
+      "state": "WA",
+      "asset": "SolarPV",
+      "size_bytes": 159256,
+      "updated": "2026-08-12T16:46:53Z",
+      "uri": "gs://infrasure-scr-data/physical_risks_exports/CONUS13K_Cell_242863_WA_WEIM_SolarPV_physical_risks.xlsx"
+    },
+    {
+      "cell_id": 251606,
+      "state": "ND",
+      "asset": "SolarPV",
+      "size_bytes": 171502,
+      "updated": "2026-08-12T16:47:28Z",
+      "uri": "gs://infrasure-scr-data/physical_risks_exports/CONUS13K_Cell_251606_ND_MISO_SolarPV_physical_risks.xlsx"
+    },
+    {
+      "cell_id": 261790,
+      "state": "VT",
+      "asset": "SolarPV",
+      "size_bytes": 161130,
+      "updated": "2026-08-12T16:48:19Z",
+      "uri": "gs://infrasure-scr-data/physical_risks_exports/CONUS13K_Cell_261790_VT_ISO-NE_SolarPV_physical_risks.xlsx"
+    },
+    {
+      "cell_id": 271817,
+      "state": "MI",
+      "asset": "SolarPV",
+      "size_bytes": 161805,
+      "updated": "2026-08-12T16:49:04Z",
+      "uri": "gs://infrasure-scr-data/physical_risks_exports/CONUS13K_Cell_271817_MI_MISO_SolarPV_physical_risks.xlsx"
+    },
+    {
+      "cell_id": 281868,
+      "state": "IA",
+      "asset": "SolarPV",
+      "size_bytes": 160940,
+      "updated": "2026-08-12T16:49:52Z",
+      "uri": "gs://infrasure-scr-data/physical_risks_exports/CONUS13K_Cell_281868_IA_MISO_SolarPV_physical_risks.xlsx"
+    },
+    {
+      "cell_id": 291870,
+      "state": "UT",
+      "asset": "SolarPV",
+      "size_bytes": 162541,
+      "updated": "2026-08-13T14:24:41Z",
+      "uri": "gs://infrasure-scr-data/physical_risks_exports/CONUS13K_Cell_291870_UT_WEIM_SolarPV_physical_risks.xlsx"
+    },
+    {
+      "cell_id": 293334,
+      "state": "CO",
+      "asset": "SolarPV",
+      "size_bytes": 159232,
+      "updated": "2026-08-13T14:24:30Z",
+      "uri": "gs://infrasure-scr-data/physical_risks_exports/CONUS13K_Cell_293334_CO_WEIM_SolarPV_physical_risks.xlsx"
+    },
+    {
+      "cell_id": 293335,
+      "state": "CO",
+      "asset": "SolarPV",
+      "size_bytes": 158877,
+      "updated": "2026-08-13T14:24:30Z",
+      "uri": "gs://infrasure-scr-data/physical_risks_exports/CONUS13K_Cell_293335_CO_WEIM_SolarPV_physical_risks.xlsx"
+    },
+    {
+      "cell_id": 301938,
+      "state": "NV",
+      "asset": "SolarPV",
+      "size_bytes": 162951,
+      "updated": "2026-08-13T14:24:44Z",
+      "uri": "gs://infrasure-scr-data/physical_risks_exports/CONUS13K_Cell_301938_NV_WEIM_SolarPV_physical_risks.xlsx"
+    },
+    {
+      "cell_id": 312053,
+      "state": "NM",
+      "asset": "SolarPV",
+      "size_bytes": 162819,
+      "updated": "2026-08-13T14:25:02Z",
+      "uri": "gs://infrasure-scr-data/physical_risks_exports/CONUS13K_Cell_312053_NM_WEIM_SolarPV_physical_risks.xlsx"
+    },
+    {
+      "cell_id": 322240,
+      "state": "SC",
+      "asset": "SolarPV",
+      "size_bytes": 169730,
+      "updated": "2026-08-14T20:21:53Z",
+      "uri": "gs://infrasure-scr-data/physical_risks_exports/CONUS13K_Cell_322240_SC_Non-ISO_DukeCarolinas_SolarPV_physical_risks.xlsx"
+    },
+    {
+      "cell_id": 335141,
+      "state": "TX",
+      "asset": "SolarPV",
+      "size_bytes": 167294,
+      "updated": "2026-08-14T20:22:42Z",
+      "uri": "gs://infrasure-scr-data/physical_risks_exports/CONUS13K_Cell_335141_TX_ERCOT_SolarPV_physical_risks.xlsx"
+    },
+    {
+      "cell_id": 335196,
+      "state": "GA",
+      "asset": "SolarPV",
+      "size_bytes": 178444,
+      "updated": "2026-08-14T20:22:15Z",
+      "uri": "gs://infrasure-scr-data/physical_risks_exports/CONUS13K_Cell_335196_GA_Non-ISO_Southern_SolarPV_physical_risks.xlsx"
+    },
+    {
+      "cell_id": 348140,
+      "state": "FL",
+      "asset": "SolarPV",
+      "size_bytes": 178986,
+      "updated": "2026-08-14T20:22:38Z",
+      "uri": "gs://infrasure-scr-data/physical_risks_exports/CONUS13K_Cell_348140_FL_Non-ISO_FRCC_SolarPV_physical_risks.xlsx"
+    },
+    {
+      "cell_id": 352419,
+      "state": "TX",
+      "asset": "SolarPV",
+      "size_bytes": 178557,
+      "updated": "2026-08-14T20:22:28Z",
+      "uri": "gs://infrasure-scr-data/physical_risks_exports/CONUS13K_Cell_352419_TX_ERCOT_SolarPV_physical_risks.xlsx"
+    },
+    {
+      "cell_id": 376954,
+      "state": "FL",
+      "asset": "SolarPV",
+      "size_bytes": 171877,
+      "updated": "2026-08-14T20:22:30Z",
+      "uri": "gs://infrasure-scr-data/physical_risks_exports/CONUS13K_Cell_376954_FL_Non-ISO_FRCC_SolarPV_physical_risks.xlsx"
+    }
+  ]
+}

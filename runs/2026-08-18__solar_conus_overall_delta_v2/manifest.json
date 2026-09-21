@@ -1,0 +1,71 @@
+{
+  "schema_version": "scr_solar_overall_delta_v2",
+  "release_status": "numerically_validated_financial_calibration_pending",
+  "created_at_utc": "2026-08-18T19:33:16.163354+00:00",
+  "run_id": "20260818T193139Z",
+  "output_file": "scr_solar_conus_overall_delta_v2.parquet",
+  "output_sha256": "864c1aa2f796fdcf04bc4d4c012ec9793dd356445d1fdb8d59ccde44a301af1e",
+  "output_size_bytes": 31560362,
+  "row_count": 418720,
+  "column_count": 46,
+  "canonical_cell_count": 13085,
+  "observed_cell_count": 11928,
+  "imputed_cell_count": 1157,
+  "scenarios": [
+    "ssp2-4.5",
+    "ssp5-8.5"
+  ],
+  "horizons": [
+    2025,
+    2030,
+    2035,
+    2040,
+    2045,
+    2050,
+    2055,
+    2060,
+    2065,
+    2070,
+    2075,
+    2080,
+    2085,
+    2090,
+    2095,
+    2100
+  ],
+  "source_v1": {
+    "local_file": "runs/2026-08-18__solar_conus_overall_delta_v1/scr_solar_conus_overall_delta_v1.parquet",
+    "sha256": "1f087bf8a7959a8ae5c33c7b27a064e22433791fc57011aa24c4a2deaef5c482",
+    "schema_version": "scr_solar_overall_delta_v1",
+    "gcs_prefix": "gs://infrasure-scr-data/derived/solar_overall_delta_v1/run_id=20260818T160023Z/"
+  },
+  "raw_factor_definition": "abs(future) / abs(2025 baseline), within scenario",
+  "candidate_field": "factor_filled_stabilized_candidate",
+  "candidate_percent_change_field": "percent_change_filled_stabilized_candidate",
+  "stabilization": {
+    "method": "symmetric_piecewise_soft_log_arctan",
+    "start": 3.0,
+    "ceiling": 5.0,
+    "floor": 0.2,
+    "identity_band": [
+      0.3333333333333333,
+      3.0
+    ],
+    "formula": "piecewise arctangent compression in natural-log factor space; reciprocal below 1/start",
+    "raw_factor_compressed_rows": 624,
+    "filled_factor_compressed_rows": 626
+  },
+  "approval_boundary": {
+    "approved": "numerical screening candidate and GCS research delivery",
+    "pending": "calibration against representative InfraSure EAL/TIV and review for Wind/Gas",
+    "not_approved": [
+      "PML scaling",
+      "TVaR scaling",
+      "client-facing automatic financial adjustment"
+    ]
+  },
+  "qa_report": "qa_report.json",
+  "qa_report_sha256": "88d8b471c5d2afd3004e09e8843e80f63debd5764ee20bf84a12ad6e984c9eec",
+  "readme": "README.md",
+  "readme_sha256": "d400286bd7ca3ce53e492a724d6477df8f21e167fd7a1fdd8e2ceec3fbd3ade9"
+}
