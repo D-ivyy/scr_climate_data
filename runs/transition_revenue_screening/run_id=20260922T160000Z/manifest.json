@@ -1,0 +1,81 @@
+{
+  "schema_version": "scr-transition-revenue-screening-run/v1",
+  "run_id": "20260922T160000Z",
+  "generated_at": "2026-09-22T15:43:43.011491+00:00",
+  "status": "research_trial_complete",
+  "parquet": {
+    "filename": "scr_transition_revenue_screening_conus.parquet",
+    "sha256": "8d4a3b78e56a3b94592f28800d4863725789a3851649a43208345af332389181",
+    "row_count": 1413180,
+    "grain": "cell_id x asset_type x scenario x horizon"
+  },
+  "qa_report_sha256": "b9b0d1580f1eb5c99fa81de6f3b1acde4ae736f943def1dc2c306990ffd936cd",
+  "readme_sha256": "534a751d8c253fd871d58f39f183c74ba8ffab2b3e788308c28c8e9fea5a5f02",
+  "source_inventories": {
+    "solar": {
+      "prefix": "gs://infrasure-scr-data/Solar-asset/transition_risk/",
+      "count": 13041,
+      "sha256": "3bd6ec2d1d1278aed03ccdbcbf380c47457ad302554b1f69f51e7671204a038d"
+    },
+    "wind_farm": {
+      "prefix": "gs://infrasure-scr-data/onshore_wind/transition_risk/",
+      "count": 13085,
+      "sha256": "f489f1dc018bbad70b443422fe5ffa6ad14d636334586ff798517091abc4713c"
+    }
+  },
+  "revenue_sources": {
+    "solar": {
+      "path": "/Users/divy/code/personal/renewablesinfo/products/index_analysis_lab/data/delivery/solar_revenue_layer_conus.parquet",
+      "sha256": "fe7fcc9933439bfefd23fdaf451cba9d8a0e45505471ef29e1caa92460f2340c"
+    },
+    "wind_farm": {
+      "path": "/Users/divy/code/personal/renewablesinfo/products/index_analysis_lab/data/delivery/wind_revenue_layer_conus.parquet",
+      "sha256": "4226cbf4c8c2a8ea4e51f3b0120c83a0d2da9b0ce473cf5f04db4767a3051d96"
+    }
+  },
+  "template_sources": {
+    "solar_v1": {
+      "source_uri": "gs://infrasure-scr-data/Solar-asset/transition_risk/CONUS13K_Cell_235780_MN_MISO_SolarPV_transition_risks.xlsx",
+      "source_file_sha256": "6730db7f1a1c6f343fd12eb5cfcd8d8a3bdd028005112ba5a4e40dd78c43cb8c",
+      "normalized_template_sha256": "a553b97ab19bf6924b9b5851bd26ea59c5885da8001dff58f05e6b32058ae686",
+      "report_date": "2026-09-17",
+      "ticcs_subclass": "IC702010",
+      "ticcs_subclass_name": "Photovoltaic Power Generation",
+      "row_count": 216
+    },
+    "wind_a": {
+      "source_uri": "gs://infrasure-scr-data/onshore_wind/transition_risk/CONUS13K_Cell_235780_MN_MISO_OnshoreWind_transition_risks.xlsx",
+      "source_file_sha256": "aceaeebd8c2777bc25f6db583862f1b857ae49cd91b66e73ff683e477615416f",
+      "normalized_template_sha256": "643875641d7b072a99ec56fbf12b346735ca07581d55be17546dda9a4f5fc452",
+      "report_date": "2026-09-16",
+      "ticcs_subclass": "IC701010",
+      "ticcs_subclass_name": "On-Shore Wind Power Generation",
+      "row_count": 216
+    },
+    "wind_b": {
+      "source_uri": "gs://infrasure-scr-data/onshore_wind/transition_risk/CONUS13K_Cell_267458_MN_MISO_OnshoreWind_transition_risks.xlsx",
+      "source_file_sha256": "ea1f8227ce609bf005830d770be66fe1c617979c2a3b750577fdd673b8811fce",
+      "normalized_template_sha256": "e8e9647c328edf37d9ea931af681bdc3e3ccda699d6eeabaa3f431c4da16da22",
+      "report_date": "2026-09-16",
+      "ticcs_subclass": "IC701010",
+      "ticcs_subclass_name": "On-Shore Wind Power Generation",
+      "row_count": 216
+    }
+  },
+  "assumptions": {
+    "impact_scale": "source_value_is_percentage_points",
+    "direct_carbon_application": "experimental_annual_revenue_proxy",
+    "market_demand_application": "annual_revenue",
+    "overall_combination": "additive_same_revenue_base_proxy",
+    "factor_formula": "1 + adjusted impact / 100",
+    "horizon_semantics": {
+      "indicators": "SCR indicator values are 10-year averages centered on the selected horizon.",
+      "financial_impacts": "SCR subrisk financial impacts are average annual impacts from 2025 through the selected horizon; they are neither cumulative dollar totals nor point-in-time-only impacts."
+    },
+    "sign_convention": "Positive adjusted impact is treated as an annual-revenue uplift and negative adjusted impact as an annual-revenue drag.",
+    "adjustment_policy": "adjusted_operational_raw_retained_for_audit",
+    "outlier_policy": "none",
+    "missing_value_policy": "unavailable_not_zero_or_one",
+    "tiv_application": "not_applied"
+  }
+}

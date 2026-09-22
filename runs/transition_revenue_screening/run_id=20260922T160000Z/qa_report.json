@@ -1,0 +1,66 @@
+{
+  "schema_version": "scr-transition-revenue-screening-qa/v1",
+  "run_id": "20260922T160000Z",
+  "generated_at": "2026-09-22T15:43:43.011491+00:00",
+  "row_count": 1413180,
+  "unique_grain_count": 1413180,
+  "asset_cell_count": {
+    "solar": 13085,
+    "wind_farm": 13085
+  },
+  "scr_inventory_cell_count": {
+    "solar": 13041,
+    "wind_farm": 13085
+  },
+  "availability_row_counts": {
+    "available": 1410696,
+    "missing_revenue": 108,
+    "missing_scr": 2376
+  },
+  "raw_adjusted_impact_mismatch_count": 0,
+  "template_audit": {
+    "solar": {
+      "sampled_workbook_count": 31,
+      "normalized_template_count": 1,
+      "templates": [
+        {
+          "normalized_sha256": "a553b97ab19bf6924b9b5851bd26ea59c5885da8001dff58f05e6b32058ae686",
+          "sample_count": 31,
+          "minimum_cell_id": 235780,
+          "maximum_cell_id": 376954
+        }
+      ]
+    },
+    "wind": {
+      "sampled_workbook_count": 33,
+      "normalized_template_count": 2,
+      "templates": [
+        {
+          "normalized_sha256": "643875641d7b072a99ec56fbf12b346735ca07581d55be17546dda9a4f5fc452",
+          "sample_count": 9,
+          "minimum_cell_id": 235780,
+          "maximum_cell_id": 267457
+        },
+        {
+          "normalized_sha256": "e8e9647c328edf37d9ea931af681bdc3e3ccda699d6eeabaa3f431c4da16da22",
+          "sample_count": 24,
+          "minimum_cell_id": 267458,
+          "maximum_cell_id": 376954
+        }
+      ]
+    }
+  },
+  "wind_regime_counts": {
+    "wind_a": 3271,
+    "wind_b": 9814
+  },
+  "parquet_sha256": "8d4a3b78e56a3b94592f28800d4863725789a3851649a43208345af332389181",
+  "checks": {
+    "expected_rows": true,
+    "unique_inventory_ids": true,
+    "expected_template_count": true,
+    "raw_equals_adjusted_in_current_sources": true,
+    "tiv_not_used": true,
+    "no_factor_compression_or_outlier_transform": true
+  }
+}
