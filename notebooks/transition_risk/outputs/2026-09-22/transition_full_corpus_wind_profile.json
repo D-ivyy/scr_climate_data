@@ -1,0 +1,194 @@
+{
+  "schema_version": "scr_transition_full_corpus_profile_v1",
+  "created_at_utc": "2026-09-22T13:17:11.598733+00:00",
+  "shards_prefix": "gs://infrasure-benchmark/scr_climate_data/dev/cloudrun/wind_transition_profile_v1/run_id=20260922T124232Z/outputs/",
+  "shard_uri_list_sha256": "c70cba24a1779e21e84eedb4f1109d63d9fd6cf19347b9b09d3bcdc215342ddf",
+  "source_inventory_sha256": [
+    "1e39411e20ce970ca653924434be66548c7d5808135ab117b9e8e2a32d2a16c4"
+  ],
+  "expected_files": 13085,
+  "shard_count": 128,
+  "files_seen": 13085,
+  "successful_files": 13085,
+  "parse_error_count": 0,
+  "parse_errors": [],
+  "unique_cell_count": 13085,
+  "compact_row_count": 706590,
+  "schema_hash_counts": {
+    "de3472cfb77ea09f0b42e3cd0d5c875924b6b25e45c35afbdb339c2bd1121151": 13085
+  },
+  "report_dates": [
+    "2026-09-16"
+  ],
+  "ticcs_subclasses": [
+    "IC701010"
+  ],
+  "ticcs_names": [
+    "On-Shore Wind Power Generation"
+  ],
+  "scenarios": [
+    "Below 2\u00b0C",
+    "Climate Breakdown",
+    "Climate Destabilization",
+    "Current Policies",
+    "Delayed transition",
+    "Expected",
+    "Fragmented World",
+    "Nationally Determined Contributions (NDCs)",
+    "Net Zero 2050"
+  ],
+  "horizons": [
+    2025,
+    2030,
+    2035,
+    2040,
+    2045,
+    2050
+  ],
+  "indicators": [
+    "Carbon price",
+    "Revenue growth",
+    "Scope 1&2 emissions intensity",
+    "Scope 3 emissions intensity"
+  ],
+  "subrisks": [
+    "Direct Carbon Cost",
+    "Market Demand Shifts"
+  ],
+  "impact_distributions": {
+    "raw": {
+      "non_null_count": 994460,
+      "null_count": 418720,
+      "minimum": -0.947056,
+      "maximum": 37.002403,
+      "negative_count": 595367,
+      "zero_count": 0,
+      "abs_above_one_count": 369652,
+      "abs_above_100_count": 0
+    },
+    "adjusted": {
+      "non_null_count": 994460,
+      "null_count": 418720,
+      "minimum": -0.947056,
+      "maximum": 37.002403,
+      "negative_count": 595367,
+      "zero_count": 0,
+      "abs_above_one_count": 369652,
+      "abs_above_100_count": 0
+    }
+  },
+  "raw_adjusted_impact_equal_count": 994460,
+  "raw_adjusted_impact_comparable_count": 994460,
+  "raw_adjusted_impact_equal_share": 1.0,
+  "subrisk_rating_domains": {
+    "Direct Carbon Cost": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "Market Demand Shifts": [
+      "A",
+      "C",
+      "D",
+      "E",
+      "F",
+      "G"
+    ]
+  },
+  "overall_rating_domain": [
+    "A",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G"
+  ],
+  "distinct_economic_content_fingerprints": 2,
+  "economic_fingerprints": [
+    {
+      "economic_content_fingerprint": "23850bce84e11209f606cf09004ffbeeb5fec3e47df4791cc941ac6e46dac21a",
+      "cell_count": 9814,
+      "minimum_cell_id": 267458,
+      "maximum_cell_id": 376954,
+      "minimum_asset_id": "USA_20491",
+      "maximum_asset_id": "USA_31286",
+      "report_dates": [
+        "2026-09-16"
+      ],
+      "sample_cell_ids": [
+        267458,
+        267459,
+        267460,
+        267461,
+        267462,
+        267463,
+        267464,
+        267465,
+        267466,
+        267467
+      ]
+    },
+    {
+      "economic_content_fingerprint": "f50fc22b335ecf348ceda0a1669872630df108d41c78b0cda9b0b36e5afaa9de",
+      "cell_count": 3271,
+      "minimum_cell_id": 235780,
+      "maximum_cell_id": 267457,
+      "minimum_asset_id": "USA_17220",
+      "maximum_asset_id": "USA_20490",
+      "report_dates": [
+        "2026-09-16"
+      ],
+      "sample_cell_ids": [
+        235780,
+        237109,
+        237110,
+        237111,
+        237112,
+        237115,
+        237116,
+        237117,
+        237118,
+        237119
+      ]
+    }
+  ],
+  "economic_fingerprint_transition_count_in_cell_order": 1,
+  "economic_fingerprint_transitions": [
+    {
+      "after_cell_id": 267457,
+      "before_cell_id": 267458,
+      "from_fingerprint": "f50fc22b335ecf348ceda0a1669872630df108d41c78b0cda9b0b36e5afaa9de",
+      "to_fingerprint": "23850bce84e11209f606cf09004ffbeeb5fec3e47df4791cc941ac6e46dac21a"
+    }
+  ],
+  "economic_fingerprint_contiguous_segments": [
+    {
+      "economic_content_fingerprint": "f50fc22b335ecf348ceda0a1669872630df108d41c78b0cda9b0b36e5afaa9de",
+      "cell_count": 3271,
+      "minimum_cell_id": 235780,
+      "maximum_cell_id": 267457
+    },
+    {
+      "economic_content_fingerprint": "23850bce84e11209f606cf09004ffbeeb5fec3e47df4791cc941ac6e46dac21a",
+      "cell_count": 9814,
+      "minimum_cell_id": 267458,
+      "maximum_cell_id": 376954
+    }
+  ],
+  "checks": {
+    "expected_shard_count": true,
+    "complete_task_index_set": true,
+    "single_inventory_hash": true,
+    "expected_file_count": true,
+    "zero_parse_errors": true,
+    "unique_cell_ids": true,
+    "expected_compact_rows": true,
+    "single_output_schema": true,
+    "nine_scenarios": true,
+    "six_horizons": true,
+    "four_indicators": true,
+    "two_subrisks": true
+  }
+}

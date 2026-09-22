@@ -17,6 +17,11 @@ report date, schema hash, and an economic-content fingerprint. The fingerprint
 is required because deterministic sampling found one Solar template and two
 ordered Wind templates.
 
+`summarize_shards.py` streams completed result shards into a small full-corpus
+QA artifact. It verifies task/file/cell counts, parses, compact grain, domains,
+impact distributions, and exact economic-fingerprint segments without loading
+the roughly 900 MiB asset result set into memory.
+
 Local validation:
 
 ```bash

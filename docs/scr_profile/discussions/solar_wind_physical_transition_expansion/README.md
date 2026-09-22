@@ -168,12 +168,15 @@ inferred from the older examples.
 
 ### Transition risk
 
-The deterministic source profile established that the embedded ReadMe declares
+The source profile established that the embedded ReadMe declares
 subrisk impacts as annualized revenue / OpEx percentages. It also exposed two
 contract risks: the declared `0-1` range conflicts with observed values up to
-`37.002403`, and a 128-file-per-surface fingerprint test found one Solar
-economic template but two ordered Wind templates. The full-corpus extraction
-must therefore preserve raw values, interpretation status, and source regime.
+`37.002403`, and the full corpus contains one Solar economic template but two
+ordered Wind templates. The exact Wind boundary is between cells 267457 and
+267458 (3,271 early-template cells and 9,814 later-template cells). There is no
+cell-level variation within any template, so a CONUS map would misrepresent a
+template/batch boundary as geographic variation. Any package must preserve raw
+values, interpretation status, and source regime.
 
 These remain open and define the next investigation phase:
 

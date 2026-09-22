@@ -24,3 +24,8 @@ The sample step writes:
 - `outputs/<date>/transition_compact_sample.csv`
 - `outputs/<date>/transition_template_fingerprint_sample.json`
 - `outputs/<date>/transition_template_fingerprint_sample.csv`
+
+The full-corpus Cloud Run profile writes:
+
+- `outputs/<date>/transition_full_corpus_solar_profile.json`
+- `outputs/<date>/transition_full_corpus_wind_profile.json`
