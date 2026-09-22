@@ -1,7 +1,7 @@
 ---
 author: InfraSure
 created: 2026-09-21
-updated: 2026-09-21
+updated: 2026-09-22
 status: active investigation
 ---
 
@@ -20,8 +20,8 @@ investigation:
  Solar PV         | EXISTING DELIVERY  | NEW INVESTIGATION  |
                   | validate refresh   | profile + design   |
                   +--------------------+--------------------+
- Onshore wind     | NEXT BUILD         | NEW INVESTIGATION  |
-                  | reproduce + QA     | profile + design   |
+ Onshore wind     | RESEARCH COMPLETE  | NEW INVESTIGATION  |
+                  | filled V1/V2 + QA  | profile + design   |
                   +--------------------+--------------------+
 
 Execution order: inventory -> Wind physical -> transition semantics ->
@@ -53,6 +53,12 @@ The existing Solar physical recipient release is a canonical-grid package with:
 That release remains the current implementation baseline. The newly discovered
 Solar workbooks are a newer upstream source surface and must not silently replace
 the released package.
+
+The Wind physical research package is also complete. It contains a raw field
+that preserves SCR's unsupported factors as null and a separate complete-grid
+field filled from the nearest metric-eligible Wind cell. Stabilization is
+applied only after that separation, so observed SCR, imputation, and numerical
+guardrails remain independently auditable.
 
 ## Current GCS source inventory
 
@@ -145,20 +151,24 @@ pathways, horizons through 2060, five indicators, and an Inflation indicator.
 The current GCS contract must therefore be profiled from source rather than
 inferred from the older examples.
 
-## Questions that must be answered by evidence
+## Resolved decisions and remaining questions
 
 ### Wind physical
 
-1. Is the current Wind physical schema stable across all workbooks?
-2. Does `adjustedTotalDamage` reconcile and behave like the Solar field?
-3. Does the 2025-to-future factor have the same tiny-baseline and extreme-ratio
-   failure mode observed for Solar?
-4. Does the Solar stabilization method remain appropriate after seeing the full
-   Wind distribution, or does Wind require different calibrated parameters?
-5. Is nearest-neighbor filling unnecessary because Wind source coverage is
-   complete, except for any parse/schema failures discovered during execution?
+1. All 13,085 Wind physical workbooks share one validated output schema and
+   parsed without error.
+2. `adjustedTotalDamage` supports a complete factor path at 11,968 cells; 1,117
+   cells lack a usable 2025 baseline even though their workbooks exist.
+3. Raw Wind factors have the same tiny-baseline ratio-tail failure mode seen in
+   Solar; the tested 3x/5x arctangent method changes only 307 observed rows.
+4. The applied research surface uses the nearest metric-eligible Wind donor for
+   the 1,117 unsupported cells while preserving raw nulls and donor provenance.
+5. The filled V2 changes 308 rows: the same 307 observed tail rows plus one
+   copied donor-path row.
 
 ### Transition risk
+
+These remain open and define the next investigation phase:
 
 1. Does an adjusted subrisk impact of `-17.0353` mean `-17.0353%`, or is a
    different scale intended?
@@ -190,5 +200,7 @@ Reproducible inventory and sample-schema profiling lives under
 [`notebooks/scr_four_surface_inventory/`](../../../../notebooks/scr_four_surface_inventory/).
 The completed Wind physical investigation is documented in
 [`01_wind_physical_full_corpus_findings.md`](01_wind_physical_full_corpus_findings.md).
+The reviewed completion decision and immutable package are documented in
+[`02_wind_nearest_fill_implementation.md`](02_wind_nearest_fill_implementation.md).
 The ordered implementation is defined in the
 [`SCR Solar and Wind Physical and Transition Expansion Plan`](../../plans/SCR%20Solar%20and%20Wind%20Physical%20and%20Transition%20Expansion%20Plan.md).

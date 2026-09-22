@@ -1,0 +1,135 @@
+{
+  "status": "passed",
+  "created_at_utc": "2026-09-22T12:26:59.877493+00:00",
+  "inputs": {
+    "raw_v1": {
+      "file": "scr_wind_conus_overall_delta_v1_raw.parquet",
+      "sha256": "8bc750c9c841a2ee47f8a9cccfdae78e14f961a2a435d7f957687e97321a60da"
+    },
+    "filled_v1": {
+      "file": "scr_wind_conus_overall_delta_v1_filled.parquet",
+      "sha256": "1c037857055a97158ac25c2d30a6f274a2d14b410e4fd9aed134118c24dfd153"
+    },
+    "filled_v2": {
+      "file": "scr_wind_conus_overall_delta_v2_filled_candidate.parquet",
+      "sha256": "edee42cf4a55044367293dafab9cf1a8333c17b0fc1dbe61ff2401ed819dba09"
+    }
+  },
+  "grain": {
+    "rows": 418720,
+    "canonical_cells": 13085,
+    "scenarios": [
+      "ssp2-4.5",
+      "ssp5-8.5"
+    ],
+    "horizons": [
+      2025,
+      2030,
+      2035,
+      2040,
+      2045,
+      2050,
+      2055,
+      2060,
+      2065,
+      2070,
+      2075,
+      2080,
+      2085,
+      2090,
+      2095,
+      2100
+    ]
+  },
+  "availability": {
+    "metric_eligible_cells": 11968,
+    "imputed_cells": 1117,
+    "raw_factor_null_rows": 35744,
+    "filled_factor_null_rows": 0
+  },
+  "donors": {
+    "distance_km": {
+      "min": 18.237625851163074,
+      "median": 21.830838146962428,
+      "p95": 35.248424976259955,
+      "max": 86.54901457713527
+    },
+    "distance_bands": {
+      "30-60": 84,
+      "60-100": 1,
+      "<=30": 1032
+    },
+    "same_state_count": 1069,
+    "same_state_share": 0.9570277529095792
+  },
+  "late_emerging": {
+    "cell_count": 6,
+    "row_count": 48,
+    "rows_by_cell_and_scenario": {
+      "256041": {
+        "ssp5-8.5": 7
+      },
+      "283346": {
+        "ssp5-8.5": 10
+      },
+      "345257": {
+        "ssp2-4.5": 8
+      },
+      "355295": {
+        "ssp5-8.5": 5
+      },
+      "355357": {
+        "ssp2-4.5": 4,
+        "ssp5-8.5": 4
+      },
+      "363997": {
+        "ssp2-4.5": 6,
+        "ssp5-8.5": 4
+      }
+    }
+  },
+  "solar_pattern_comparison": {
+    "older_solar_missing_cells": 1157,
+    "wind_unavailable_cells": 1117,
+    "overlap_cells": 1113,
+    "overlap_share_of_wind": 0.9964189794091316,
+    "wind_only_cells": [
+      345257,
+      355295,
+      355357,
+      363997
+    ],
+    "solar_only_cells": 44,
+    "current_solar_missing_equals_solar_only": true
+  },
+  "stabilization": {
+    "raw_compressed_rows": 307,
+    "filled_compressed_rows": 308,
+    "additional_imputed_compressed_rows": 1,
+    "candidate_range": [
+      0.2089244874456891,
+      4.892127435110999
+    ]
+  },
+  "checks": {
+    "row_count_418720": true,
+    "key_order_preserved": true,
+    "raw_source_fields_preserved": true,
+    "v1_columns_preserved_in_v2": true,
+    "v2_source_schema_version_preserved": true,
+    "unique_key": true,
+    "raw_factor_null_count_35744": true,
+    "filled_factor_null_count_zero": true,
+    "imputed_cell_count_1117": true,
+    "each_imputed_cell_has_32_rows": true,
+    "imputed_status_is_explicit": true,
+    "observed_rows_not_imputed": true,
+    "donors_are_non_imputed_cells": true,
+    "late_emerging_cell_count_6": true,
+    "solar_overlap_1113": true,
+    "solar_current_44_equals_old_minus_wind": true,
+    "v2_qa_passed": true,
+    "v2_raw_compressed_307": true,
+    "v2_filled_compressed_308": true
+  }
+}

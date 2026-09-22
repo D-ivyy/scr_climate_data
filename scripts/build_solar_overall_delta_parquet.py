@@ -33,6 +33,10 @@ DEFAULT_SCHEMA_VERSION = "scr_solar_overall_delta_v1"
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument("--grid", required=True, type=Path)
+    parser.add_argument(
+        "--grid-label",
+        help="Stable URI or release label to record instead of the local grid path.",
+    )
     parser.add_argument("--shards", required=True, type=Path)
     parser.add_argument("--output", required=True, type=Path)
     parser.add_argument("--manifest", required=True, type=Path)
@@ -43,6 +47,18 @@ def parse_args() -> argparse.Namespace:
         default="gs://infrasure-scr-data/physical_risks_exports/",
     )
     parser.add_argument("--schema-version", default=DEFAULT_SCHEMA_VERSION)
+    parser.add_argument(
+        "--lineage-manifest",
+        type=Path,
+        help=(
+            "Optional prior manifest from the same immutable extraction. "
+            "When supplied, source/grid/count parity is validated and recorded."
+        ),
+    )
+    parser.add_argument(
+        "--lineage-label",
+        help="Stable URI or release label to record instead of the local lineage path.",
+    )
     parser.add_argument(
         "--missing-policy",
         choices=("nearest_observed_cell", "retain_null", "error"),
@@ -331,6 +347,27 @@ def main() -> None:
     }
     metric_unavailable = sorted(set(observed) - metric_eligible_ids)
     unavailable = sorted(grid_ids - metric_eligible_ids)
+    lineage = None
+    if args.lineage_manifest is not None:
+        lineage = json.loads(args.lineage_manifest.read_text(encoding="utf-8"))
+        expected = {
+            "canonical_grid_sha256": sha256(args.grid),
+            "source_bucket": args.source_prefix,
+            "asset_type": args.asset_type,
+            "ticcs_subclass": args.ticcs_subclass,
+            "canonical_cell_count": len(grid),
+            "observed_cell_count": len(observed),
+            "metric_eligible_cell_count": len(metric_eligible_ids),
+            "metric_unavailable_cell_count": len(metric_unavailable),
+            "missing_source_cell_count": len(missing_source),
+        }
+        mismatches = {
+            key: {"expected": value, "lineage": lineage.get(key)}
+            for key, value in expected.items()
+            if lineage.get(key) != value
+        }
+        if mismatches:
+            raise ValueError(f"Lineage manifest does not match extraction: {mismatches}")
     if unavailable and args.missing_policy == "error":
         raise ValueError(
             "Missing-policy=error but "
@@ -427,7 +464,7 @@ def main() -> None:
         "output_file": args.output.name,
         "output_sha256": sha256(args.output),
         "output_size_bytes": args.output.stat().st_size,
-        "canonical_grid": str(args.grid),
+        "canonical_grid": args.grid_label or str(args.grid),
         "canonical_grid_sha256": sha256(args.grid),
         "source_bucket": args.source_prefix,
         "asset_type": args.asset_type,
@@ -456,6 +493,16 @@ def main() -> None:
             "noncanonical_observed_cells": 0,
         },
     }
+    if lineage is not None:
+        manifest["checks"]["source_lineage_matches"] = True
+        manifest["source_lineage"] = {
+            "manifest_file": args.lineage_label or str(args.lineage_manifest),
+            "manifest_sha256": sha256(args.lineage_manifest),
+            "schema_version": lineage.get("schema_version"),
+            "output_sha256": lineage.get("output_sha256"),
+            "publication_prefix": lineage.get("publication_prefix"),
+            "cloud_run": lineage.get("cloud_run"),
+        }
     args.manifest.parent.mkdir(parents=True, exist_ok=True)
     args.manifest.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(manifest, indent=2))

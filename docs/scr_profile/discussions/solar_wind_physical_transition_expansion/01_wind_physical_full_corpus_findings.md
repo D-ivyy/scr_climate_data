@@ -1,11 +1,18 @@
 ---
 author: InfraSure
 created: 2026-09-21
-updated: 2026-09-21
-status: candidate ready for review
+updated: 2026-09-22
+status: historical retain-null candidate; completion decision superseded
 ---
 
 # Onshore Wind physical-delta full-corpus findings
+
+> **Decision update — 2026-09-22:** This document preserves the initial
+> retain-null investigation. The reviewed implementation now keeps these raw
+> nulls while adding a separately labeled nearest-donor `factor_filled` field.
+> See
+> [`02_wind_nearest_fill_implementation.md`](02_wind_nearest_fill_implementation.md)
+> for the approved research candidate and QA evidence.
 
 ## Result in one view
 

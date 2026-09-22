@@ -213,6 +213,16 @@ def main() -> None:
 
     output_hash = sha256(output_path)
     created_at = dt.datetime.now(dt.timezone.utc).isoformat()
+    if source_manifest.get("missing_cell_method") == "nearest_observed_cell":
+        fill_statement = (
+            f"V1 fills `{source_manifest['imputed_cell_count']:,}` cells from their nearest "
+            "metric-eligible canonical donor while retaining null `factor_raw` values and "
+            "explicit donor provenance. Stabilization does not change that provenance."
+        )
+    else:
+        fill_statement = (
+            "Null source factors remain null; stabilization does not fill or reinterpret them."
+        )
     qa = {
         "status": status,
         "created_at_utc": created_at,
@@ -254,7 +264,7 @@ def main() -> None:
         "scenarios": source_manifest["scenarios"],
         "horizons": source_manifest["horizons"],
         "source_v1": {
-            "local_file": str(args.source_parquet),
+            "file": args.source_parquet.name,
             "sha256": source_hash,
             "schema_version": source_manifest["schema_version"],
             "gcs_prefix": source_manifest.get("publication_prefix"),
@@ -335,8 +345,7 @@ Raw and filled factors remain available and are never overwritten.
 
 The candidate changes only the extreme tail while exactly preserving the
 `{1 / args.start:.6f}×–{args.start:g}×` identity band and the ordering of distinct
-factor values. Null source factors remain null; stabilization does not fill or
-reinterpret them.
+factor values. {fill_statement}
 
 ## Status and permitted use
 

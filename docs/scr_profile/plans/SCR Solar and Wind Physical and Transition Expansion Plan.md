@@ -1,22 +1,22 @@
 ---
 author: InfraSure
 created: 2026-09-21
-updated: 2026-09-21
+updated: 2026-09-22
 status: active
 ---
 
 # SCR Solar and Wind physical and transition expansion plan
 
-## Current progress — 2026-09-21
+## Current progress — 2026-09-22
 
 | Phase | Status | Result |
 |---|---|---|
 | Phase 0: inventory and schema | Complete | Four surfaces reconciled; Wind complete, Solar missing the same 44 cells in both risk families |
 | Phase 1: Wind physical investigation | Complete | 13,085 workbooks parsed; 11,968 usable factor cells; 1,117 metric-unavailable cells |
-| Phase 2: Wind physical candidate | Research candidate published | Raw V1 and nullable stabilized V2 pass QA and are immutable under SCR `derived/`; product null-handling review remains |
+| Phase 2: Wind physical candidate | Complete as research package | Raw nulls preserved; 1,117 cells filled from nearest eligible Wind donors; filled V1 and stabilized V2 pass QA and are immutable under SCR `derived/` |
 | Phase 3: transition deep profile | Next | Full-corpus transition grain, variability, and impact semantics |
 | Phase 4: transition packages | Not started | Blocked by Phase 3 interpretation gate |
-| Phase 5: recipient delivery/dashboard | Not started | Starts after Wind null-handling and transition contract reviews |
+| Phase 5: recipient delivery/dashboard | Wind promotion pending | Wind research package is ready for recipient packaging; transition views remain blocked by Phase 3 |
 
 ## Outcome
 
@@ -114,8 +114,10 @@ Gate:
 
 1. Produce the canonical grain `cell_id x asset_type x scenario x horizon`.
 2. Keep raw, stabilized/applied, and filled fields distinct.
-3. Because the raw Wind inventory is complete, do not spatially fill unless a
-   demonstrated parse/content failure creates a delivery gap.
+3. Preserve raw null factors at the 1,117 cells without a usable 2025 baseline,
+   but provide a separate nearest-metric-eligible Wind donor path for the
+   complete-grid applied field. Record donor cell, distance, fill method, and
+   explicit imputation status.
 4. Add a sidecar with source inventory hash, schema hash, code revision,
    calibration parameters, QA results, and limitations.
 5. Stage the package in the same governed delivery family as Solar physical,
@@ -129,6 +131,7 @@ Acceptance checks:
 - 418,720 unique delivery rows if every workbook passes;
 - no noncanonical cells or duplicate grain;
 - factor/status/provenance fields reconcile; and
+- `factor_raw` retains 35,744 null rows while `factor_filled` has zero nulls;
 - only EAL is eligible for scaling—PML, VaR, and TVaR remain out of scope.
 
 ## Phase 3 — Deep-profile transition risk before product design
@@ -242,7 +245,7 @@ Gate:
 | Keep physical and transition separate | Fixed | Different risk concepts and downstream financial uses |
 | Reuse Solar parser structure for Wind | Conditional | Current schema and full-corpus validation |
 | Reuse Solar stabilization parameters for Wind | Candidate supported | Wind experiment changes 307 valid rows, preserves identity band/order, and bounds candidate to 0.2089×–4.8921× |
-| Fill 1,117 Wind metric-unavailable cells | Rejected for current candidate | Workbooks show structural no-damage and blank-baseline/emerging-damage cases; nullable statuses are preserved |
+| Fill 1,117 Wind metric-unavailable cells | Approved for separate applied field | Raw nulls and 48 late-emerging future rows remain intact; median donor distance 21.83 km, P95 35.25 km, maximum 86.55 km; 1,113 cells overlap the older Solar missing pattern |
 | Treat transition impact as percentage | Open | SCR documentation or internal scale validation |
 | Apply transition impact to cash flow | Open | Unit, denominator, sign, and combination rules |
 | Fill Solar's 44 transition gaps spatially | Open | Demonstrated spatial continuity and product need |
