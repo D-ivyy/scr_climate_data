@@ -168,6 +168,13 @@ inferred from the older examples.
 
 ### Transition risk
 
+The deterministic source profile established that the embedded ReadMe declares
+subrisk impacts as annualized revenue / OpEx percentages. It also exposed two
+contract risks: the declared `0-1` range conflicts with observed values up to
+`37.002403`, and a 128-file-per-surface fingerprint test found one Solar
+economic template but two ordered Wind templates. The full-corpus extraction
+must therefore preserve raw values, interpretation status, and source regime.
+
 These remain open and define the next investigation phase:
 
 1. Does an adjusted subrisk impact of `-17.0353` mean `-17.0353%`, or is a
@@ -202,5 +209,7 @@ The completed Wind physical investigation is documented in
 [`01_wind_physical_full_corpus_findings.md`](01_wind_physical_full_corpus_findings.md).
 The reviewed completion decision and immutable package are documented in
 [`02_wind_nearest_fill_implementation.md`](02_wind_nearest_fill_implementation.md).
+The transition semantic and source-regime findings are documented in
+[`03_transition_sample_semantics_and_regime_findings.md`](03_transition_sample_semantics_and_regime_findings.md).
 The ordered implementation is defined in the
 [`SCR Solar and Wind Physical and Transition Expansion Plan`](../../plans/SCR%20Solar%20and%20Wind%20Physical%20and%20Transition%20Expansion%20Plan.md).

@@ -1,0 +1,859 @@
+{
+  "sample_design": {
+    "workbooks_per_surface": 7,
+    "total_workbooks": 14,
+    "source_uri_list_sha256": "57ed37dcec97291bbf2e7976e9c1f18f57b1ae956220e7ae55e596f35baead67",
+    "cell_ids_by_surface": {
+      "solar_transition": [
+        235780,
+        251603,
+        267495,
+        291861,
+        316436,
+        335072,
+        376954
+      ],
+      "wind_transition": [
+        235780,
+        251603,
+        267495,
+        291861,
+        316436,
+        335072,
+        376954
+      ]
+    }
+  },
+  "readme_contract": {
+    "solar_transition": {
+      "scenario": {
+        "definition": "Scenario selected for the rating analysis (among Oxford Economics scenarios)",
+        "type": "STRING",
+        "range": "Below 2\u00b0C, Net Zero 2050, Low Demand, Delayed Transition, Current Policies, NDCs",
+        "unit": "text"
+      },
+      "timeHorizon": {
+        "definition": "Time horizon selected for the rating analysis",
+        "type": "FLOAT",
+        "range": "[2030-2060]",
+        "unit": "no unit"
+      },
+      "indicatorValue": {
+        "definition": "Value of the transition indicator",
+        "type": "FLOAT",
+        "range": "na",
+        "unit": "see above"
+      },
+      "adjustedIndicatorValue": {
+        "definition": "Value of the transition indicator adjusted to reflect asset-specific characteristics",
+        "type": "FLOAT",
+        "range": "na",
+        "unit": "see above"
+      },
+      "subriskRevenueImpact": {
+        "definition": "Subrisk impact on asset revenue / OpEx (annualized average)",
+        "type": "FLOAT",
+        "range": "0-1",
+        "unit": "%"
+      },
+      "adjustedSubriskRevenueImpact": {
+        "definition": "Subrisk impact on asset revenue / OpEx (annualized average), adjusted to reflect asset-specific characteristics",
+        "type": "FLOAT",
+        "range": "0-1",
+        "unit": "%"
+      },
+      "subriskExposureRating": {
+        "definition": "Exposure to transition subrisk until time horizon selected, expressed as a rating",
+        "type": "CATEGORICAL",
+        "range": "A-G",
+        "unit": "no unit"
+      },
+      "adjustedSubriskExposureRating": {
+        "definition": "Exposure to transition subrisk until time horizon selected, adjusted to reflect asset-specific characteristics, expressed as a rating",
+        "type": "CATEGORICAL",
+        "range": "A-G",
+        "unit": "no unit"
+      },
+      "transitionExposureRating": {
+        "definition": "Exposure to transition risks based on the timeHorizon selected expressed as a rating ",
+        "type": "CATEGORICAL",
+        "range": "A-G",
+        "unit": "no unit"
+      },
+      "adjustedTransitionExposureRating": {
+        "definition": "Exposure to transition risks based on the timeHorizon selected, adjusted to reflect asset-specific characteristics, expressed as a rating",
+        "type": "CATEGORICAL",
+        "range": "A-G",
+        "unit": "no unit"
+      }
+    },
+    "wind_transition": {
+      "scenario": {
+        "definition": "Scenario selected for the rating analysis (among Oxford Economics scenarios)",
+        "type": "STRING",
+        "range": "Below 2\u00b0C, Net Zero 2050, Low Demand, Delayed Transition, Current Policies, NDCs",
+        "unit": "text"
+      },
+      "timeHorizon": {
+        "definition": "Time horizon selected for the rating analysis",
+        "type": "FLOAT",
+        "range": "[2030-2060]",
+        "unit": "no unit"
+      },
+      "indicatorValue": {
+        "definition": "Value of the transition indicator",
+        "type": "FLOAT",
+        "range": "na",
+        "unit": "see above"
+      },
+      "adjustedIndicatorValue": {
+        "definition": "Value of the transition indicator adjusted to reflect asset-specific characteristics",
+        "type": "FLOAT",
+        "range": "na",
+        "unit": "see above"
+      },
+      "subriskRevenueImpact": {
+        "definition": "Subrisk impact on asset revenue / OpEx (annualized average)",
+        "type": "FLOAT",
+        "range": "0-1",
+        "unit": "%"
+      },
+      "adjustedSubriskRevenueImpact": {
+        "definition": "Subrisk impact on asset revenue / OpEx (annualized average), adjusted to reflect asset-specific characteristics",
+        "type": "FLOAT",
+        "range": "0-1",
+        "unit": "%"
+      },
+      "subriskExposureRating": {
+        "definition": "Exposure to transition subrisk until time horizon selected, expressed as a rating",
+        "type": "CATEGORICAL",
+        "range": "A-G",
+        "unit": "no unit"
+      },
+      "adjustedSubriskExposureRating": {
+        "definition": "Exposure to transition subrisk until time horizon selected, adjusted to reflect asset-specific characteristics, expressed as a rating",
+        "type": "CATEGORICAL",
+        "range": "A-G",
+        "unit": "no unit"
+      },
+      "transitionExposureRating": {
+        "definition": "Exposure to transition risks based on the timeHorizon selected expressed as a rating ",
+        "type": "CATEGORICAL",
+        "range": "A-G",
+        "unit": "no unit"
+      },
+      "adjustedTransitionExposureRating": {
+        "definition": "Exposure to transition risks based on the timeHorizon selected, adjusted to reflect asset-specific characteristics, expressed as a rating",
+        "type": "CATEGORICAL",
+        "range": "A-G",
+        "unit": "no unit"
+      }
+    }
+  },
+  "surfaces": {
+    "solar_transition": {
+      "sample_workbook_count": 7,
+      "source_row_count": 1512,
+      "source_rows_per_workbook": 216,
+      "source_grain_duplicate_count": 0,
+      "scenarios": [
+        "Below 2\u00b0C",
+        "Climate Breakdown",
+        "Climate Destabilization",
+        "Current Policies",
+        "Delayed transition",
+        "Expected",
+        "Fragmented World",
+        "Nationally Determined Contributions (NDCs)",
+        "Net Zero 2050"
+      ],
+      "horizons": [
+        "2025",
+        "2030",
+        "2035",
+        "2040",
+        "2045",
+        "2050"
+      ],
+      "indicators": [
+        "Carbon price",
+        "Revenue growth",
+        "Scope 1&2 emissions intensity",
+        "Scope 3 emissions intensity"
+      ],
+      "subrisks": [
+        "Direct Carbon Cost",
+        "Market Demand Shifts"
+      ],
+      "report_dates_by_cell": {
+        "235780": [
+          "2026-09-17"
+        ],
+        "251603": [
+          "2026-09-17"
+        ],
+        "267495": [
+          "2026-09-17"
+        ],
+        "291861": [
+          "2026-09-17"
+        ],
+        "316436": [
+          "2026-09-17"
+        ],
+        "335072": [
+          "2026-09-17"
+        ],
+        "376954": [
+          "2026-09-17"
+        ]
+      },
+      "readme_asset_values": [
+        100000000
+      ],
+      "readme_asset_revenues": [
+        10000000
+      ],
+      "compact_row_count": 378,
+      "compact_rows_per_workbook": 54,
+      "impact_distribution": {
+        "minimum": -0.947056,
+        "maximum": 37.002403,
+        "negative_row_count": 658,
+        "above_one_abs_row_count": 364,
+        "above_100_abs_row_count": 0
+      },
+      "raw_equals_adjusted_impact_share": 1.0,
+      "raw_equals_adjusted_overall_rating_share": 1.0,
+      "repeated_measure_consistency": {
+        "subriskRevenueImpact": {
+          "group_count": 756,
+          "inconsistent_group_count": 0
+        },
+        "adjustedSubriskRevenueImpact": {
+          "group_count": 756,
+          "inconsistent_group_count": 0
+        },
+        "subriskExposureRating": {
+          "group_count": 756,
+          "inconsistent_group_count": 0
+        },
+        "adjustedSubriskExposureRating": {
+          "group_count": 756,
+          "inconsistent_group_count": 0
+        },
+        "transitionExposureRating": {
+          "group_count": 378,
+          "inconsistent_group_count": 0
+        },
+        "adjustedTransitionExposureRating": {
+          "group_count": 378,
+          "inconsistent_group_count": 0
+        }
+      },
+      "location_variation": {
+        "indicatorValue": {
+          "complete_comparison_groups": 216,
+          "groups_varying_across_sample_cells": 0,
+          "examples": []
+        },
+        "adjustedSubriskRevenueImpact": {
+          "complete_comparison_groups": 108,
+          "groups_varying_across_sample_cells": 0,
+          "examples": []
+        },
+        "adjustedSubriskExposureRating": {
+          "complete_comparison_groups": 108,
+          "groups_varying_across_sample_cells": 0,
+          "examples": []
+        },
+        "adjustedTransitionExposureRating": {
+          "complete_comparison_groups": 54,
+          "groups_varying_across_sample_cells": 0,
+          "examples": []
+        }
+      },
+      "checks": {
+        "shape_216_by_20": true,
+        "source_grain_unique": true,
+        "nine_scenarios": true,
+        "six_horizons": true,
+        "expected_indicators": true,
+        "expected_subrisks": true,
+        "compact_grain_54_per_workbook": true,
+        "repeated_measures_consistent": true
+      }
+    },
+    "wind_transition": {
+      "sample_workbook_count": 7,
+      "source_row_count": 1512,
+      "source_rows_per_workbook": 216,
+      "source_grain_duplicate_count": 0,
+      "scenarios": [
+        "Below 2\u00b0C",
+        "Climate Breakdown",
+        "Climate Destabilization",
+        "Current Policies",
+        "Delayed transition",
+        "Expected",
+        "Fragmented World",
+        "Nationally Determined Contributions (NDCs)",
+        "Net Zero 2050"
+      ],
+      "horizons": [
+        "2025",
+        "2030",
+        "2035",
+        "2040",
+        "2045",
+        "2050"
+      ],
+      "indicators": [
+        "Carbon price",
+        "Revenue growth",
+        "Scope 1&2 emissions intensity",
+        "Scope 3 emissions intensity"
+      ],
+      "subrisks": [
+        "Direct Carbon Cost",
+        "Market Demand Shifts"
+      ],
+      "report_dates_by_cell": {
+        "235780": [
+          "2026-09-16"
+        ],
+        "251603": [
+          "2026-09-16"
+        ],
+        "267495": [
+          "2026-09-16"
+        ],
+        "291861": [
+          "2026-09-16"
+        ],
+        "316436": [
+          "2026-09-16"
+        ],
+        "335072": [
+          "2026-09-16"
+        ],
+        "376954": [
+          "2026-09-16"
+        ]
+      },
+      "readme_asset_values": [
+        100000000
+      ],
+      "readme_asset_revenues": [
+        10000000
+      ],
+      "compact_row_count": 378,
+      "compact_rows_per_workbook": 54,
+      "impact_distribution": {
+        "minimum": -0.947056,
+        "maximum": 37.002403,
+        "negative_row_count": 638,
+        "above_one_abs_row_count": 394,
+        "above_100_abs_row_count": 0
+      },
+      "raw_equals_adjusted_impact_share": 1.0,
+      "raw_equals_adjusted_overall_rating_share": 1.0,
+      "repeated_measure_consistency": {
+        "subriskRevenueImpact": {
+          "group_count": 756,
+          "inconsistent_group_count": 0
+        },
+        "adjustedSubriskRevenueImpact": {
+          "group_count": 756,
+          "inconsistent_group_count": 0
+        },
+        "subriskExposureRating": {
+          "group_count": 756,
+          "inconsistent_group_count": 0
+        },
+        "adjustedSubriskExposureRating": {
+          "group_count": 756,
+          "inconsistent_group_count": 0
+        },
+        "transitionExposureRating": {
+          "group_count": 378,
+          "inconsistent_group_count": 0
+        },
+        "adjustedTransitionExposureRating": {
+          "group_count": 378,
+          "inconsistent_group_count": 0
+        }
+      },
+      "location_variation": {
+        "indicatorValue": {
+          "complete_comparison_groups": 216,
+          "groups_varying_across_sample_cells": 30,
+          "examples": [
+            {
+              "group": [
+                "Expected",
+                "2030",
+                "Revenue growth"
+              ],
+              "values_by_cell": {
+                "235780": 0.218766,
+                "251603": 0.218766,
+                "267495": 0.630592,
+                "291861": 0.630592,
+                "316436": 0.630592,
+                "335072": 0.630592,
+                "376954": 0.630592
+              }
+            },
+            {
+              "group": [
+                "Expected",
+                "2035",
+                "Revenue growth"
+              ],
+              "values_by_cell": {
+                "235780": 0.28846,
+                "251603": 0.28846,
+                "267495": 0.400679,
+                "291861": 0.400679,
+                "316436": 0.400679,
+                "335072": 0.400679,
+                "376954": 0.400679
+              }
+            },
+            {
+              "group": [
+                "Expected",
+                "2040",
+                "Revenue growth"
+              ],
+              "values_by_cell": {
+                "235780": 0.317185,
+                "251603": 0.317185,
+                "267495": 0.160506,
+                "291861": 0.160506,
+                "316436": 0.160506,
+                "335072": 0.160506,
+                "376954": 0.160506
+              }
+            },
+            {
+              "group": [
+                "Expected",
+                "2045",
+                "Revenue growth"
+              ],
+              "values_by_cell": {
+                "235780": 0.303436,
+                "251603": 0.303436,
+                "267495": 0.079548,
+                "291861": 0.079548,
+                "316436": 0.079548,
+                "335072": 0.079548,
+                "376954": 0.079548
+              }
+            },
+            {
+              "group": [
+                "Expected",
+                "2050",
+                "Revenue growth"
+              ],
+              "values_by_cell": {
+                "235780": 0.300055,
+                "251603": 0.300055,
+                "267495": 0.211631,
+                "291861": 0.211631,
+                "316436": 0.211631,
+                "335072": 0.211631,
+                "376954": 0.211631
+              }
+            }
+          ]
+        },
+        "adjustedSubriskRevenueImpact": {
+          "complete_comparison_groups": 108,
+          "groups_varying_across_sample_cells": 30,
+          "examples": [
+            {
+              "group": [
+                "Expected",
+                "2030",
+                "Market Demand Shifts"
+              ],
+              "values_by_cell": {
+                "235780": 0.64723,
+                "251603": 0.64723,
+                "267495": 2.045696,
+                "291861": 2.045696,
+                "316436": 2.045696,
+                "335072": 2.045696,
+                "376954": 2.045696
+              }
+            },
+            {
+              "group": [
+                "Expected",
+                "2035",
+                "Market Demand Shifts"
+              ],
+              "values_by_cell": {
+                "235780": 1.420115,
+                "251603": 1.420115,
+                "267495": 2.998902,
+                "291861": 2.998902,
+                "316436": 2.998902,
+                "335072": 2.998902,
+                "376954": 2.998902
+              }
+            },
+            {
+              "group": [
+                "Expected",
+                "2040",
+                "Market Demand Shifts"
+              ],
+              "values_by_cell": {
+                "235780": 2.305565,
+                "251603": 2.305565,
+                "267495": 3.032909,
+                "291861": 3.032909,
+                "316436": 3.032909,
+                "335072": 3.032909,
+                "376954": 3.032909
+              }
+            },
+            {
+              "group": [
+                "Expected",
+                "2045",
+                "Market Demand Shifts"
+              ],
+              "values_by_cell": {
+                "235780": 3.153504,
+                "251603": 3.153504,
+                "267495": 2.669672,
+                "291861": 2.669672,
+                "316436": 2.669672,
+                "335072": 2.669672,
+                "376954": 2.669672
+              }
+            },
+            {
+              "group": [
+                "Expected",
+                "2050",
+                "Market Demand Shifts"
+              ],
+              "values_by_cell": {
+                "235780": 3.959225,
+                "251603": 3.959225,
+                "267495": 2.879013,
+                "291861": 2.879013,
+                "316436": 2.879013,
+                "335072": 2.879013,
+                "376954": 2.879013
+              }
+            }
+          ]
+        },
+        "adjustedSubriskExposureRating": {
+          "complete_comparison_groups": 108,
+          "groups_varying_across_sample_cells": 31,
+          "examples": [
+            {
+              "group": [
+                "Expected",
+                "2025",
+                "Market Demand Shifts"
+              ],
+              "values_by_cell": {
+                "235780": "F",
+                "251603": "F",
+                "267495": "E",
+                "291861": "E",
+                "316436": "E",
+                "335072": "E",
+                "376954": "E"
+              }
+            },
+            {
+              "group": [
+                "Expected",
+                "2035",
+                "Market Demand Shifts"
+              ],
+              "values_by_cell": {
+                "235780": "A",
+                "251603": "A",
+                "267495": "D",
+                "291861": "D",
+                "316436": "D",
+                "335072": "D",
+                "376954": "D"
+              }
+            },
+            {
+              "group": [
+                "Expected",
+                "2040",
+                "Market Demand Shifts"
+              ],
+              "values_by_cell": {
+                "235780": "A",
+                "251603": "A",
+                "267495": "D",
+                "291861": "D",
+                "316436": "D",
+                "335072": "D",
+                "376954": "D"
+              }
+            },
+            {
+              "group": [
+                "Expected",
+                "2045",
+                "Market Demand Shifts"
+              ],
+              "values_by_cell": {
+                "235780": "A",
+                "251603": "A",
+                "267495": "D",
+                "291861": "D",
+                "316436": "D",
+                "335072": "D",
+                "376954": "D"
+              }
+            },
+            {
+              "group": [
+                "Expected",
+                "2050",
+                "Market Demand Shifts"
+              ],
+              "values_by_cell": {
+                "235780": "A",
+                "251603": "A",
+                "267495": "D",
+                "291861": "D",
+                "316436": "D",
+                "335072": "D",
+                "376954": "D"
+              }
+            }
+          ]
+        },
+        "adjustedTransitionExposureRating": {
+          "complete_comparison_groups": 54,
+          "groups_varying_across_sample_cells": 31,
+          "examples": [
+            {
+              "group": [
+                "Expected",
+                "2025"
+              ],
+              "values_by_cell": {
+                "235780": "F",
+                "251603": "F",
+                "267495": "E",
+                "291861": "E",
+                "316436": "E",
+                "335072": "E",
+                "376954": "E"
+              }
+            },
+            {
+              "group": [
+                "Expected",
+                "2035"
+              ],
+              "values_by_cell": {
+                "235780": "A",
+                "251603": "A",
+                "267495": "D",
+                "291861": "D",
+                "316436": "D",
+                "335072": "D",
+                "376954": "D"
+              }
+            },
+            {
+              "group": [
+                "Expected",
+                "2040"
+              ],
+              "values_by_cell": {
+                "235780": "A",
+                "251603": "A",
+                "267495": "D",
+                "291861": "D",
+                "316436": "D",
+                "335072": "D",
+                "376954": "D"
+              }
+            },
+            {
+              "group": [
+                "Expected",
+                "2045"
+              ],
+              "values_by_cell": {
+                "235780": "A",
+                "251603": "A",
+                "267495": "D",
+                "291861": "D",
+                "316436": "D",
+                "335072": "D",
+                "376954": "D"
+              }
+            },
+            {
+              "group": [
+                "Expected",
+                "2050"
+              ],
+              "values_by_cell": {
+                "235780": "A",
+                "251603": "A",
+                "267495": "D",
+                "291861": "D",
+                "316436": "D",
+                "335072": "D",
+                "376954": "D"
+              }
+            }
+          ]
+        }
+      },
+      "checks": {
+        "shape_216_by_20": true,
+        "source_grain_unique": true,
+        "nine_scenarios": true,
+        "six_horizons": true,
+        "expected_indicators": true,
+        "expected_subrisks": true,
+        "compact_grain_54_per_workbook": true,
+        "repeated_measures_consistent": true
+      }
+    }
+  },
+  "cross_asset": {
+    "carbon_price": {
+      "comparable_rows": 378,
+      "equal_rows": 378
+    },
+    "revenue_growth": {
+      "comparable_rows": 378,
+      "equal_rows": 228
+    },
+    "scope_1_2_intensity": {
+      "comparable_rows": 378,
+      "equal_rows": 7
+    },
+    "scope_3_intensity": {
+      "comparable_rows": 378,
+      "equal_rows": 7
+    },
+    "direct_carbon_cost_impact": {
+      "comparable_rows": 378,
+      "equal_rows": 63
+    },
+    "market_demand_shifts_impact": {
+      "comparable_rows": 378,
+      "equal_rows": 228
+    },
+    "overall_transition_rating": {
+      "comparable_rows": 378,
+      "equal_rows": 223
+    }
+  },
+  "interpretation_findings": [
+    {
+      "finding": "SCR labels adjustedSubriskRevenueImpact as an annualized average impact on asset revenue / OpEx with unit percent.",
+      "evidence": {
+        "definition": "Subrisk impact on asset revenue / OpEx (annualized average), adjusted to reflect asset-specific characteristics",
+        "type": "FLOAT",
+        "range": "0-1",
+        "unit": "%"
+      }
+    },
+    {
+      "finding": "The documented 0-1 range is inconsistent with current output values, including magnitudes above 1; scale must be validated before cash-flow application.",
+      "evidence": {
+        "solar_transition": {
+          "minimum": -0.947056,
+          "maximum": 37.002403,
+          "negative_row_count": 658,
+          "above_one_abs_row_count": 364,
+          "above_100_abs_row_count": 0
+        },
+        "wind_transition": {
+          "minimum": -0.947056,
+          "maximum": 37.002403,
+          "negative_row_count": 638,
+          "above_one_abs_row_count": 394,
+          "above_100_abs_row_count": 0
+        }
+      }
+    },
+    {
+      "finding": "The ReadMe scenario and horizon descriptions are stale relative to the exported Output sheet.",
+      "evidence": {
+        "readme_scenario_range": "Below 2\u00b0C, Net Zero 2050, Low Demand, Delayed Transition, Current Policies, NDCs",
+        "readme_horizon_range": "[2030-2060]",
+        "observed_scenarios": [
+          "Below 2\u00b0C",
+          "Climate Breakdown",
+          "Climate Destabilization",
+          "Current Policies",
+          "Delayed transition",
+          "Expected",
+          "Fragmented World",
+          "Nationally Determined Contributions (NDCs)",
+          "Net Zero 2050"
+        ],
+        "observed_horizons": [
+          "2025",
+          "2030",
+          "2035",
+          "2040",
+          "2045",
+          "2050"
+        ]
+      }
+    },
+    {
+      "finding": "The ReadMe defines adjustedIndicatorValue, but that field is absent from the current 20-column Output sheet.",
+      "evidence": {
+        "definition": {
+          "definition": "Value of the transition indicator adjusted to reflect asset-specific characteristics",
+          "type": "FLOAT",
+          "range": "na",
+          "unit": "see above"
+        },
+        "output_headers": [
+          "assetId",
+          "assetName",
+          "reportDate",
+          "geolocationCoordinates",
+          "countryCode",
+          "climateZone",
+          "ticcsSubClass",
+          "ticcsSubClassName",
+          "scenario",
+          "timeHorizon",
+          "indicator",
+          "indicatorUnit",
+          "indicatorValue",
+          "subrisk",
+          "subriskRevenueImpact",
+          "adjustedSubriskRevenueImpact",
+          "subriskExposureRating",
+          "adjustedSubriskExposureRating",
+          "transitionExposureRating",
+          "adjustedTransitionExposureRating"
+        ]
+      }
+    }
+  ]
+}

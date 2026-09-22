@@ -14,7 +14,7 @@ status: active
 | Phase 0: inventory and schema | Complete | Four surfaces reconciled; Wind complete, Solar missing the same 44 cells in both risk families |
 | Phase 1: Wind physical investigation | Complete | 13,085 workbooks parsed; 11,968 usable factor cells; 1,117 metric-unavailable cells |
 | Phase 2: Wind physical candidate | Complete as research package | Raw nulls preserved; 1,117 cells filled from nearest eligible Wind donors; filled V1 and stabilized V2 pass QA and are immutable under SCR `derived/` |
-| Phase 3: transition deep profile | Next | Full-corpus transition grain, variability, and impact semantics |
+| Phase 3: transition deep profile | In progress | Sample grain/semantics complete; one Solar and two ordered Wind economic templates detected; full-corpus raw extraction next |
 | Phase 4: transition packages | Not started | Blocked by Phase 3 interpretation gate |
 | Phase 5: recipient delivery/dashboard | Wind promotion pending | Wind research package is ready for recipient packaging; transition views remain blocked by Phase 3 |
 
@@ -160,6 +160,9 @@ country -> scenario -> horizon -> asset type -> cell / asset
 
 8. Resolve or explicitly preserve uncertainty around unit, denominator, sign,
    and the relationship between numeric impacts and A-G ratings.
+9. Fingerprint complete economic content per workbook and preserve the source
+   regime on every compact record. Locate and quantify the exact Wind boundary
+   before treating the corpus as one coherent model run.
 
 Gate:
 
@@ -248,6 +251,7 @@ Gate:
 | Fill 1,117 Wind metric-unavailable cells | Approved for separate applied field | Raw nulls and 48 late-emerging future rows remain intact; median donor distance 21.83 km, P95 35.25 km, maximum 86.55 km; 1,113 cells overlap the older Solar missing pattern |
 | Treat transition impact as percentage | Open | SCR documentation or internal scale validation |
 | Apply transition impact to cash flow | Open | Unit, denominator, sign, and combination rules |
+| Treat Wind transition as one source regime | Rejected pending upstream clarification | 128-file sample contains two ordered economic fingerprints despite one report date and TICCS class |
 | Fill Solar's 44 transition gaps spatially | Open | Demonstrated spatial continuity and product need |
 | Refresh the existing Solar physical package | Deferred | Controlled old-vs-new source comparison |
 

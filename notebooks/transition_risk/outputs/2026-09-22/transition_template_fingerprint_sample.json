@@ -1,0 +1,130 @@
+{
+  "sample_size_requested_per_surface": 128,
+  "inventory_counts": {
+    "solar_transition": 13041,
+    "wind_transition": 13085
+  },
+  "sample_uri_list_sha256": {
+    "solar_transition": "39b03bfcef1e0a85b8b4c58ba7f8774ffc0603ee1882c1d5f25931ce666f7d0a",
+    "wind_transition": "4029522f41323f0108ee690d3b3b22fbeaba04c8e26db621c5e215620eec26c4"
+  },
+  "surfaces": {
+    "solar_transition": {
+      "sample_count": 128,
+      "distinct_economic_content_fingerprints": 1,
+      "economic_fingerprint_transitions_in_cell_order": 0,
+      "report_dates": [
+        "2026-09-17"
+      ],
+      "ticcs_subclasses": [
+        "IC702010"
+      ],
+      "fingerprints": [
+        {
+          "economic_content_fingerprint": "52873a58bb1774e8eb357b9ee2632b02e9d502b9d029bcfc8fff973ae325fc43",
+          "sample_count": 128,
+          "minimum_cell_id": 235780,
+          "maximum_cell_id": 376954,
+          "sample_cell_ids": [
+            235780,
+            238617,
+            240049,
+            241471,
+            242887,
+            242989,
+            244397,
+            245805,
+            247216,
+            248625,
+            248730,
+            250135
+          ],
+          "asset_id_range": [
+            "USA_01223",
+            "USA_17219"
+          ],
+          "sentinel": {
+            "expected_2030_revenue_growth": 0.218766,
+            "expected_2030_market_demand_impact": 0.64723,
+            "expected_2030_market_demand_rating": "D",
+            "expected_2025_overall_rating": "F"
+          }
+        }
+      ]
+    },
+    "wind_transition": {
+      "sample_count": 128,
+      "distinct_economic_content_fingerprints": 2,
+      "economic_fingerprint_transitions_in_cell_order": 1,
+      "report_dates": [
+        "2026-09-16"
+      ],
+      "ticcs_subclasses": [
+        "IC701010"
+      ],
+      "fingerprints": [
+        {
+          "economic_content_fingerprint": "23850bce84e11209f606cf09004ffbeeb5fec3e47df4791cc941ac6e46dac21a",
+          "sample_count": 96,
+          "minimum_cell_id": 267484,
+          "maximum_cell_id": 376954,
+          "sample_cell_ids": [
+            267484,
+            268842,
+            268976,
+            270303,
+            270426,
+            271754,
+            271877,
+            273204,
+            274554,
+            274657,
+            276007,
+            276110
+          ],
+          "asset_id_range": [
+            "USA_20517",
+            "USA_31286"
+          ],
+          "sentinel": {
+            "expected_2030_revenue_growth": 0.630592,
+            "expected_2030_market_demand_impact": 2.045696,
+            "expected_2030_market_demand_rating": "D",
+            "expected_2025_overall_rating": "E"
+          }
+        },
+        {
+          "economic_content_fingerprint": "f50fc22b335ecf348ceda0a1669872630df108d41c78b0cda9b0b36e5afaa9de",
+          "sample_count": 32,
+          "minimum_cell_id": 235780,
+          "maximum_cell_id": 267381,
+          "sample_cell_ids": [
+            235780,
+            238615,
+            240047,
+            241467,
+            242880,
+            242983,
+            244387,
+            245795,
+            247205,
+            247308,
+            248715,
+            250119
+          ],
+          "asset_id_range": [
+            "USA_17220",
+            "USA_20414"
+          ],
+          "sentinel": {
+            "expected_2030_revenue_growth": 0.218766,
+            "expected_2030_market_demand_impact": 0.64723,
+            "expected_2030_market_demand_rating": "D",
+            "expected_2025_overall_rating": "F"
+          }
+        }
+      ]
+    }
+  },
+  "cross_surface_shared_fingerprint_count": 0
+}
